@@ -1,5 +1,0 @@
-#ignore back end node modules
-back-end/node_modules
-
-#ignore front end node modules
-client/node_modules

@@ -50,7 +50,7 @@ getSingleGroup = (req, res, next) => {
 }
 
 createGroup = (req, res, next) => {
-    db.none('insert into groups ')
+    db.none('insert into groups WHERE')
 }
 
 
