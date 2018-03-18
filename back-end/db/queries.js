@@ -30,9 +30,9 @@ getUserInfo = (req, res, next) => {
         return next(err);
     });
 }
-// selected from groups list page from front-end
+// select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
-    db.none('select group_name, rating, payout, frequency from groups where group_name=${group_name}',
+    db.one('select group_name, rating, payout, frequency, description from groups where group_name=${group_name}',
         {
             group_name: req.body.group_name
         }
@@ -42,8 +42,15 @@ getSingleGroup = (req, res, next) => {
             status: success,
             data: data,
             message: 'Retrieved group info'
-        })
+        });
     })
+    .catch((err) => {
+        return next(err);
+    })
+}
+
+createGroup = (req, res, next) => {
+    db.none('insert into groups ')
 }
 
 
