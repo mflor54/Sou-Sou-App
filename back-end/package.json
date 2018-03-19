@@ -13,6 +13,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "pg-promise": "^8.2.2",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "stripe": "^5.5.0"
   }
 }
