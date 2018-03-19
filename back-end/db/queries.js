@@ -48,15 +48,33 @@ getSingleGroup = (req, res, next) => {
         return next(err);
     })
 }
-
+// creates group when user submits form from group creation page
 createGroup = (req, res, next) => {
-    db.none('insert into groups WHERE')
+    db.none('insert into groups (group_name, total_members, creator, payout, frequency, description, rating) values (${group_name}, ${total_members}, ${user_name}, ${payout}, ${frequency}, ${description}, ${rating})',{
+        group_name: req.body.group_name,
+        total_members: req.body.total_members,
+        user_name: req.body.user_name,
+        payout: req.body.payout,
+        frequency: req.body.frequency,
+        description: req.body.description,
+        rating: req.body.rating
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: success,
+            data: data,
+            message: 'Created group!'
+        });
+    })
+    .catch((err) => {
+        return next(err);
+    })
 }
 
 
 module.exports = {
     getAllGroups: getAllGroups,
     getUserInfo: getUserInfo,
-    getSingleGroup: getSingleGroup
-  
+    getSingleGroup: getSingleGroup,
+    createGroup: createGroup
 };
