@@ -1,6 +1,6 @@
 const db = require("./index");
-const authHelpers = require("../auth/helpers");
-const passport = require("../auth/local");
+// const authHelpers = require("../auth/helpers");
+// const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
 getAllGroups = (req, res, next) => {
@@ -118,6 +118,17 @@ createGroup = (req, res, next) => {
     })
     .catch((err) => {
         return next(err);
+    })
+}
+
+createUser = (req, res, next) => {
+    db.none('insert into users (email, first_name, last_name, rating, salt, password_digest) values (${email}, $first_name}, ${last_name}, ${rating}, ${salt}, ${password_digest})', {
+        email: email,
+        first_name: first_name,
+        last_name: last_name,
+        rating: rating,
+        salt: salt,
+        password_digest: password_digest
     })
 }
 

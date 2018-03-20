@@ -1,4 +1,6 @@
+const db = require('../db/queries');
 var express = require('express');
+const stripe = require('../constants/stripe');
 var router = express.Router();
 
 /*
@@ -14,6 +16,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+
 router.post('/register', db.createUser);
 
 router.post('/login', passport.authenticate("local"), (req, res) => {
@@ -21,5 +24,8 @@ router.post('/login', passport.authenticate("local"), (req, res) => {
   // `req.user` contains the authenticated user;
   res.json(req.user);
 });
+
+router.post('/signup', db.createUser);
+
 
 module.exports = router;
