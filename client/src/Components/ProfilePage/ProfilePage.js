@@ -1,15 +1,16 @@
 import React from 'react'
 
-const Profile = ({user}) =>{
+const ProfilePage = ({user}) =>{
     return(
         <div>
             <h1>{user}'s Profile</h1>
+        </div>
 
-            
-            </div>
+        
+        
     )
 }
 
-export default Profile;
+export default ProfilePage;
 
 
