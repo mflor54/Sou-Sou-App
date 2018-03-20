@@ -130,6 +130,30 @@ createUser = (req, res, next) => {
         salt: salt,
         password_digest: password_digest
     })
+    .then((data) => {
+        res.status(200).json({
+            status: success,
+            data: data,
+            message: 'User created'
+        });
+    })
+    .catch((err) => {
+        return next(err);
+    })
+}
+
+userJoinGroup = (req, res, next) => {
+    db.none('update users set group_id = groups.id from groups where users.id = ${user_id} AND groups.id = ${group_id}', {
+        group_id: groupd_id,
+        user_id: user_id
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: success,
+            data: data,
+            messge: 'User joined group'
+        })
+    })
 }
 
 
