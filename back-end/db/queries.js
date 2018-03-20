@@ -1,6 +1,6 @@
 const db = require("./index");
-const authHelpers = require("../auth/helpers");
-const passport = require("../auth/local");
+// const authHelpers = require("../auth/helpers");
+// const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
 getAllGroups = (req, res, next) => {
