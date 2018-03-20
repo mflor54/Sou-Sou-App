@@ -71,6 +71,17 @@ createGroup = (req, res, next) => {
     })
 }
 
+createUser = (req, res, next) => {
+    db.none('insert into users (email, first_name, last_name, rating, salt, password_digest) values (${email}, $first_name}, ${last_name}, ${rating}, ${salt}, ${password_digest})', {
+        email: email,
+        first_name: first_name,
+        last_name: last_name,
+        rating: rating,
+        salt: salt,
+        password_digest: password_digest
+    })
+}
+
 
 module.exports = {
     getAllGroups: getAllGroups,
