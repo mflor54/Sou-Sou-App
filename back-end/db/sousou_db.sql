@@ -4,7 +4,7 @@ CREATE DATABASE SouSou;
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
   namez VARCHAR,
-  email VARCHAR,
+  email VARCHAR(255) not null unique,
   salt VARCHAR,
   password_digest VARCHAR,
   group_id INT REFERENCES groups(ID)
