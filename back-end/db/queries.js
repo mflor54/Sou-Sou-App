@@ -16,6 +16,56 @@ getAllGroups = (req, res, next) => {
         return next(err);
     })
 }
+
+//Create user with resistration and login users
+createUser = (req, res, next) => {
+  const hash = authHelpers.createHash(req.body.password);
+  console.log('createUser hash: ', hash);
+  db.any('INSERT INTO users (first_name, last_name, username, password_digest, salt) VALUE (${firstName}, ${lastName}, ${username}, ${password})', {
+    {firstName: req.body.firstName,
+    lastName:req.body.lastName,
+    username: req.body.username
+    password: hash,
+    salt: salt
+  }
+  .then(() => {
+    //Would like to authenticate and redirect to profile or login
+    res.send(`created user: ${req.body.username}`);
+  })
+    .catch(err => {
+      console.log('Create User Error: ',err);
+      res.status(500).send('error creating user')
+    })
+  })
+}
+
+//Login users
+loginUser = (req, res, next) => {
+  passport.authenticate("local", {});
+  const authenticate = passport.authenticate("local", (err, user, info) => {
+    if(err) {
+      res.status(500).send("Error while trying to logging in, Please try again")
+    } else if (!user) {
+      res.status(401).send("Invalid Username or Password, Please try again");
+    } else if (user) {
+      req.logIn(user, (err) => {
+        if (err) {
+          res.status(500).send("Login Error");
+        }else {
+          res.status(200).send(user);
+        }
+      })
+    }
+  })
+  return authenticate(req, res, next)
+}
+
+//User logout
+logoutUser = (req, res, next) => {
+  req.logout();
+  res.status(200).send("User logout")
+}
+
 // get user info for their profile page when they log in or during session
 getUserInfo = (req, res, next) => {
     db.any('select first_name, last_name, amount, rating from users')
@@ -113,5 +163,5 @@ module.exports = {
     getSingleGroup: getSingleGroup,
     createGroup: createGroup,
     createUser: createUser,
-    userJoinGroup: userJoinGroup
+    loginUser: loginUser
 };
