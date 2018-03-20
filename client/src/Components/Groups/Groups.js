@@ -8,7 +8,17 @@ const Groups = () => {
     <Grid>
       <ListGroup>
         <ListGroupItem header="Group 1" href="#">
-          
+        <Row>
+          <Col sm={4}>
+            Savings Amount $$$
+          </Col>
+          <Col sm={4}>
+            Group description (cuts off after x-amount of characters)
+          </Col>
+          <Col sm={4}>
+            icons of ppl in group
+          </Col>
+        </Row>
         </ListGroupItem>
         <ListGroupItem header="Group 2" href="#">
           
