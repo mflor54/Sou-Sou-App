@@ -4,7 +4,8 @@ import ModalRegister from '../Register/Register';
 
 import { Grid, Row, Col,Jumbotron, Button, Popover,
   Tooltip, Modal,OverlayTrigger, ButtonToolbar } from 'react-bootstrap';
-
+import './Landing.css';
+//import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.css';
 
 
 class Landing extends Component {
@@ -23,20 +24,20 @@ class Landing extends Component {
   return(
 
   <div>
-    <Jumbotron>
-        <h1>Hello, world!</h1>
+  <div className="jumbotron">
+    <Jumbotron >
+        <h1>OWO Logo</h1>
         <p>
-          This is a simple hero unit, a simple jumbotron-style component for calling
-          extra attention to featured content or information.
+        OWO is ... Information about what we do. Who we cater to and why.
         </p>
 
         <Button
-          bsStyle="primary"
+          bsStyle="custom"
           onClick={() => this.setState({ showLogin: true })}>
           Login
-         </Button>
+         </Button>{" "}
         <Button
-          bsStyle="primary"
+          bsStyle="custom"
           onClick={() => this.setState({ showReg: true })}>
           Register
         </Button>
@@ -45,27 +46,44 @@ class Landing extends Component {
        <ModalRegister show={this.state.showReg} onHide={regClose}/>
 
     </Jumbotron>
-    <Grid>
-      <Row className="show-grid">
-        <Col xs={12} md={8}>
+    </div>
+  <Grid fluid="gridlayout">
+    <Row className="show-grid">
+      <Col xs={12} lg={12} id="row1">
+        <h2>Why OWO ?</h2>
+      </Col>
+    </Row>
+    <Row className="show-grid2">
+      <Col xs={6} md={4} id="sec1">
+        <p>Some images and text about saving  with OwO</p>
+      </Col>
+      <Col xs={6} md={4} id="sec1">
+        <p>Some images and text about saving  with OwO</p>
+      </Col>
+      <Col xs={6} md={4} id="sec1">
+          <p>Some images and text about saving  with OwO</p>
+      </Col>
+    </Row>
+
+    <Row className="cd-scrolling-bg cd-scrolling-bg--color-1">
+      <Col xs={12} lg={12} className="cd-scrolling-bg__content">
+        <h2>Why OWO ?</h2>
+      </Col>
+    </Row>
+    <div className="cd-fixed-bg cd-fixed-bg--1">
+      <div className="cd-fixed-bg__content">
+        <h2>The Future</h2>
+      </div>
+    </div>
+      <Row className="cd-scrolling-bg cd-scrolling-bg--color-2">
+        <Col xs={12} md={8} className="cd-scrolling-bg__content">
           <code>&lt;{'2 width col'} /&gt;</code>
         </Col>
-        <Col xs={6} md={4}>
+        <Col xs={6} md={4} className="cd-scrolling-bg__content">
           <code>&lt;{'1 width col'} /&gt;</code>
         </Col>
       </Row>
 
-      <Row className="show-grid">
-        <Col xs={6} md={4}>
-          <code>&lt;{'3 cols'} /&gt;</code>
-        </Col>
-        <Col xs={6} md={4}>
-          <code>&lt;{'3 cols'} /&gt;</code>
-        </Col>
-        <Col xs={6} md={4}>
-          <code>&lt;{'3 cols'} /&gt;</code>
-        </Col>
-      </Row>
 
       <Row className="show-grid">
         <Col xs={6} xsOffset={6}>

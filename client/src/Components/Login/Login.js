@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Popover, Tooltip, Modal,OverlayTrigger } from 'react-bootstrap';
-
+import { Redirect } from "react-router";
 
 class ModalLogin extends Component {
   constructor(){
@@ -8,7 +8,9 @@ class ModalLogin extends Component {
     this.state ={
       usernameInput: "",
       passwordInput: "",
-      message: ""
+      message: "",
+      loggedIn: false,
+      userId:""
     }
   }
 
@@ -28,23 +30,33 @@ class ModalLogin extends Component {
      e.preventDefault();
      const { usernameInput, passwordInput } = this.state;
 
-     if (usernameInput.length < 3) {
+     if (usernameInput.length < 6) {
        this.setState({
-         message: "Username length must be at least 3"
+         message: "Username length must be at least 6"
        });
        return;
      }
      fetch
        .post("/users/login", {
-         username: this.state.usernameInput,
-         password: this.state.passwordInput
+         username: usernameInput,
+         password: passwordInput
        })
        .then(result => result.json())
        .then(res => {
-         this.setState({ usernameInput: "", passwordInput: "", message: "Logged In" });
+         this.setState({
+           usernameInput: "",
+           passwordInput: "",
+           message: "Logged In",
+           userId:"",
+           loggedIn: true
+         });
        })
        .catch(err => {
-         this.setState({ usernameInput: "", passwordInput: "", message: "User name or password does not match." });
+         this.setState({
+           usernameInput: "",
+           passwordInput: "",
+           message: "User name or password does not match."
+         });
        });
    };
 
@@ -57,7 +69,10 @@ class ModalLogin extends Component {
     </Popover>
   );
   const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
- const { usernameInput, passwordInput, message } = this.state;
+  const { usernameInput, passwordInput, message, loggedIn } = this.state;
+   if (loggedIn) {
+       return <Redirect to="/profile/:userId" />;
+     }
     return(
       <Modal {...this.props}>
       <Modal.Header closeButton>
