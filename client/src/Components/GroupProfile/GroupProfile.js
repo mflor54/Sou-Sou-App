@@ -18,10 +18,10 @@ const GroupProfile = () => {
     <div>
       navbar
       <div>
-        <Grid fluid={true}>
+        <Grid>
           <Row className="show-grid">
             <Col md={12}> 
-              <h2>Group Profile page</h2>
+              <h2 className="gp-title">What if I have a really really really long group name.  What happens then???????</h2>
             </Col>
           </Row>
           <Row className="show-grid">
