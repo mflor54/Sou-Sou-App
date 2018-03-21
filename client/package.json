@@ -12,6 +12,7 @@
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-landing-components": "^0.2.7",
+    "react-router": "^4.2.0",
     "react-scripts": "1.1.1"
   },
   "scripts": {
@@ -20,5 +21,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-   "proxy": "http://localhost:3100/"
+  "proxy": "http://localhost:3100/"
 }
