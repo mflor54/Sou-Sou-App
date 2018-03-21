@@ -1,13 +1,13 @@
 const db = require("./index");
-// const authHelpers = require("../auth/helpers");
-// const passport = require("../auth/local");
+const authHelpers = require("../auth/helpers");
+const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
 getAllGroups = (req, res, next) => {
     db.any('select group_name, payout, total_members from groups')
     .then((data) => {
         res.status(200).json({
-            status: success,
+            status: 'success',
             data: data,
             message: 'Retrieved all groups'
         });
@@ -21,13 +21,12 @@ getAllGroups = (req, res, next) => {
 createUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
   console.log('createUser hash: ', hash);
-  db.any('INSERT INTO users (first_name, last_name, username, password_digest, salt) VALUE (${firstName}, ${lastName}, ${username}, ${password})', {
-    {firstName: req.body.firstName,
+  db.any('INSERT INTO users (first_name, last_name, username, password_digest) VALUES (${firstName}, ${lastName}, ${username}, ${password})', {
+    firstName: req.body.firstName,
     lastName:req.body.lastName,
-    username: req.body.username
+    username: req.body.username,
     password: hash,
-    salt: salt
-  }
+  })
   .then(() => {
     //Would like to authenticate and redirect to profile or login
     res.send(`created user: ${req.body.username}`);
@@ -36,8 +35,8 @@ createUser = (req, res, next) => {
       console.log('Create User Error: ',err);
       res.status(500).send('error creating user')
     })
-  })
-}
+  }
+
 
 //Login users
 loginUser = (req, res, next) => {
@@ -121,27 +120,6 @@ createGroup = (req, res, next) => {
     })
 }
 
-createUser = (req, res, next) => {
-    db.none('insert into users (email, first_name, last_name, rating, salt, password_digest) values (${email}, $first_name}, ${last_name}, ${rating}, ${salt}, ${password_digest})', {
-        email: email,
-        first_name: first_name,
-        last_name: last_name,
-        rating: rating,
-        salt: salt,
-        password_digest: password_digest
-    })
-    .then((data) => {
-        res.status(200).json({
-            status: success,
-            data: data,
-            message: 'User created'
-        });
-    })
-    .catch((err) => {
-        return next(err);
-    })
-}
-
 userJoinGroup = (req, res, next) => {
     db.none('update users set group_id = groups.id from groups where users.id = ${user_id} AND groups.id = ${group_id}', {
         group_id: groupd_id,
@@ -153,6 +131,9 @@ userJoinGroup = (req, res, next) => {
             data: data,
             messge: 'User joined group'
         })
+    })
+    .catch((err) => {
+        return next(err);
     })
 }
 
