@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button, Col, Grid, Row, } from 'react-bootstrap';
+import { Jumbotron, Button, Col, Grid, Row, Panel } from 'react-bootstrap';
 
 import './GroupProfile.css';
 
@@ -8,12 +8,12 @@ const avatarStyle = {
   width: '50px',
   marginRight: '5px'
 }
-
+let disable_toggle = false;
 const GroupProfile = () => {
   //join button logic depends on: 
     //number of possible group members
     //number of ppl currently in group
-  
+    //if group is full status = true
   return(
     <div>
       navbar
@@ -21,34 +21,43 @@ const GroupProfile = () => {
         <Grid>
           <Row className="show-grid">
             <Col md={12}> 
-              <h2 className="gp-title">What if I have a really really really long group name.  What happens then???????</h2>
+              <h1 className="gp-title">Get Schmoney Team</h1>
             </Col>
           </Row>
           <Row className="show-grid">
             <Col md={6}>
               <p>
-                Group Description: Cat ipsum dolor sit amet, paw at your fat belly annoy the old grumpy cat, start a fight and then retreat to wash when i lose howl on top of tall thing. Loved it, hated it, loved it, hated it. Scratch the box intrigued by the shower. Chew iPad power cord cat snacks give attitude. Favor packaging over toy meow meow or meow loudly just to annoy owners for roll on the floor purring your whiskers off lick human with sandpaper tongue.
+                Group Description: Cat ipsum dolor sit amet, paw at your fat belly annoy the old grumpy cat, start a fight and then retreat to wash when i lose howl on top of tall thing. Loved it, hated it, loved it, hated it. Scratch the box intrigued by the shower.
               </p>
             </Col>
             <Col md={6}>
-              Payout
+              Next Payout Date: April 1, 2018
+              <div className="">
+                <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
+              </div>
               <div>
-              <img style={avatarStyle} alt="username" src="https://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-6.jpg"/>
-              <img style={avatarStyle} alt="username" src="https://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-6.jpg"/>
-              <img style={avatarStyle} alt="username" src="https://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-6.jpg"/>
+                <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
+                <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
+                <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
               </div>
             </Col>
           </Row>
           <Row className="show-grid">
             <Col md={6}>
-              <Button>Join/Closed</Button>
+              <Button disabled={disable_toggle}>Join</Button>
             </Col>
           </Row>
         </Grid>
       </div>
-      <div>
-        Chat Box
-      </div>
+      <Grid>
+        <Row>
+          <Col md={6}>
+            <Panel.Heading>
+              Message Board
+            </Panel.Heading>
+          </Col>
+        </Row>
+      </Grid>
       
     </div>
   )
