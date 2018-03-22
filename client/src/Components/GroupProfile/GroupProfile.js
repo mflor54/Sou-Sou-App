@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button, Col, Grid, Row, Panel } from 'react-bootstrap';
+import { Jumbotron, Button, Col, Grid, Row, Panel, Glyphicon } from 'react-bootstrap';
 
 import './GroupProfile.css';
 
@@ -49,40 +49,102 @@ const GroupProfile = () => {
           </Row>
         </Grid>
       </div>
-      <Grid>
-        <Row>
-          <Col md={12}>
-            <Panel bsStyle="primary">
-              <Panel.Heading>
-                Message Board
-              </Panel.Heading>
+
+      <Panel>
+        <Panel.Heading>
+          Message Board
+        </Panel.Heading>
+        <Panel.Body>
+          <ul className="chat">
+            <li className="left clearfix">
+              <span className="chat-img pull-left">
+                <img className="img-circle" src="http://placehold.it/50/A430A8/fff&text=C" alt="user-avatar"  />
+              </span>
+              <div className="chat-body clearfix">
+                <div className="header">
+                  <strong className="pull-left">Crystal</strong> 
+                  <small className="pull-right">
+                    <span className="glyphicon glyphicon-time"></span>
+                    20min ago
+                  </small>
+                </div>
+                <p className="chat-message pull-left">Is this going to show up where I want it to?</p>
+              </div>
+            </li>
+            <li className="left clearfix">
+              <span className="chat-img pull-left">
+                <img className="img-circle" src="http://placehold.it/50/08CEC7/fff&text=M" alt="user-avatar"  />
+              </span>
+              <div className="chat-body clearfix">
+                <div className="header">
+                  <strong className="pull-left">Mike</strong> 
+                  <small className="pull-right">
+                    <span className="glyphicon glyphicon-time"></span>
+                    20min ago
+                  </small>
+                </div>
+                <p className="chat-message pull-left">Is this going to show up where I want it to?</p>
+              </div>
+            </li>
+            <li className="left clearfix">
+              <span className="chat-img pull-left">
+                <img className="img-circle" src="http://placehold.it/50/29D9F4/fff&text=K" alt="user-avatar"  />
+              </span>
+              <div className="chat-body clearfix">
+                <div className="header">
+                  <strong className="pull-left">Krystal</strong> 
+                  <small className="pull-right">
+                    <span className="glyphicon glyphicon-time"></span>
+                    20min ago
+                  </small>
+                </div>
+                <p className="chat-message pull-left">Is this going to show up where I want it to? What happens if I put a shit ton of text in here because I'm angry! Arrrrarrrrrrrrrrrhahshshghghshshghg</p>
+              </div>
+            </li>
+            <li className="left clearfix">
+              <span className="chat-img pull-left">
+                <img className="img-circle" src="http://placehold.it/50/25283D/fff&text=R" alt="user-avatar"  />
+              </span>
+              <div className="chat-body clearfix">
+                <div className="header">
+                  <strong className="pull-left">Rachel</strong> 
+                  <small className="pull-right">
+                    <span className="glyphicon glyphicon-time"></span>
+                    20min ago
+                  </small>
+                </div>
+                <p className="chat-message pull-left">Is this going to show up where I want it to?</p>
+              </div>
+            </li>
+            <li className="left clearfix">
+              <span className="chat-img pull-left">
+                <img className="img-circle" src="http://placehold.it/50/29D9F4/fff&text=K" alt="user-avatar"  />
+              </span>
+              <div className="chat-body clearfix">
+                <div className="header">
+                  <strong className="pull-left">Krystal</strong> 
+                  <small className="pull-right">
+                    <span className="glyphicon glyphicon-time"></span>
+                    20min ago
+                  </small>
+                </div>
+                <p className="chat-message pull-left">Is this going to show up where I want it to?</p>
+              </div>
+            </li>
+          </ul>
+        </Panel.Body>
+
+        <Panel.Footer>
+          <div className="input-group">
+            <input type="text" className="form-control" placeholder="type your message here...."/>
+            <span className="input-group-btn">
+              <button className="btn btn-secondary" type="button">Send</button>
+            </span>
+          </div>
+        </Panel.Footer>
         
-              <Panel.Body>
-                <ul className="chat">
-                  <li className="left">
-                    <span className="chat-img pull-left">
-                      <img src="http://placehold.it/50/A430A8/fff&text=C" alt="user-avatar" className="img-circle" />
-                    </span>
-                    <div className="chat-body clearfix">
-                      <div className="header">
-                        <strong class="primary-font pull-left">Crystal</strong>
-                          <small className="pull-right text-muted">
-                            <span className="glyphicon glyphicon-time"></span>
-                            12 mins ago
-                          </small>
-                      </div>
-                      <p className="chat-message">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </Panel.Body>
-              
-            </Panel>
-          </Col>
-        </Row>
-      </Grid>
+      </Panel>
+          
       
     </div>
   )
@@ -90,3 +152,12 @@ const GroupProfile = () => {
 
 
 export default GroupProfile;
+
+/*
+<Panel.Footer>
+  <div className="input-group">
+    <input id="chat-input" type="text" className="form-control" placeholder="type message here...."/>
+    <span className="input-group-addon" id=""></span>
+  </div>
+</Panel.Footer>
+*/
