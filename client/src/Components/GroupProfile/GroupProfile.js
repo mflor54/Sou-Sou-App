@@ -51,10 +51,35 @@ const GroupProfile = () => {
       </div>
       <Grid>
         <Row>
-          <Col md={6}>
-            <Panel.Heading>
-              Message Board
-            </Panel.Heading>
+          <Col md={12}>
+            <Panel bsStyle="primary">
+              <Panel.Heading>
+                Message Board
+              </Panel.Heading>
+        
+              <Panel.Body>
+                <ul className="chat">
+                  <li className="left">
+                    <span className="chat-img pull-left">
+                      <img src="http://placehold.it/50/A430A8/fff&text=C" alt="user-avatar" className="img-circle" />
+                    </span>
+                    <div className="chat-body clearfix">
+                      <div className="header">
+                        <strong class="primary-font pull-left">Crystal</strong>
+                          <small className="pull-right text-muted">
+                            <span className="glyphicon glyphicon-time"></span>
+                            12 mins ago
+                          </small>
+                      </div>
+                      <p className="chat-message">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </Panel.Body>
+              
+            </Panel>
           </Col>
         </Row>
       </Grid>
