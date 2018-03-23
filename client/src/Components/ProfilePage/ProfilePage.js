@@ -1,10 +1,11 @@
+
 import React, { Component } from 'react';
 // import ModalLogin from '../Login/Login';
 // import ModalRegister from '../Register/Register';
 
 import { Grid, Row, Col,Jumbotron, Button, Popover,
-  Tooltip, Modal,OverlayTrigger, ButtonToolbar, Navbar, 
-  Nav, NavItem, NavDropdown, MenuItem, Image, Thumbnail, 
+  Tooltip, Modal,OverlayTrigger, ButtonToolbar, Navbar,
+  Nav, NavItem, NavDropdown, MenuItem, Image, Thumbnail,
   Media, ListGroup,ListGroupItem } from 'react-bootstrap';
 
 
@@ -39,7 +40,7 @@ class ProfilePage extends Component {
     <Navbar.Text>
       Signed in as: Jason Otto
     </Navbar.Text>
-    </Navbar.Collapse>  
+    </Navbar.Collapse>
 
     </Nav>
     <Nav pullRight>
@@ -56,11 +57,11 @@ class ProfilePage extends Component {
         <MenuItem eventKey={3.3}>Something else here</MenuItem>
         <MenuItem divider />
         <MenuItem eventKey={3.3}>Separated link</MenuItem>
-      </NavDropdown>      
+      </NavDropdown>
 
     </Nav>
   </Navbar.Collapse>
- 
+
   <Jumbotron>
 
 <Media>
@@ -71,7 +72,8 @@ class ProfilePage extends Component {
       <h1><Media.Heading>Jason Otto</Media.Heading></h1>
       <p>
         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-      
+
+
       </p>
     </Media.Body>
   </Media>
@@ -144,7 +146,8 @@ class ProfilePage extends Component {
   </Navbar.Header>
   <Navbar.Collapse>
 
-      
+
+
     <Navbar.Text pullRight>Join a Group</Navbar.Text>
   </Navbar.Collapse>
 
@@ -156,7 +159,8 @@ class ProfilePage extends Component {
   <ListGroupItem header="Heading 3" bsStyle="danger">
     Danger styling
   </ListGroupItem>
- 
+
+
   </Navbar>
  </ListGroup>
 
@@ -167,7 +171,4 @@ class ProfilePage extends Component {
 
 export default ProfilePage;
         
-        
-
-
 

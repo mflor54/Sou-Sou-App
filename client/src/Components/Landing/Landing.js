@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ModalLogin from '../Login/Login';
 import ModalRegister from '../Register/Register';
 
-import { Grid, Row, Col,Jumbotron, Button, Popover,
-  Tooltip, Modal,OverlayTrigger, ButtonToolbar } from 'react-bootstrap';
+import { Grid, Row, Col,Jumbotron} from 'react-bootstrap';
+import { Button} from 'mdbreact';
 import './Landing.css';
 //import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.css';
 
@@ -18,26 +18,32 @@ class Landing extends Component {
   }
 
 
+
+
   render(){
    let loginClose = () => this.setState({ showLogin: false });
    let regClose = () => this.setState({ showReg: false });
   return(
 
   <div>
-  <div className="jumbotron">
-    <Jumbotron >
+
+  <div>
+
+    <Jumbotron className="jumbotron">
         <h1>OWO Logo</h1>
         <p>
         OWO is ... Information about what we do. Who we cater to and why.
         </p>
 
         <Button
-          bsStyle="custom"
+           className="btn-custom" color="unique" size="lg"
           onClick={() => this.setState({ showLogin: true })}>
           Login
-         </Button>{" "}
+         </Button>
+
+         {" "}
         <Button
-          bsStyle="custom"
+          className="btn-custom" color="unique" size="lg"
           onClick={() => this.setState({ showReg: true })}>
           Register
         </Button>
@@ -64,17 +70,18 @@ class Landing extends Component {
           <p>Some images and text about saving  with OwO</p>
       </Col>
     </Row>
-
     <Row className="cd-scrolling-bg cd-scrolling-bg--color-1">
       <Col xs={12} lg={12} className="cd-scrolling-bg__content">
         <h2>Why OWO ?</h2>
       </Col>
     </Row>
+
     <div className="cd-fixed-bg cd-fixed-bg--1">
       <div className="cd-fixed-bg__content">
         <h2>The Future</h2>
       </div>
     </div>
+
       <Row className="cd-scrolling-bg cd-scrolling-bg--color-2">
         <Col xs={12} md={8} className="cd-scrolling-bg__content">
           <code>&lt;{'2 width col'} /&gt;</code>

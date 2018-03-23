@@ -1,13 +1,19 @@
-DROP DATABASE IF EXISTS SouSou;
-CREATE DATABASE SouSou;
+DROP DATABASE IF EXISTS sousou;
+CREATE DATABASE sousou;
+
+\c sousou
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
-  namez VARCHAR,
+  first_name VARCHAR,
+  last_name VARCHAR,
+  username VARCHAR,
   email VARCHAR(255) not null unique,
   salt VARCHAR,
   password_digest VARCHAR,
-  group_id INT REFERENCES groups(ID)
+  amount INT,
+  stripe_id  VARCHAR,
+  image BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png')
 );
 
 CREATE TABLE groups (

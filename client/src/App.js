@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Button} from 'mdbreact';
 
 
 import Landing from './Components/Landing/Landing'
