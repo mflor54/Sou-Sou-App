@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Popover, Tooltip, Modal,OverlayTrigger } from 'react-bootstrap';
+import {  Popover, Tooltip, Modal,OverlayTrigger } from 'react-bootstrap';
+import { Button} from 'mdbreact';
 import { Redirect } from "react-router";
+import axios from 'axios';
+import '../Landing/Landing.css';
 
 class ModalLogin extends Component {
   constructor(){
@@ -10,7 +13,7 @@ class ModalLogin extends Component {
       passwordInput: "",
       message: "",
       loggedIn: false,
-      userId:""
+      id:""
     }
   }
 
@@ -28,7 +31,7 @@ class ModalLogin extends Component {
 
    submitForm = e => {
      e.preventDefault();
-     const { usernameInput, passwordInput } = this.state;
+     const { usernameInput, passwordInput, loggedIn, message, userId } = this.state;
 
      if (usernameInput.length < 6) {
        this.setState({
@@ -36,20 +39,18 @@ class ModalLogin extends Component {
        });
        return;
      }
-     fetch
+     axios
        .post("/users/login", {
          username: usernameInput,
          password: passwordInput
        })
-       .then(result => result.json())
        .then(res => {
-         this.setState({
-           usernameInput: "",
-           passwordInput: "",
-           message: "Logged In",
-           userId:"",
-           loggedIn: true
-         });
+         console.log(res);
+         this.props.setUser(res.data);
+          this.setState({
+            loggedIn: true
+          });
+
        })
        .catch(err => {
          this.setState({
@@ -71,7 +72,8 @@ class ModalLogin extends Component {
   const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
   const { usernameInput, passwordInput, message, loggedIn } = this.state;
    if (loggedIn) {
-       return <Redirect to="/profile/:userId" />;
+     console.log(loggedIn);
+      return <Redirect to={`/users/profile`} render={this.renderProfilePage}/>;
      }
     return(
       <Modal {...this.props}>
@@ -124,8 +126,12 @@ class ModalLogin extends Component {
 
       </Modal.Body>
       <Modal.Footer>
-      <Button onClick={this.submitForm}>Submit</Button>
-        <Button onClick={this.props.onHide}>Close</Button>
+      <Button
+      className="btn-custom" color="unique" size="lg"
+      onClick={this.submitForm}>Submit</Button>
+        <Button
+        className="btn-custom" color="unique" size="lg"
+        onClick={this.props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
     )

@@ -7,7 +7,7 @@ getAllGroups = (req, res, next) => {
     db.any('select group_name, payout, total_members from groups')
     .then((data) => {
         res.status(200).json({
-            status: success,
+            status: 'success',
             data: data,
             message: 'Retrieved all groups'
         });
@@ -17,17 +17,33 @@ getAllGroups = (req, res, next) => {
     })
 }
 
+//Get all information of all users
+getAllUsers = (req, res, next) => {
+  db
+    .any("select * from users")
+    .then(function(data) {
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Crystal has Retrieved ALL users"
+      });
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+}
+
 //Create user with resistration and login users
 createUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
   console.log('createUser hash: ', hash);
-  db.any('INSERT INTO users (first_name, last_name, username, password_digest, salt) VALUE (${firstName}, ${lastName}, ${username}, ${password})', {
-    {firstName: req.body.firstName,
+  db.any('INSERT INTO users (first_name, last_name, username, password_digest, email) VALUES (${firstName}, ${lastName}, ${username}, ${password}, ${email})', {
+    firstName: req.body.firstName,
     lastName:req.body.lastName,
-    username: req.body.username
+    username: req.body.username,
+    email:req.body.email,
     password: hash,
-    salt: salt
-  }
+  })
   .then(() => {
     //Would like to authenticate and redirect to profile or login
     res.send(`created user: ${req.body.username}`);
@@ -36,13 +52,15 @@ createUser = (req, res, next) => {
       console.log('Create User Error: ',err);
       res.status(500).send('error creating user')
     })
-  })
-}
+  }
+
 
 //Login users
 loginUser = (req, res, next) => {
   passport.authenticate("local", {});
+
   const authenticate = passport.authenticate("local", (err, user, info) => {
+    console.log('User: ', user);
     if(err) {
       res.status(500).send("Error while trying to logging in, Please try again")
     } else if (!user) {
@@ -68,7 +86,7 @@ logoutUser = (req, res, next) => {
 
 // get user info for their profile page when they log in or during session
 getUserInfo = (req, res, next) => {
-    db.any('select first_name, last_name, amount, rating from users')
+    db.any('select * from users where username = ${username}')
     .then((data) => {
         res.status(200).json({
             status: success,
@@ -80,6 +98,8 @@ getUserInfo = (req, res, next) => {
         return next(err);
     });
 }
+
+
 // select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
     db.one('select group_name, rating, payout, frequency, description from groups where group_name=${group_name}',
@@ -121,6 +141,23 @@ createGroup = (req, res, next) => {
     })
 }
 
+userJoinGroup = (req, res, next) => {
+    db.none('update users set group_id = groups.id from groups where users.id = ${user_id} AND groups.id = ${group_id}', {
+        group_id: groupd_id,
+        user_id: user_id
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: success,
+            data: data,
+            messge: 'User joined group'
+        })
+    })
+    .catch((err) => {
+        return next(err);
+    })
+}
+
 
 module.exports = {
     getAllGroups: getAllGroups,
@@ -128,5 +165,6 @@ module.exports = {
     getSingleGroup: getSingleGroup,
     createGroup: createGroup,
     createUser: createUser,
-    loginUser: loginUser
+    loginUser: loginUser,
+    getAllUsers:getAllUsers
 };

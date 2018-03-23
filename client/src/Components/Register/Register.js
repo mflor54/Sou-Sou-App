@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Popover, Tooltip, Modal,OverlayTrigger } from 'react-bootstrap';
+import {  Popover, Tooltip, Modal } from 'react-bootstrap';
 import { Redirect } from "react-router";
+import axios from "axios";
+import { Button } from 'mdbreact';
+import '../Landing/Landing.css';
 
 class ModalRegister extends Component {
   constructor(){
@@ -11,6 +14,7 @@ class ModalRegister extends Component {
       firstNameInput: "",
       lastNameInput: "",
       comfirmPassword: "",
+      emailInput:"",
       message: ""
     }
     this.handleChange = this.handleChange.bind(this);
@@ -22,7 +26,7 @@ handleChange (evt) {
 
 submitForm = e => {
  e.preventDefault();
- const { usernameInput, passwordInput, firstNameInput, lastNameInput, comfirmPassword } = this.state;
+ const { usernameInput, passwordInput, firstNameInput, lastNameInput, comfirmPassword,emailInput } = this.state;
 
  if (usernameInput.length < 6) {
    this.setState({
@@ -37,13 +41,14 @@ submitForm = e => {
    });
    return
  }
- fetch("/users/register", {
+ axios.post("/users/register", {
+
      firstName: firstNameInput,
      lastName: lastNameInput,
      username: usernameInput,
-     password: passwordInput
+     password: passwordInput,
+     email:emailInput
    })
-   .then(result => result.json())
    .then(res => {
      this.setState({ usernameInput: "", passwordInput: "", message: "Inserted User" });
    })
@@ -61,7 +66,7 @@ render(){
       </Popover>
     );
     const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-    const { usernameInput, passwordInput, message , firstNameInput, lastNameInput, comfirmPassword} = this.state;
+    const { emailInput,usernameInput, passwordInput, message , firstNameInput, lastNameInput, comfirmPassword} = this.state;
   return(
     <Modal {...this.props}>
       <Modal.Header closeButton>
@@ -97,6 +102,15 @@ render(){
                     />
                   </label>
                   <label>
+                    Email:
+                    <input
+                      type="text"
+                      name="emailInput"
+                      value={emailInput}
+                      onChange={this.handleChange}
+                    />
+                  </label>
+                  <label>
                     Password:
                     <input
                       type="password"
@@ -118,8 +132,12 @@ render(){
               </Modal.Body>
             <Modal.Footer>
             <p>{message}</p>
-          <Button onClick={this.submitForm}>Submit</Button>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <Button
+          className="btn-custom" color="unique" size="lg"
+           onClick={this.submitForm}>Submit</Button>
+          <Button
+          className="btn-custom" color="unique" size="lg"
+          onClick={this.props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     )
