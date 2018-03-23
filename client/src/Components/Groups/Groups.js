@@ -15,7 +15,7 @@ const Groups = () => {
       </PageHeader>
       
         
-      <Grid>
+      {/* <Grid> */}
         <ListGroup bsClass="groups-list-group">
           <ListGroupItem header="Debt Payoff Club" href="#">
             <Row>
@@ -54,7 +54,7 @@ const Groups = () => {
             </Row>
           </ListGroupItem>
         </ListGroup>
-      </Grid>
+      {/* </Grid> */}
         
     </div>
   )
