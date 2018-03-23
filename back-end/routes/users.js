@@ -1,5 +1,7 @@
-let db = require("../db/queries");
+const db = require('../db/queries');
 var express = require('express');
+const passport = require('passport');
+const stripe = require('../constants/stripe');
 var router = express.Router();
 const { loginRequired } = require("../auth/helpers");
 const passport = require("../auth/local");
@@ -14,6 +16,7 @@ const passport = require("../auth/local");
 /* GET users listing. */
 router.get('/', db.getAllUsers);
 
+
 router.post('/register', db.createUser);
 
 router.post('/login', passport.authenticate("local"), (req, res) => {
@@ -24,6 +27,7 @@ router.post('/login', passport.authenticate("local"), (req, res) => {
 
 router.get('/profile', loginRequired, db.getUserInfo)
 // router.get("/logout", loginRequired, db.logoutuser);
+
 router.post('/signup', db.createUser);
 
 

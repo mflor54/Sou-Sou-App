@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Button} from 'mdbreact';
 
+
 import Landing from './Components/Landing/Landing'
 
 class App extends Component {
@@ -10,7 +11,8 @@ class App extends Component {
       <div className="App">
         <Landing/>
       </div>
-    );
+      
+    )
   }
 }
 

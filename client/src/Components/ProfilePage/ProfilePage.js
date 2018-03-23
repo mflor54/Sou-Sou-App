@@ -73,6 +73,7 @@ class ProfilePage extends Component {
       <p>
         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
 
+
       </p>
     </Media.Body>
   </Media>
@@ -146,6 +147,7 @@ class ProfilePage extends Component {
   <Navbar.Collapse>
 
 
+
     <Navbar.Text pullRight>Join a Group</Navbar.Text>
   </Navbar.Collapse>
 
@@ -158,6 +160,7 @@ class ProfilePage extends Component {
     Danger styling
   </ListGroupItem>
 
+
   </Navbar>
  </ListGroup>
 
@@ -168,3 +171,4 @@ class ProfilePage extends Component {
 
 export default ProfilePage;
         
+
