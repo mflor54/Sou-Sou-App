@@ -1,6 +1,5 @@
 const db = require('../db/queries');
 var express = require('express');
-const passport = require('passport');
 const stripe = require('../constants/stripe');
 var router = express.Router();
 const { loginRequired } = require("../auth/helpers");
