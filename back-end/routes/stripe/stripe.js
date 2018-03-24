@@ -11,7 +11,7 @@ userRequired = (req, res, next) => {
         res.status(401).send('not logged in lol');
         return;
     }
-    next();    
+    next();
 }
 // This route should be attached to Stripe button to direct them to payment setup
 router.get('/', userRequired, (req, res) => {
@@ -38,7 +38,7 @@ router.get('/token', userRequired, async (req, res) => {
         console.log(err);
         res.status(500).send('stripe error');
         return;
-    }     
+    }
 
     res.redirect('/users/login')
 })
