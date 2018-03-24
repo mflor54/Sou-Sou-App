@@ -1,0 +1,124 @@
+import React, { Component } from 'react';
+import { Col, Checkbox, ControlLabel, Popover, Tooltip } from 'react-bootstrap';
+import { Button } from 'mdbreact';
+import { Redirect } from "react-router";
+
+import { Link, Route, Switch } from 'react-router-dom';
+
+import axios from 'axios';
+import { ModalLink } from 'react-router-modal';
+
+import '../Join/Join.css';
+
+import 'react-router-modal/css/react-router-modal.css';
+
+
+
+class ModalJoin extends Component {
+  constructor(props,context){
+    super(props,context)
+    this.state ={
+      join: false,
+      agree: false
+    }
+    this.renderModalJoin = this.renderModalJoin.bind(this)
+  }
+
+  handleChecked = e => {
+     this.setState({
+       [e.target.name]: e.target.value
+     });
+   };
+
+   handleJoinSubmit = e => {
+     
+   };
+
+
+   renderModalJoin({onHide}){
+     return (
+       <Form horizontal className="loginModal">
+        <h2>Login</h2>
+        <hr />
+          <FormGroup controlId="formHorizontalUsername">
+            <Col componentClass={ControlLabel} sm={2}>
+              Username
+            </Col>
+            <Col sm={10}>
+              <FormControl
+              className="input"
+                type="text"
+                name="username"
+                value={this.state.usernameInput}
+                onChange={this.handleUsername} />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Password
+            </Col>
+            <Col sm={10}>
+              <FormControl
+              className="input"
+              type="password"
+               name="password"
+               value={this.state.passwordInput}
+               onChange={this.handlePassword} />
+            </Col>
+          </FormGroup>
+
+          <FormGroup>
+            <Col smOffset={2} sm={10}>
+              <Checkbox>Remember me</Checkbox>
+            </Col>
+          </FormGroup>
+
+          <FormGroup>
+            <Col smOffset={2} sm={10}>
+              <Button   className="btn-custom" color="unique" size="lg"
+                  onClick={this.submitForm}>Sign in</Button>
+            </Col>
+          </FormGroup>
+        </Form>
+     );
+   }
+
+
+
+  render(){
+    const popover = (
+    <Popover id="modal-popover" title="popover">
+      very popover. such engagement
+    </Popover>
+    );
+    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
+    const { usernameInput, passwordInput, message, loggedIn } = this.state;
+    if (loggedIn) {
+     console.log(loggedIn);
+      return <Redirect to={`/users/profile`} render={this.renderProfilePage}/>;
+     }
+    return(
+
+      <div>
+      <ModalLink
+      path={`/users/login`}
+      component={this.renderModalLogin}>
+      <Button
+         className="btn-custom" color="unique">
+         Login
+        </Button>
+       </ModalLink>
+
+
+    </div>
+
+    )
+  }
+}
+
+
+
+export default ModalLogin;
+
+
