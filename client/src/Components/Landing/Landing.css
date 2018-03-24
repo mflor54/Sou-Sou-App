@@ -1,0 +1,169 @@
+/* Button styling */
+/* TO DO:Change colors to brand style colors */
+.btn-custom {
+    background-color: purple;
+    color: white;
+    border-radius:13px;
+    width: 130px;
+    height: 40px;
+    margin: 20px 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+  }
+
+.btn-custom:hover {
+    border: solid black .5px;
+    color: grey;
+  }
+.modButtons {
+  display:inline-block;
+  width: 150px;
+  height: 30px;
+  }
+
+/* Modal Styling */
+.loginModal{
+  padding: 20px 25px;
+  height: auto;
+  width: 55vw;
+  }
+
+.input{
+
+
+}
+
+/* Grid layout style */
+
+.show-grid #row1{
+  background-color: purple;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+
+}
+.show-grid2 #sec1{
+  background-color: purple;
+  height: 20em;
+  margin: 0;
+  padding: 0;
+}
+
+
+.gridlayout:before {
+  margin: 0;
+  padding: 0;
+}
+
+/* Jumbotron header layout styling */
+.jumbotron {
+  height: 40em;
+  background-color: #006970;
+}
+
+/* Grid styling with background image*/
+.cd-fixed-bg {
+  position: relative;
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 1;
+}
+
+.cd-fixed-bg__content, .cd-fixed-bg h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+  max-width: 1170px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.cd-fixed-bg h1, .cd-fixed-bg h2 {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.cd-fixed-bg.cd-fixed-bg--1 {
+  background-image: url('http://media-assets-03.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-114803-millennials-really-are-behind-the-financial-eight-ball---2x1--940.jpg');
+}
+
+.cd-fixed-bg.cd-fixed-bg--2 {
+  background-image: url('http://media-assets-03.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-114803-millennials-really-are-behind-the-financial-eight-ball---2x1--940.jpg');
+}
+
+.cd-fixed-bg.cd-fixed-bg--3 {
+  background-image: url('http://media-assets-03.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-114803-millennials-really-are-behind-the-financial-eight-ball---2x1--940.jpg');
+}
+
+.cd-fixed-bg.cd-fixed-bg--4 {
+  background-image: url('http://media-assets-03.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-114803-millennials-really-are-behind-the-financial-eight-ball---2x1--940.jpg');
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 3.6rem;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 4.8rem;
+    font-weight: 300;
+  }
+  @supports (background-attachment: fixed) {
+    /* fix bug on IE11 and below */
+    .cd-fixed-bg {
+      background-attachment: fixed;
+    }
+  }
+}
+
+.cd-scrolling-bg {
+  position: relative;
+  min-height: 100%;
+  padding: 4em 0;
+  line-height: 1.6;
+  -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.cd-scrolling-bg.cd-scrolling-bg--color-1 {
+  background-color:#006970;
+  color: #a6989a;
+}
+
+.cd-scrolling-bg.cd-scrolling-bg--color-2 {
+  background-color:purple;
+  color: #3d3536;
+}
+
+.cd-scrolling-bg.cd-scrolling-bg--color-3 {
+  background-color: #b4d7a8;
+  color: #3d3536;
+}
+
+.cd-scrolling-bg__content {
+  width: 90%;
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-scrolling-bg {
+    padding: 8em 0;
+    font-size: 2rem;
+    line-height: 2;
+    font-weight: 300;
+  }
+}
