@@ -18,8 +18,8 @@ class ModalJoin extends Component {
   constructor(props,context){
     super(props,context)
     this.state ={
-      join: false,
-      agree: false
+      agree: false, 
+      open: true
     }
 
     this.renderModalJoin = this.renderModalJoin.bind(this)
@@ -32,18 +32,28 @@ class ModalJoin extends Component {
   };
 
   handleJoinSubmit = e => {
-     
+     //sends the user's id and the group id to the database
+     //the user's id gets added to that group as a group member
+     //once that is done...modal should close
+     //user's avatar is then added to the payout section
   };
 
 
   renderModalJoin({onHide}){
+    const { agree } = this.state;
+    console.log(agree);
+
     return (
       <Form horizontal className="modalJoin">
         <h2> Confirm Join</h2>
         <hr/>
         <FormGroup>
           <Col smOffset={2} sm={10}>
-            <Checkbox>
+            <Checkbox
+              name="agree"
+              checked={agree}
+              onChange={this.handleChecked}
+            >
               <p>
                 By joining this group, you confirm that you have agreed to OWO terms of service
               </p>
@@ -60,27 +70,15 @@ class ModalJoin extends Component {
   }
 
   render(){
-    // const popover = (
-    // <Popover id="modal-popover" title="popover">
-    //   very popover. such engagement
-    // </Popover>
-    // );
-    // const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-    // const { usernameInput, passwordInput, message, loggedIn } = this.state;
-    // if (loggedIn) {
-    //  console.log(loggedIn);
-    //   return <Redirect to={`/users/profile`} render={this.renderProfilePage}/>;
-    //  }
+    const { open } = this.state;
     return(
-
       <div>
         <ModalLink path='/test' component={this.renderModalJoin}>
-          <Button className="btn-custom" color="unique">
+         { open ? <Button className="btn-custom" color="unique">
           Join
-          </Button>
+          </Button> : <Button>Closed</Button>}
         </ModalLink>
       </div>
-
     )
   }
 }
