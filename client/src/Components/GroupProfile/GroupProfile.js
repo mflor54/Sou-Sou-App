@@ -4,6 +4,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import { ModalContainer, ModalRoute } from 'react-router-modal';
 import { Button} from 'mdbreact';
 
+import ModalJoin from '../Join/Join';
 import './GroupProfile.css';
 
 const avatarStyle = {
@@ -25,6 +26,8 @@ class GroupProfile extends Component {
     //number of ppl currently in group
     //if group is full status = true
   render() {
+    let joinClose = () => this.setState({ showjoin: false });
+
     return(
       <div>
         navbar
@@ -55,7 +58,19 @@ class GroupProfile extends Component {
             </Row>
             <Row className="show-grid">
               <Col md={6}>
-                <Button disabled={disable_toggle}>Join</Button>
+                <div className="modButtons">
+                  <Switch>
+
+                  {/* <ModalRoute path={} component={ModalJoin} /> */}
+
+                  </Switch>
+
+                  <ModalJoin 
+                    show={this.state.showJoin} 
+                    onHide={joinClose}
+                  />
+                  <ModalContainer />
+                </div>
               </Col>
             </Row>
           </Grid>

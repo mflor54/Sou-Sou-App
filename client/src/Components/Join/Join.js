@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Checkbox, ControlLabel, Popover, Tooltip } from 'react-bootstrap';
+import { Col, Checkbox, ControlLabel, Popover, Tooltip, Form, FormGroup, FormControl } from 'react-bootstrap';
 import { Button } from 'mdbreact';
 import { Redirect } from "react-router";
 
@@ -38,7 +38,7 @@ class ModalJoin extends Component {
    renderModalJoin({onHide}){
      return (
        <Form horizontal className="loginModal">
-        <h2>Login</h2>
+        <h2>Join</h2>
         <hr />
           <FormGroup controlId="formHorizontalUsername">
             <Col componentClass={ControlLabel} sm={2}>
@@ -106,7 +106,7 @@ class ModalJoin extends Component {
       component={this.renderModalLogin}>
       <Button
          className="btn-custom" color="unique">
-         Login
+         Join
         </Button>
        </ModalLink>
 
@@ -119,6 +119,6 @@ class ModalJoin extends Component {
 
 
 
-export default ModalLogin;
+export default ModalJoin;
 
 
