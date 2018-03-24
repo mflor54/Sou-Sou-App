@@ -50,6 +50,11 @@ class ModalJoin extends Component {
             </Checkbox>
           </Col>
         </FormGroup>
+        <FormGroup>
+          <Col smOffset={2} sm={10}>
+            <Button className="btn-custom" color="unique" size="lg" onClick={this.handleJoinSubmit}>Join</Button>
+          </Col>
+        </FormGroup>
       </Form>
     );
   }
