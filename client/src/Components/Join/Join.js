@@ -32,9 +32,10 @@ class ModalJoin extends Component {
   };
 
   handleJoinSubmit = e => {
+    //post request to userJoinGroup
      //sends the user's id and the group id to the database
      //the user's id gets added to that group as a group member
-     //once that is done...modal should close
+     //upon success, modal should close
      //user's avatar is then added to the payout section
   };
 
@@ -62,7 +63,14 @@ class ModalJoin extends Component {
         </FormGroup>
         <FormGroup>
           <Col smOffset={2} sm={10}>
-            <Button className="btn-custom" color="unique" size="lg" onClick={this.handleJoinSubmit}>Join</Button>
+            <Button 
+              className="btn-custom" 
+              color="unique" 
+              size="lg" 
+              onClick={this.handleJoinSubmit}
+            >
+              Join
+            </Button>
           </Col>
         </FormGroup>
       </Form>
@@ -82,8 +90,6 @@ class ModalJoin extends Component {
     )
   }
 }
-
-
 
 export default ModalJoin;
 
