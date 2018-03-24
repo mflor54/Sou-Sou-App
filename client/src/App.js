@@ -8,10 +8,10 @@ import Landing from './Components/Landing/Landing'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <Landing/>
       </div>
-      
+
     )
   }
 }
