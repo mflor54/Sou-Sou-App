@@ -128,6 +128,7 @@ class ModalLogin extends Component {
     );
     const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
     const { usernameInput, passwordInput, message, loggedIn } = this.state;
+
     if (loggedIn) {
      console.log(loggedIn);
       return <Redirect to={`/users/profile`} render={this.renderProfilePage}/>;
