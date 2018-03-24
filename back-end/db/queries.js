@@ -70,7 +70,9 @@ loginUser = (req, res, next) => {
         if (err) {
           res.status(500).send("Login Error");
         }else {
+          console.log(res.status);
           res.status(200).send(user);
+          // res.redirect('/users/profile');
         }
       })
     }

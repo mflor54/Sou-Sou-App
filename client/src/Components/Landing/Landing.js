@@ -8,6 +8,9 @@ import './Landing.css';
 //import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.css';
 
 
+import { Link, Route, Switch } from 'react-router-dom';
+import { ModalContainer, ModalRoute } from 'react-router-modal';
+
 class Landing extends Component {
   constructor(props, context) {
     super(props, context);
@@ -23,6 +26,7 @@ class Landing extends Component {
   render(){
    let loginClose = () => this.setState({ showLogin: false });
    let regClose = () => this.setState({ showReg: false });
+       const url = `/react-router-modal-examples`;
   return(
 
   <div>
@@ -35,21 +39,23 @@ class Landing extends Component {
         OWO is ... Information about what we do. Who we cater to and why.
         </p>
 
-        <Button
-           className="btn-custom" color="unique" size="lg"
-          onClick={() => this.setState({ showLogin: true })}>
-          Login
-         </Button>
+              <div className="modButtons">
+                <Switch>
 
-         {" "}
-        <Button
-          className="btn-custom" color="unique" size="lg"
-          onClick={() => this.setState({ showReg: true })}>
-          Register
-        </Button>
+                 <ModalRoute path={`/users/login`} component={ModalLogin} />
+                 <ModalRoute path={`/users/register`} component={ModalRegister} />
 
-       <ModalLogin show={this.state.showLogin} onHide={loginClose}/>
-       <ModalRegister show={this.state.showReg} onHide={regClose}/>
+              </Switch>
+
+             <ModalLogin show={this.state.showLogin} onHide={loginClose}/>
+             <ModalRegister show={this.state.showReg} onHide={regClose}/>
+
+        
+            <ModalContainer />
+        </div>
+
+
+
 
     </Jumbotron>
     </div>
