@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Checkbox, ControlLabel, Popover, Tooltip, Form, FormGroup, FormControl } from 'react-bootstrap';
+import { Col, Checkbox, Form, FormGroup, FormControl } from 'react-bootstrap';
 import { Button } from 'mdbreact';
 import { Redirect } from "react-router";
 
@@ -37,6 +37,15 @@ class ModalJoin extends Component {
      //the user's id gets added to that group as a group member
      //upon success, modal should close
      //user's avatar is then added to the payout section
+     axios.post("/groups/join/:groupid/:userid", {
+      
+    })
+    .then(res => {
+      //close modal
+    })
+    .catch(err => {
+      console.log('There was an error joining the group');
+    });
   };
 
 
