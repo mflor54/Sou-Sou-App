@@ -21,97 +21,60 @@ class ModalJoin extends Component {
       join: false,
       agree: false
     }
+
     this.renderModalJoin = this.renderModalJoin.bind(this)
   }
 
   handleChecked = e => {
-     this.setState({
-       [e.target.name]: e.target.value
-     });
-   };
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
-   handleJoinSubmit = e => {
+  handleJoinSubmit = e => {
      
-   };
+  };
 
 
-   renderModalJoin({onHide}){
-     return (
-       <Form horizontal className="loginModal">
-        <h2>Join</h2>
-        <hr />
-          <FormGroup controlId="formHorizontalUsername">
-            <Col componentClass={ControlLabel} sm={2}>
-              Username
-            </Col>
-            <Col sm={10}>
-              <FormControl
-              className="input"
-                type="text"
-                name="username"
-                value={this.state.usernameInput}
-                onChange={this.handleUsername} />
-            </Col>
-          </FormGroup>
-
-          <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} sm={2}>
-              Password
-            </Col>
-            <Col sm={10}>
-              <FormControl
-              className="input"
-              type="password"
-               name="password"
-               value={this.state.passwordInput}
-               onChange={this.handlePassword} />
-            </Col>
-          </FormGroup>
-
-          <FormGroup>
-            <Col smOffset={2} sm={10}>
-              <Checkbox>Remember me</Checkbox>
-            </Col>
-          </FormGroup>
-
-          <FormGroup>
-            <Col smOffset={2} sm={10}>
-              <Button   className="btn-custom" color="unique" size="lg"
-                  onClick={this.submitForm}>Sign in</Button>
-            </Col>
-          </FormGroup>
-        </Form>
-     );
-   }
-
-
+  renderModalJoin({onHide}){
+    return (
+      <Form horizontal className="modalJoin">
+        <h2> Confirm Join</h2>
+        <hr/>
+        <FormGroup>
+          <Col smOffset={2} sm={10}>
+            <Checkbox>
+              <p>
+                By joining this group, you confirm that you have agreed to OWO terms of service
+              </p>
+            </Checkbox>
+          </Col>
+        </FormGroup>
+      </Form>
+    );
+  }
 
   render(){
-    const popover = (
-    <Popover id="modal-popover" title="popover">
-      very popover. such engagement
-    </Popover>
-    );
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-    const { usernameInput, passwordInput, message, loggedIn } = this.state;
-    if (loggedIn) {
-     console.log(loggedIn);
-      return <Redirect to={`/users/profile`} render={this.renderProfilePage}/>;
-     }
+    // const popover = (
+    // <Popover id="modal-popover" title="popover">
+    //   very popover. such engagement
+    // </Popover>
+    // );
+    // const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
+    // const { usernameInput, passwordInput, message, loggedIn } = this.state;
+    // if (loggedIn) {
+    //  console.log(loggedIn);
+    //   return <Redirect to={`/users/profile`} render={this.renderProfilePage}/>;
+    //  }
     return(
 
       <div>
-      <ModalLink
-      path={`/users/login`}
-      component={this.renderModalLogin}>
-      <Button
-         className="btn-custom" color="unique">
-         Join
-        </Button>
-       </ModalLink>
-
-
-    </div>
+        <ModalLink path='/test' component={this.renderModalJoin}>
+          <Button className="btn-custom" color="unique">
+          Join
+          </Button>
+        </ModalLink>
+      </div>
 
     )
   }

@@ -61,7 +61,7 @@ class GroupProfile extends Component {
                 <div className="modButtons">
                   <Switch>
 
-                  {/* <ModalRoute path={} component={ModalJoin} /> */}
+                  <ModalRoute path='/test' component={ModalJoin} />
 
                   </Switch>
 
