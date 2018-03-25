@@ -44,8 +44,8 @@ class Users extends React.Component {
     const { user, id } = this.state;
     return (
       <div className="App">
-<ModalContainer />
-      <ModalRoute path={`/users/login`} component={this.renderLogin} />
+<ModalContainer  backdropClassName='react-router-modal__backdrop' />
+      <ModalRoute path={`/users/login`} component={this.renderLogin} parentPath="/"/>
       <ModalRoute path={`/users/register`} component={ModalRegister} />
       <Route path="/users/profile" render={this.renderProfilePage} />
 

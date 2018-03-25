@@ -33,7 +33,7 @@ renderProfilePage(){
         <Col xs={6} md={4} id="sec1">
           <p>Profile Photo</p>
         </Col>
-        <Col xs={12} md={8} id="sec1">
+        <Col xs={12} md={8} id="sec2">
             <p>Welcome Jim</p>
             <p>Rating: Gold</p>
               <p>Memeber Since: 2017</p>
@@ -64,12 +64,12 @@ renderProfilePage(){
   <div>
 
   <h1>Nav</h1>
-  <Link to="/users/Groups">Groups</Link>
+  <Link to="/Groups">Groups</Link>
   <Link to="/users/Profile">Profile Page</Link>
   <Link to="/">Logout</Link>
 
   <Switch>
-  <Route path="/users/Groups" component={Groups} />
+  <Route path="/Groups" component={Groups} />
   <Route path="/users/Profile" component={this.renderProfilePage} />
   <Route path="/" component={Landing} />
   </Switch>
@@ -81,4 +81,3 @@ renderProfilePage(){
 }
 
 export default ProfilePage;
-
