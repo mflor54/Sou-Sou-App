@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 // import ModalLogin from '../Login/Login';
 // import ModalRegister from '../Register/Register';
@@ -23,18 +22,22 @@ class ProfilePage extends Component {
     this.renderProfilePage = this.renderProfilePage.bind(this)
   }
 
-  renderProfilePage(){
-    return(
-      
-      <div>
-        <Grid fluid="gridlayout">
-          <Row className="show-grid">
-            <Col xs={6} md={4} id="sec1">
-              <p>Profile Photo</p>
-            </Col>
-            <Col xs={12} md={8} id="sec1">
-              <p>Welcome Jim</p>
-              <p>Rating: Gold</p>
+
+renderProfilePage(){
+  return(
+
+    <div>
+    <Grid fluid="gridlayout">
+      <Row className="show-grid">
+
+
+        <Col xs={6} md={4} id="sec1">
+          <p>Profile Photo</p>
+        </Col>
+        <Col xs={12} md={8} id="sec1">
+            <p>Welcome Jim</p>
+            <p>Rating: Gold</p>
+
               <p>Memeber Since: 2017</p>
               <p>Savings to date: $3,689</p>
             </Col>
@@ -78,3 +81,4 @@ class ProfilePage extends Component {
 }
 
 export default ProfilePage;
+

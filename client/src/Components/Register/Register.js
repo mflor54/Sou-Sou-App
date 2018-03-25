@@ -162,7 +162,7 @@ renderModalRegistation({onHide}){
 
        <FormGroup>
          <Col smOffset={3} sm={8}>
-           <Button   className="btn-custom" color="unique" size="lg"
+           <Button   className="btn-custom"
                onClick={this.submitForm}>Sign in</Button>
          </Col>
        </FormGroup>
@@ -188,7 +188,7 @@ render(){
           path={`/users/register`}
           component={this.renderModalRegistation}>
           <Button
-             className="btn-custom" color="unique">
+             className="btn-custom" color="secondary-color-dark" >
              Sign Up
             </Button>
            </ModalLink>

@@ -136,14 +136,14 @@ class ModalLogin extends Component {
     return(
 
       <div>
-      <ModalLink
-      path={`/users/login`}
-      component={this.renderModalLogin}>
-      <Button
-         className="btn-custom" color="unique">
-         Login
-        </Button>
-       </ModalLink>
+        <ModalLink
+          path={`/users/login`}
+          component={this.renderModalLogin}>
+          <Button
+             className="btn-custom" color="unique">
+             Login
+          </Button>
+        </ModalLink>
 
 
     </div>
