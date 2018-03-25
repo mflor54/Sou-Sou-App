@@ -1,20 +1,28 @@
+/*Page layout*/
+
+.Landing{
+
+
+}
+
+
 /* Button styling */
 /* TO DO:Change colors to brand style colors */
 .btn-custom {
-    background-color: purple;
-    color: white;
+    background-color: #a430a8;
+    color: #eaf3ff;
     border-radius:13px;
-    width: 130px;
-    height: 40px;
-    margin: 20px 0;
+    width: 110px;
+    height: 33px;
+    margin:0 0 20px 0;
     font-family: 'Roboto', sans-serif;
-    font-size: 15px;
+    font-size: 13px;
   }
 
 .btn-custom:hover {
-    border: solid black .5px;
-    color: grey;
+    border: solid #620a65 .8px;
   }
+
 .modButtons {
   display:inline-block;
   width: 150px;
@@ -36,15 +44,15 @@
 /* Grid layout style */
 
 .show-grid #row1{
-  background-color: purple;
+  background-color: #eaf3ff;
   width: 100%;
   height: auto;
   margin: 0;
-  padding: 0;
+  padding: 10px;
 
 }
 .show-grid2 #sec1{
-  background-color: purple;
+  background-color: #eaf3ff;
   height: 20em;
   margin: 0;
   padding: 0;
@@ -54,12 +62,36 @@
 .gridlayout:before {
   margin: 0;
   padding: 0;
+
+
 }
 
 /* Jumbotron header layout styling */
+ .show-grid #jumbotop{
+  background-color: #eaf3ff;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+
+
+}
 .jumbotron {
-  height: 40em;
-  background-color: #006970;
+
+background-image: url(../images/bg2.png);
+background-size: cover;
+background-repeat: no-repeat;
+height: 90vh;
+padding: 25px;
+border: none;
+color: #eaf3ff;
+}
+
+#logo {
+  width: 40vw;
+  margin: auto;
+  align-content: center;
+
 }
 
 /* Grid styling with background image*/
@@ -70,6 +102,9 @@
   background-repeat: no-repeat;
   background-position: center center;
   z-index: 1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .cd-fixed-bg__content, .cd-fixed-bg h2 {
@@ -81,33 +116,26 @@
   -webkit-transform: translateX(-50%) translateY(-50%);
       -ms-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
-  width: 90%;
-  max-width: 1170px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: auto;
   text-align: center;
   font-size: 3rem;
 }
 
 .cd-fixed-bg h1, .cd-fixed-bg h2 {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  color: white;
+color: #25283d;
 }
 
 .cd-fixed-bg.cd-fixed-bg--1 {
-  background-image: url('http://media-assets-03.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-114803-millennials-really-are-behind-the-financial-eight-ball---2x1--940.jpg');
+  background-image: url(../images/audience-band-celebration-196652.jpg);
+  background-size: cover;
+  background-position: center;
+  opacity: .7;
 }
 
-.cd-fixed-bg.cd-fixed-bg--2 {
-  background-image: url('http://media-assets-03.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-114803-millennials-really-are-behind-the-financial-eight-ball---2x1--940.jpg');
-}
 
-.cd-fixed-bg.cd-fixed-bg--3 {
-  background-image: url('http://media-assets-03.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-114803-millennials-really-are-behind-the-financial-eight-ball---2x1--940.jpg');
-}
-
-.cd-fixed-bg.cd-fixed-bg--4 {
-  background-image: url('http://media-assets-03.thedrum.com/cache/images/thedrum-prod/s3-news-tmp-114803-millennials-really-are-behind-the-financial-eight-ball---2x1--940.jpg');
-}
 
 @media only screen and (min-width: 768px) {
   .cd-fixed-bg h1, .cd-fixed-bg h2 {
@@ -139,18 +167,25 @@
 }
 
 .cd-scrolling-bg.cd-scrolling-bg--color-1 {
-  background-color:#006970;
-  color: #a6989a;
+  background-color:#08cec7;
+  height: 100vh;
+  color: #eaf3ff;
+}
+.cd-scrolling-bg--color-2.5 {
+  background-color:#a430a8;
+  color: #eaf3ff;
+  height: auto;
 }
 
 .cd-scrolling-bg.cd-scrolling-bg--color-2 {
-  background-color:purple;
-  color: #3d3536;
+  background-color:#a430a8;
+  color: #eaf3ff;
+  height: 100vh;
 }
 
 .cd-scrolling-bg.cd-scrolling-bg--color-3 {
-  background-color: #b4d7a8;
-  color: #3d3536;
+  background-color: #eaf3ff;
+  color: #29d9f4;
 }
 
 .cd-scrolling-bg__content {

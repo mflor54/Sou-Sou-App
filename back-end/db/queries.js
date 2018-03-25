@@ -4,8 +4,9 @@ const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
 getAllGroups = (req, res, next) => {
-    db.any('select group_name, payout, total_members from groups')
+    db.any('SELECT * FROM groups')
     .then((data) => {
+      console.log(data);
         res.status(200).json({
             status: 'success',
             data: data,
@@ -33,28 +34,6 @@ getAllUsers = (req, res, next) => {
     });
 }
 
-//Create user with resistration and login users
-createUser = (req, res, next) => {
-  const hash = authHelpers.createHash(req.body.password);
-  console.log('createUser hash: ', hash);
-  db.any('INSERT INTO users (first_name, last_name, username, password_digest, email) VALUES (${firstName}, ${lastName}, ${username}, ${password}, ${email})', {
-    firstName: req.body.firstName,
-    lastName:req.body.lastName,
-    username: req.body.username,
-    email:req.body.email,
-    password: hash,
-  })
-  .then(() => {
-    //Would like to authenticate and redirect to profile or login
-    res.send(`created user: ${req.body.username}`);
-  })
-    .catch(err => {
-      console.log('Create User Error: ',err);
-      res.status(500).send('error creating user')
-    })
-  }
-
-
 //Login users
 loginUser = (req, res, next) => {
   passport.authenticate("local", {});
@@ -79,6 +58,29 @@ loginUser = (req, res, next) => {
   })
   return authenticate(req, res, next)
 }
+//Create user with resistration and login users
+createUser = (req, res, next) => {
+  const hash = authHelpers.createHash(req.body.password);
+  console.log('createUser hash: ', hash);
+  db.any('INSERT INTO users (first_name, last_name, username, password_digest, email) VALUES (${firstName}, ${lastName}, ${username}, ${password}, ${email})', {
+    firstName: req.body.firstName,
+    lastName:req.body.lastName,
+    username: req.body.username,
+    email:req.body.email,
+    password: hash,
+  })
+  .then(() => {
+    //Would like to authenticate and redirect to profile or login
+    res.send(`created user: ${req.body.username}`);
+    loginUser()
+  })
+    .catch(err => {
+      console.log('Create User Error: ',err);
+      res.status(500).send('error creating user')
+    })
+  }
+
+
 
 //User logout
 logoutUser = (req, res, next) => {
