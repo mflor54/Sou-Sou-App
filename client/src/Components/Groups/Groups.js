@@ -32,6 +32,19 @@ class Groups extends Component {
     this.getAllGroups();
   }
 
+  showGroupMembers(total_members){
+    let owlstr = [];
+    for(var i = 0; i < total_members; i++){ 
+      // console.log(total_members);
+      owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
+      // owlstr += <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
+    }
+    console.log(owlstr);
+    return owlstr.forEach((owl)=> <img src={owl}/>);
+    // return owlstr;
+    // <img style={avatarStyle} src={owlstr} alt="username"/>;
+    // <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
+  }
   render(){
     const { groups } = this.state;
     console.log("this is groups from state", groups);
@@ -41,9 +54,10 @@ class Groups extends Component {
         <PageHeader bsClass="groups-header">
           Example page header <small>Subtext for header</small>
         </PageHeader>
+        
         <ListGroup bsClass="groups-list-group">
           {groups.map((group) => 
-            <ListGroupItem header={group.description} href="#"> 
+            <ListGroupItem header={group.description} href={`/groupProfile/${group.id}`}> 
               <Row>
                 <Col md={4}>
                   <p>{group.frequency} pay-in of <strong>$ {group.total_amount}</strong></p>
@@ -52,7 +66,13 @@ class Groups extends Component {
                   <p>Savings Goal: <strong>$ {group.payout}</strong></p>
                 </Col>
                 <Col md={4}>
-                  
+                  <p>{group.total_members}</p>
+                  {this.showGroupMembers(group.total_members)}
+                  {/* {this.showGroupMembers(group.total_members).forEach(img => <img src={img} style={avatarStyle} alt="username" />)} */}
+
+
+                  {/* <img src={this.showGroupMembers(group.total_members)} />
+                  <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/> */}
                 </Col>
               </Row>
             </ListGroupItem>
