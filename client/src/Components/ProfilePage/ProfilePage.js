@@ -22,18 +22,20 @@ class ProfilePage extends Component {
     this.renderProfilePage = this.renderProfilePage.bind(this)
   }
 
-  renderProfilePage(){
-    return(
-      
-      <div>
-        <Grid fluid="gridlayout">
-          <Row className="show-grid">
-            <Col xs={6} md={4} id="sec1">
-              <p>Profile Photo</p>
-            </Col>
-            <Col xs={12} md={8} id="sec1">
-              <p>Welcome Jim</p>
-              <p>Rating: Gold</p>
+renderProfilePage(){
+  return(
+
+    <div>
+    <Grid fluid="gridlayout">
+      <Row className="show-grid">
+
+
+        <Col xs={6} md={4} id="sec1">
+          <p>Profile Photo</p>
+        </Col>
+        <Col xs={12} md={8} id="sec1">
+            <p>Welcome Jim</p>
+            <p>Rating: Gold</p>
               <p>Memeber Since: 2017</p>
               <p>Savings to date: $3,689</p>
             </Col>
@@ -59,17 +61,19 @@ class ProfilePage extends Component {
       let regClose = () => this.setState({ showReg: false });
     return(
 
-      <div>
-        <h1>Nav</h1>
-        <Link to="/users/Groups">Groups</Link>
-        <Link to="/users/Profile">Profile Page</Link>
-        <Link to="/">Logout</Link>
+  <div>
 
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route path="/users/Profile" component={this.renderProfilePage} />
-          <Route path="/users/Groups" component={Groups} />
-        </Switch>
+  <h1>Nav</h1>
+  <Link to="/users/Groups">Groups</Link>
+  <Link to="/users/Profile">Profile Page</Link>
+  <Link to="/">Logout</Link>
+
+  <Switch>
+  <Route path="/users/Groups" component={Groups} />
+  <Route path="/users/Profile" component={this.renderProfilePage} />
+  <Route path="/" component={Landing} />
+  </Switch>
+
 
       </div>
     )
@@ -77,3 +81,4 @@ class ProfilePage extends Component {
 }
 
 export default ProfilePage;
+
