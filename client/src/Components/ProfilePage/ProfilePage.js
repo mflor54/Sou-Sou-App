@@ -34,7 +34,7 @@ renderProfilePage(){
         <Col xs={6} md={4} id="sec1">
           <p>Profile Photo</p>
         </Col>
-        <Col xs={12} md={8} id="sec1">
+        <Col xs={12} md={8} id="sec2">
             <p>Welcome Jim</p>
             <p>Rating: Gold</p>
 
@@ -81,4 +81,3 @@ renderProfilePage(){
 }
 
 export default ProfilePage;
-

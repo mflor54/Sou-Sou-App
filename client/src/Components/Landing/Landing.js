@@ -19,9 +19,14 @@ class Landing extends Component {
     super(props, context);
     this.state = {
       showLogin: false,
-      showReg:false
+      showReg:false,
+      show:true
     }
   }
+
+  handleBackClick=()=> {
+  this.setState({ show: false });
+}
 
 
 
@@ -30,7 +35,7 @@ class Landing extends Component {
     let regClose = () => this.setState({ showReg: false });
    return(
 
-   <div>
+   <div className="Landing">
       <div>
         </div>
           <Grid fluid="gridlayout">
@@ -44,8 +49,8 @@ class Landing extends Component {
                     OWO is ... Information about what we do. Who we cater to and why.
                   </p>
                      <div className="modButtons">
-                        <ModalLogin show={this.state.showLogin} onHide={loginClose}/>
-                        <ModalRegister show={this.state.showReg} onHide={regClose}/>
+                        <ModalLogin show={this.state.showLogin} onBackdropClick={this.handleBackClick}  />
+                        <ModalRegister show={this.state.showReg} onBackdropClick={this.handleBackClick}/>
                         <ModalContainer />
                      </div>
                    </Jumbotron>
