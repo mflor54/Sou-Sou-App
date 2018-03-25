@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 // import ModalLogin from '../Login/Login';
 // import ModalRegister from '../Register/Register';
@@ -38,33 +37,29 @@ renderProfilePage(){
             <p>Welcome Jim</p>
             <p>Rating: Gold</p>
               <p>Memeber Since: 2017</p>
-               <p>Savings to date: $3,689</p>
-        </Col>
+              <p>Savings to date: $3,689</p>
+            </Col>
 
-      </Row>
-      <Row className="show-grid2">
-      <Col xs={12} lg={12} className="cd-scrolling-bg__content">
-        <h2>Groups</h2>
-        <Row className="show-grid2">
-        <Col xs={12} lg={12} className="cd-scrolling-bg__content">
-          <h2>Your Groups</h2>
+          </Row>
+          <Row className="show-grid2">
+            <Col xs={12} lg={12} className="cd-scrolling-bg__content">
+              <h2>Groups</h2>
+              <Row className="show-grid2">
+                <Col xs={12} lg={12} className="cd-scrolling-bg__content">
+                  <h2>Your Groups</h2>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    )
+  }
 
-
-        </Col>
-        </Row>
-
-      </Col>
-      </Row>
-
-      </Grid>
-    </div>
-  )
-}
-
-  render(){
-   let loginClose = () => this.setState({ showLogin: false });
-   let regClose = () => this.setState({ showReg: false });
-  return(
+    render(){
+      let loginClose = () => this.setState({ showLogin: false });
+      let regClose = () => this.setState({ showReg: false });
+    return(
 
   <div>
 
@@ -79,9 +74,11 @@ renderProfilePage(){
   <Route path="/" component={Landing} />
   </Switch>
 
-  </div>
+
+      </div>
     )
   }
 }
 
 export default ProfilePage;
+
