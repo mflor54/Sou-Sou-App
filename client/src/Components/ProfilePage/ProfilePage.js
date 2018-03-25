@@ -63,6 +63,7 @@ renderProfilePage(){
       let regClose = () => this.setState({ showReg: false });
     return(
 
+
       <div>
         <h1>Nav</h1>
         <Link to="/groups">Groups</Link>
@@ -74,6 +75,7 @@ renderProfilePage(){
           <Route path="/users/Profile" component={this.renderProfilePage} />
           <Route path="/groups" component={Groups} />
         </Switch>
+
 
       </div>
     )

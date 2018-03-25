@@ -162,6 +162,10 @@ userJoinGroup = (req, res, next) => {
     })
 }
 
+paymentSent = (req, res, next) => {
+    db.none()
+}
+
 
 module.exports = {
     getAllGroups: getAllGroups,
