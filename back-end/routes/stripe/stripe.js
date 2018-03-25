@@ -43,4 +43,6 @@ router.get('/token', userRequired, async (req, res) => {
     res.redirect('/users/login')
 })
 
+
+
 module.exports = router;

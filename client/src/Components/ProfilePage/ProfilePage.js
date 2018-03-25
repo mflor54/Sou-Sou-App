@@ -25,7 +25,6 @@ class ProfilePage extends Component {
 
 renderProfilePage(){
   return(
-    </div>
     <div>
     <Grid fluid="gridlayout">
       <Row className="show-grid">
@@ -67,16 +66,15 @@ renderProfilePage(){
   return(
 
   <div>
-  <div>
   <h1>Nav</h1>
   <Link to="/users/Groups">Groups</Link>
   <Link to="/users/Profile">Profile Page</Link>
   <Link to="/">Logout</Link>
 
   <Switch>
-  <Route to"/users/Groups" component={Groups} />
-  <Route to"/users/Profile" component={this.renderProfilePage} />
-  <Route to"/" component={Landing} />
+  <Route to="/users/Groups" component={Groups} />
+  <Route to="/users/Profile" component={this.renderProfilePage} />
+  <Route to="/" component={Landing} />
   </Switch>
 
   </div>
