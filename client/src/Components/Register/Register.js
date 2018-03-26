@@ -18,7 +18,8 @@ class ModalRegister extends Component {
       lastNameInput: "",
       comfirmPassword: "",
       emailInput:"",
-      message: ""
+      message: "",
+      registered:false,
     }
     this.handleChange = this.handleChange.bind(this);
     this.renderModalRegistation = this.renderModalRegistation.bind(this)
@@ -55,7 +56,7 @@ submitForm = e => {
      email:emailInput
    })
    .then(res => {
-     this.setState({ usernameInput: "", passwordInput: "", message: "Inserted User" });
+     this.setState({ usernameInput: "", passwordInput: "", message: "Inserted User", registered: true });
    })
    .catch(err => {
      this.setState({ usernameInput: "", passwordInput: "", message: "Error Inserting User" });
@@ -124,9 +125,9 @@ renderModalRegistation({onHide}){
            className="input"
            type="text"
            placeholder="JaneDoe78"
-           name="username"
+           name="usernameInput"
            value={this.state.usernameInput}
-           onChange={this.handleUsername} />
+           onChange={this.handleChange} />
          </Col>
        </FormGroup>
 
@@ -139,9 +140,9 @@ renderModalRegistation({onHide}){
            className="input"
            type="password"
            placeholder="Password"
-            name="password"
+            name="passwordInput"
             value={this.state.passwordInput}
-            onChange={this.handlePassword} />
+            onChange={this.handleChange} />
          </Col>
        </FormGroup>
 
@@ -162,8 +163,10 @@ renderModalRegistation({onHide}){
 
        <FormGroup>
          <Col smOffset={3} sm={8}>
-           <Button   className="btn-custom" color="unique" size="lg"
-               onClick={this.submitForm}>Sign in</Button>
+           <Button
+           className="btn-custom"
+           color="secondary-color-dark"
+           onClick={this.submitForm}>Sign in</Button>
          </Col>
        </FormGroup>
      </Form>
@@ -172,28 +175,23 @@ renderModalRegistation({onHide}){
 
 
 render(){
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-    const { emailInput,usernameInput, passwordInput, message , firstNameInput, lastNameInput, comfirmPassword} = this.state;
+    const { emailInput,usernameInput, passwordInput, message , firstNameInput, lastNameInput, comfirmPassword, registered} = this.state;
+    if (registered) {
+      return <Redirect to={`/users/login`} render={this.renderLogin}/>;
+     }
   return(
 
-          <div>
-
-
+        <div>
           <ModalLink
-          path={`/users/register`}
-          component={this.renderModalRegistation}>
+              path={`/users/register`}
+              component={this.renderModalRegistation}
+              parentPath="/">
           <Button
-             className="btn-custom" color="unique">
+             className="btn-custom"
+             color="secondary-color-dark" >
              Sign Up
             </Button>
            </ModalLink>
-
-
         </div>
     )
   }
