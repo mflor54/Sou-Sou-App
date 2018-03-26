@@ -4,47 +4,47 @@ CREATE DATABASE sousou;
 \c sousou
 
 CREATE TABLE users (
-    ID SERIAL PRIMARY KEY,
-    email VARCHAR UNIQUE,
-    salt VARCHAR,
-    password_digest VARCHAR,
-    group_id INTEGER REFERENCES groups(id),
-    first_name VARCHAR,
-    last_name VARCHAR,
-    amount INTEGER,
-    rating VARCHAR,
-    stripe_id VARCHAR UNIQUE,
-    image_ BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png'),
-    username VARCHAR UNIQUE
+  ID SERIAL PRIMARY KEY,
+  email VARCHAR UNIQUE,
+  username VARCHAR UNIQUE,
+  salt VARCHAR,
+  password_digest VARCHAR,
+  first_name VARCHAR,
+  last_name VARCHAR,
+  amount INTEGER,
+  rating VARCHAR,
+  stripe_id VARCHAR UNIQUE,
+  image_ BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png')
+
 );
 
 CREATE TABLE groups (
-    ID SERIAL PRIMARY KEY,
-    total_members INTEGER,
-    creator VARCHAR,
-    pay_in_amount NUMERIC (6, 2),
-    pay_out_amount NUMERIC (6, 2),
-    total_amount INTEGER,
-    date_created TIMESTAMPTZ,
-    frequency VARCHAR,
-    payout VARCHAR,
-    group_name VARCHAR UNIQUE,
-    rating VARCHAR,
-    description_ VARCHAR
+  ID SERIAL PRIMARY KEY,
+  group_name VARCHAR UNIQUE,
+  total_members INTEGER,
+  creator VARCHAR,
+  pay_in_amount NUMERIC(6,2),
+  pay_out_amount NUMERIC(6,2),
+  description_ VARCHAR,
+  frequency VARCHAR,
+  date_created TIMESTAMPTZ,
+  end_date TIMESTAMPTZ,
+  user_id INTEGER REFERENCES users(ID)
 );
 
-CREATE TABLE paymentsIn (
+CREATE TABLE payments_in (
     ID SERIAL PRIMARY KEY,
-    payment_id VARCHAR UNIQUE,
-    amount INTEGER,
-    user_id VARCHAR REFERENCES users(stripe_id),
-    groupd_id INTEGER REFERENCES users(id)
+    amount NUMERIC(2),
+    payment_id VARCHAR,
+    group_id INTEGER REFERENCES groups(ID),
+    user_id INTEGER REFERENCES users(ID)
 );
 
-CREATE TABLE paymentsOut (
+
+CREATE TABLE payments_out (
     ID SERIAL PRIMARY KEY,
-    payment_id VARCHAR UNIQUE,
-    amount INTEGER,
-    user_id VARCHAR REFERENCES users(stripe_id),
-    group_id INTEGER REFERENCES users(id)
+    amount NUMERIC(2),
+    payment_id VARCHAR,
+    group_id INTEGER REFERENCES groups(ID),
+    user_id INTEGER REFERENCES users(ID)
 );

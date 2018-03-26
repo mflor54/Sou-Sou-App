@@ -58,23 +58,21 @@ renderProfilePage(){
     )
   }
 
-    render(){
+render(){
       let loginClose = () => this.setState({ showLogin: false });
       let regClose = () => this.setState({ showReg: false });
     return(
 
+  <h1>Nav</h1>
+  <Link to="/groups">Groups</Link>
+  <Link to="/users/profile">Profile Page</Link>
+  <Link to="/">Logout</Link>
 
-      <div>
-        <h1>Nav</h1>
-        <Link to="/groups">Groups</Link>
-        <Link to="/users/Profile">Profile Page</Link>
-        <Link to="/">Logout</Link>
-
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route path="/users/Profile" component={this.renderProfilePage} />
-          <Route path="/groups" component={Groups} />
-        </Switch>
+  <Switch>
+  <Route path="/users/profile" component={this.renderProfilePage} />
+  <Route path="/groups" component={Groups} />
+  <Route path="/" component={Landing} />
+  </Switch>
 
 
       </div>

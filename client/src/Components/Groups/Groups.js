@@ -16,10 +16,11 @@ class Groups extends Component {
     }
   }
 
+
   getAllGroups = () => {
     fetch("/groups")
     .then(res => res.json())
-    .then((groups) => {
+    .then(groups => {
       console.log(groups.data[0]);
       let data = groups.data
       this.setState({
@@ -34,10 +35,10 @@ class Groups extends Component {
 
   showGroupMembers(total_members){
     let owlstr = [];
-    for(var i = 0; i < total_members; i++){ 
-      
+    for(var i = 0; i < total_members; i++){
+
       owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
-  
+
     }
     console.log(owlstr);
     return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
@@ -51,10 +52,10 @@ class Groups extends Component {
         <PageHeader bsClass="groups-header">
           Example page header <small>Subtext for header</small>
         </PageHeader>
-        
+
         <ListGroup bsClass="groups-list-group">
-          {groups.map((group) => 
-            <ListGroupItem header={group.description} href={`/groupProfile/${group.id}`}> 
+          {groups.map((group) =>
+            <ListGroupItem header={group.description} href={`/groupProfile/${group.id}`}>
               <Row>
                 <Col md={4}>
                   <p>{group.frequency} pay-in of <strong>$ {group.total_amount}</strong></p>
@@ -73,8 +74,7 @@ class Groups extends Component {
     )
   }
 
-} 
- 
+
 
 
 export default Groups;

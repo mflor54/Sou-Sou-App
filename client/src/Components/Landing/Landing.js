@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ModalLogin from '../Login/Login';
 import ModalRegister from '../Register/Register';
-
+import Groups from '../Groups/Groups';
 import { Grid, Row, Col,Jumbotron} from 'react-bootstrap';
 import { Button} from 'mdbreact';
 import './Landing.css';
@@ -135,6 +135,7 @@ class Landing extends Component {
     <Switch>
       <Route exact path="/" component={this.renderLandingPage} />
       <Route path="/users" component={Users} />
+      <Route path="/groups" component={Groups} />
     </Switch>
   </div>
     )

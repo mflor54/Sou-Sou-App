@@ -56,7 +56,16 @@ submitForm = e => {
      email:emailInput
    })
    .then(res => {
-     this.setState({ usernameInput: "", passwordInput: "", message: "Inserted User", registered: true });
+     this.setState({
+       registered: true,
+       firstNameInput: "",
+       lastNameInput: "",
+       usernameInput: "",
+       passwordInput: "",
+       comfirmPassword: "",
+       emailInput:"",
+       message: "Inserted User"
+       });
    })
    .catch(err => {
      this.setState({ usernameInput: "", passwordInput: "", message: "Error Inserting User" });
@@ -169,6 +178,7 @@ renderModalRegistation({onHide}){
            onClick={this.submitForm}>Sign in</Button>
          </Col>
        </FormGroup>
+       <div>{message}</div>
      </Form>
   );
 }
