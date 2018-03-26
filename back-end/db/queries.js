@@ -4,7 +4,7 @@ const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
 getAllGroups = (req, res, next) => {
-    db.any('select group_name, payout, total_members from groups')
+    db.any('select * from groups')
     .then((data) => {
         res.status(200).json({
             status: 'success',
@@ -89,7 +89,7 @@ logoutUser = (req, res, next) => {
 
 // get user info for their profile page when they log in or during session
 getUserInfo = (req, res, next) => {
-    db.any('select * from users where username = ${username}')
+    db.any('select * from users where username = ${userName}')
     .then((data) => {
         res.status(200).json({
             status: success,
@@ -105,9 +105,9 @@ getUserInfo = (req, res, next) => {
 
 // select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
-    db.one('select group_name, rating, payout, frequency, description from groups where group_name=${group_name}',
+    db.one('select * from groups where group.ID=${groupId}',
         {
-            group_name: req.body.group_name
+            groupId: req.body.group_name
         }
     )
     .then((data) => {
@@ -123,18 +123,17 @@ getSingleGroup = (req, res, next) => {
 }
 // creates group when user submits form from group creation page
 createGroup = (req, res, next) => {
-    db.none('insert into groups (group_name, total_members, creator, payout, frequency, description, rating) values (${group_name}, ${total_members}, ${user_name}, ${payout}, ${frequency}, ${description}, ${rating})',{
-        group_name: req.body.group_name,
-        total_members: req.body.total_members,
-        user_name: req.body.user_name,
-        payout: req.body.payout,
+    db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description) values (${groupName}, ${totalMembers}, ${userName}, ${payoutAmount}, ${frequency}, ${description})',{
+        groupName: req.body.group_name,
+        totalMembers: req.body.total_members,
+        userName: req.body.user_name,
+        payoutAmount: req.body.payout,
         frequency: req.body.frequency,
-        description: req.body.description,
-        rating: req.body.rating
+        description: req.body.description
     })
     .then((data) => {
         res.status(200).json({
-            status: success,
+            status: "success",
             data: data,
             message: 'Created group!'
         });
@@ -145,7 +144,8 @@ createGroup = (req, res, next) => {
 }
 
 userJoinGroup = (req, res, next) => {
-    db.none('update users set group_id = groups.id from groups where users.id = ${user_id} AND groups.id = ${group_id}', {
+  //Needs updating when needs are clearified
+    db.none('update groups where group.ID = ${groupId} from groups where users.id = ${user_id} AND groups.id = ${group_id}', {
         group_id: groupd_id,
         user_id: user_id
     })
