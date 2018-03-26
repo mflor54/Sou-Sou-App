@@ -15,6 +15,7 @@ CREATE TABLE users (
   rating VARCHAR,
   stripe_id VARCHAR UNIQUE,
   image_ BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png')
+
 );
 
 CREATE TABLE groups (

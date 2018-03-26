@@ -4,8 +4,10 @@ const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
 getAllGroups = (req, res, next) => {
-    db.any('select * from groups')
+
+    db.any('SELECT * FROM groups')
     .then((data) => {
+      console.log(data);
         res.status(200).json({
             status: 'success',
             data: data,
@@ -159,6 +161,10 @@ userJoinGroup = (req, res, next) => {
     .catch((err) => {
         return next(err);
     })
+}
+
+paymentSent = (req, res, next) => {
+    db.none()
 }
 
 

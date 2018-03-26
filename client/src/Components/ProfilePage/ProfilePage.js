@@ -22,6 +22,7 @@ class ProfilePage extends Component {
     this.renderProfilePage = this.renderProfilePage.bind(this)
   }
 
+
 renderProfilePage(){
   return(
 
@@ -36,6 +37,7 @@ renderProfilePage(){
         <Col xs={12} md={8} id="sec2">
             <p>Welcome Jim</p>
             <p>Rating: Gold</p>
+
               <p>Memeber Since: 2017</p>
               <p>Savings to date: $3,689</p>
             </Col>
@@ -60,8 +62,6 @@ render(){
       let loginClose = () => this.setState({ showLogin: false });
       let regClose = () => this.setState({ showReg: false });
     return(
-
-  <div>
 
   <h1>Nav</h1>
   <Link to="/groups">Groups</Link>

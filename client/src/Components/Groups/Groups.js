@@ -16,6 +16,7 @@ class Groups extends Component {
     }
   }
 
+
   getAllGroups = () => {
     fetch("/groups")
     .then(res => res.json())
@@ -73,7 +74,6 @@ class Groups extends Component {
     )
   }
 
-}
 
 
 
