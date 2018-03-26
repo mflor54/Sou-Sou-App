@@ -57,7 +57,7 @@ submitForm = e => {
    })
    .then(res => {
      this.setState({
-        registered: true,
+       registered: true,
        firstNameInput: "",
        lastNameInput: "",
        usernameInput: "",
