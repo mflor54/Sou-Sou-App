@@ -27,7 +27,8 @@ class GroupProfile extends Component {
     //number of ppl currently in group
     //if group is full status = true
   getGroup(){
-    console.log(this.props.match.params.groupID)
+    let groupID = this.props.match.params.groupID;
+    console.log(groupID);
   }
  
  
