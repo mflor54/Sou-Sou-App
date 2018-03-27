@@ -18,16 +18,22 @@ class GroupProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showJoin: false
+      showJoin: false,
+      group:[]
     }
   }
   //join button logic depends on: 
     //number of possible group members
     //number of ppl currently in group
     //if group is full status = true
+  getGroup(){
+    console.log(this.props.match.params.groupID)
+  }
+ 
+ 
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-
+    this.getGroup();
     return(
       <div>
         navbar
