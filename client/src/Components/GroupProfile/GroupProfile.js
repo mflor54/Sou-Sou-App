@@ -28,7 +28,16 @@ class GroupProfile extends Component {
     //if group is full status = true
   getGroup(){
     let groupID = this.props.match.params.groupID;
-    console.log(groupID);
+    //console.log(groupID);
+    fetch(`/groups/${groupID}`)
+    .then(res => res.json())
+    .then(group => {
+      console.log("=====", group.data);
+      let data = group.data;
+      this.setState({
+        group: data
+      });
+    });
   }
  
  
