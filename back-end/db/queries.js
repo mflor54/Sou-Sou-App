@@ -107,20 +107,22 @@ getUserInfo = (req, res, next) => {
 
 // select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
-    db.one('select * from groups where group.ID=${groupId}',
+    db.one('select * from groups where groups.ID=${groupId}',
         {
-            groupId: req.body.group_name
+            groupId: req.params.groupID
         }
     )
     .then((data) => {
+      console.log(data);
         res.status(200).json({
-            status: success,
+            status: "success",
             data: data,
             message: 'Retrieved group info'
         });
     })
     .catch((err) => {
         return next(err);
+        console.log(err);
     })
 }
 // creates group when user submits form from group creation page
