@@ -22,46 +22,54 @@ class GroupProfile extends Component {
       group:[]
     }
   }
-  //join button logic depends on: 
-    //number of possible group members
-    //number of ppl currently in group
-    //if group is full status = true
-  getGroup(){
+  
+  //Gets one group from the database and udpates the state of group to that fetched group
+  getGroup = () => {
     let groupID = this.props.match.params.groupID;
     //console.log(groupID);
     fetch(`/groups/${groupID}`)
     .then(res => res.json())
     .then(group => {
-      console.log("=====", group.data);
+      console.log("=====>", group.data);
       let data = group.data;
       this.setState({
         group: data
       });
     });
   }
- 
+  
+  componentDidMount(){
+    this.getGroup();
+  }
  
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    this.getGroup();
+    const { group } = this.state;
+    console.log("group from state =>", group);
+    
     return(
       <div>
         navbar
         <div>
           <Grid>
+            
             <Row className="show-grid">
               <Col md={12}> 
-                <h1 className="gp-title">Get Schmoney Team</h1>
+                <h1 className="gp-title">group.group_name</h1>
               </Col>
             </Row>
             <Row className="show-grid">
               <Col md={6}>
                 <p>
-                  Group Description: Cat ipsum dolor sit amet, paw at your fat belly annoy the old grumpy cat, start a fight and then retreat to wash when i lose howl on top of tall thing. Loved it, hated it, loved it, hated it. Scratch the box intrigued by the shower.
+                  {group.description}
+                  group.creator
+                  group.pay_in_amount
+                  group.frequency
                 </p>
               </Col>
               <Col md={6}>
                 Next Payout Date: April 1, 2018
+                group.pay_out_amount
                 <div className="">
                   <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
                 </div>
