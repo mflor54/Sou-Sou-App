@@ -45,7 +45,7 @@ class Groups extends Component {
       owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
 
     }
-    console.log(owlstr);
+    //console.log(owlstr);
     return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
   }
   renderGroupsList(){
@@ -61,13 +61,13 @@ class Groups extends Component {
         <ListGroup bsClass="groups-list-group">
           {groups.map((group) =>
             <Link to={`/groups/${group.id}`}>
-              <ListGroupItem header={group.description} >
+              <ListGroupItem header={group.group_name} >
               <Row>
                 <Col md={4}>
-                  <p>{group.frequency} pay-in of <strong>$ {group.total_amount}</strong></p>
+                  <p>{group.frequency} pay-in of <strong>$ {group.pay_in_amount}</strong></p>
                 </Col>
                 <Col md={4}>
-                  <p>Savings Goal: <strong>$ {group.payout}</strong></p>
+                  <p>Savings Goal: <strong>$ {group.pay_out_amount}</strong></p>
                 </Col>
                 <Col md={4}>
                   {this.showGroupMembers(group.total_members)}
