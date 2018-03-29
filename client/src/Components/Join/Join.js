@@ -6,12 +6,11 @@ import { Redirect } from "react-router";
 import { Link, Route, Switch } from 'react-router-dom';
 
 import axios from 'axios';
-import { ModalLink } from 'react-router-modal';
+import { ModalLink, Modal } from 'react-router-modal';
 
 import '../Join/Join.css';
 
 import 'react-router-modal/css/react-router-modal.css';
-
 
 
 class ModalJoin extends Component {
@@ -37,22 +36,14 @@ class ModalJoin extends Component {
      //the user's id gets added to that group as a group member
      //upon success, modal should close
      //user's avatar is then added to the payout section
-     axios.post("/groups/join/:groupid/:userid", {
-      
-    })
-    .then(res => {
-      //close modal
-    })
-    .catch(err => {
-      console.log('There was an error joining the group');
-    });
   };
 
 
   renderModalJoin({onHide}){
     const { agree } = this.state;
-    console.log(agree);
-
+    console.log("**", agree);
+    let groupID = this.props.match.params.groupID;
+    console.log("===> Group ID===>", groupID);
     return (
       <Form horizontal className="modalJoin">
         <h2> Confirm Join</h2>
@@ -90,7 +81,7 @@ class ModalJoin extends Component {
     const { open } = this.state;
     return(
       <div>
-        <ModalLink path='/test' component={this.renderModalJoin}>
+        <ModalLink path={`/groups/groupID/join`}component={this.renderModalJoin}>
          { open ? <Button className="btn-custom" color="unique">
           Join
           </Button> : <Button>Closed</Button>}

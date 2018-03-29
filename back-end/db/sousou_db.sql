@@ -25,7 +25,7 @@ CREATE TABLE groups (
   creator VARCHAR,
   pay_in_amount NUMERIC(6,2),
   pay_out_amount NUMERIC(6,2),
-  description_ VARCHAR,
+  description_ TEXT,
   frequency VARCHAR,
   date_created TIMESTAMPTZ,
   end_date TIMESTAMPTZ,

@@ -18,41 +18,72 @@ class GroupProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showJoin: false
+      showJoin: false,
+      group:[]
     }
   }
-  //join button logic depends on: 
-    //number of possible group members
-    //number of ppl currently in group
-    //if group is full status = true
+  
+
+  //Gets one group from the database and udpates the state of group to that fetched group
+  getGroup = () => {
+    let groupID = this.props.match.params.groupID;
+    //console.log(groupID);
+    fetch(`/groups/${groupID}`)
+    .then(res => res.json())
+    .then(group => {
+      console.log("=====>", group.data);
+      let data = group.data;
+      this.setState({
+        group: data
+      });
+    });
+  }
+  
+  componentDidMount(){
+    this.getGroup();
+  }
+  showGroupMembers(total_members){
+    let owlstr = [];
+    for(var i = 0; i < total_members; i++){
+
+      owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
+
+    }
+    //console.log(owlstr);
+    return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
+  }
+
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-
+    const { group } = this.state;
+    console.log("group from state =>", group);
+    
     return(
       <div>
         navbar
         <div>
           <Grid>
+            
             <Row className="show-grid">
               <Col md={12}> 
-                <h1 className="gp-title">Get Schmoney Team</h1>
+                <h1 className="gp-title">{group.group_name}</h1>
               </Col>
             </Row>
             <Row className="show-grid">
               <Col md={6}>
-                <p>
-                  Group Description: Cat ipsum dolor sit amet, paw at your fat belly annoy the old grumpy cat, start a fight and then retreat to wash when i lose howl on top of tall thing. Loved it, hated it, loved it, hated it. Scratch the box intrigued by the shower.
-                </p>
+                <p>{group.description_}</p>
+                <p>Group Creator: {group.creator} (i would prefer the group creator's avatar to be here</p>
+                <p>{group.frequency} payments of ${group.pay_in_amount}</p>
+                
               </Col>
               <Col md={6}>
-                Next Payout Date: April 1, 2018
+                <p>Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018</p>
+                <p></p>
                 <div className="">
                   <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
                 </div>
                 <div>
-                  <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
-                  <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
-                  <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
+                  {this.showGroupMembers(group.total_members)}
                 </div>
               </Col>
             </Row>
