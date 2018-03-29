@@ -23,6 +23,7 @@ class GroupProfile extends Component {
     }
   }
   
+
   //Gets one group from the database and udpates the state of group to that fetched group
   getGroup = () => {
     let groupID = this.props.match.params.groupID;
@@ -41,7 +42,17 @@ class GroupProfile extends Component {
   componentDidMount(){
     this.getGroup();
   }
- 
+  showGroupMembers(total_members){
+    let owlstr = [];
+    for(var i = 0; i < total_members; i++){
+
+      owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
+
+    }
+    //console.log(owlstr);
+    return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
+  }
+
   render() {
     let joinClose = () => this.setState({ showjoin: false });
     const { group } = this.state;
@@ -55,28 +66,24 @@ class GroupProfile extends Component {
             
             <Row className="show-grid">
               <Col md={12}> 
-                <h1 className="gp-title">group.group_name</h1>
+                <h1 className="gp-title">{group.group_name}</h1>
               </Col>
             </Row>
             <Row className="show-grid">
               <Col md={6}>
-                <p>
-                  {group.description}
-                  group.creator
-                  group.pay_in_amount
-                  group.frequency
-                </p>
+                <p>{group.description_}</p>
+                <p>Group Creator: {group.creator} (i would prefer the group creator's avatar to be here</p>
+                <p>{group.frequency} payments of ${group.pay_in_amount}</p>
+                
               </Col>
               <Col md={6}>
-                Next Payout Date: April 1, 2018
-                group.pay_out_amount
+                <p>Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018</p>
+                <p></p>
                 <div className="">
                   <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
                 </div>
                 <div>
-                  <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
-                  <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
-                  <img style={avatarStyle} alt="username" src="https://image.flaticon.com/icons/svg/12/12324.svg"/>
+                  {this.showGroupMembers(group.total_members)}
                 </div>
               </Col>
             </Row>
