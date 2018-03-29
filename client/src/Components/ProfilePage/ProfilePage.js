@@ -6,7 +6,7 @@ import { Grid, Row, Col,Jumbotron, Button, Popover,
   Tooltip, Modal,OverlayTrigger, ButtonToolbar, Navbar,
   Nav, NavItem, NavDropdown, MenuItem, Image, Thumbnail,
   Media, ListGroup,ListGroupItem } from 'react-bootstrap';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
 import '../Landing/Landing.css';
@@ -49,6 +49,7 @@ renderProfilePage(){
               <Row className="show-grid2">
                 <Col xs={12} lg={12} className="cd-scrolling-bg__content">
                   <h2>Your Groups</h2>
+                  <a href="http://localhost:3100/users/stripe/connect">STRIPE</a>
                 </Col>
               </Row>
             </Col>

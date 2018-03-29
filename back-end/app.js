@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require("passport");
+const cors = require('cors');
 
 const secret = require('./secret.js')
 var index = require('./routes/index');
@@ -15,6 +16,8 @@ let groups = require('./routes/groups');
 let stripeRoutes = require('./routes/stripe/stripe')
 
 var app = express();
+
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 

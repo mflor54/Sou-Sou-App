@@ -5,6 +5,8 @@ import { ModalContainer, ModalRoute } from 'react-router-modal';
 import ModalRegister from "../Register/Register";
 import ModalLogin from "../Login/Login";
 import ProfilePage from "../ProfilePage/ProfilePage";
+import Token from "../Stripe/Token";
+import Done from "../Stripe/Done";
 
 class Users extends React.Component {
   constructor() {
@@ -29,10 +31,11 @@ class Users extends React.Component {
 
   renderProfilePage= props => {
     const { user, id } = this.state;
+    console.log("State.user is = " + user);
     if (!user) {
       return <div> must log in first </div>;
 
-}
+    }
       return <ProfilePage id={user.id} />;
   };
 
@@ -48,7 +51,9 @@ class Users extends React.Component {
       <ModalRoute path={`/users/login`} component={this.renderLogin} parentPath="/"/>
       <ModalRoute path={`/users/register`} component={ModalRegister} />
       <Route path="/users/profile" render={this.renderProfilePage} />
-
+      <Route path="/users/stripe/token" component={Token}/>
+      <Route path="/users/stripe/done" component={Done}/>
+      
       </div>
     );
   }
