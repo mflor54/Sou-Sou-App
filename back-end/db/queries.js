@@ -166,6 +166,23 @@ userJoinGroup = (req, res, next) => {
     })
 }
 
+saveCustomerToken = (req, res, next) => {
+    db.none('update users set stripe_id = ${stripe_id} WHERE email = ${email}', {
+        stripe_id: req.query.stripe_id,
+        email: req.query.email
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'User token saved'
+        })
+    })
+    .catch((err) => {
+        return next(err);
+    })
+}
+
 paymentSent = (req, res, next) => {
     db.none()
 }

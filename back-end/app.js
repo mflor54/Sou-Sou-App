@@ -29,10 +29,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(
   session({
     secret:
@@ -41,6 +37,8 @@ app.use(
     saveUninitialized: true
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/users/stripe', stripeRoutes);

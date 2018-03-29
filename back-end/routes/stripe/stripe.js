@@ -1,5 +1,6 @@
 const stripe = require('../../constants/stripe');
 const authHelpers = require('../../auth/helpers');
+const db = require('../../db/queries');
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
@@ -16,7 +17,7 @@ userRequired = (req, res, next) => {
 // This route should be attached to Stripe button to direct them to payment setup
 router.get('/', userRequired, (req, res) => {
     req.user.state = Math.random().toString(36).slice(2);
-    res.redirect(`${stripe.authorizeUri}?client_id=${stripe.clientID}&state=${req.session.state}`);
+    res.redirect(`${stripe.authorizeUri}?client_id=${stripe.clientID}&state=${req.user.state}&stripe_user[email]=${req.user.email}`);
 })
 
 router.get('/token', userRequired, async (req, res) => {
@@ -33,7 +34,7 @@ router.get('/token', userRequired, async (req, res) => {
             code: req.query.code
         });
         console.log(axiosRes);
-
+        
     } catch (err){
         console.log(err);
         res.status(500).send('stripe error');

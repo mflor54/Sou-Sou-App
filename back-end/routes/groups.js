@@ -1,6 +1,7 @@
 let db = require('../db/queries');
 let stripe = require('../constants/stripe');
 let express = require('express');
+let axios = require('axios');
 let router = express.Router();
 
 
@@ -12,6 +13,7 @@ router.post('/new', db.createGroup);
 
 //localhost:3100/groups/groupID
 router.get('/:groupID', db.getSingleGroup);
+
 
 router.post('/:id/charge', async (req, res, next) => {
     const charge = await stripe.charges.create({
