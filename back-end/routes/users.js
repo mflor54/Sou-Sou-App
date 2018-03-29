@@ -21,7 +21,7 @@ router.post('/register', db.createUser);
 router.post('/login', passport.authenticate("local"), (req, res) => {
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user;
-  res.json(req.user.stripe_id);
+  res.json(req.user);
 });
 
 router.get('/profile', loginRequired, db.getUserInfo)

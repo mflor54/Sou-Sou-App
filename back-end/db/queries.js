@@ -187,6 +187,20 @@ paymentSent = (req, res, next) => {
     db.none()
 }
 
+saveCustomerId = (data, id) => {
+    db.none('update users set stripe_id = ${stripe_user_id} WHERE id = ${id}', {
+        stripe_user_id: data,
+        id: id
+    })
+    .then((data) => {
+        console.log('SAVED CUSTOMER ID => ' + data);
+    })
+    .catch((err) => {
+        console.log('YOU SUCK');
+        return;
+    })
+}
+
 
 module.exports = {
     getAllGroups: getAllGroups,
@@ -195,5 +209,6 @@ module.exports = {
     createGroup: createGroup,
     createUser: createUser,
     loginUser: loginUser,
-    getAllUsers:getAllUsers
+    getAllUsers:getAllUsers,
+    saveCustomerId: saveCustomerId,
 };

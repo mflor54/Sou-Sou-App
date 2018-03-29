@@ -22,7 +22,7 @@ CREATE TABLE groups (
   ID SERIAL PRIMARY KEY,
   group_name VARCHAR UNIQUE,
   total_members INTEGER,
-  creator VARCHAR,
+  creator INTEGER REFERENCES users(ID),
   pay_in_amount NUMERIC(6,2),
   pay_out_amount NUMERIC(6,2),
   description_ TEXT,
