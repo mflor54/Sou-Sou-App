@@ -188,7 +188,7 @@ class ProfilePage extends Component {
                 </Row>
                 <Row className="show-grid2">
                     <Col xs={12} lg={12}>
-                        <h2 className="panel-headding"> nGroups
+                        <h2 className="panel-headding"> My Groups
                             <Button className="pull-right btn-outline-dark">+ Group</Button>
                         </h2>
                         <Row className="show-grid2">
