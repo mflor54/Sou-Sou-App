@@ -150,13 +150,22 @@ createGroup = (req, res, next) => {
 
 userJoinGroup = (req, res, next) => {
   //Needs updating when needs are clearified
+  /*
     db.none('update groups where group.ID = ${groupId} from groups where users.id = ${user_id} AND groups.id = ${group_id}', {
-        group_id: groupd_id,
+        group_id: group.ID,
         user_id: user_id
     })
+    */
+   console.log(req.body)
+  //  let groupID = 1;
+  //  let userID = 2;
+   db.none('insert into users_groups (group_id, user_id) values (${groupID}, ${userID})', {
+      groupID: req.body.groupID,
+      userID: req.body.userID
+   })
     .then((data) => {
         res.status(200).json({
-            status: success,
+            status: "success",
             data: data,
             messge: 'User joined group'
         })
@@ -211,4 +220,5 @@ module.exports = {
     loginUser: loginUser,
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
+    userJoinGroup: userJoinGroup
 };

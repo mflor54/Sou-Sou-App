@@ -1,4 +1,4 @@
-//var db = require('../db/index');
+var db = require('../db/index');
 var queries = require('../db/queries');
 
 
@@ -8,7 +8,7 @@ let group1 = {
   body: {
     groupName: "Spending Money",
     totalMembers: 5,
-    creator: "Rachel",
+    creator: 1,
     payinAmount: 25,
     payoutAmount: 125,
     frequency: "Weekly", 
@@ -20,7 +20,7 @@ let group2 = {
   body: {
     groupName: "Savings Warriors",
     totalMembers: 3,
-    creator: "Crystal",
+    creator: 2,
     payinAmount: 100,
     payoutAmount: 300,
     frequency: "Monthly", 
@@ -32,7 +32,7 @@ let group3 = {
   body: {
     groupName: "Down Payment",
     totalMembers: 9,
-    creator: "Mike",
+    creator: 3,
     payinAmount: 250,
     payoutAmount: 2250,
     frequency: "Monthly", 
@@ -44,7 +44,7 @@ let group4 = {
   body: {
     groupName: "Party Favors",
     totalMembers: 5,
-    creator: "Rachel",
+    creator: 4,
     payinAmount: 100,
     payoutAmount: 500,
     frequency: "monthly", 
@@ -56,7 +56,7 @@ let group5 = {
   body: {
     groupName: "Car Note",
     totalMembers: 9,
-    creator: "Krystal",
+    creator: 5,
     payinAmount: 30,
     payoutAmount: 225,
     frequency: "weekly", 
@@ -84,14 +84,23 @@ let next = (err) => {
 }
 
 //pass all 3 into the query
+/*
 queries.createGroup(group1, resMock, next);
 queries.createGroup(group2, resMock, next);
 queries.createGroup(group3, resMock, next);
 queries.createGroup(group4, resMock, next);
 queries.createGroup(group5, resMock, next);
-
-
+*/
 
 //run the file in with node in the terminal. Test by reading the errors and correcting the queries. 
 //Check the database --> did the data save correctly?
+
+let join1 = {
+  body: {
+    groupID: 3,
+    userID: 2
+  }  
+}
+
+queries.userJoinGroup(join1, resMock, next);
 

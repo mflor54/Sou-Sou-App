@@ -42,8 +42,8 @@ class ModalJoin extends Component {
   renderModalJoin({onHide}){
     const { agree } = this.state;
     console.log("**", agree);
-    let groupID = this.props.match.params.groupID;
-    console.log("===> Group ID===>", groupID);
+    //let groupID = this.props.match.params.groupID;
+    //console.log("===> Group ID===>", groupID);
     return (
       <Form horizontal className="modalJoin">
         <h2> Confirm Join</h2>
@@ -81,6 +81,7 @@ class ModalJoin extends Component {
     const { open } = this.state;
     return(
       <div>
+        {/* this is not correct */}
         <ModalLink path={`/groups/groupID/join`}component={this.renderModalJoin}>
          { open ? <Button className="btn-custom" color="unique">
           Join
