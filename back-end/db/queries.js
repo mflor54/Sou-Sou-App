@@ -4,8 +4,10 @@ const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
 getAllGroups = (req, res, next) => {
-    db.any('select * from groups')
+
+    db.any('SELECT * FROM groups')
     .then((data) => {
+      console.log(data);
         res.status(200).json({
             status: 'success',
             data: data,
@@ -105,29 +107,32 @@ getUserInfo = (req, res, next) => {
 
 // select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
-    db.one('select * from groups where group.ID=${groupId}',
+    db.one('select * from groups where groups.ID=${groupId}',
         {
-            groupId: req.body.group_name
+            groupId: req.params.groupID
         }
     )
     .then((data) => {
+      console.log(data);
         res.status(200).json({
-            status: success,
+            status: "success",
             data: data,
             message: 'Retrieved group info'
         });
     })
     .catch((err) => {
         return next(err);
+        console.log(err);
     })
 }
 // creates group when user submits form from group creation page
 createGroup = (req, res, next) => {
-    db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description) values (${groupName}, ${totalMembers}, ${userName}, ${payoutAmount}, ${frequency}, ${description})',{
-        groupName: req.body.group_name,
-        totalMembers: req.body.total_members,
-        userName: req.body.user_name,
-        payoutAmount: req.body.payout,
+    db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description_) values (${groupName}, ${totalMembers}, ${creator},${payinAmount}, ${payoutAmount}, ${frequency}, ${description})',{
+        groupName: req.body.groupName,
+        totalMembers: req.body.totalMembers,
+        creator: req.body.creator,
+        payinAmount: req.body.payinAmount,
+        payoutAmount: req.body.payoutAmount,
         frequency: req.body.frequency,
         description: req.body.description
     })
@@ -145,19 +150,63 @@ createGroup = (req, res, next) => {
 
 userJoinGroup = (req, res, next) => {
   //Needs updating when needs are clearified
+  /*
     db.none('update groups where group.ID = ${groupId} from groups where users.id = ${user_id} AND groups.id = ${group_id}', {
-        group_id: groupd_id,
+        group_id: group.ID,
         user_id: user_id
     })
+    */
+   console.log(req.body)
+  //  let groupID = 1;
+  //  let userID = 2;
+   db.none('insert into users_groups (group_id, user_id) values (${groupID}, ${userID})', {
+      groupID: req.body.groupID,
+      userID: req.body.userID
+   })
     .then((data) => {
         res.status(200).json({
-            status: success,
+            status: "success",
             data: data,
             messge: 'User joined group'
         })
     })
     .catch((err) => {
         return next(err);
+    })
+}
+
+saveCustomerToken = (req, res, next) => {
+    db.none('update users set stripe_id = ${stripe_id} WHERE email = ${email}', {
+        stripe_id: req.query.stripe_id,
+        email: req.query.email
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'User token saved'
+        })
+    })
+    .catch((err) => {
+        return next(err);
+    })
+}
+
+paymentSent = (req, res, next) => {
+    db.none()
+}
+
+saveCustomerId = (data, id) => {
+    db.none('update users set stripe_id = ${stripe_user_id} WHERE id = ${id}', {
+        stripe_user_id: data,
+        id: id
+    })
+    .then((data) => {
+        console.log('SAVED CUSTOMER ID => ' + data);
+    })
+    .catch((err) => {
+        console.log('YOU SUCK');
+        return;
     })
 }
 
@@ -169,5 +218,7 @@ module.exports = {
     createGroup: createGroup,
     createUser: createUser,
     loginUser: loginUser,
-    getAllUsers:getAllUsers
+    getAllUsers:getAllUsers,
+    saveCustomerId: saveCustomerId,
+    userJoinGroup: userJoinGroup
 };
