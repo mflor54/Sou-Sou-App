@@ -42,7 +42,7 @@ class OWONavbar extends React.Component {
     }
 
     render() {
-        console.log(window.location.pathname)
+        console.log('pathname', window.location.pathname)
         return (
             <Navbar color="indigo" dark expand="md" scrolling>
                 <NavbarBrand href="/">
@@ -57,9 +57,9 @@ class OWONavbar extends React.Component {
                         <NavItem active={window.location.pathname === locations.profile}>
                             <NavLink className="nav-link" to={locations.profile}>Profile</NavLink>
                         </NavItem>
-                        <NavItem active= {window.location.pathname === locations.stripe}>
+                        {/* <NavItem active= {window.location.pathname === locations.stripe}>
                             <NavLink className="nav-link" to={locations.stripe}>Stripe</NavLink>
-                        </NavItem>
+                        </NavItem> */}
                     </NavbarNav>
                     <NavbarNav right>
                         <NavItem>
