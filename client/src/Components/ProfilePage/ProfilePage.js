@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 // import ModalLogin from '../Login/Login';
 // import ModalRegister from '../Register/Register';
 
-import { Grid, Row, Col,Jumbotron, Button, Popover,
-  Tooltip, Modal,OverlayTrigger, ButtonToolbar, Navbar,
-  Nav, NavItem, NavDropdown, MenuItem, Image, Thumbnail,
-  Media, ListGroup,ListGroupItem } from 'react-bootstrap';
+import { Grid, Row, Col} from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';

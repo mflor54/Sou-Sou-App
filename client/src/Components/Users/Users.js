@@ -1,10 +1,21 @@
 import React from "react";
-import { Route, Link, Switch, Redirect } from "react-router-dom";
+import { Route,  Redirect } from "react-router-dom";
 import axios from "axios";
 import { ModalContainer, ModalRoute } from 'react-router-modal';
 import ModalRegister from "../Register/Register";
 import ModalLogin from "../Login/Login";
+import Landing from '../Landing/Landing';
 import ProfilePage from "../ProfilePage/ProfilePage";
+import { Grid, Row, Col, Image} from 'react-bootstrap';
+
+var randomImages = [
+    require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
+    require('../images/groupImages/backlit-clouds-dusk-853168.jpg'),
+    require('../images/groupImages/bay-beach-beautiful-531602.jpg'),
+    require('../images/groupImages/beach-cave-cavo-greco-371588.jpg'),
+    require('../images/groupImages/celebration-coloured-crowd-889545.jpg'),
+    require('../images/groupImages/book-chair-chat-711009.jpg'),
+];
 
 class Users extends React.Component {
   constructor() {
@@ -29,8 +40,9 @@ class Users extends React.Component {
 
   renderProfilePage= props => {
     const { user, id } = this.state;
+
     if (!user) {
-      return <div> must log in first </div>;
+      return null;
 
 }
       return <ProfilePage id={user.id} />;
@@ -43,11 +55,18 @@ class Users extends React.Component {
     console.log("users: ", this.state);
     const { user, id } = this.state;
     return (
-      <div className="App">
-<ModalContainer  backdropClassName='react-router-modal__backdrop' />
-      <ModalRoute path={`/users/login`} component={this.renderLogin} parentPath="/"/>
-      <ModalRoute path={`/users/register`} component={ModalRegister} />
-      <Route path="/users/profile" render={this.renderProfilePage} />
+      <div>
+          <Grid fluid="true">
+              <Row className="show-grid">
+                  <Col xs={6} md={12}>
+                  <img  src={randomImages[Math.floor(Math.random()*randomImages.length)]}/>
+                  <ModalContainer  backdropClassName='react-router-modal__backdrop' />
+                  </Col>
+              </Row>
+        </Grid>
+        <ModalRoute path={`/users/login`} component={this.renderLogin} />
+        <ModalRoute path={`/users/register`} component={ModalRegister} />
+        <Route path="/users/profile" render={this.renderProfilePage} />
 
       </div>
     );
