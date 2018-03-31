@@ -3,5 +3,5 @@ export default {
     logout: '/logout',
     groups: '/groups',
     profile: '/users/profile',
-    stripe: '/users/stripe/connect',
+    // stripe: '/users/stripe/connect',
 }
