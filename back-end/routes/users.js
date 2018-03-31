@@ -25,6 +25,8 @@ router.post('/login', passport.authenticate("local"), (req, res) => {
 });
 
 router.get('/profile', loginRequired, db.getUserInfo)
+router.patch('/profile', loginRequired, db.updateUserInfo)
+router.post('/profile/picture/', loginRequired, db.updateProfilePicture)
 // router.get("/logout", loginRequired, db.logoutuser);
 
 router.post('/signup', db.createUser);

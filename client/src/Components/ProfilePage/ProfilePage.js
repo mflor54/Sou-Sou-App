@@ -28,7 +28,7 @@ class ProfilePage extends Component {
             showUpload: false,
             user: {
                 amount: 100,
-                email: "abhishek@asd.asd",
+                email: "tbabekrys@gamil.com",
                 first_name: "",
                 id: 1,
                 last_name: "",
@@ -37,7 +37,7 @@ class ProfilePage extends Component {
                 rating: null,
                 salt: null,
                 stripe_id: null,
-                username: "abhisheklal"
+                username: "Krys All Day"
             }
         };
         this.renderProfilePage = this.renderProfilePage.bind(this);
