@@ -6,6 +6,8 @@ import ModalRegister from "../Register/Register";
 import ModalLogin from "../Login/Login";
 import Landing from '../Landing/Landing';
 import ProfilePage from "../ProfilePage/ProfilePage";
+import Token from "../Stripe/Token";
+import Done from "../Stripe/Done";
 
 
 import { Grid, Row, Col, Image} from 'react-bootstrap';
@@ -57,11 +59,15 @@ class Users extends React.Component {
     const { user, id } = this.state;
     console.log("users: ", user);
 
+    console.log("State.user is = " + user);
+
     if (!user) {
       return null;
 
+
 }
       return <ProfilePage userInfo={user} />;
+
   };
 
 
@@ -72,12 +78,15 @@ class Users extends React.Component {
     const { user, id } = this.state;
         console.log("users: ", user);
     return (
-      <div>
-      <ModalContainer  backdropClassName='react-router-modal__backdrop' />
-        <ModalRoute path={`/users/login`} component={this.renderLogin} />
-        <ModalRoute path={`/users/register`} component={ModalRegister} />
-        <Route path="/users/profile" render={this.renderProfilePage} />
-
+ 
+      <div className="App">
+<ModalContainer  backdropClassName='react-router-modal__backdrop' />
+      <ModalRoute path={`/users/login`} component={this.renderLogin} parentPath="/"/>
+      <ModalRoute path={`/users/register`} component={ModalRegister} />
+      <Route path="/users/profile" render={this.renderProfilePage} />
+      <Route path="/users/stripe/token" component={Token}/>
+      <Route path="/users/stripe/done" component={Done}/>
+      
       </div>
     );
   }

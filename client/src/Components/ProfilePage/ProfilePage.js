@@ -87,7 +87,8 @@ renderProfilePage=({props})=>{
           <Row className="show-grid2">
             <Row>
                 <Col xs={12} lg={12} className="cd-scrolling-bg__content">
-                    <h2>Groups</h2>
+                  <h2>Your Groups</h2>
+                  <a href="http://localhost:3100/users/stripe/connect">STRIPE</a>
                 </Col>
             </Row>
             <Row className="show-grid2">
@@ -107,8 +108,7 @@ renderProfilePage=({props})=>{
   }
 
 render(){
-
-    return(
+return(
 
       <div>
 

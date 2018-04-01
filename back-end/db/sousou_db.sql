@@ -16,20 +16,28 @@ CREATE TABLE users (
   stripe_id VARCHAR UNIQUE,
   memeber_date text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM'),
   image_ BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png')
+
 );
 
 CREATE TABLE groups (
   ID SERIAL PRIMARY KEY,
   group_name VARCHAR UNIQUE,
   total_members INTEGER,
-  creator VARCHAR,
+  creator INTEGER REFERENCES users(ID),
   pay_in_amount NUMERIC(6,2),
   pay_out_amount NUMERIC(6,2),
-  description_ VARCHAR,
+  description_ TEXT,
   frequency VARCHAR,
   date_created TIMESTAMPTZ,
   end_date TIMESTAMPTZ,
   user_id INTEGER REFERENCES users(ID)
+);
+
+-- This table creates a many to many relationship between groups and users
+
+CREATE TABLE users_groups (
+  user_id INTEGER REFERENCES users(ID),
+  group_id INTEGER REFERENCES groups(ID)
 );
 
 CREATE TABLE payments_in (

@@ -29,11 +29,9 @@ render() {
   const { visible } = this.state;
 
   return (
-    <ScrollTrigger onEnter={this.onEnterViewport} onExit={this.onExitViewport}>
     <video className='videoTag' autoPlay loop muted>
         <source src={howToVid} type='video/mp4' />
     </video>
-    </ScrollTrigger>
   );
 }
 
