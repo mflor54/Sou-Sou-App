@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Jumbotron, Button, Col, Grid, Row, Panel, Glyphicon } from 'react-bootstrap';
+import Nav from '../Nav/Nav';
 
 import './GroupProfile.css';
 
@@ -10,17 +11,22 @@ const avatarStyle = {
 }
 let disable_toggle = false;
 const GroupProfile = () => {
-  //join button logic depends on: 
+  //join button logic depends on:
     //number of possible group members
     //number of ppl currently in group
     //if group is full status = true
   return(
     <div>
-      navbar
+
       <div>
         <Grid>
+        <Row className="show-grid">
+          <Col md={12}>
+              <Nav />
+          </Col>
+        </Row>
           <Row className="show-grid">
-            <Col md={12}> 
+            <Col md={12}>
               <h1 className="gp-title">Get Schmoney Team</h1>
             </Col>
           </Row>
@@ -62,7 +68,7 @@ const GroupProfile = () => {
               </span>
               <div className="chat-body clearfix">
                 <div className="header">
-                  <strong className="pull-left">Crystal</strong> 
+                  <strong className="pull-left">Crystal</strong>
                   <small className="pull-right">
                     <span className="glyphicon glyphicon-time"></span>
                     20min ago
@@ -77,7 +83,7 @@ const GroupProfile = () => {
               </span>
               <div className="chat-body clearfix">
                 <div className="header">
-                  <strong className="pull-left">Mike</strong> 
+                  <strong className="pull-left">Mike</strong>
                   <small className="pull-right">
                     <span className="glyphicon glyphicon-time"></span>
                     20min ago
@@ -92,13 +98,13 @@ const GroupProfile = () => {
               </span>
               <div className="chat-body clearfix">
                 <div className="header">
-                  <strong className="pull-left">Krystal</strong> 
+                  <strong className="pull-left">Krystal</strong>
                   <small className="pull-right">
                     <span className="glyphicon glyphicon-time"></span>
                     20min ago
                   </small>
                 </div>
-                <p className="chat-message pull-left">Is this going to show up where I want it to? What happens if I put a shit ton of text in here because I'm angry! Arrrrarrrrrrrrrrrhahshshghghshshghg</p>
+                <p className="chat-message pull-left">Is this going to show up where I want it to? What happens if I put a shit ton of text in here because I am angry! Arrrrarrrrrrrrrrrhahshshghghshshghg</p>
               </div>
             </li>
             <li className="left clearfix">
@@ -107,7 +113,7 @@ const GroupProfile = () => {
               </span>
               <div className="chat-body clearfix">
                 <div className="header">
-                  <strong className="pull-left">Rachel</strong> 
+                  <strong className="pull-left">Rachel</strong>
                   <small className="pull-right">
                     <span className="glyphicon glyphicon-time"></span>
                     20min ago
@@ -122,7 +128,7 @@ const GroupProfile = () => {
               </span>
               <div className="chat-body clearfix">
                 <div className="header">
-                  <strong className="pull-left">Krystal</strong> 
+                  <strong className="pull-left">Krystal</strong>
                   <small className="pull-right">
                     <span className="glyphicon glyphicon-time"></span>
                     20min ago
@@ -142,10 +148,10 @@ const GroupProfile = () => {
             </span>
           </div>
         </Panel.Footer>
-        
+
       </Panel>
-          
-      
+
+
     </div>
   )
 }

@@ -103,7 +103,8 @@ right:0;
   padding: 0;
   height: auto;
   width:100vw;
-
+background-position: center;
+background-size: cover;
 }
 
  #logosize{
@@ -259,7 +260,7 @@ color: #29D9F4;
   text-align: center;
 }
 
-.cd-scrolling-bg.cd-scrolling-bg--color-1 {
+.cd-scrolling-bg.cd-scrolling-bg--color-3 {
   background-color:#08cec7;
 
   color: #eaf3ff;
@@ -273,7 +274,7 @@ color: #29D9F4;
 
 }
 
-.cd-scrolling-bg.cd-scrolling-bg--color-3 {
+.cd-scrolling-bg.cd-scrolling-bg--color-1 {
   background-color: #eaf3ff;
   color: #25283D;
 
@@ -281,7 +282,7 @@ color: #29D9F4;
 }
 
 .cd-scrolling-bg__content {
-  width: 90vw;
+  width: 100vw;
   max-width: 768px;
   margin: 0 auto;
 

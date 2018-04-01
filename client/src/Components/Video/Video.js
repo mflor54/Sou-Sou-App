@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
 import ScrollTrigger from 'react-scroll-trigger';
-import {Row, Col, Jumbotron, Modal} from 'react-bootstrap';
 import './Video.css';
-var howToVid = require('./OwoVid.mp4');
-
+var howToVid = require('./owo_movie.mov')
 
 
 class Video extends Component{
+  constructor(){
+    super()
+    this.state={
+      visable:false
+    }
+  }
+
+
+  onEnterViewport() {
+  this.setState({
+    visible: true,
+  });
+}
+
+onExitViewport() {
+  this.setState({
+    visible: false,
+  });
+}
 
 render() {
-
+  const { visible } = this.state;
 
   return (
-
-    <section>
-
-      <video loop preload autoplay>
-        <source id="source_polar_mp4" src={howToVid} type="video/mp4;codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"/>
-      </video>
-    </section>
+    <ScrollTrigger onEnter={this.onEnterViewport} onExit={this.onExitViewport}>
+    <video className='videoTag' autoPlay loop muted>
+        <source src={howToVid} type='video/mp4' />
+    </video>
+    </ScrollTrigger>
   );
 }
 

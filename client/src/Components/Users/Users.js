@@ -53,7 +53,9 @@ class Users extends React.Component {
   };
 
   renderProfilePage= props => {
+
     const { user, id } = this.state;
+    console.log("users: ", user);
 
     if (!user) {
       return null;
@@ -66,8 +68,9 @@ class Users extends React.Component {
 
 
   render() {
-    console.log("users: ", this.state);
+
     const { user, id } = this.state;
+        console.log("users: ", user);
     return (
       <div>
       <ModalContainer  backdropClassName='react-router-modal__backdrop' />

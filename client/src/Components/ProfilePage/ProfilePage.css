@@ -1,9 +1,17 @@
-.show-grid #sec1{
-  background-color: #25283d;
-  height: 20em;
+
+.Profile{
+margin: 0;
+padding: 0;
+background-color: #eaf3ff;
+color:  #a430a8;
+
+}
+
+.show-grid #nav{
+  height: 5em;
   margin: 0;
   padding: 0;
-  color: #eaf3ff;
+  color: #a430a8;
 
 }
 
@@ -11,5 +19,13 @@
   background-color: #eaf3ff;
   height: 20em;
   margin: 0;
-  padding: 0;
+  padding: 5em;
+}
+
+.profilePic{
+  width: 10em;
+  height:10em;
+  border: solid .1px  #eaf3ff;
+  border-radius: 50px;
+  background-image:url("https://image.flaticon.com/icons/svg/12/12324.svg");
 }
