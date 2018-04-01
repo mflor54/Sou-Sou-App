@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { ProgressBar, Tabs, Tab, Popover, Form, FormGroup, ControlLabel, FormControl, Checkbox, Radio, Button, InputGroup, Input, Row, Col, Panel } from 'react-bootstrap';
+import axios from 'axios';
 
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'mdbreact';
 
+import '../Landing/Landing.css';
 import './CreateGroup.css';
 
 
@@ -12,32 +14,79 @@ class CreateGroup extends Component {
     super();
     this.state = {
       groupName: '',
-      description: '', 
-      payout: '', 
-      frequency: '', 
-      payin: '',
-      groupMembers: ''
+      totalMembers: '', 
+      creator: '', 
+      payinAmount: '',
+      payoutAmount: '', 
+      frequency: '',
+      description: ''
     }
   }
+
   //progress to show progress - animated
   //tabs to navigate
   //needs to redirect to the newly created group-profile page
-  handleInput = e => {
 
+
+  toggleTabs = () => {
+    //changes to the next tab 
+    //make this a button
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   handleChecked = e => {
-
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
   
   handlePayin = () => {
-
+    //calculates the payin amount based on the savings goal and payout frequency
   }
 
-  handleSubmit = () => {
-
+  handleSubmit = e => {
+    e.preventDefault();
+    const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
+    //axios call that sends all the info to the backend route
+    axios.post("/groups/new", {
+      groupName: groupName,
+      totalMembers: totalMembers, 
+      creator: creator, 
+      payinAmount: payinAmount,
+      payoutAmount: payoutAmount, 
+      frequency: frequency,
+      description: description
+    })
+    .then(res => {
+      console.log(res);
+      //I want to show the success message and redirect to 
+      // this.props.setUser(res.data);
+      //  this.setState({
+      //    loggedIn: true
+      //  });
+    })
+    .catch(err => {
+      //reset form and tell user to there was an error and start over. 
+    });
   }
+
   render(){
+    let members = [3, 5, 9];
+    let payout = [100, 250, 1000];
+    let payoutFreq = ["Weekly", "Bi-Weekly", "Monthly"];
+
+
+    const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
+    console.log("===", groupName);
+    console.log("===", description);
+    console.log("===", totalMembers);
+    console.log("===", frequency);
+    console.log("===", payoutAmount);
     return(
       <div>
         <h1>Create Group Page</h1>
@@ -53,16 +102,18 @@ class CreateGroup extends Component {
                   <FormControl
                     name="groupName" 
                     type="text"
-                    value="this.state.value"
+                    value={this.state.value}
                     placeholder="Enter Group Name"
+                    onChange={this.handleChange}
                   />
                   <ControlLabel>Group Description</ControlLabel>
                   <FormControl
                     name="description"
                     componentClass="textarea" 
                     type="text"
-                    value="this.state.value"
+                    value={this.state.value}
                     placeholder="Enter Group Description"
+                    onChange={this.handleChange}
                   />
                 </Panel.Body>
               </Panel>
@@ -77,21 +128,21 @@ class CreateGroup extends Component {
               <Panel.Body> 
                 <ControlLabel>Payout Amount</ControlLabel>
                   <FormGroup>
-                    <Radio name="100" inline>$100</Radio> 
-                    <Radio name="250" inline>$250</Radio>  
-                    <Radio name="1000" inline>$1000</Radio> 
+
+                    {payout.map(pay => <Radio name="payoutAmount" value={pay} onChange={this.handleChange} inline>${pay}</Radio>)}
+
                   </FormGroup> 
                 <ControlLabel>Number of Group Members</ControlLabel>
                   <FormGroup>
-                    <Radio name="3" inline>3</Radio> 
-                    <Radio name="5" inline>5</Radio>  
-                    <Radio name="9" inline>9</Radio> 
+
+                    {members.map(member => <Radio name="totalMembers" value={member} onChange={this.handleChange} inline>{member}</Radio>)}
+  
                   </FormGroup>    
                 <ControlLabel>Payout Frequency</ControlLabel>
                   <FormGroup>
-                    <Radio name="weekly" inline>Weekly</Radio> 
-                    <Radio name="bi-weekly" inline>Bi-Weekly</Radio>  
-                    <Radio name="monthly" inline>Monthly</Radio> 
+                    
+                    {payoutFreq.map(freq => <Radio name="frequency" value={freq} onChange={this.handleChange} inline>{freq}</Radio>)}
+                    
                   </FormGroup> 
                 <ControlLabel>Pay-in Amount</ControlLabel>
                   <FormGroup>
@@ -105,7 +156,7 @@ class CreateGroup extends Component {
             <TabContent>
               <ControlLabel>Review Group Creation</ControlLabel>
                 <FormGroup>
-                  <Button>Submit</Button>
+                  <Button className="btn-custom" color="secondary-color-dark">Submit</Button>
                 </FormGroup>
             </TabContent>
           </Tab>
