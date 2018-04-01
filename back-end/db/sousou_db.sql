@@ -1,24 +1,54 @@
-DROP DATABASE IF EXISTS SouSou;
-CREATE DATABASE SouSou;
+DROP DATABASE IF EXISTS sousou;
+CREATE DATABASE sousou;
+
+\c sousou
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
-  namez VARCHAR,
-  email VARCHAR,
+  email VARCHAR UNIQUE,
+  username VARCHAR UNIQUE,
   salt VARCHAR,
   password_digest VARCHAR,
-  group_id INT REFERENCES groups(ID)
+  first_name VARCHAR,
+  last_name VARCHAR,
+  amount INTEGER,
+  rating VARCHAR,
+  stripe_id VARCHAR UNIQUE,
+  image_ BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png')
+
 );
 
 CREATE TABLE groups (
-    ID SERIAL PRIMARY KEY,
-    total_members INT,
-    creator VARCHAR,
-    total_amount NUMERIC(2),
-    end_date TIMESTAMPTZ
+  ID SERIAL PRIMARY KEY,
+  group_name VARCHAR UNIQUE,
+  total_members INTEGER,
+  creator INTEGER REFERENCES users(ID),
+  pay_in_amount NUMERIC(6,2),
+  pay_out_amount NUMERIC(6,2),
+  description_ TEXT,
+  frequency VARCHAR,
+  date_created TIMESTAMPTZ,
+  end_date TIMESTAMPTZ,
+  user_id INTEGER REFERENCES users(ID)
 );
 
-CREATE TABLE payments (
+-- This table creates a many to many relationship between groups and users
+
+CREATE TABLE users_groups (
+  user_id INTEGER REFERENCES users(ID),
+  group_id INTEGER REFERENCES groups(ID)
+);
+
+CREATE TABLE payments_in (
+    ID SERIAL PRIMARY KEY,
+    amount NUMERIC(2),
+    payment_id VARCHAR,
+    group_id INTEGER REFERENCES groups(ID),
+    user_id INTEGER REFERENCES users(ID)
+);
+
+
+CREATE TABLE payments_out (
     ID SERIAL PRIMARY KEY,
     amount NUMERIC(2),
     payment_id VARCHAR,
