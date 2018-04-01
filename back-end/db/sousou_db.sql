@@ -32,6 +32,13 @@ CREATE TABLE groups (
   user_id INTEGER REFERENCES users(ID)
 );
 
+-- This table creates a many to many relationship between groups and users
+
+CREATE TABLE users_groups (
+  user_id INTEGER REFERENCES users(ID),
+  group_id INTEGER REFERENCES groups(ID)
+);
+
 CREATE TABLE payments_in (
     ID SERIAL PRIMARY KEY,
     amount NUMERIC(2),
