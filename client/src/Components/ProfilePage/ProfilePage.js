@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import { Grid, Row, Col} from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
+
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
 import Footer from '../Footer/Footer';
@@ -23,6 +24,7 @@ class ProfilePage extends Component {
 
 renderProfilePage=({setUser})=>{
   console.log(this.props.setUser);
+
   return(
 
     <div>
@@ -36,6 +38,7 @@ renderProfilePage=({setUser})=>{
         <Col xs={12} md={8} id="sec2">
             <p>Welcome Jim</p>
             <p>Rating: Gold</p>
+
               <p>Memeber Since: 2017</p>
               <p>Savings to date: $3,689</p>
             </Col>
@@ -47,6 +50,7 @@ renderProfilePage=({setUser})=>{
               <Row className="show-grid2">
                 <Col xs={12} lg={12} className="cd-scrolling-bg__content">
                   <h2>Your Groups</h2>
+                  <a href="http://localhost:3100/users/stripe/connect">STRIPE</a>
                 </Col>
               </Row>
             </Col>
@@ -59,20 +63,19 @@ renderProfilePage=({setUser})=>{
 
 render(){
 
+
     return(
+      <div>
+        <h1>Nav</h1>
+        <Link to="/groups">Groups</Link>
+        <Link to="/users/profile">Profile Page</Link>
+        <Link to="/">Logout</Link>
 
-  <div>
-
-  <h1>Nav</h1>
-  <Link to="/groups">Groups</Link>
-  <Link to="/users/profile">Profile Page</Link>
-  <Link to="/">Logout</Link>
-
-  <Switch>
-  <Route path="/users/profile" component={this.renderProfilePage} />
-  <Route path="/groups" component={Groups} />
-  <Route path="/" component={Landing} />
-  </Switch>
+        <Switch>
+          <Route path="/users/profile" component={this.renderProfilePage} />
+          <Route path="/groups" component={Groups} />
+          <Route path="/" component={Landing} />
+        </Switch>
 
 
       </div>

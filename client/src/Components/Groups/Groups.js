@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 import { ListGroup, ListGroupItem, Row, Col, PageHeader } from 'react-bootstrap';
+
+import GroupProfile from '../GroupProfile/GroupProfile';
 
 
 const avatarStyle = {
@@ -14,7 +17,10 @@ class Groups extends Component {
     this.state = {
       groups: []
     }
+
+    this.renderGroupsList = this.renderGroupsList.bind(this)
   }
+
 
   getAllGroups = () => {
     fetch("/groups")
@@ -39,10 +45,10 @@ class Groups extends Component {
       owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
 
     }
-    console.log(owlstr);
+    //console.log(owlstr);
     return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
   }
-  render(){
+  renderGroupsList(){
     const { groups } = this.state;
     console.log("this is groups from state", groups);
     return(
@@ -54,27 +60,39 @@ class Groups extends Component {
 
         <ListGroup bsClass="groups-list-group">
           {groups.map((group) =>
-            <ListGroupItem header={group.description} href={`/groupProfile/${group.id}`}>
+            <Link to={`/groups/${group.id}`}>
+              <ListGroupItem header={group.group_name} >
               <Row>
                 <Col md={4}>
-                  <p>{group.frequency} pay-in of <strong>$ {group.total_amount}</strong></p>
+                  <p>{group.frequency} pay-in of <strong>$ {group.pay_in_amount}</strong></p>
                 </Col>
                 <Col md={4}>
-                  <p>Savings Goal: <strong>$ {group.payout}</strong></p>
+                  <p>Savings Goal: <strong>$ {group.pay_out_amount}</strong></p>
                 </Col>
                 <Col md={4}>
                   {this.showGroupMembers(group.total_members)}
                 </Col>
               </Row>
             </ListGroupItem>
+          </Link>
           )}
         </ListGroup>
       </div>
     )
   }
 
-}
+  render(){
+    return(
+      <Switch>
+        <Route path="/groups/:groupID" component={GroupProfile}/>
+        <Route path="/groups" component={this.renderGroupsList} />
+        
+      </Switch>
+    )
+  }
 
+
+}
 
 
 export default Groups;
