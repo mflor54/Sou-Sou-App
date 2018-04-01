@@ -14,10 +14,10 @@ class CreateGroup extends Component {
     super();
     this.state = {
       groupName: '',
-      totalMembers: '', 
+      totalMembers: 0, 
       creator: '', 
       payinAmount: '',
-      payoutAmount: '', 
+      payoutAmount: 0, 
       frequency: '',
       description: ''
     }
@@ -45,7 +45,19 @@ class CreateGroup extends Component {
     })
   }
   
-  handlePayin = () => {
+  calculatePayin = (amount, members) => {
+    // const { payoutAmount, totalMembers } = this.state;
+    // let amount = payoutAmount;
+    // let members = totalMembers;
+    let result = 0
+    if(amount === 0 || members === 0){
+      return result;
+    } else {
+      result = Math.floor(amount/ ( members - 1 ));
+      return result;
+    }
+    console.log("===>", amount, members);
+     
     //calculates the payin amount based on the savings goal and payout frequency
   }
 
@@ -140,13 +152,14 @@ class CreateGroup extends Component {
                   </FormGroup>    
                 <ControlLabel>Payout Frequency</ControlLabel>
                   <FormGroup>
-                    
+
                     {payoutFreq.map(freq => <Radio name="frequency" value={freq} onChange={this.handleChange} inline>{freq}</Radio>)}
                     
                   </FormGroup> 
                 <ControlLabel>Pay-in Amount</ControlLabel>
                   <FormGroup>
-                    Dynamically shows the amount each user will have to pay each week, bi-week or month
+                    <p>Each member of this group will pay in <strong>${this.calculatePayin(payoutAmount, totalMembers)} on a {frequency} basis </strong>, except for the person being paid. </p>
+                    
                   </FormGroup>                      
                 </Panel.Body>
               </Panel>
@@ -154,10 +167,17 @@ class CreateGroup extends Component {
           </Tab>
           <Tab eventKey={3} title="Submit">
             <TabContent>
-              <ControlLabel>Review Group Creation</ControlLabel>
-                <FormGroup>
-                  <Button className="btn-custom" color="secondary-color-dark">Submit</Button>
-                </FormGroup>
+              <Panel className="create-panel">
+                <Panel.Heading>
+                  <Panel.Title componentClass="h3">Review </Panel.Title>
+                </Panel.Heading>
+                <Panel.Body> 
+                <ControlLabel>Review Group Creation</ControlLabel>
+                  <FormGroup>
+                    <Button className="btn-custom" color="secondary-color-dark">Submit</Button>
+                  </FormGroup>
+                </Panel.Body>
+              </Panel>
             </TabContent>
           </Tab>
         </Tabs>
