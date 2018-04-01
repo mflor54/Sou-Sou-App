@@ -6,6 +6,7 @@ import { Grid, Row, Col} from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
+import Footer from '../Footer/Footer';
 import '../Landing/Landing.css';
 
 
@@ -14,12 +15,14 @@ class ProfilePage extends Component {
     super(props, context);
     this.state = {
       showLogin: false,
-      showReg:false
+      showReg:false,
+    
     }
     this.renderProfilePage = this.renderProfilePage.bind(this)
   }
 
-renderProfilePage(){
+renderProfilePage=({setUser})=>{
+  console.log(this.props.setUser);
   return(
 
     <div>
@@ -49,13 +52,13 @@ renderProfilePage(){
             </Col>
           </Row>
         </Grid>
+        <Footer />
       </div>
     )
   }
 
 render(){
-      let loginClose = () => this.setState({ showLogin: false });
-      let regClose = () => this.setState({ showReg: false });
+
     return(
 
   <div>

@@ -6,6 +6,8 @@ import ModalRegister from "../Register/Register";
 import ModalLogin from "../Login/Login";
 import Landing from '../Landing/Landing';
 import ProfilePage from "../ProfilePage/ProfilePage";
+
+
 import { Grid, Row, Col, Image} from 'react-bootstrap';
 
 var randomImages = [
@@ -16,6 +18,7 @@ var randomImages = [
     require('../images/groupImages/celebration-coloured-crowd-889545.jpg'),
     require('../images/groupImages/book-chair-chat-711009.jpg'),
 ];
+
 
 class Users extends React.Component {
   constructor() {
@@ -34,7 +37,18 @@ class Users extends React.Component {
 
   renderLogin = () => {
 
-    return <ModalLogin setUser={this.setUser} />;
+    return (
+      <Grid fluid="true">
+          <Row className="show-grid">
+              <Col xs={6} md={12}>
+              <img  src={randomImages[Math.floor(Math.random()*randomImages.length)]}/>
+                    <ModalLogin setUser={this.setUser} />
+              </Col>
+          </Row>
+    </Grid>
+
+
+    );
 
   };
 
@@ -45,7 +59,7 @@ class Users extends React.Component {
       return null;
 
 }
-      return <ProfilePage id={user.id} />;
+      return <ProfilePage userInfo={user} />;
   };
 
 
@@ -56,14 +70,7 @@ class Users extends React.Component {
     const { user, id } = this.state;
     return (
       <div>
-          <Grid fluid="true">
-              <Row className="show-grid">
-                  <Col xs={6} md={12}>
-                  <img  src={randomImages[Math.floor(Math.random()*randomImages.length)]}/>
-                  <ModalContainer  backdropClassName='react-router-modal__backdrop' />
-                  </Col>
-              </Row>
-        </Grid>
+      <ModalContainer  backdropClassName='react-router-modal__backdrop' />
         <ModalRoute path={`/users/login`} component={this.renderLogin} />
         <ModalRoute path={`/users/register`} component={ModalRegister} />
         <Route path="/users/profile" render={this.renderProfilePage} />

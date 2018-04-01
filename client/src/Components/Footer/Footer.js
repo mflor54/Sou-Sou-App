@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import {Row, Col} from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import ExpansionPanel, {
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
-} from 'material-ui/ExpansionPanel';
-import Typography from 'material-ui/Typography';
-import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import { Button} from 'mdbreact';
 import HelpList from'../Help/Help';
 import './Footer.css';
