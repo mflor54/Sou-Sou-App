@@ -68,17 +68,17 @@ class ModalLogin extends Component {
        });
    };
 
-   renderModalLogin({onHide}){
+   renderModalLogin(){
      return (
        <Form horizontal className="loginModal" >
 
         <h2>Login</h2>
         <hr />
-          <FormGroup controlId="formHorizontalUsername">
-            <Col componentClass={ControlLabel} sm={2}>
+          <FormGroup controlId="formHorizontalUsername" bsSize="large">
+            <Col componentClass={ControlLabel} sm={3}>
               Username
             </Col>
-            <Col sm={10}>
+            <Col sm={9}>
               <FormControl
               className="input"
                 type="text"
@@ -89,10 +89,10 @@ class ModalLogin extends Component {
           </FormGroup>
 
           <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} sm={2}>
+            <Col componentClass={ControlLabel} sm={3}>
               Password
             </Col>
-            <Col sm={10}>
+            <Col sm={9}>
               <FormControl
               className="input"
               type="password"
@@ -103,19 +103,17 @@ class ModalLogin extends Component {
           </FormGroup>
 
           <FormGroup>
-            <Col smOffset={2} sm={10}>
+            <Col smOffset={3} sm={8}>
               <Checkbox>Remember me</Checkbox>
             </Col>
           </FormGroup>
 
           <FormGroup>
-            <Col smOffset={2} sm={8}>
-              <Button   className="btn-custom"  color="secondary-color-dark" size="lg"
+            <Col smOffset={3} sm={8}>
+              <Button   className="btn-custom"  color="secondary-color-dark"
                   onClick={this.submitForm}>Sign in</Button>
             </Col>
-             <Col smOffset={2} sm={8}>
-                  <Back/>
-                </Col>
+
           </FormGroup>
         </Form>
      );
@@ -124,12 +122,7 @@ class ModalLogin extends Component {
 
 
   render(){
-    const popover = (
-    <Popover id="modal-popover" title="popover">
-      very popover. such engagement
-    </Popover>
-    );
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
+  
     const { usernameInput, passwordInput, message, loggedIn } = this.state;
 
     if (loggedIn) {
@@ -144,7 +137,7 @@ class ModalLogin extends Component {
              component={this.renderModalLogin}
              parentPath="/">
           <Button
-             className="btn-custom"
+             className="btn-custom loginHeader"
              color="secondary-color-dark">
              Login
           </Button>
