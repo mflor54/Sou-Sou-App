@@ -12,15 +12,31 @@ class CreateGroup extends Component {
     super();
     this.state = {
       groupName: '',
-      groupDescription: '', 
+      description: '', 
       payout: '', 
       frequency: '', 
+      payin: '',
       groupMembers: ''
     }
   }
   //progress to show progress - animated
   //tabs to navigate
   //needs to redirect to the newly created group-profile page
+  handleInput = e => {
+
+  }
+
+  handleChecked = e => {
+
+  }
+  
+  handlePayin = () => {
+
+  }
+
+  handleSubmit = () => {
+
+  }
   render(){
     return(
       <div>
@@ -34,13 +50,15 @@ class CreateGroup extends Component {
                 </Panel.Heading>
                 <Panel.Body> 
                   <ControlLabel>Group Name</ControlLabel>
-                  <FormControl 
+                  <FormControl
+                    name="groupName" 
                     type="text"
                     value="this.state.value"
                     placeholder="Enter Group Name"
                   />
                   <ControlLabel>Group Description</ControlLabel>
                   <FormControl
+                    name="description"
                     componentClass="textarea" 
                     type="text"
                     value="this.state.value"
@@ -74,7 +92,11 @@ class CreateGroup extends Component {
                     <Radio name="weekly" inline>Weekly</Radio> 
                     <Radio name="bi-weekly" inline>Bi-Weekly</Radio>  
                     <Radio name="monthly" inline>Monthly</Radio> 
-                  </FormGroup>                     
+                  </FormGroup> 
+                <ControlLabel>Pay-in Amount</ControlLabel>
+                  <FormGroup>
+                    Dynamically shows the amount each user will have to pay each week, bi-week or month
+                  </FormGroup>                      
                 </Panel.Body>
               </Panel>
             </TabContent>
