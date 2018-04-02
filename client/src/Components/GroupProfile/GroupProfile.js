@@ -22,7 +22,7 @@ class GroupProfile extends Component {
       group:[]
     }
   }
-  
+
 
   //Gets one group from the database and udpates the state of group to that fetched group
   getGroup = () => {
@@ -38,7 +38,7 @@ class GroupProfile extends Component {
       });
     });
   }
-  
+
   componentDidMount(){
     this.getGroup();
   }
@@ -57,15 +57,15 @@ class GroupProfile extends Component {
     let joinClose = () => this.setState({ showjoin: false });
     const { group } = this.state;
     console.log("group from state =>", group);
-    
+
     return(
       <div>
         navbar
         <div>
           <Grid>
-            
+
             <Row className="show-grid">
-              <Col md={12}> 
+              <Col md={12}>
                 <h1 className="gp-title">{group.group_name}</h1>
               </Col>
             </Row>
@@ -74,7 +74,7 @@ class GroupProfile extends Component {
                 <p>{group.description_}</p>
                 <p>Group Creator: {group.creator} (i would prefer the group creator's avatar to be here</p>
                 <p>{group.frequency} payments of ${group.pay_in_amount}</p>
-                
+
               </Col>
               <Col md={6}>
                 <p>Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018</p>
@@ -96,8 +96,8 @@ class GroupProfile extends Component {
 
                   </Switch>
 
-                  <ModalJoin 
-                    show={this.state.showJoin} 
+                  <ModalJoin
+                    show={this.state.showJoin}
                     onHide={joinClose}
                   />
                   <ModalContainer />
@@ -119,7 +119,7 @@ class GroupProfile extends Component {
                 </span>
                 <div className="chat-body clearfix">
                   <div className="header">
-                    <strong className="pull-left">Crystal</strong> 
+                    <strong className="pull-left">Crystal</strong>
                     <small className="pull-right">
                       <span className="glyphicon glyphicon-time"></span>
                       20min ago
@@ -134,7 +134,7 @@ class GroupProfile extends Component {
                 </span>
                 <div className="chat-body clearfix">
                   <div className="header">
-                    <strong className="pull-left">Mike</strong> 
+                    <strong className="pull-left">Mike</strong>
                     <small className="pull-right">
                       <span className="glyphicon glyphicon-time"></span>
                       20min ago
@@ -149,7 +149,7 @@ class GroupProfile extends Component {
                 </span>
                 <div className="chat-body clearfix">
                   <div className="header">
-                    <strong className="pull-left">Krystal</strong> 
+                    <strong className="pull-left">Krystal</strong>
                     <small className="pull-right">
                       <span className="glyphicon glyphicon-time"></span>
                       20min ago
@@ -164,7 +164,7 @@ class GroupProfile extends Component {
                 </span>
                 <div className="chat-body clearfix">
                   <div className="header">
-                    <strong className="pull-left">Rachel</strong> 
+                    <strong className="pull-left">Rachel</strong>
                     <small className="pull-right">
                       <span className="glyphicon glyphicon-time"></span>
                       20min ago
@@ -179,7 +179,7 @@ class GroupProfile extends Component {
                 </span>
                 <div className="chat-body clearfix">
                   <div className="header">
-                    <strong className="pull-left">Krystal</strong> 
+                    <strong className="pull-left">Krystal</strong>
                     <small className="pull-right">
                       <span className="glyphicon glyphicon-time"></span>
                       20min ago
@@ -199,10 +199,10 @@ class GroupProfile extends Component {
               </span>
             </div>
           </Panel.Footer>
-          
+
         </Panel>
-            
-        
+
+
       </div>
     )
   }

@@ -55,7 +55,9 @@ class Users extends React.Component {
   };
 
   renderProfilePage= props => {
+
     const { user, id } = this.state;
+    console.log("users: ", user);
 
     console.log("State.user is = " + user);
 
@@ -72,8 +74,9 @@ class Users extends React.Component {
 
 
   render() {
-    console.log("users: ", this.state);
+
     const { user, id } = this.state;
+        console.log("users: ", user);
     return (
  
       <div className="App">
