@@ -6,6 +6,7 @@ import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'mdbreact';
 
 import '../Landing/Landing.css';
+
 import './CreateGroup.css';
 
 
@@ -19,7 +20,7 @@ class CreateGroup extends Component {
       payinAmount: '',
       payoutAmount: 0, 
       frequency: '',
-      description: ''
+      description: ''  
     }
   }
 
@@ -28,18 +29,17 @@ class CreateGroup extends Component {
   //needs to redirect to the newly created group-profile page
 
 
-  toggleTabs = () => {
+  handleTabChange = (tabKey) => {
+    let key = this.state;
+    console.log("halllp")
+    this.setState({
+      key
+    });
     //changes to the next tab 
     //make this a button
   }
 
   handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleChecked = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -63,6 +63,7 @@ class CreateGroup extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log("clicking submit");
     const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
     //axios call that sends all the info to the backend route
     axios.post("/groups/new", {
@@ -93,7 +94,7 @@ class CreateGroup extends Component {
     let payoutFreq = ["Weekly", "Bi-Weekly", "Monthly"];
 
 
-    const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
+    const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description, key } = this.state;
     console.log("===", groupName);
     console.log("===", description);
     console.log("===", totalMembers);
@@ -101,8 +102,10 @@ class CreateGroup extends Component {
     console.log("===", payoutAmount);
     return(
       <div>
+        Nav Bar
         <h1>Create Group Page</h1>
-        <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+        <ProgressBar active now={60} />
+        <Tabs defaultActiveKey={1} id="create-tabs">
           <Tab eventKey={1} title="Group Description">
             <TabContent>
               <Panel className="create-panel">
@@ -127,10 +130,12 @@ class CreateGroup extends Component {
                     placeholder="Enter Group Description"
                     onChange={this.handleChange}
                   />
+                  
                 </Panel.Body>
               </Panel>
             </TabContent>
           </Tab>
+
           <Tab eventKey={2} title="Group Details">
           <TabContent>
             <Panel className="create-panel">
@@ -165,22 +170,24 @@ class CreateGroup extends Component {
               </Panel>
             </TabContent>
           </Tab>
-          <Tab eventKey={3} title="Submit">
+
+          <Tab eventKey={3} title="Review">
             <TabContent>
               <Panel className="create-panel">
                 <Panel.Heading>
-                  <Panel.Title componentClass="h3">Review </Panel.Title>
+                  <Panel.Title componentClass="h3">Review Group Creation</Panel.Title>
                 </Panel.Heading>
                 <Panel.Body> 
                 <ControlLabel>Review Group Creation</ControlLabel>
                   <FormGroup>
-                    <Button className="btn-custom" color="secondary-color-dark">Submit</Button>
+                    
                   </FormGroup>
                 </Panel.Body>
               </Panel>
             </TabContent>
           </Tab>
         </Tabs>
+        <Button className="btn-custom" color="unique" size="lg" onClick={this.handleSubmit}>Submit</Button>
       </div>
     )
   }
