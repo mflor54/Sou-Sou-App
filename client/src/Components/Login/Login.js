@@ -88,7 +88,7 @@ class ModalLogin extends Component {
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          <FormGroup controlId="formHorizontalPassword" bsSize="large">
             <Col componentClass={ControlLabel} sm={3}>
               Password
             </Col>
@@ -122,7 +122,7 @@ class ModalLogin extends Component {
 
 
   render(){
-  
+
     const { usernameInput, passwordInput, message, loggedIn } = this.state;
 
     if (loggedIn) {
@@ -131,7 +131,7 @@ class ModalLogin extends Component {
      }
     return(
 
-        <div>
+
           <ModalLink
              path={`/users/login`}
              component={this.renderModalLogin}
@@ -142,7 +142,7 @@ class ModalLogin extends Component {
              Login
           </Button>
         </ModalLink>
-      </div>
+    
 
     )
   }

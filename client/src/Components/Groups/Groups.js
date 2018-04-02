@@ -4,6 +4,7 @@ import { ListGroup, ListGroupItem, Row, Col, PageHeader } from 'react-bootstrap'
 
 import GroupProfile from '../GroupProfile/GroupProfile';
 import ProfilePage from '../ProfilePage/ProfilePage';
+import Footer from '../Footer/Footer';
 import Landing from '../Landing/Landing';
 import Nav from '../Nav/Nav';
 
@@ -64,7 +65,7 @@ class Groups extends Component {
 
       <ListGroup bsClass="groups-list-group">
         {groups.map((group) =>
-          <ListGroupItem header={group.description} href={`/groupProfile/${group.id}`}>
+          <ListGroupItem header={group.description} href={`/groups/${group.id}`}>
             <Row>
               <Col md={4}>
                 <p>{group.frequency} pay-in of <strong>$ {group.total_amount}</strong></p>
@@ -79,6 +80,9 @@ class Groups extends Component {
           </ListGroupItem>
         )}
       </ListGroup>
+      <div>
+          <Footer className="foot" />
+      </div>
     </div>
 
   )

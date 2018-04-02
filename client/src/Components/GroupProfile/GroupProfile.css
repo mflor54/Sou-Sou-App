@@ -1,7 +1,23 @@
 
-body {
-  background-color: #EAF3FF;
+.foot{
+text-align: center;
+
 }
+
+/* body {
+  background-image: url(../images/BG/bg1.png);
+  background-position: center;
+  background-size: cover;
+} */
+
+.avatarStyle {
+  height: 50px;
+  width: 50px;
+  margin-right: 5px;
+}
+
+
+
 
 .gp-title {
   /* align-content: left; */

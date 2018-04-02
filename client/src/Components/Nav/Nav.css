@@ -1,8 +1,27 @@
-.logosize{
-  width: 3vw;
-  padding: 5em;
+.Nav {
+  padding: 1em 0;
+  text-align: center;
+  margin: auto 0;
+  height: 8em;
 }
 
- Link{
-  color: #eaf3ff;
+
+.logosize{
+  width: 7vw;
+}
+
+.login_button {
+  position: absolute;
+}
+
+.logoPos{
+  padding-left: 5em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.logoPos p {
+  padding-left: 5em;
+  text-align: center;
+  margin: 0 auto;
 }

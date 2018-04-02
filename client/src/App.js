@@ -9,7 +9,7 @@ import GroupProfile from './Components/GroupProfile/GroupProfile'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <Landing />
       </div>
 
