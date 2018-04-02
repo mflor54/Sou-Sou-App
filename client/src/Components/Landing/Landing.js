@@ -133,7 +133,7 @@ handleChange = panel => (event, expanded) => {
                   <img src={mm}   className="icons"/>
                   <h2>Knowledge</h2>
 
-                      <p>Understanding the importance of finacial discipline will reesonate throughout your life.</p>
+                      <p>Understanding the importance of finacial discipline will resonate throughout your life.</p>
                   </Col>
 
                    <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">

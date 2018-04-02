@@ -56,7 +56,7 @@ class GroupProfile extends Component {
   render() {
     let joinClose = () => this.setState({ showjoin: false });
     const { group } = this.state;
-    console.log("group from state =>", group);
+    console.log("**group from state =>", group);
 
     return(
       <div>
