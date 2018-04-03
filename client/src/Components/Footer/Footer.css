@@ -1,0 +1,12 @@
+
+
+
+.foot {
+background-image: url(../images/BG/footer.png);
+background-size: cover;
+background-repeat: no-repeat;
+height: 100px;
+bottom: 0;
+padding: 25px;
+
+}
