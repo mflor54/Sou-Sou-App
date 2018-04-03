@@ -107,6 +107,7 @@ renderProfilePage=()=>{
                 <p>Rating: Gold</p>
                 <p>Memeber Since: {cdate}</p>
                 {stripeButton}
+                <Button className="btn-custom">Create Group</Button>
             </Col>
           </Row>
 </section>
