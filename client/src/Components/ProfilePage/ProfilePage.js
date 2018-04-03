@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import ReactFileReader from 'react-file-reader';
 import { Grid, Row, Col, Image} from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
-import GridList from 'material-ui/GridList';
-
+import {GridList, GridTile} from 'material-ui/GridList';
 import Nav from '../Nav/Nav';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
@@ -11,7 +10,8 @@ import FooterUser from '../Footer/Footer';
 import GroupProfile from '../GroupProfile/GroupProfile';
 import ProfilePic from './ProfilePic';
 import { Button} from 'mdbreact';
-import './ProfilePage.css'
+import './ProfilePage.css';
+
 var logo = require('../images/Logo/OwoLogoNWGroup3Sm.png');
 var randomImages = [
     require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
@@ -23,6 +23,14 @@ var randomImages = [
 ];
 
 
+const avatarStyle = {
+  height: '50px',
+  width: '50px',
+  marginRight: '5px'
+}
+
+
+
 class ProfilePage extends Component {
   constructor(props, context) {
     super(props, context);
@@ -30,6 +38,8 @@ class ProfilePage extends Component {
     this.state = {
        showUpload: false,
       userProfile: props.userInfo,
+      groups:"",
+      userGroup:""
 
     }
   }
@@ -58,6 +68,37 @@ class ProfilePage extends Component {
   //     }
 
 
+  getMyGroups = () => {
+    fetch("/groups")
+    .then(res => res.json())
+    .then(groups => {
+      console.log('Show mw all groups:',groups)
+  
+      let data = groups.data
+      this.setState({
+        groups: data
+      });
+    });
+
+  
+    /////if the person exsit in the group then filter them and retun group they belong to
+
+  }
+  componentDidMount(){
+    this.getMyGroups();
+  }
+
+
+showMyGroup(group_name){
+  let owlstr = [];
+  for(var i = 0; i < group_name; i++){
+
+    owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
+
+  }
+  return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
+}
+
 
 
 
@@ -66,6 +107,14 @@ renderProfilePage=()=>{
 
     console.log(this.state.userProfile);
   console.log(this.props.userInfo);
+  let groupsjsx;
+
+  if (this.state.groups) {
+    groupsjsx = this.state.groups.map((group) => {
+      return(<div> {group.group_name} </div>)
+    })
+  }
+
 
   var cts = this.state.userProfile.member_date,
      cdate = (new Date(cts)).toString();
@@ -104,17 +153,30 @@ renderProfilePage=()=>{
         <Col xs={6} md={7} id="sec2">
             <p>Welcome {userProfile.username}</p>
                 <p>Rating: Gold</p>
-                <p>Memeber Since: {cdate}</p>
-                {stripeButton}
+                  <p>Memeber Since: 2017</p>
+                <p>Savings to date: $3,689</p>
+                <p>Start saving now click <a href="http://localhost:3100/users/stripe/connect">STRIPE</a></p>
             </Col>
           </Row>
-</section>
-<section className="container">
-          <Row className="show-grid2">
 
-                <Col xs={12} lg={12} className="title" >
-                  <h2>My Groups</h2>
-                </Col>
+
+        <Row className="show-grid2">
+  
+          <Row className="show-grid2">
+              <Col xs={12} lg={12} className="cd-scrolling-bg__content">
+                    <h2>My Groups</h2>
+                    { this.state.groups ? <div>{groupsjsx}</div> :
+                    <p>You are not in a group, Create one now!</p> }
+              </Col>
+          </Row>
+        <Row>
+            <Col xs={12} lg={12} className="cd-scrolling-bg__content">
+                <h2>Suggested Groups</h2>
+                  Join a group today
+            </Col>
+        </Row>
+        </Row>
+
 
   </Row>
             <div className='root'>
@@ -173,8 +235,7 @@ render(){
 return(
 
       <div>
-        <Route path="/groups/:groupID" component={GroupProfile}/>
-          <Route path="/users/profile" component={this.renderProfilePage} />
+          <Route path="/users/profile" render={this.renderProfilePage} />
           <Route path="/groups" component={Groups} />
           <Route path="/" component={Landing} />
       </div>
@@ -182,4 +243,4 @@ return(
   }
 }
 
-export default ProfilePage;
+export default (ProfilePage);

@@ -1,0 +1,11 @@
+.profilepic {
+    text-align: center;
+}
+.profilepic img {
+    height: 200px;
+    box-shadow: 0 0px 10px 0 rgba(0,0,0,.16), 0 0px 10px 0 rgba(0,0,0,.12);
+    background: #F5F5F5;
+    border-radius: 403px;
+    max-width: 200px;
+    max-height: 200px;
+}
