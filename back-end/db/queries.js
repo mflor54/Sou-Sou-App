@@ -127,10 +127,11 @@ getSingleGroup = (req, res, next) => {
 }
 // creates group when user submits form from group creation page
 createGroup = (req, res, next) => {
+  let creator = req.user.id;
     db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description_) values (${groupName}, ${totalMembers}, ${creator},${payinAmount}, ${payoutAmount}, ${frequency}, ${description})',{
         groupName: req.body.groupName,
         totalMembers: req.body.totalMembers,
-        creator: req.body.creator,
+        creator: creator,
         payinAmount: req.body.payinAmount,
         payoutAmount: req.body.payoutAmount,
         frequency: req.body.frequency,

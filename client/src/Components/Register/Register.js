@@ -6,6 +6,8 @@ import { Button } from 'mdbreact';
 import { ModalLink } from 'react-router-modal';
 
 import '../Landing/Landing.css';
+import 'react-router-modal/css/react-router-modal.css';
+
 
 class ModalRegister extends Component {
   constructor(){

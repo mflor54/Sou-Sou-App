@@ -5,25 +5,25 @@ import { Button} from 'mdbreact';
 import HelpList from'../Help/Help';
 import './Footer.css';
 
-var insta = require('../images/icons/instagram.png');
-var twitter = require('../images/icons/twitter.png');
-var github = require('../images/icons/github.png');
+var insta = require('../images/icons/instagram-64.png');
+var twitter = require('../images/icons/twitter-64.png');
+var github = require('../images/icons/github-64.png');
 
 
 
-class Footer extends Component{
+class FooterUser extends Component{
 render(){
 
   return(
     <div>
 
     <Row className="foot">
-       <Col sm={6} md={6}>
+       <Col xs={6} md={6} className="help">
 
 
       <HelpList  />
        </Col>
-       <Col sm={6} md={6}>
+       <Col xs={6} md={6} className="social">
          <a target="blank" href="https://twitter.com/TheOfficial_OWO"><img src={twitter} /></a>
          {"  "}
          {"  "}
@@ -42,4 +42,4 @@ render(){
 
 
 
-export default Footer;
+export default FooterUser;

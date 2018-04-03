@@ -8,13 +8,19 @@ import './Landing.css';
 import { Link, Route, Switch } from 'react-router-dom';
 import { ModalContainer, ModalRoute } from 'react-router-modal';
 import Users from '../Users/Users';
-import Footer from '../Footer/Footer';
+import FooterLanding from '../FooterLanding/FooterLanding';
 import Header from '../Header/Header';
 import HelpList from'../Help/Help';
 import Video from '../Video/Video';
 
 var logo = require('../images/Logo/OwoLogoNWGroup3LG.png');
-var thumb= require("../images/Logo/OwoLogoNWGroup3Sm.png");
+
+var Rachel= require("../images/crew/rachel.jpg");
+var Crystal= require("../images/crew/crystal.png");
+var Mike = require("../images/crew/mike.jpg");
+var Krystal= require("../images/crew/krystal.jpg");
+
+
 var brain = require('../images/icons/brain.png')
 var mm = require('../images/icons/mm.png')
 var saving = require('../images/icons/saving.png')
@@ -64,11 +70,14 @@ handleChange = panel => (event, expanded) => {
 
           <Grid fluid="gridlayout">
             <Row className="show-grid">
-              <Col xs={6} md={12} id="jumbotop">
+              <Col xs={12} md={12} id="jumbotop">
                 <Jumbotron bsClass="jumbotron">
-                  <Row>
+                  <Row className="top">
+                  <Col xsHidden lg={6} className="header">
                       <Header />
-                      <Col xs={1} md={2} className="login_button">
+                   </Col>
+
+                      <Col xs={6} lg={6} className="login_button">
                         <ModalLogin show={this.props.showLogin} onBackdropClick={this.handleBackClick}  />
                       </Col>
                    </Row>
@@ -133,7 +142,7 @@ handleChange = panel => (event, expanded) => {
                   <img src={mm}   className="icons"/>
                   <h2>Knowledge</h2>
 
-                      <p>Understanding the importance of finacial discipline will reesonate throughout your life.</p>
+                      <p>Understanding the importance of finacial discipline will resonate throughout your life.</p>
                   </Col>
 
                    <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
@@ -158,9 +167,10 @@ handleChange = panel => (event, expanded) => {
         </Row>
         <Row>
            <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                <Image src={thumb} rounded />
-                <h3>Rachel</h3>
-                 <p>Team Lead</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+
             </Col>
           <Col xs={6} md={3} className="cd-scrolling-bg__content">
             <Video />
@@ -187,41 +197,39 @@ handleChange = panel => (event, expanded) => {
                   <Row>
                       <Col xs={12} lg={12} className="cd-scrolling-bg__content row_title" >
                           <h1>The OWO Crew</h1>
-                          <h2 id="content">
+                          <h4 id="content">
                              Developing a digital world of finacial accountablity to connect nieghbors
-                             and allow oppertunities beyond the scope of instutionalized economy
-                          </h2>
+                             and allow oppertunities beyond the scope of instutionalized economy.
+                          </h4>
                       </Col>
                   </Row>
                   <Row>
                      <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                     <Image src={thumb} rounded />
-                        <h3>Rachel</h3>
+                     <Image src={Rachel} rounded className="crewPhotos" />
+                        <h3 id="cName">Rachel</h3>
                          <p>Team Lead</p>
                       </Col>
                       <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                      <Image src={thumb} rounded />
-                          <h3>Crystal</h3>
+                      <Image src={Crystal} rounded className="crewPhotos"/>
+                          <h3 id="cName">Crystal</h3>
                           <p>Design Lead</p>
                       </Col>
                       <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                      <Image src={thumb} rounded />
-                        <h3>Mike</h3>
+                      <Image src={Mike} rounded className="crewPhotos"/>
+                        <h3 id="cName">Mike</h3>
                          <p>Technical Lead</p>
                       </Col>
                       <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                          <Image src={thumb} rounded />
-                          <h3>Krystal</h3>
+                          <Image src={Krystal} rounded className="crewPhotos"/>
+                          <h3 id="cName">Krystal</h3>
                          <p>Demo Lead</p>
                       </Col>
                    </Row>
               </Row>
-                <div>
-
-
-          <Footer />
-          </div>
-     </Grid>
+            <div>
+                <FooterLanding />
+            </div>
+        </Grid>
    </div>
      )
   }
