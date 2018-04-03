@@ -19,7 +19,8 @@ class GroupProfile extends Component {
     super(props);
     this.state = {
       showJoin: false,
-      group:[]
+      group:[], 
+      groupID: ''
     }
   }
   
@@ -31,10 +32,11 @@ class GroupProfile extends Component {
     fetch(`/groups/${groupID}`)
     .then(res => res.json())
     .then(group => {
-      console.log("=====>", group.data);
+      console.log("=====>", group.data.id);
       let data = group.data;
       this.setState({
-        group: data
+        group: data, 
+        groupID: data.id
       });
     });
   }
@@ -55,8 +57,9 @@ class GroupProfile extends Component {
 
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    const { group } = this.state;
+    const { group, groupID } = this.state;
     console.log("group from state =>", group);
+    console.log("groupID from state =>", groupID);
     
     return(
       <div>
@@ -90,7 +93,8 @@ class GroupProfile extends Component {
             <Row className="show-grid">
               <Col md={6}>
                 <div className="modButtons">
-                  <Switch>
+                  <ModalJoin groupID={groupID}/>
+                  {/* <Switch>
 
                   <ModalRoute path='/test' component={ModalJoin} />
 
@@ -100,7 +104,7 @@ class GroupProfile extends Component {
                     show={this.state.showJoin} 
                     onHide={joinClose}
                   />
-                  <ModalContainer />
+                  <ModalContainer /> */}
                 </div>
               </Col>
             </Row>

@@ -21,7 +21,7 @@ class ModalJoin extends Component {
       open: true
     }
 
-    this.renderModalJoin = this.renderModalJoin.bind(this)
+    //this.renderModalJoin = this.renderModalJoin.bind(this)
   }
 
   handleChecked = e => {
@@ -38,57 +38,63 @@ class ModalJoin extends Component {
      //user's avatar is then added to the payout section
   };
 
-
-  renderModalJoin({onHide}){
-    const { agree } = this.state;
-    console.log("**", agree);
-    let groupID = this.props.match.params.groupID;
-    console.log("===> Group ID===>", groupID);
-    return (
-      <Form horizontal className="modalJoin">
-        <h2> Confirm Join</h2>
-        <hr/>
-        <FormGroup>
-          <Col smOffset={2} sm={10}>
-            <Checkbox
-              name="agree"
-              checked={agree}
-              onChange={this.handleChecked}
-            >
-              <p>
-                By joining this group, you confirm that you have agreed to OWO terms of service
-              </p>
-            </Checkbox>
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col smOffset={2} sm={10}>
-            <Button 
-              className="btn-custom" 
-              color="unique" 
-              size="lg" 
-              onClick={this.handleJoinSubmit}
-            >
-              Join
-            </Button>
-          </Col>
-        </FormGroup>
-      </Form>
-    );
-  }
-
   render(){
-    const { open } = this.state;
+    console.log("props in join", this.props);
     return(
-      <div>
-        <ModalLink path={`/groups/groupID/join`}component={this.renderModalJoin}>
-         { open ? <Button className="btn-custom" color="unique">
-          Join
-          </Button> : <Button>Closed</Button>}
-        </ModalLink>
-      </div>
+      <Button>Join</Button>
     )
   }
+
+  // renderModalJoin({onHide}){
+  //   const { agree } = this.state;
+  //   console.log("**", agree);
+  //   let groupID = this.props.match.params.groupID;
+  //   console.log("===> Group ID===>", groupID);
+  //   return (
+  //     <Form horizontal className="modalJoin">
+  //       <h2> Confirm Join</h2>
+  //       <hr/>
+  //       <FormGroup>
+  //         <Col smOffset={2} sm={10}>
+  //           <Checkbox
+  //             name="agree"
+  //             checked={agree}
+  //             onChange={this.handleChecked}
+  //           >
+  //             <p>
+  //               By joining this group, you confirm that you have agreed to OWO terms of service
+  //             </p>
+  //           </Checkbox>
+  //         </Col>
+  //       </FormGroup>
+  //       <FormGroup>
+  //         <Col smOffset={2} sm={10}>
+  //           <Button 
+  //             className="btn-custom" 
+  //             color="unique" 
+  //             size="lg" 
+  //             onClick={this.handleJoinSubmit}
+  //           >
+  //             Join
+  //           </Button>
+  //         </Col>
+  //       </FormGroup>
+  //     </Form>
+  //   );
+  // }
+
+  // render(){
+  //   const { open } = this.state;
+  //   return(
+  //     <div>
+  //       <ModalLink path={`/groups/groupID/join`}component={this.renderModalJoin}>
+  //        { open ? <Button className="btn-custom" color="unique">
+  //         Join
+  //         </Button> : <Button>Closed</Button>}
+  //       </ModalLink>
+  //     </div>
+  //   )
+  // }
 }
 
 export default ModalJoin;
