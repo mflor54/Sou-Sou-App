@@ -2,13 +2,40 @@
 .Profile{
 margin: 0;
 padding: 0;
-background-color: #eaf3ff;
-color:  #a430a8;
-
+background-image: url(../images/BG/bg7.png);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+height: 100vh;
+width: 100vw;
+position: fixed;
 }
 
+.profilePic{
+height: 200px;
+width: 200px;
+display: block;
+border-radius: 100px;
+background-image: url('../images/crew/rachel.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+padding: 4em;
+}
+
+/*
+.profilePic::after {
+content: '';
+position: absolute;
+border-radius: 100px;
+top: 0; left: 0; bottom: 0; right: 0;
+background: radial-gradient(circle, transparent 50%, black 150%);
+padding: 4em;
+} */
+
+
+
 .show-grid #nav{
-  height: 5em;
+  height: 4em;
   margin: 0;
   padding: 0;
   color: #a430a8;
@@ -16,16 +43,90 @@ color:  #a430a8;
 }
 
 .show-grid #sec2{
-  background-color: #eaf3ff;
+
   height: 20em;
   margin: 0;
   padding: 5em;
+  right: 0;
+
 }
 
-.profilePic{
-  width: 10em;
-  height:10em;
-  border: solid .1px  #eaf3ff;
-  border-radius: 50px;
-  background-image:url("https://image.flaticon.com/icons/svg/12/12324.svg");
+#sec2 p{
+
+line-height: 1.5;
+font-size: 20px;
+font-weight: 300;
+
+}
+
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+},
+.gridList {
+  width: 40em;
+  height: 20em;
+border-spacing: 8px 20px;
+  overflow-y: auto;
+
+},
+
+.user_info{
+  height: 100vh;
+  width: 85vw;
+  z-index: 4;
+  padding: 5em;
+}
+
+
+.footer{
+text-align: center;
+
+}
+
+.tiles{
+  width: 15vw;
+  height: auto;
+
+}
+
+.container{
+  background-color: #fff;
+  height: 100vh;
+  width: 95vw;
+  z-index: 3;
+  padding: 3em;
+overflow: scroll;
+}
+
+
+
+.btn-custom.pp {
+    background-color: #a430a8;
+    color: #eaf3ff;
+    border-radius:50px;
+    width:25em;
+    height: 3em;
+    margin:0 0 20px 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .btn-custom:hover {
+      /* border: solid #620a65 .8px; */
+        color: #25283d !important;
+        background-color: transparent;
+
+
+    }
+
+.user_groups{
+height:20vh;
+}
+
+.featured_groups{
+height: 20vh;
 }

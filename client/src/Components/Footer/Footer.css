@@ -1,12 +1,27 @@
 
 
 
-.foot {
-background-image: url(../images/BG/footer.png);
-background-size: cover;
-background-repeat: no-repeat;
-height: 100px;
-bottom: 0;
-padding: 25px;
 
+
+.foot {
+height: auto;
+bottom: 0;
+padding: 12px 100px 0 100px;
+}
+
+
+.social {
+  right: 0;
+  padding-left: 30em;
+  margin: 0 auto;
+
+}
+
+img {
+width: 32px;
+}
+
+.help {
+  padding-right: 30em;
+    margin: 0 auto;
 }

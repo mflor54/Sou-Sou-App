@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import ReactFileReader from 'react-file-reader';
-import { Grid, Row, Col} from 'react-bootstrap';
+import { Grid, Row, Col, Image} from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Nav from '../Nav/Nav';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
-import Footer from '../Footer/Footer';
+import FooterUser from '../Footer/Footer';
+import GroupProfile from '../GroupProfile/GroupProfile';
 import ProfilePic from './ProfilePic';
 import { Button} from 'mdbreact';
 import './ProfilePage.css';
 
 var logo = require('../images/Logo/OwoLogoNWGroup3Sm.png');
+var randomImages = [
+    require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
+    require('../images/groupImages/backlit-clouds-dusk-853168.jpg'),
+    require('../images/groupImages/bay-beach-beautiful-531602.jpg'),
+    require('../images/groupImages/beach-cave-cavo-greco-371588.jpg'),
+    require('../images/groupImages/celebration-coloured-crowd-889545.jpg'),
+    require('../images/groupImages/book-chair-chat-711009.jpg'),
+];
 
 
 const avatarStyle = {
@@ -33,7 +42,6 @@ class ProfilePage extends Component {
       userGroup:""
 
     }
-    this.renderProfilePage = this.renderProfilePage.bind(this)
   }
 
   //
@@ -95,7 +103,7 @@ showMyGroup(group_name){
 
 
 
-renderProfilePage=({props})=>{
+renderProfilePage=()=>{
 
     console.log(this.state.userProfile);
   console.log(this.props.userInfo);
@@ -108,23 +116,41 @@ renderProfilePage=({props})=>{
   }
 
 
+  var cts = this.state.userProfile.member_date,
+     cdate = (new Date(cts)).toString();
+  const stripeUser = this.state.userProfile.stripe_id
+
+  const stripeButton = !stripeUser ? (
+    <a href="http://localhost:3100/users/stripe/connect">
+    <Button className="btn-custom pp" color="secondary-color-dark">
+    Complete your account STRIPE
+    </Button>
+    </a>
+  ):(
+    <p>You have saved: {this.state.userProfile.amount} </p>
+
+  )
+
   const {userProfile} = this.state
   return(
 
-    <div className="Profile">
+    <div xs={12} md={12} className="Profile">
+    <div >
       <Grid fluid="gridlayout">
       <Row className="show-grid">
           <Col xs={6} md={12} id="nav">
               <Nav />
           </Col>
        </Row>
+<section className="user_info">
+      <Row >
 
-      <Row className="show-grid">
-        <Col xs={6} md={4} id="sec1">
-          <div className="profilePic"> Pic Here</div>
 
+        <Col xs={6} md={5} >
+          <img alt=''  className="profilePic" />
         </Col>
-        <Col xs={6} md={8} id="sec2">
+
+        <Col xs={6} md={7} id="sec2">
             <p>Welcome {userProfile.username}</p>
                 <p>Rating: Gold</p>
                   <p>Memeber Since: 2017</p>
@@ -151,10 +177,55 @@ renderProfilePage=({props})=>{
         </Row>
         </Row>
 
-          <Row>
-          <Footer />
-          </Row>
+
+  </Row>
+            <div className='root'>
+               <GridList
+
+                 className='gridList'
+               >
+
+               {randomImages.map((tile) => (
+                  <div
+                   key={tile}
+                    >
+                   <img className="tiles" src={tile} />
+                  </div>
+                  ))}
+                  </GridList>
+                  </div>
+
+
+                            <Row className="show-grid2">
+
+                                  <Col xs={12} lg={12} className="title" >
+                                    <h2>My Groups</h2>
+                                  </Col>
+
+                    </Row>
+                              <div className='root'>
+                                 <GridList
+                                   cellHeight={180}
+                                   className='gridList'
+                                 >
+
+                                 {randomImages.map((tile) => (
+                                    <div
+                                     key={tile}
+                                      >
+                                     <img className="tiles" src={tile} />
+                                    </div>
+                                    ))}
+                                    </GridList>
+                                    </div>
+
+                                    </section>
+
+          <div>
+  <FooterUser className="footer"/>
+          </div>
         </Grid>
+      </div>
 
       </div>
     )
@@ -164,7 +235,6 @@ render(){
 return(
 
       <div>
-
           <Route path="/users/profile" render={this.renderProfilePage} />
           <Route path="/groups" component={Groups} />
           <Route path="/" component={Landing} />
