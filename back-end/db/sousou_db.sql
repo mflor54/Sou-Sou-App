@@ -11,9 +11,10 @@ CREATE TABLE users (
   password_digest VARCHAR,
   first_name VARCHAR,
   last_name VARCHAR,
-  amount INTEGER,
-  rating VARCHAR,
+  amount NUMERIC NOT NULL DEFAULT 0,
+  rating VARCHAR NOT NULL DEFAULT('Bronze'),
   stripe_id VARCHAR UNIQUE,
+  memeber_date text NOT NULL DEFAULT TO_CHAR(CURRENT_TIMESTAMP,'YYYYMM'),
   image_ BYTEA DEFAULT('https://png.icons8.com/windows/1600/owl.png')
 
 );
@@ -30,6 +31,13 @@ CREATE TABLE groups (
   date_created TIMESTAMPTZ,
   end_date TIMESTAMPTZ,
   user_id INTEGER REFERENCES users(ID)
+);
+
+-- This table creates a many to many relationship between groups and users
+
+CREATE TABLE users_groups (
+  user_id INTEGER REFERENCES users(ID),
+  group_id INTEGER REFERENCES groups(ID)
 );
 
 CREATE TABLE payments_in (

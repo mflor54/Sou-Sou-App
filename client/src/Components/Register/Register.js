@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router";
-import {  Form, FormGroup, FormControl, Col, Checkbox, ControlLabel,Popover, Tooltip } from 'react-bootstrap';
+import {  Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
 import axios from "axios";
 import { Button } from 'mdbreact';
-import { Link, Route, Switch } from 'react-router-dom';
 import { ModalLink } from 'react-router-modal';
 
 import '../Landing/Landing.css';
@@ -197,9 +196,9 @@ render(){
               component={this.renderModalRegistation}
               parentPath="/">
           <Button
-             className="btn-custom"
+             className="btn-custom register"
              color="secondary-color-dark" >
-             Sign Up
+            Start Saving Now
             </Button>
            </ModalLink>
         </div>

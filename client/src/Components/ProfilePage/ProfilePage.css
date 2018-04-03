@@ -1,46 +1,31 @@
-.show-grid {
-  /* margin-top: 10px; */
+
+.Profile{
+margin: 0;
+padding: 0;
+background-color: #eaf3ff;
+color:  #a430a8;
+
 }
-.show-grid #sec1{
-  /* background-color: #25283d; */
-  /* height: 20em; */
-  /* margin: 0; */
-  /* padding: 0; */
-  /* color: #eaf3ff; */
-  /* margin-right: 20px; */
-  margin-bottom: 10px;
+
+.show-grid #nav{
+  height: 5em;
+  margin: 0;
+  padding: 0;
+  color: #a430a8;
+
 }
 
 .show-grid #sec2{
-  /* background-color: #eaf3ff; */
-  /* height: 20em; */
-  /* margin: 0; */
-  /* padding: 0; */
-  margin-bottom: 10px;
+  background-color: #eaf3ff;
+  height: 20em;
+  margin: 0;
+  padding: 5em;
 }
 
-.profile-info-box {
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-  background: #F5F5F5;
-  padding-top: 25px;
-}
-.profile-info-box h2{
-  height: 62px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.editButton {
-  opacity: 0.2;
-}
-.nameBox:hover .editButton {
-  opacity: 1;
-}
-
-.react-file-reader, .uploadBtn {
-    display: inline;
-    float: right;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
+.profilePic{
+  width: 10em;
+  height:10em;
+  border: solid .1px  #eaf3ff;
+  border-radius: 50px;
+  background-image:url("https://image.flaticon.com/icons/svg/12/12324.svg");
 }
