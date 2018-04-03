@@ -14,12 +14,16 @@ position: fixed;
 .profilePic{
 height: 200px;
 width: 200px;
-display: block;
+
+border: solid #fff 3px;
 border-radius: 100px;
+position: absolute;
+top: 100px;
+left: 20px;
 background-image: url('../images/crew/rachel.jpg');
 background-size: cover;
 background-repeat: no-repeat;
-padding: 4em;
+
 }
 
 /*
@@ -74,11 +78,15 @@ border-spacing: 8px 20px;
 
 },
 
-.user_info{
-  height: 100vh;
-  width: 85vw;
-  z-index: 4;
-  padding: 5em;
+.userInfo{
+  position: relative;
+   width: 100%;
+   height: 150px;
+   border: 2px solid #000;
+   text-align: right;
+   background-size: cover;
+   background-repeat: no-repeat;
+background-image: url(../images/BG/bg7.png);
 }
 
 
@@ -94,12 +102,12 @@ text-align: center;
 }
 
 .container{
-  background-color: #fff;
-  height: 100vh;
-  width: 95vw;
-  z-index: 3;
-  padding: 3em;
-overflow: scroll;
+  position: relative;
+  width: 100%;
+  border: 2px solid #000;
+  height: 500px;
+  text-align: right;
+
 }
 
 

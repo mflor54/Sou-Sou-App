@@ -1,6 +1,7 @@
 const db = require("./index");
 const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
+const session = require("express-session");
 
 // Query to get all groups for public groups page, map in the front-end
 getAllGroups = (req, res, next) => {
@@ -21,6 +22,7 @@ getAllGroups = (req, res, next) => {
 
 //Get all information of all users
 getAllUsers = (req, res, next) => {
+
   db
     .any("select * from users")
     .then(function(data) {
@@ -29,16 +31,20 @@ getAllUsers = (req, res, next) => {
         data: data,
         message: "Crystal has Retrieved ALL users"
       });
+
     })
     .catch(function(err) {
       return next(err);
     });
 }
 
+
+
+
 //Login users
 loginUser = (req, res, next) => {
   passport.authenticate("local", {});
-
+var sessData = req.session;
   const authenticate = passport.authenticate("local", (err, user, info) => {
     console.log('User: ', user);
     if(err) {
@@ -46,6 +52,7 @@ loginUser = (req, res, next) => {
     } else if (!user) {
       res.status(401).send("Invalid Username or Password, Please try again");
     } else if (user) {
+
       req.logIn(user, (err) => {
         if (err) {
           res.status(500).send("Login Error");
@@ -211,5 +218,6 @@ module.exports = {
     loginUser: loginUser,
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
-    userJoinGroup: userJoinGroup
+    userJoinGroup: userJoinGroup,
+
 };

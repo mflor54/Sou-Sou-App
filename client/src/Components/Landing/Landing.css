@@ -2,7 +2,8 @@
 
 .Landing{
 text-align: center;
-
+margin: 0;
+padding: 0;
 
 }
 
@@ -109,14 +110,29 @@ object-fit: cover;
   width: 55vw;
   }
 
-  @media only screen and (max-width: 768px) {
-    .loginModal{
-      padding: 10px 15px;
-      height: auto;
-      width: 55vw;
-      }
+  @media only screen
+    and (min-width: 320px)
+    and (max-width: 1400px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+      .react-router-modal__modal-open{
+
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        }
   }
 
+
+    /* @media only screen
+      and (min-width: 320px)
+      and (max-width: 1400px)
+      and (-webkit-min-device-pixel-ratio: 2) {
+        .UserBg{
+          height:100%;
+        background-position: center;
+        background-size: cover;
+        }
+    } */
 /* Grid layout style */
 
 .show-grid #row1{
