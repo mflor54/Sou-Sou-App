@@ -19,7 +19,8 @@ class CreateGroup extends Component {
       payinAmount: '',
       payoutAmount: 0,
       frequency: '',
-      description: ''
+      description: '',
+      search:''
     }
   }
 

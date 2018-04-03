@@ -34,12 +34,14 @@ const avatarStyle = {
 class ProfilePage extends Component {
   constructor(props, context) {
     super(props, context);
-    console.log(props);
     this.state = {
        showUpload: false,
-      userProfile: props.userInfo,
-      groups:"",
-      userGroup:""
+       userProfile: props.userInfo,
+
+     // userProfile: props.userInfo,
+     // groups:"",
+   //   userGroup:""
+
 
     }
   }
@@ -105,35 +107,75 @@ showMyGroup(group_name){
 
 renderProfilePage=()=>{
 
-    console.log(this.state.userProfile);
+  console.log(this.state.userProfile);
   console.log(this.props.userInfo);
-  let groupsjsx;
+  const {userProfile} = this.state
+
+ /* let groupsjsx;
 
   if (this.state.groups) {
     groupsjsx = this.state.groups.map((group) => {
       return(<div> {group.group_name} </div>)
     })
-  }
+  }*/
 
 
   var cts = this.state.userProfile.member_date,
      cdate = (new Date(cts)).toString();
   const stripeUser = this.state.userProfile.stripe_id
-
   const stripeButton = !stripeUser ? (
     <a href="http://localhost:3100/users/stripe/connect">
-    <Button className="btn-custom pp" color="secondary-color-dark">
-    Complete your account STRIPE
-    </Button>
+          <Button className="btn-custom pp" color="secondary-color-dark">
+                Complete your account STRIPE
+          </Button>
     </a>
   ):(
     <p>You have saved: {this.state.userProfile.amount} </p>
-
   )
 
-  const {userProfile} = this.state
   return(
+      <div xs={12} md={12}>
 
+                  <Grid fluid="gridlayout">
+
+                      <Row className="show-grid">
+                          <Col xs={6} md={12} id="nav">
+                              <Nav />
+                          </Col>
+                      </Row>
+
+                  <div>
+                      <Row className="userInfo">
+                          <Col xs={6} md={4}>
+                                <img alt=''  className="profilePic" />
+                          </Col>
+                          <Col xs={6} md={8} id="sec2">
+                                <p>Welcome {userProfile.username}</p>
+                                <p>Rating: Gold</p>
+                                <p>Memeber Since: {cdate}</p>
+                                {stripeButton}
+                          </Col>
+                      </Row>
+                </div>
+
+                <section className="container">
+
+                    <Row className="show-grid2">
+                          <Col xs={12} lg={12} className="title" >
+                            <h2>My Groups</h2>
+                          </Col>
+                    </Row>
+
+                <div className='root'>
+                      <GridList
+                           className='gridList'>
+                                  {randomImages.map((tile) => (
+                                      <div key={tile}>
+                                          <img className="tiles" src={tile} />
+                                      </div>
+                                      ))}
+                       </GridList>
+/*
     <div xs={12} md={12} className="Profile">
     <div >
       <Grid fluid="gridlayout">
@@ -189,51 +231,40 @@ renderProfilePage=()=>{
                   <div
                    key={tile}
                     >
-                   <img className="tiles" src={tile} />
-                  </div>
-                  ))}
-                  </GridList>
+                   <img className="tiles" src={tile} />*/
                   </div>
 
-
-                            <Row className="show-grid2">
-
-                                  <Col xs={12} lg={12} className="title" >
-                                    <h2>My Groups</h2>
-                                  </Col>
-
+                    <Row className="show-grid2">
+                          <Col xs={12} lg={12} className="title">
+                                <h2>My Groups</h2>
+                          </Col>
                     </Row>
-                              <div className='root'>
-                                 <GridList
-                                   cellHeight={180}
-                                   className='gridList'
-                                 >
 
-                                 {randomImages.map((tile) => (
-                                    <div
-                                     key={tile}
-                                      >
-                                     <img className="tiles" src={tile} />
-                                    </div>
-                                    ))}
-                                    </GridList>
-                                    </div>
+                  <div className='root'>
+                          <GridList
+                               cellHeight={180}
+                                  className='gridList'>
+                                      {randomImages.map((tile) => (
+                                          <div key={tile}>
+                                                <img className="tiles" src={tile} />
+                                          </div>
+                                        ))}
+                          </GridList>
+                    </div>
 
-                                    </section>
+                </section>
 
-          <div>
-  <FooterUser className="footer"/>
+                    <div>
+                        <FooterUser className="footer"/>
+                    </div>
+                </Grid>
           </div>
-        </Grid>
-      </div>
-
-      </div>
     )
   }
 
-render(){
-return(
 
+render() {
+  return(
       <div>
           <Route path="/users/profile" render={this.renderProfilePage} />
           <Route path="/groups" component={Groups} />

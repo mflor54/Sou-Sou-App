@@ -16,6 +16,13 @@ let groups = require('./routes/groups');
 let stripeRoutes = require('./routes/stripe/stripe')
 
 var app = express();
+let proxyValue = false;
+
+if(process.env.PROXY_VALUE == '1') {
+	//if there's a proxy, tell express to trust it.  used in production when serving node with nginx or similar
+	app.set('trust proxy', 1);
+	proxyValue = true;
+}
 
 app.use(cors());
 
@@ -34,10 +41,16 @@ app.use(cookieParser());
 
 app.use(
   session({
+    name: 'server-session-cookie-id',
     secret:
       secret.secret,
-    resave: false,
-    saveUninitialized: true
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+          secure: false,
+          maxAge: 2160000000,
+          httpOnly: false},
+    expires: false
   })
 );
 app.use(passport.initialize());
@@ -63,5 +76,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
