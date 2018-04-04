@@ -10,7 +10,7 @@ var github = require('../images/icons/githubheadmain.png');
 const Header= ()=>{
   return(
 
-<Col  xsHidden md={2}>
+<div>
                <a target="blank" href="https://twitter.com/TheOfficial_OWO"><img src={twitter} /></a>
                {"  "}
                {"  "}
@@ -18,7 +18,7 @@ const Header= ()=>{
                     {"  "}
                     {"  "}
                          <a className="Github" target="blank" href="https://github.com/mflor54/Sou-Sou-App"><img src={github} /></a>
-             </Col>
+             </div>
 
 
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import 'grommet/grommet.min.css';
+import '../node_modules/grommet-css';
 import './App.css';
 import { Button} from 'mdbreact';
 
@@ -9,7 +11,7 @@ import GroupProfile from './Components/GroupProfile/GroupProfile'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <Landing />
       </div>
 

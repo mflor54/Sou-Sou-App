@@ -6,6 +6,11 @@ import { Button } from 'mdbreact';
 import { ModalLink } from 'react-router-modal';
 
 import '../Landing/Landing.css';
+import 'react-router-modal/css/react-router-modal.css';
+
+
+
+
 
 class ModalRegister extends Component {
   constructor(){
@@ -75,6 +80,7 @@ renderModalRegistation({onHide}){
   const { emailInput,usernameInput, passwordInput, message , firstNameInput, lastNameInput, comfirmPassword} = this.state;
 
   return (
+    <div>
     <Form horizontal className="loginModal">
      <h2>Sign Up</h2>
      <hr />
@@ -174,11 +180,13 @@ renderModalRegistation({onHide}){
            <Button
            className="btn-custom"
            color="secondary-color-dark"
-           onClick={this.submitForm}>Sign in</Button>
+           onClick={this.submitForm}>Sign Up</Button>
          </Col>
        </FormGroup>
        <div>{message}</div>
      </Form>
+
+     </div>
   );
 }
 
@@ -194,6 +202,7 @@ render(){
           <ModalLink
               path={`/users/register`}
               component={this.renderModalRegistation}
+
               parentPath="/">
           <Button
              className="btn-custom register"
@@ -207,76 +216,3 @@ render(){
 }
 
 export default ModalRegister;
-
-// <Modal {...this.props}>
-//   <Modal.Header closeButton>
-//     <Modal.Title>Login</Modal.Title>
-//       </Modal.Header>
-//         <Modal.Body>
-//           <form>
-//             <label>
-//               First Name:
-//               <input
-//                 type="text"
-//                 name="firstNameInput"
-//                 value={firstNameInput}
-//                 onChange={this.handleChange}
-//               />
-//             </label>
-//             <label>
-//               Last Name:
-//               <input
-//                 type="text"
-//                 name="lastNameInput"
-//                 value={lastNameInput}
-//                 onChange={this.handleChange}
-//               />
-//             </label>
-//               <label>
-//                 Username:
-//                 <input
-//                   type="text"
-//                   name="usernameInput"
-//                   value={usernameInput}
-//                   onChange={this.handleChange}
-//                 />
-//               </label>
-//               <label>
-//                 Email:
-//                 <input
-//                   type="text"
-//                   name="emailInput"
-//                   value={emailInput}
-//                   onChange={this.handleChange}
-//                 />
-//               </label>
-//               <label>
-//                 Password:
-//                 <input
-//                   type="password"
-//                   name="passwordInput"
-//                   value={passwordInput}
-//                   onChange={this.handleChange}
-//                 />
-//               </label>
-//               <label>
-//                 Confirm Password:
-//                 <input
-//                   type="password"
-//                   name="comfirmPassword"
-//                   value={comfirmPassword}
-//                   onChange={this.handleChange}
-//                 />
-//               </label>
-//             </form>
-//           </Modal.Body>
-//         <Modal.Footer>
-//         <p>{message}</p>
-//       <Button
-//       className="btn-custom" color="unique" size="lg"
-//        onClick={this.submitForm}>Submit</Button>
-//       <Button
-//       className="btn-custom" color="unique" size="lg"
-//       onClick={this.props.onHide}>Close</Button>
-//     </Modal.Footer>
-//   </Modal>

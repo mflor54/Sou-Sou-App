@@ -1,16 +1,5 @@
 
-section {
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-zoom:50%;
-}
 video {
-  left: 20%;
-  min-height: 60%;
-  min-width: 60%;
-  position: absolute;
-  top: 0%;
-  transform: translate(-50%, -50%);
 
+width: 40vw;
 }

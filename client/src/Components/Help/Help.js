@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import Modal from 'react-responsive-modal';
 import Button from 'material-ui/Button';
+import './Help.css';
 
 
 const styles = theme => ({
@@ -34,11 +35,11 @@ class HelpList extends Component {
   constructor(props,context){
     super(props,context);
     this.state = {
-  open: false,
-  show: false,
- expanded: null,
-};
-    }
+    open: false,
+    show: false,
+    expanded: null,
+    };
+  }
 
     onOpenModal = () => {
   this.setState({ open: true });
@@ -61,7 +62,7 @@ onCloseModal = () => {
     return (
       <div className="example">
         <a onClick={this.onOpenModal}>
-        Help
+            Help
         </a>{' '}
 
         <Modal open={open} onClose={this.onCloseModal} little>
