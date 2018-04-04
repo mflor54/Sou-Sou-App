@@ -4,21 +4,20 @@ const passport = require("../auth/local");
 const session = require("express-session");
 
 // Query to get all groups for public groups page, map in the front-end
-getAllGroups = (req, res, next) => {
-
-    db.any('SELECT * FROM groups')
-    .then((data) => {
-      console.log(data);
-        res.status(200).json({
-            status: 'success',
-            data: data,
-            message: 'Retrieved all groups'
-        });
-    })
-    .catch((err) => {
-        return next(err);
-    })
-}
+// getAllGroups = (req, res, next) => {
+//      db.any("select * from groups inner join users on groups.creator = users.ID")
+//     .then((data) => {
+//       console.log(data);
+//         res.status(200).json({
+//             status: 'success',
+//             data: data,
+//             message: 'Retrieved all groups'
+//         });
+//     })
+//     .catch((err) => {
+//         return next(err);
+//     })
+// }
 
 //Get all information of all users
 getAllUsers = (req, res, next) => {
@@ -114,9 +113,10 @@ getUserInfo = (req, res, next) => {
 
 // select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
-    db.one('select * from groups where groups.ID=${groupId}',
+  console.log("REQ Group ID: ",req);
+    db.one('select * from groups where group_name=${groupID}',
         {
-            groupId: req.params.groupID
+            groupID: req.params.groupID
         }
     )
     .then((data) => {
@@ -209,6 +209,27 @@ saveCustomerId = (data, id) => {
 }
 
 
+
+getAllGroups = (req, res, next) => {
+
+    db.any('select * from groups inner join users on groups.creator = users.ID')
+    .then((data) => {
+      console.log(data);
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'Retrieved all creators'
+        });
+    })
+    .catch((err) => {
+      console.log(err)
+        return next(err);
+    })
+}
+
+
+
+
 module.exports = {
     getAllGroups: getAllGroups,
     getUserInfo: getUserInfo,
@@ -219,5 +240,6 @@ module.exports = {
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
     userJoinGroup: userJoinGroup,
+    // getAllCreatorsInfo: getAllCreatorsInfo
 
 };
