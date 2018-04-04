@@ -129,6 +129,10 @@ getSingleGroup = (req, res, next) => {
 createGroup = (req, res, next) => {
   let creator = 2;
   //let date = now();
+  console.log("====================");
+  console.log("req:", req.body)
+  console.log("====================");
+  //console.log("req.user", req.user);
     db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description_, date_created) values (${groupName}, ${totalMembers}, ${creator},${payinAmount}, ${payoutAmount}, ${frequency}, ${description}, clock_timestamp())',{
         groupName: req.body.groupName,
         totalMembers: req.body.totalMembers,

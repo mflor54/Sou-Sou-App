@@ -17,10 +17,10 @@ class CreateGroup extends Component {
       groupName: '',
       totalMembers: 0,
       creator: '',
-      payinAmount: '',
       payoutAmount: 0,
       frequency: '',
-      description: ''  
+      description: '', 
+      dateCreated: ''  
     }
   }
 
@@ -56,8 +56,8 @@ class CreateGroup extends Component {
       result = Math.floor(amount/ ( members - 1 ));
       return result;
     }
-    console.log("===>", amount, members);
-
+    console.log("===> amount, members", amount, members);
+   
     //calculates the payin amount based on the savings goal and payout frequency
   }
 
@@ -65,11 +65,31 @@ class CreateGroup extends Component {
     e.preventDefault();
     console.log("clicking submit");
     const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
+    let payin = (payoutAmount/(totalMembers-1);
+  
+    /*
+    fetch("/groups/new", {
+      method: "POST",
+      headers: {"Content-Type": "application/x-www-form-urlencoded"}, 
+      body: {
+        groupName: groupName,
+        totalMembers: totalMembers,
+        payinAmount: payinAmount,
+        payoutAmount: payoutAmount,
+        frequency: frequency,
+        description: description
+      }
+    });
+    */
     //axios call that sends all the info to the backend route
+    console.log(this.state);
+
+    let gabe = 200
+    
     axios.post("/groups/new", {
       groupName: groupName,
       totalMembers: totalMembers,
-      payinAmount: payinAmount,
+      payinAmount: payin,
       payoutAmount: payoutAmount,
       frequency: frequency,
       description: description
@@ -79,9 +99,11 @@ class CreateGroup extends Component {
       //I want to show the success message and redirect to the newly created group
     })
     .catch(err => {
+      console.log(err);
       //reset form and tell user to there was an error and start over.
     });
-  }
+    
+  };
 
 
 
@@ -99,6 +121,8 @@ class CreateGroup extends Component {
     console.log("===", totalMembers);
     console.log("===", frequency);
     console.log("===", payoutAmount);
+    console.log("===", payinAmount);
+  
     return(
       <div>
         Nav Bar
@@ -186,7 +210,7 @@ class CreateGroup extends Component {
             </TabContent>
           </Tab>
         </Tabs>
-        <Button className="btn-custom" color="unique" size="lg" onClick={this.handleSubmit}>Submit</Button>
+        <Button className="btn-custom" color="secondary-color-dark" onClick={this.handleSubmit}>Submit</Button>
       </div>
     )
   }
