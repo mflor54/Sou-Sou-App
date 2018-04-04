@@ -53,7 +53,7 @@ class CreateGroup extends Component {
     if(amount === 0 || members === 0){
       return result;
     } else {
-      result = Math.floor(amount/ ( members - 1 ));
+      result = Math.ceil(amount/( members - 1 ));
       return result;
     }
     console.log("===> amount, members", amount, members);
@@ -65,7 +65,7 @@ class CreateGroup extends Component {
     e.preventDefault();
     console.log("clicking submit");
     const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
-    let payin = (payoutAmount/(totalMembers-1);
+    let payin = Math.ceil(payoutAmount/(totalMembers - 1));
   
     /*
     fetch("/groups/new", {
@@ -82,10 +82,7 @@ class CreateGroup extends Component {
     });
     */
     //axios call that sends all the info to the backend route
-    console.log(this.state);
-
-    let gabe = 200
-    
+    //console.log(this.state);    
     axios.post("/groups/new", {
       groupName: groupName,
       totalMembers: totalMembers,
@@ -115,13 +112,14 @@ class CreateGroup extends Component {
     let payoutFreq = ["Weekly", "Bi-Weekly", "Monthly"];
 
 
-    const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description, key } = this.state;
+    const { groupName, totalMembers, creator, payoutAmount, frequency, description, key } = this.state;
+    /*
     console.log("===", groupName);
     console.log("===", description);
     console.log("===", totalMembers);
     console.log("===", frequency);
     console.log("===", payoutAmount);
-    console.log("===", payinAmount);
+    */
   
     return(
       <div>
