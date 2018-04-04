@@ -127,8 +127,9 @@ getSingleGroup = (req, res, next) => {
 }
 // creates group when user submits form from group creation page
 createGroup = (req, res, next) => {
-  let creator = req.user.id;
-    db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description_) values (${groupName}, ${totalMembers}, ${creator},${payinAmount}, ${payoutAmount}, ${frequency}, ${description})',{
+  let creator = 2;
+  //let date = now();
+    db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description_, date_created) values (${groupName}, ${totalMembers}, ${creator},${payinAmount}, ${payoutAmount}, ${frequency}, ${description}, clock_timestamp())',{
         groupName: req.body.groupName,
         totalMembers: req.body.totalMembers,
         creator: creator,
@@ -138,6 +139,7 @@ createGroup = (req, res, next) => {
         description: req.body.description
     })
     .then((data) => {
+      console.log("this is data from my group", data);
         res.status(200).json({
             status: "success",
             data: data,
