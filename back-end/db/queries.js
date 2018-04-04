@@ -160,8 +160,8 @@ userJoinGroup = (req, res, next) => {
   //  let groupID = 1;
   //  let userID = 2;
    db.none('insert into users_groups (group_id, user_id) values (${groupID}, ${userID})', {
-      groupID: req.body.groupID,
-      userID: req.body.userID
+      groupID: req.params.groupID,
+      userID: req.params.userID
    })
     .then((data) => {
         res.status(200).json({
@@ -193,7 +193,7 @@ saveCustomerToken = (req, res, next) => {
 }
 
 paymentSent = (req, res, next) => {
-    db.none()
+    
 }
 
 saveCustomerId = (data, id) => {
@@ -210,6 +210,77 @@ saveCustomerId = (data, id) => {
     })
 }
 
+getMembersFromGroup = (group_id) => {
+    db.any('select * from users where group = ${group_id}', {
+        group_id: group_id
+    })
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((err) => {
+        console.log('ERROR => ' + err);
+        return next(err);
+    })
+}
+
+getNumberOfPayments = (user, group) => {
+    db.any('select * from paymentsin where group_id = ${group} and user_id = ${user}', {
+        user: user,
+        group: group,
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'list of payments'
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+        return next(err);
+    })
+}
+
+paymentsIn = (user, amount, group, charge_id) => {
+    db.one('insert into paymentsin (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
+        charge_id: charge_id,
+        group: group,
+        user:user,
+        amount: amount
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'payment sent in'
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+        return next(err);
+    })
+}
+
+paymentsOut = (user, amount, group, charge_id) => {
+    db.one('insert into paymentsout (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
+        charge_id: charge_id,
+        group: group,
+        user:user,
+        amount: amount
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'payment sent out'
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+        return next(err);
+    })
+}
+
 
 module.exports = {
     getAllGroups: getAllGroups,
@@ -220,5 +291,7 @@ module.exports = {
     loginUser: loginUser,
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
-    userJoinGroup: userJoinGroup
+    userJoinGroup: userJoinGroup,
+    getMembersFromGroup: getMembersFromGroup,
+    getNumberOfPayments: getNumberOfPayments,
 };

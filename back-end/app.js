@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 let groups = require('./routes/groups');
 let stripeRoutes = require('./routes/stripe/stripe')
+let charges = require('./routes/stripe/charge');
 
 var app = express();
 
