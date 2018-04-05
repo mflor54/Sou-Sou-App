@@ -21,6 +21,9 @@ import Section from 'grommet/components/Section';
 import Hero from 'grommet/components/Hero';
 import Box from 'grommet/components/Box';
 import Nav from '../Nav/Nav';
+import FormField from 'grommet/components/FormField';
+import TextInput from 'grommet/components/TextInput';
+
 
 import ModalJoin from '../Join/Join';
 import './GroupProfile.css';
@@ -175,7 +178,7 @@ let groupID = this.props.match.params.groupID;
                 <Headline
                     size='small'
                     strong={false}>
-                          Group Creator:
+                          Group Creator:     <img className="img-circle" src="https://image.flaticon.com/icons/svg/12/12324.svg" alt="user-avatar"  />
                 </Headline>
                 <Headline
                     size='small'
@@ -205,31 +208,7 @@ let groupID = this.props.match.params.groupID;
                   </Headline>
 
                   </Section>
-                <Section pad='medium'
-                  justify='center'
-                  align='center'>
 
-                  <Section pad='large'
-                    justify='center'
-
-                    >
-                          <Pulse icon={<Down id='icon_color'/>} />
-                  </Section>
-
-                      <Box flex={true}
-                        justify='end'
-                        direction='row'
-                        responsive={true}
-                        size='large'>
-                            <Tiles fill={true}
-                              selectable={true}
-                              >
-                                    <Tile>
-
-                                    </Tile>
-                              </Tiles>
-                      </Box>
-                  </Section>
 
 
 
@@ -237,7 +216,7 @@ let groupID = this.props.match.params.groupID;
                       justify='center'
 
                       >
-                        <Headline >ChatRoom</Headline>
+                        <Headline >ChatBoard</Headline>
                                       <List>
                                         <ListItem
                                         justify='between'
@@ -257,8 +236,8 @@ let groupID = this.props.match.params.groupID;
 
                                           <span className='secondary' >
 
-                                          <span id="text-align" className="pull-right">
-                                                Hey guys, Welcome to our awesome savings club... Lets save some money 🤑💪🏽
+                                          <span id="text-align" className="pull-right" id="verticalLine">
+                                                Heyyyy guys, Welcome to our awesome savings club... Lets save some money 🤑💪🏽
                                             </span>
                                           </span>
                                             <small className="pull-right" >
@@ -273,25 +252,83 @@ let groupID = this.props.match.params.groupID;
                                           >
 
                                           <span pad='small'>
-                                          <img className="img-circle" src="http://placehold.it/50/29D9F4/fff&text=K" alt="user-avatar"  />
+                                          <img className="img-circle" src="http://placehold.it/50/08CEC7/fff&text=M" alt="user-avatar"  />
                                           </span>
 
                                           <span pad='small' id="space">
 
-                                            <strong>Krystal</strong>
+                                            <strong>Mike</strong>
                                           </span>
 
 
                                           <span className='secondary' id="verticalLine">
 
                                           <span>
-                                                I am new to OWO and this is my first savvings pool 😁
+                                                I am new to OWO... I am excited to be in my first savings pool, goodluck everyone 😁
                                             </span>
                                           </span>
                                             <small className="pull-right" >
                                               <span className="glyphicon glyphicon-time"></span>
                                               <span>
-                                              {" "}20min ago
+                                              {" "}17min ago
+                                              </span>
+                                            </small>
+
+
+                                        </ListItem>
+                                        <ListItem justify='between'
+                                          separator='horizontal'
+                                          >
+
+                                          <span pad='small'>
+                                          <img className="img-circle" src="http://placehold.it/50/A430A8/fff&text=C" alt="user-avatar"  />
+                                          </span>
+
+                                          <span pad='small' id="space">
+
+                                            <strong>Crystal</strong>
+                                          </span>
+
+
+                                          <span className='secondary' id="verticalLine">
+
+                                          <span>
+                                                OMG!! Nice to meet everyone... we are going to accompish so much together 🤴🏽👸🏽💅🏽
+                                            </span>
+                                          </span>
+                                            <small className="pull-right" >
+                                              <span className="glyphicon glyphicon-time"></span>
+                                              <span>
+                                              {" "}10min ago
+                                              </span>
+                                            </small>
+
+
+                                        </ListItem>
+                                        <ListItem justify='between'
+                                          separator='horizontal'
+                                          >
+
+                                          <span pad='small'>
+                                          <img className="img-circle" src="http://placehold.it/50/25283D/fff&text=R" alt="user-avatar"  />
+                                          </span>
+
+                                          <span pad='small' id="space">
+
+                                            <strong>Rachel</strong>
+                                          </span>
+
+
+                                          <span className='secondary' id="verticalLine">
+
+                                          <span>
+                                                This is awesome, I am meeting so many new people and saving so much. I 💜 OWO Yay!
+                                            </span>
+                                          </span>
+                                            <small className="pull-right" >
+                                              <span className="glyphicon glyphicon-time"></span>
+                                              <span>
+                                              {" "}5min ago
                                               </span>
                                             </small>
 
@@ -299,20 +336,28 @@ let groupID = this.props.match.params.groupID;
                                         </ListItem>
                                         <ListItem justify='between'>
                                           <span>
-                                            Eric
-                                          </span>
-                                          <span className='secondary'>
-                                            odd
+
                                           </span>
                                         </ListItem>
                                       </List>
 
-                                      </Section>
-                  <Section pad='large'
-                    justify='center'
-                    align='center'>
+                                      <div className="input-group">
+                                      <FormField  type="text" className="form-control" label="type your message here....">
+                                        <TextInput />
+                                      </FormField>
 
-                  </Section>
+                                        <span className="input-group-btn">
+                                          <button className="btn btn-secondary" type="button">Send</button>
+                                        </span>
+                                      </div>
+                              </Section>
+              <Section pad='large'
+                justify='center'
+                align='center'>
+        </Section>
+
+
+
 
     </Article>
     )
