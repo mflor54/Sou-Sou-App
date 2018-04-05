@@ -142,7 +142,7 @@ class Groups extends Component {
               <Tile>
 
 
-                 <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}><Card thumbnail={pic}
+                 <Link to={`/groups/${group.id}`} groupinfo={group.creator}><Card thumbnail={pic}
                   heading={group.group_name.toUpperCase()}
                   label={`Group Creator: ${group.username}`}
                   description={group.description_}

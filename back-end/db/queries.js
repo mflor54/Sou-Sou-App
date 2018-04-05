@@ -3,6 +3,7 @@ const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
+/*
 getAllGroups = (req, res, next) => {
 
     db.any('SELECT * FROM groups')
@@ -18,6 +19,7 @@ getAllGroups = (req, res, next) => {
         return next(err);
     })
 }
+*/
 
 //Get all information of all users
 getAllUsers = (req, res, next) => {
@@ -227,6 +229,23 @@ saveCustomerId = (data, id) => {
         console.log('YOU SUCK');
         return;
     })
+}
+
+getAllGroups = (req, res, next) => {
+
+  db.any('select * from groups inner join users on groups.creator = users.ID')
+  .then((data) => {
+    console.log(data);
+      res.status(200).json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved all creators'
+      });
+  })
+  .catch((err) => {
+    console.log(err)
+      return next(err);
+  })
 }
 
 
