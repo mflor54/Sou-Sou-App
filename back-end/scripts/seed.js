@@ -60,7 +60,8 @@ let group5 = {
     payinAmount: 30,
     payoutAmount: 225,
     frequency: "weekly",
-    description: "description of the group because descriptions are great. They help people know what is going on and stuff!"
+    description: "description of the group because descriptions are great. They help people know what is going on and stuff!", 
+    date_created: current_timestamp()
   }
 }
 

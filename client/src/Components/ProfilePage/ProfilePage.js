@@ -107,7 +107,7 @@ renderProfilePage=()=>{
                 <p>Rating: Gold</p>
                 <p>Memeber Since: {cdate}</p>
                 {stripeButton}
-                <Button className="btn-custom">Create Group</Button>
+                <Link to="/groups/new"><Button className="btn-custom">Create Group</Button></Link>
             </Col>
           </Row>
 </section>
@@ -175,10 +175,14 @@ render(){
 return(
 
       <div>
+        <Switch>
+        
         <Route path="/groups/:groupID" component={GroupProfile}/>
           <Route path="/users/profile" component={this.renderProfilePage} />
-          <Route path="/groups" component={Groups} />
+          <Route exact path="/groups" component={Groups} />
+          {/* <Route path="/groups/new" component={CreateGroup} /> */}
           <Route path="/" component={Landing} />
+        </Switch>
       </div>
     )
   }

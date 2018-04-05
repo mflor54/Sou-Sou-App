@@ -16,7 +16,6 @@ class CreateGroup extends Component {
     this.state = {
       groupName: '',
       totalMembers: 0,
-      creator: '',
       payoutAmount: 0,
       frequency: '',
       description: '', 
@@ -60,12 +59,26 @@ class CreateGroup extends Component {
    
     //calculates the payin amount based on the savings goal and payout frequency
   }
+  getNewGroup(){
+    console.log("getNewGroup started");
+    const { groupName } = this.state;
+
+    axios.get(`/groups/byName/${groupName}`)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+    
+  }
 
   handleSubmit = e => {
     e.preventDefault();
     console.log("clicking submit");
     const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
     let payin = Math.ceil(payoutAmount/(totalMembers - 1));
+    let name = groupName;
   
     /*
     fetch("/groups/new", {
@@ -91,10 +104,9 @@ class CreateGroup extends Component {
       frequency: frequency,
       description: description
     })
-    .then(res => {
-      console.log(res);
-      //I want to show the success message and redirect to the newly created group
-    })
+    .then(
+      this.getNewGroup()
+    )
     .catch(err => {
       console.log(err);
       //reset form and tell user to there was an error and start over.
@@ -102,7 +114,7 @@ class CreateGroup extends Component {
     
   };
 
-
+  
 
 
 
@@ -127,7 +139,7 @@ class CreateGroup extends Component {
         <h1>Create Group Page</h1>
         <ProgressBar active now={60} />
         <Tabs defaultActiveKey={1} id="create-tabs">
-          <Tab eventKey={1} title="Group Description">
+          <Tab eventKey={1} title="Step 1: Group Description">
             <TabContent>
               <Panel className="create-panel">
                 <Panel.Heading>
@@ -157,7 +169,7 @@ class CreateGroup extends Component {
             </TabContent>
           </Tab>
 
-          <Tab eventKey={2} title="Group Details">
+          <Tab eventKey={2} title="Step 2: Group Details">
           <TabContent>
             <Panel className="create-panel">
               <Panel.Heading>
@@ -192,7 +204,7 @@ class CreateGroup extends Component {
             </TabContent>
           </Tab>
 
-          <Tab eventKey={3} title="Review">
+          <Tab eventKey={3} title="Step 3: Review">
             <TabContent>
               <Panel className="create-panel">
                 <Panel.Heading>

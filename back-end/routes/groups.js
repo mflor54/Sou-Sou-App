@@ -14,6 +14,9 @@ router.post('/new', db.createGroup);
 //localhost:3100/groups/groupID
 router.get('/:groupID', db.getSingleGroup);
 
+//localhost:3100/groups/byName
+router.get('/byName/:groupName', db.getGroupByName);
+
 //localhost:3100/groups/:groupID/join/:userID
 //Join Group
 router.post('/:groupID/join/:userID', db.userJoinGroup);
