@@ -1,9 +1,33 @@
 .groups-header {
-  /* margin-bottom: 0; */
-  position: fixed;
+background-color: #25283D;
+
 }
+
+/* Article{
+
+} */
 
 .foot{
 text-align: center;
+
+}
+.avatar{
+  width: 100%;
+  margin: auto;
+
+}
+.avatarList #inner{
+    display: inline-block;
+}
+.avatarList {
+  display: inline-block;
+  width: 100%;
+}
+
+.avatarStyle {
+display: inline-block;
+  height: 2em;
+  width: 2em;
+
 
 }

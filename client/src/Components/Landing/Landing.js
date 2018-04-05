@@ -1,3 +1,5 @@
+
+
 import React, { Component } from 'react';
 import ModalLogin from '../Login/Login';
 import ModalRegister from '../Register/Register';
@@ -7,6 +9,22 @@ import { Button} from 'mdbreact';
 import './Landing.css';
 import { Link, Route, Switch } from 'react-router-dom';
 import { ModalContainer, ModalRoute } from 'react-router-modal';
+      import Article from 'grommet/components/Article';
+      import Headline from 'grommet/components/Headline';
+      import Heading from 'grommet/components/Heading';
+      import Pulse from 'grommet/components/icons/Pulse';
+      import Down from 'grommet/components/icons/base/Down';
+
+      import Section from 'grommet/components/Section';
+      import Hero from 'grommet/components/Hero';
+      import Box from 'grommet/components/Box';
+      import Tiles from 'grommet/components/Tiles';
+import Tile from 'grommet/components/Tile';
+
+import Card from 'grommet/components/Card';
+
+
+
 import Users from '../Users/Users';
 import FooterLanding from '../FooterLanding/FooterLanding';
 import Header from '../Header/Header';
@@ -14,6 +32,7 @@ import HelpList from'../Help/Help';
 import Video from '../Video/Video';
 
 var logo = require('../images/Logo/OwoLogoNWGroup3LG.png');
+var bg = require('../images/BG/bg8.png');
 
 var Rachel= require("../images/crew/rachel.jpg");
 var Crystal= require("../images/crew/crystal.png");
@@ -64,175 +83,182 @@ handleChange = panel => (event, expanded) => {
     let regClose = () => this.setState({ showReg: false });
     let lgClose = () => this.setState({ lgShow: false });
 
-   return(
 
-     <div className="Landing">
 
-          <Grid fluid="gridlayout">
-            <Row className="show-grid">
-              <Col xs={12} md={12} id="jumbotop">
-                <Jumbotron bsClass="jumbotron">
-                  <Row className="top">
-                  <Col xsHidden lg={6} className="header">
-                      <Header />
-                   </Col>
+  return(
 
-                      <Col xs={6} lg={6} className="login_button">
-                        <ModalLogin show={this.props.showLogin} onBackdropClick={this.handleBackClick}  />
-                      </Col>
-                   </Row>
+         <div className="Landing">
 
+              <Grid fluid="gridlayout">
                 <Row className="show-grid">
-                  <Col xs={6} lg={12}>
-                    <img  src={logo}  id='logosize'/>
-                  </Col>
-                </Row>
+                  <Col xs={12} md={12} id="jumbotop">
+                    <Jumbotron bsClass="jumbotron">
+                      <Row className="top">
+                      <Col xsHidden lg={6} className="header">
+                          <Header />
+                       </Col>
 
+                          <Col xs={6} lg={6} className="login_button">
+                            <ModalLogin show={this.props.showLogin} onBackdropClick={this.handleBackClick}  />
+                          </Col>
+                       </Row>
 
-                      <h3 id="title">
-                        OWO means Money in Yoruba.
-                      </h3>
-                      <Row className="show-grid">
-                        <Col xs={6} lg={12}>
-                        <p id="mission">
-                          We envision a world where everyone has the opportunity to save OWO (money) with their family,
-                          friends and neighbors while also emphasizing the importance of financial security. Through a social
-                          platform OWO members can support and motivate each other to reach their savings goal. By providing
-                          resources we want to improve the financial knowledge of our OWO members that will benefit in future
-                          progression/succession of our community and economy.
-                        </p>
+                    <Row className="show-grid">
+                      <Col xs={6} lg={12}>
+                        <img  src={logo}  id='logosize'/>
                       </Col>
                     </Row>
 
-                      <div className="modButtons">
 
-                         <ModalRegister show={this.state.showReg} onBackdropClick={this.handleBackClick}/>
-                         <ModalContainer  />
-                      </div>
+                          <h3 id="title">
+                            OWO means Money in Yoruba.
+                          </h3>
+                          <Row className="show-grid">
+                            <Col xs={6} lg={12}>
+                            <p id="mission">
+                              We envision a world where everyone has the opportunity to save OWO (money) with their family,
+                              friends and neighbors while also emphasizing the importance of financial security. Through a social
+                              platform OWO members can support and motivate each other to reach their savings goal. By providing
+                              resources we want to improve the financial knowledge of our OWO members that will benefit in future
+                              progression/succession of our community and economy.
+                            </p>
+                          </Col>
+                        </Row>
 
-                      <Row className="show-grid">
-                        <Col xs={8} lg={12}>
-                        <a href="#HowTo">
-                          <img  src={arrow} className="arrow"/></a>
-                        </Col>
-                      </Row>
-                   </Jumbotron>
-                 </Col>
-               </Row>
+                          <div className="modButtons">
 
-        <Row className="cd-scrolling-bg cd-scrolling-bg--color-3" id="HowTo">
-              <Row center="md" >
-                  <Col xs={6} md={4} className="cd-scrolling-bg__content row_title">
-                      <h1>Why OWO ?</h1>
-                  </Col>
-              </Row>
-            <Row center="md">
-              <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
-              <img src={connect} className="icons"/>
-                  <h2>Connect</h2>
-                 <p>Being in contact with family, friends and neighbors can help you be more effective than saving alone.</p>
-              </Col>
-                  <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
-                  <img src={saving}  className="icons" />
-                  <h2>Save</h2>
+                             <ModalRegister show={this.state.showReg} onBackdropClick={this.handleBackClick}/>
+                             <ModalContainer  />
+                          </div>
 
-                      <p>You are in control. You are able to choose when you want your payout and how much you would like to save.</p>
-                   </Col>
-                  <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
-                  <img src={mm}   className="icons"/>
-                  <h2>Knowledge</h2>
+                          <Row className="show-grid">
+                            <Col xs={8} lg={12}>
+                                 <a href="#HowTo">
+                                        <Pulse icon={<Down id='icon_color'/>} />
+                                  </a>
+                            </Col>
+                          </Row>
+                       </Jumbotron>
+                     </Col>
+                   </Row>
 
-                      <p>Understanding the importance of finacial discipline will resonate throughout your life.</p>
-                  </Col>
-
-                   <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
-                          <img src={brain}   className="icons"/>
-                         <h2>Security</h2>
-                      <p>Not to worry, OWO will step in and contibute if a another memeber stops thier payments.</p>
-                   </Col>
-              </Row>
-          </Row>
-          <Row className="cd-fixed-bg cd-fixed-bg--1">
-              <Col xs={12} lg={12} >
-                  <img className="cd-fixed-bg__content"/>
-                  <h2>Entertainment</h2>
-              </Col>
-          </Row>
-
-    <Row className="cd-scrolling-bg cd-scrolling-bg--color-1">
-        <Row>
-           <Col xs={12} lg={12} className="cd-scrolling-bg__content row_title row_title">
-                <h1>How to OWO</h1>
-           </Col>
-        </Row>
-        <Row>
-           <Col xs={6} md={3} className="cd-scrolling-bg__content">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-
-            </Col>
-          <Col xs={6} md={3} className="cd-scrolling-bg__content">
-            <Video />
-          </Col>
-        </Row>
-
-
-          <Row>
-              <Col xs={12} lg={12} className="cd-scrolling-bg__content row_title" >
-                  <ModalRegister show={this.state.showReg} onBackdropClick={this.handleBackClick}/>
-
-                 </Col>
-             </Row>
-          </Row>
-
-          <Row className="cd-fixed-bg cd-fixed-bg--2">
-            <Col xs={12} lg={12} >
-            <img className="cd-fixed-bg__content"/>
-              <h2>Travel</h2>
-            </Col>
-          </Row>
-
-            <Row className="cd-scrolling-bg cd-scrolling-bg--color-2">
-                  <Row>
-                      <Col xs={12} lg={12} className="cd-scrolling-bg__content row_title" >
-                          <h1>The OWO Crew</h1>
-                          <h4 id="content">
-                             Developing a digital world of finacial accountablity to connect nieghbors
-                             and allow oppertunities beyond the scope of instutionalized economy.
-                          </h4>
+            <Row className="cd-scrolling-bg cd-scrolling-bg--color-3" id="HowTo">
+                  <Row center="md" >
+                      <Col xs={6} md={4} className="cd-scrolling-bg__content row_title">
+                          <h1>Why OWO ?</h1>
                       </Col>
                   </Row>
-                  <Row>
-                     <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                     <Image src={Rachel} rounded className="crewPhotos" />
-                        <h3 id="cName">Rachel</h3>
-                         <p>Team Lead</p>
+                <Row center="md">
+                  <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
+                  <img src={connect} className="icons"/>
+                      <h2>Connect</h2>
+                     <p>Being in contact with family, friends and neighbors can help you be more effective than saving alone.</p>
+                  </Col>
+                      <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
+                      <img src={saving}  className="icons" />
+                      <h2>Save</h2>
+
+                          <p>You are in control. You are able to choose when you want your payout and how much you would like to save.</p>
+                       </Col>
+                      <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
+                      <img src={mm}   className="icons"/>
+                      <h2>Knowledge</h2>
+
+                          <p>Understanding the importance of finacial discipline will resonate throughout your life.</p>
                       </Col>
-                      <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                      <Image src={Crystal} rounded className="crewPhotos"/>
-                          <h3 id="cName">Crystal</h3>
-                          <p>Design Lead</p>
-                      </Col>
-                      <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                      <Image src={Mike} rounded className="crewPhotos"/>
-                        <h3 id="cName">Mike</h3>
-                         <p>Technical Lead</p>
-                      </Col>
-                      <Col xs={6} md={3} className="cd-scrolling-bg__content">
-                          <Image src={Krystal} rounded className="crewPhotos"/>
-                          <h3 id="cName">Krystal</h3>
-                         <p>Demo Lead</p>
-                      </Col>
-                   </Row>
+
+                       <Col xs={6} md={2} className="cd-scrolling-bg__content row_title">
+                              <img src={brain}   className="icons"/>
+                             <h2>Security</h2>
+                          <p>Not to worry, OWO will step in and contibute if a another memeber stops thier payments.</p>
+                       </Col>
+                  </Row>
               </Row>
-            <div>
-                <FooterLanding />
-            </div>
-        </Grid>
-   </div>
-     )
+              <Row className="cd-fixed-bg cd-fixed-bg--1">
+                  <Col xs={12} lg={12} >
+                      <img className="cd-fixed-bg__content"/>
+                      <h2>Entertainment</h2>
+                  </Col>
+              </Row>
+
+        <Row className="cd-scrolling-bg cd-scrolling-bg--color-1">
+            <Row>
+               <Col xs={12} lg={12} className="cd-scrolling-bg__content row_title row_title">
+                    <h1>How to OWO</h1>
+               </Col>
+            </Row>
+            <Row>
+               <Col xs={6} md={3} className="cd-scrolling-bg__content">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </p>
+
+                </Col>
+              <Col xs={6} md={3} className="cd-scrolling-bg__content">
+                <Video />
+              </Col>
+            </Row>
+
+
+              <Row>
+                  <Col xs={12} lg={12} className="cd-scrolling-bg__content row_title" >
+                      <ModalRegister show={this.state.showReg} onBackdropClick={this.handleBackClick}/>
+
+                     </Col>
+                 </Row>
+              </Row>
+
+              <Row className="cd-fixed-bg cd-fixed-bg--2">
+                <Col xs={12} lg={12} >
+                <img className="cd-fixed-bg__content"/>
+                  <h2>Travel</h2>
+                </Col>
+              </Row>
+
+                <Row className="cd-scrolling-bg cd-scrolling-bg--color-2">
+                      <Row>
+                          <Col xs={12} lg={12} className="cd-scrolling-bg__content row_title" >
+                              <h1>The OWO Crew</h1>
+                              <h4 id="content">
+                                 Developing a digital world of finacial accountablity to connect nieghbors
+                                 and allow oppertunities beyond the scope of instutionalized economy.
+                              </h4>
+                          </Col>
+                      </Row>
+                      <Row>
+                         <Col xs={6} md={3} className="cd-scrolling-bg__content">
+                         <Image src={Rachel} rounded className="crewPhotos" />
+                            <h3 id="cName">Rachel</h3>
+                             <p>Team Lead</p>
+                          </Col>
+                          <Col xs={6} md={3} className="cd-scrolling-bg__content">
+                          <Image src={Crystal} rounded className="crewPhotos"/>
+                              <h3 id="cName">Crystal</h3>
+                              <p>Design Lead</p>
+                          </Col>
+                          <Col xs={6} md={3} className="cd-scrolling-bg__content">
+                          <Image src={Mike} rounded className="crewPhotos"/>
+                            <h3 id="cName">Mike</h3>
+                             <p>Technical Lead</p>
+                          </Col>
+                          <Col xs={6} md={3} className="cd-scrolling-bg__content">
+                              <Image src={Krystal} rounded className="crewPhotos"/>
+                              <h3 id="cName">Krystal</h3>
+                             <p>Demo Lead</p>
+                          </Col>
+                       </Row>
+                  </Row>
+
+
+
+            </Grid>
+              <FooterLanding />
+       </div>
+         )
+
   }
+
+
 
   render(){
     let loginClose = () => this.setState({ showLogin: false });

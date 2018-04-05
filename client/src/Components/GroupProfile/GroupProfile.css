@@ -1,23 +1,66 @@
 
+.groups-header {
+background-color: #A430A8;
+
+}
+
+
 .foot{
 text-align: center;
 
 }
+#icon_color{
+  background-color: #08CEC7;
+}
 
+#headline{
+  text-transform: capitalize;
+}
 /* body {
   background-image: url(../images/BG/bg1.png);
   background-position: center;
   background-size: cover;
 } */
 
+#ava{
+  display: inline-block;
+}
 .avatarStyle {
-  height: 50px;
-  width: 50px;
-  margin-right: 5px;
+  height: 4em;
+  width: 4em;
+
 }
 
+.headline
+{
+    margin-right: 60px;
+}
 
+#chatter{
+  width: 80vw;
 
+}
+.img-circle{
+  width: 3em;
+  height: 3em;
+}
+ #right{
+     text-align: right;
+ }
+
+#verticalLine{
+  border-left: 1px solid rgba(0,0,0,.22);
+  right:0;
+  padding: 0 1em 0 1em;
+  text-align: right;
+}
+#space{
+  padding: 0 1em;
+
+}
+span {
+  text-align: left;
+}
 
 .gp-title {
   /* align-content: left; */
@@ -70,7 +113,7 @@ text-align: center;
     height: 400px;
 }
 
-.chat-message {
+#chat-message {
   position: relative;
   /* top: 20px;
   right: 45px; */

@@ -4,6 +4,7 @@ const stripe = require('../constants/stripe');
 var router = express.Router();
 const { loginRequired } = require("../auth/helpers");
 const passport = require("../auth/local");
+
 /*
 -Save user name, username, password to db
 -User navigates to stripe complete billing info
@@ -15,6 +16,7 @@ const passport = require("../auth/local");
 /* GET users listing. */
 router.get('/', db.getAllUsers);
 
+// router.get('/testroute', db.testRoute)
 
 router.post('/register', db.createUser);
 

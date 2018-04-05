@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import 'grommet/grommet.min.css';
+import '../node_modules/grommet-css';
 import './App.css';
 import { Button} from 'mdbreact';
 

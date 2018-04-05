@@ -130,7 +130,7 @@ createGroup = (req, res, next) => {
   let creator = 2;
   //let date = now();
   console.log("====================");
-  console.log("req:", req.body)
+  console.log("req.body of createGroup:", req.body)
   console.log("====================");
   //console.log("req.user", req.user);
     db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description_, date_created) values (${groupName}, ${totalMembers}, ${creator},${payinAmount}, ${payoutAmount}, ${frequency}, ${description}, clock_timestamp())',{
@@ -143,7 +143,7 @@ createGroup = (req, res, next) => {
         description: req.body.description
     })
     .then((data) => {
-      console.log("this is data from my group", data);
+      console.log("this is data from my group from db.none", data);
         res.status(200).json({
             status: "success",
             data: data,
@@ -153,6 +153,27 @@ createGroup = (req, res, next) => {
     .catch((err) => {
         return next(err);
     })
+}
+
+getGroupByName = (req, res, next) => {
+  console.log("req.params of getGroupByName:",req.params);
+  db.one('select * from groups where group_name = ${groupName}',
+    {
+      groupName: req.params.groupName
+    }
+  )
+  .then((data) => {
+    console.log("=== group by name: ", data);
+      res.status(200).json({
+          status: "success",
+          data: data,
+          message: 'Retrieved Group by name'
+      });
+  })
+  .catch((err) => {
+      return next(err);
+      console.log(err);
+  })
 }
 
 userJoinGroup = (req, res, next) => {
@@ -213,6 +234,7 @@ module.exports = {
     getAllGroups: getAllGroups,
     getUserInfo: getUserInfo,
     getSingleGroup: getSingleGroup,
+    getGroupByName: getGroupByName,
     createGroup: createGroup,
     createUser: createUser,
     loginUser: loginUser,
