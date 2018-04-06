@@ -42,7 +42,13 @@ class ModalJoin extends Component {
     })
     .then(res => {
       console.log("***handleJoinSubmit response: ",res);
+      //can this handle refresh of page
+      //--you can force the page to refresh by changing state. 
+      //this.setState({
+        //groupmember: true
+      //})
     })
+  
 
      //sends the user's id(via the back end with req.user) and the group id to the database
      //the user's id gets added to that group as a group member
@@ -65,12 +71,23 @@ class ModalJoin extends Component {
   //get the group id that belongs to the req.user.id from the users_groups table and compare it to the group id from this.state
   //true or false
   //if (userID.groupID == groupID) {
+    //this.setState({
+        //groupMember: true
+    //});
+  //} else {
+    //this.setState({
+        //groupMember: false
+    //})
+  //}
+//}
+    
     //user is in the group already
     //render paybutton component
     //render ChatBoard component
-  //} 
+   
   //check if group is full
 //this can be used again to occur when a user joins a group - hopefully this will reset the page
+//should also call this function 
 
 
 
@@ -78,7 +95,7 @@ class ModalJoin extends Component {
   render(){
     return(
       <div>
-      <Button onClick={this.handleJoinSubmit}>Join</Button>
+      <Button type="Submit" onClick={this.handleJoinSubmit}>Join</Button>
       </div>
     )
   }
