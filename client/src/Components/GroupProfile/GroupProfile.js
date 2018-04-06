@@ -25,7 +25,7 @@ import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 
 
-import ModalJoin from '../Join/Join';
+import Join from '../Join/Join';
 import './GroupProfile.css';
 
 var logo = require('../images/Logo/OwoLogoNWGroupGR.png');
@@ -209,7 +209,7 @@ let groupID = this.props.match.params.groupID;
 
                   </Section>
 
-
+                  <Join groupID={this.state.groupID}/>
 
 
                     <Section pad='large'

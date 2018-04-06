@@ -179,10 +179,11 @@ getGroupByName = (req, res, next) => {
 }
 
 userJoinGroup = (req, res, next) => {
-
+  let userID = req.user.id;
+  console.log("userJoinGroup ==> req.user.id", userID);
    db.none('insert into users_groups (group_id, user_id) values (${groupID}, ${userID})', {
-      groupID: req.params.groupID,
-      userID: req.params.userID
+      groupID: req.body.groupID,
+      userID: userID
    })
     .then((data) => {
         res.status(200).json({
