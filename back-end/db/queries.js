@@ -237,7 +237,7 @@ getAllGroups = (req, res, next) => {
 
   db.any('select * from groups inner join users on groups.creator = users.ID')
   .then((data) => {
-    console.log(data);
+    //console.log(data);
       res.status(200).json({
           status: 'success',
           data: data,
@@ -251,7 +251,7 @@ getAllGroups = (req, res, next) => {
 }
 
 checkGroupStatus = (req, res, next) => {
-  db.any('select users_groups.group_id, count(*) as "current members", groups.total_members as "max members" from users_groups inner join groups on users_groups.group_id = groups.id where groups.id=${groupID} group by users_groups.group_id, groups.id', {
+  db.any('select users_groups.group_id, count(*) as "currentMembers", groups.total_members as "maxMembers" from users_groups inner join groups on users_groups.group_id = groups.id where groups.id=${groupID} group by users_groups.group_id, groups.id', {
     groupID: req.params.groupID
   })
   .then((data) => {

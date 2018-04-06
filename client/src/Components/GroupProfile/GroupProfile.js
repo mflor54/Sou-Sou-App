@@ -64,6 +64,7 @@ class GroupProfile extends Component {
       groupID:this.props.match.params.groupID,
       group:[],
       groupinfo: props.groupInfo, 
+      groupOpen: ''
 
     }
   }
@@ -103,7 +104,24 @@ class GroupProfile extends Component {
   }
 
   checkGroupStatus = () => {
-    console.log("checking status");
+    fetch(`/groups/${groupID}/check`)
+    .then(res => 
+      res.json()
+    )
+    .then(group => {
+      console.log("++--> check status:", group.data);
+      let data = group.data[0];
+      //console.log(data.maxMembers);
+      let currentMembers = parseInt(data.currentMembers);
+      let maxMembers = data.maxMembers;
+      console.log(typeof(currentMembers), maxMembers);
+      if(currentMembers > maxMembers){
+        this.setState({
+          groupOpen: true
+        })
+      }
+    })
+    // console.log("checking status");
   }
 
 
