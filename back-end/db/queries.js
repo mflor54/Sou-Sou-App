@@ -127,6 +127,7 @@ getSingleGroup = (req, res, next) => {
         console.log(err);
     })
 }
+
 // creates group when user submits form from group creation page
 createGroup = (req, res, next) => {
   let creator = 2;

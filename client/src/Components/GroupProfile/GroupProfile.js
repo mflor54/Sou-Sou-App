@@ -63,7 +63,7 @@ class GroupProfile extends Component {
       showJoin: false,
       groupID:this.props.match.params.groupID,
       group:[],
-      groupinfo: props.groupInfo
+      groupinfo: props.groupInfo, 
 
     }
   }
@@ -102,16 +102,20 @@ class GroupProfile extends Component {
     });
   }
 
+  checkGroupStatus = () => {
+    console.log("checking status");
+  }
+
 
 
   componentDidMount(){
+    let groupID = this.props.match.params.groupID;
 
+    localStorage.setItem('groupID', JSON.stringify(groupID));
+    this.setState({ groupID: groupID });
+    this.getGroup();
+    this.checkGroupStatus();
 
-let groupID = this.props.match.params.groupID;
-
-        localStorage.setItem('groupID', JSON.stringify(groupID));
-        this.setState({ groupID: groupID });
-  this.getGroup();
   }
 
   showGroupMembers(total_members){
