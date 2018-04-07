@@ -267,20 +267,37 @@ checkGroupStatus = (req, res, next) => {
   })
 }
 
-groupMemberCheck = (req, res, next) => {
-  let userID = req.user.id;
+isMember = (req, res, next) => {
+  let userID = 3;
 
   db.any('select * from users_groups WHERE group_id=${groupID} AND user_id=${userID}', {
     groupID: req.params.groupID,
     userID: userID
   })
   .then((data) => {
-    console.log(data);
+    if(data.length <= 0){
+      res.status(200).json({
+        status: 'success',
+        result: false,
+        message: 'This user is not a group member'
+      })
+    } else {
+      res.status(200).json({
+        status: 'success',
+        result: true,
+        data: data, 
+        message: 'This user is a group member'
+      });
+      //console.log(data);
+    }
+  })
+  .catch((err) => {
+    console.log("isMember Error: ", err);
   })
 }
 
 module.exports = {
-    groupMemberCheck: groupMemberCheck,
+    isMember: isMember,
     checkGroupStatus: checkGroupStatus,
     getAllGroups: getAllGroups,
     getUserInfo: getUserInfo,
