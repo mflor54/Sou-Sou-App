@@ -1,4 +1,24 @@
 
+.btn-custom.pp {
+  background-color: #a430a8;
+  color: #eaf3ff;
+  border-radius:50px;
+  width:25em;
+  height: 3em;
+  margin:0 0 20px 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+.btn-custom:hover {
+    /* border: solid #620a65 .8px; */
+      color: #25283d !important;
+      background-color: transparent;
+
+
+  }
+
+
 .groups-header {
 background-color: #A430A8;
 
