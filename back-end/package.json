@@ -9,6 +9,7 @@
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
+    "connect-pg-simple": "^4.2.1",
     "cookie-parser": "~1.4.3",
     "cookie-session": "^2.0.0-beta.3",
     "cors": "^2.8.4",

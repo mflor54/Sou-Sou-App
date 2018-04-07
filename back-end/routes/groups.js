@@ -2,11 +2,13 @@ let db = require('../db/queries');
 let stripe = require('../constants/stripe');
 let express = require('express');
 let axios = require('axios');
+const { loginRequired } = require("../auth/helpers");
+const passport = require("../auth/local");
 let router = express.Router();
 
 
 //localhost:3100/groups
-router.get('/', db.getAllGroups);
+router.get('/',  db.getAllGroups);
 
 
 //localhost:3100/groups/new

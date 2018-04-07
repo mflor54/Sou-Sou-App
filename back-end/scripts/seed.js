@@ -12,7 +12,7 @@ let group1 = {
     payinAmount: 25,
     payoutAmount: 125,
     frequency: "Weekly",
-    description: "description of the group because descriptions are great. They help people know what is going on and stuff!"
+    description: "For shopping and food"
   }
 }
 let group2 = {
@@ -24,19 +24,19 @@ let group2 = {
     payinAmount: 100,
     payoutAmount: 300,
     frequency: "Monthly",
-    description: "description of the group because descriptions are great. They help people know what is going on and stuff!"
+    description: "Saving so freaking Hard!"
   }
 }
 let group3 = {
   //this is the response you would get from the body
   body: {
-    groupName: "Down Payment",
+    groupName: "Moving",
     totalMembers: 9,
     creator: 3,
     payinAmount: 250,
     payoutAmount: 2250,
     frequency: "Monthly",
-    description: "description of the group because descriptions are great. They help people know what is going on and stuff!"
+    description: "Security and deposit for apartments"
   }
 }
 let group4 = {
@@ -48,7 +48,7 @@ let group4 = {
     payinAmount: 100,
     payoutAmount: 500,
     frequency: "monthly",
-    description: "description of the group because descriptions are great. They help people know what is going on and stuff!"
+    description: "Have a random party"
   }
 }
 let group5 = {
@@ -60,7 +60,33 @@ let group5 = {
     payinAmount: 30,
     payoutAmount: 225,
     frequency: "weekly",
-    description: "description of the group because descriptions are great. They help people know what is going on and stuff!"
+    description: "Need help with your car note?"
+  }
+}
+
+let group6 = {
+  //this is the response you would get from the body
+  body: {
+    groupName: "Electronic Envy",
+    totalMembers: 9,
+    creator: 9,
+    payinAmount: 62.50,
+    payoutAmount: 500,
+    frequency: "weekly",
+    description: "Quick paying savings for toys"
+  }
+}
+
+let group7 = {
+  //this is the response you would get from the body
+  body: {
+    groupName: "Lets Get a Car",
+    totalMembers: 9,
+    creator: 9,
+    payinAmount: 625,
+    payoutAmount: 5000,
+    frequency: "Monthly",
+    description: "Down payment for a new car"
   }
 }
 

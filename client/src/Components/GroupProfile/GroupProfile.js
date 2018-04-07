@@ -133,14 +133,7 @@ let groupID = this.props.match.params.groupID;
 
     return(
       <Article scrollStep={false}>
-            <Section pad='small'
-              justify='center'
-              align='center'
-              className="groups-header"
 
-              >
-                      <Nav />
-              </Section>
 
                 <Hero background={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
                     fit='cover'
@@ -164,6 +157,14 @@ let groupID = this.props.match.params.groupID;
                                   </Box>
                             </Box>
                   </Hero>
+                  <Section pad='small'
+                    justify='center'
+                    align='center'
+                    className="groups-header"
+
+                    >
+
+                    </Section>
               <Section pad='large'
                 justify='center'
 
