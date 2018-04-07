@@ -255,6 +255,7 @@ checkGroupStatus = (req, res, next) => {
     groupID: req.params.groupID
   })
   .then((data) => {
+    console.log(data[0].currentMembers);
     res.status(200).json({
       status: 'success',
       data: data,

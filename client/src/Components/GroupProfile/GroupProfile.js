@@ -114,14 +114,18 @@ class GroupProfile extends Component {
       console.log("++--> check status:", group.data);
       let data = group.data[0];
       //console.log(data.maxMembers);
-      let currentMembers = parseInt(data.currentMembers);
-      let maxMembers = data.maxMembers;
-      console.log(currentMembers, maxMembers);
-      if(currentMembers >= maxMembers) {
-        this.setState({
-          groupOpen: false
-        })
+      if(group.data[0].currentMembers !== undefined){
+        let currentMembers = parseInt(data.currentMembers);
+        let maxMembers = data.maxMembers;
+        console.log(currentMembers, maxMembers);
+      
+        if(currentMembers >= maxMembers) {
+          this.setState({
+            groupOpen: false
+          });
+        }
       }
+      
     })
     // console.log("checking status");
   }
