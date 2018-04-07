@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ScrollTrigger from 'react-scroll-trigger';
 import './Video.css';
-var howToVid = require('./owo_movie.mov')
+var howToVid = require('./OWOcycle.mov')
 
 
 class Video extends Component{

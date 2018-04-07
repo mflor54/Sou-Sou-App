@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import ReactFileReader from 'react-file-reader';
 import { Grid, Row, Col, Image} from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
-import {GridList, GridTile} from 'material-ui/GridList';
+import GridList from 'material-ui/GridList';
+
 import Nav from '../Nav/Nav';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
 import FooterUser from '../Footer/Footer';
 import GroupProfile from '../GroupProfile/GroupProfile';
+import CreateGroup from '../CreateGroup/CreateGroup';
 import ProfilePic from './ProfilePic';
 import { Button} from 'mdbreact';
-import './ProfilePage.css';
-
+import './ProfilePage.css'
 var logo = require('../images/Logo/OwoLogoNWGroup3Sm.png');
 var randomImages = [
     require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
@@ -23,14 +24,6 @@ var randomImages = [
 ];
 
 
-const avatarStyle = {
-  height: '50px',
-  width: '50px',
-  marginRight: '5px'
-}
-
-
-
 class ProfilePage extends Component {
   constructor(props, context) {
     super(props, context);
@@ -38,13 +31,16 @@ class ProfilePage extends Component {
        showUpload: false,
        userProfile: props.userInfo,
 
-     // userProfile: props.userInfo,
-     // groups:"",
-   //   userGroup:""
-
-
     }
   }
+
+
+  handleClick() {
+    this.setState(createGroup => ({
+     
+    }));
+  }
+  
 
   //
   // handleFile = (files) => {
@@ -70,56 +66,12 @@ class ProfilePage extends Component {
   //     }
 
 
-  getMyGroups = () => {
-    fetch("/groups")
-    .then(res => res.json())
-    .then(groups => {
-      console.log('Show mw all groups:',groups)
-  
-      let data = groups.data
-      this.setState({
-        groups: data
-      });
-    });
-
-  
-    /////if the person exsit in the group then filter them and retun group they belong to
-
-  }
-  componentDidMount(){
-    this.getMyGroups();
-  }
-
-
-showMyGroup(group_name){
-  let owlstr = [];
-  for(var i = 0; i < group_name; i++){
-
-    owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
-
-  }
-  return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
-}
-
-
-
-
 
 renderProfilePage=()=>{
 
   console.log(this.state.userProfile);
   console.log(this.props.userInfo);
   const {userProfile} = this.state
-
- /* let groupsjsx;
-
-  if (this.state.groups) {
-    groupsjsx = this.state.groups.map((group) => {
-      return(<div> {group.group_name} </div>)
-    })
-  }*/
-
-
   var cts = this.state.userProfile.member_date,
      cdate = (new Date(cts)).toString();
   const stripeUser = this.state.userProfile.stripe_id
@@ -134,131 +86,80 @@ renderProfilePage=()=>{
   )
 
   return(
-      <div xs={12} md={12}>
+<div xs={12} md={12}>
 
-                  <Grid fluid="gridlayout">
+    <Grid fluid="gridlayout">
 
-                      <Row className="show-grid">
-                          <Col xs={6} md={12} id="nav">
-                              <Nav />
-                          </Col>
-                      </Row>
+        <Row className="show-grid">
+            <Col xs={6} md={12} id="nav">
+                <Nav />
+            </Col>
+        </Row>
 
-                  <div>
-                      <Row className="userInfo">
-                          <Col xs={6} md={4}>
-                                <img alt=''  className="profilePic" />
-                          </Col>
-                          <Col xs={6} md={8} id="sec2">
-                                <p>Welcome {userProfile.username}</p>
-                                <p>Rating: Gold</p>
-                                <p>Memeber Since: {cdate}</p>
-                                {stripeButton}
-                          </Col>
-                      </Row>
-                </div>
-
-                <section className="container">
-
-                    <Row className="show-grid2">
-                          <Col xs={12} lg={12} className="title" >
-                            <h2>My Groups</h2>
-                          </Col>
-                    </Row>
-
-                <div className='root'>
-                      <GridList
-                           className='gridList'>
-                                  {randomImages.map((tile) => (
-                                      <div key={tile}>
-                                          <img className="tiles" src={tile} />
-                                      </div>
-                                      ))}
-                       </GridList>
-/*
-    <div xs={12} md={12} className="Profile">
-    <div >
-      <Grid fluid="gridlayout">
-      <Row className="show-grid">
-          <Col xs={6} md={12} id="nav">
-              <Nav />
-          </Col>
-       </Row>
-<section className="user_info">
-      <Row >
-
-
-        <Col xs={6} md={5} >
-          <img alt=''  className="profilePic" />
-        </Col>
-
-        <Col xs={6} md={7} id="sec2">
-            <p>Welcome {userProfile.username}</p>
+    <div>
+        <Row className="userInfo">
+            <Col xs={6} md={4}>
+                <img alt=''  className="profilePic" />
+            </Col>
+            <Col xs={6} md={8} id="sec2">
+                <p>Welcome {userProfile.username}</p>
                 <p>Rating: Gold</p>
-                  <p>Memeber Since: 2017</p>
-                <p>Savings to date: $3,689</p>
-                <p>Start saving now click <a href="http://localhost:3100/users/stripe/connect">STRIPE</a></p>
-            </Col>
-          </Row>
-
-
-        <Row className="show-grid2">
-  
-          <Row className="show-grid2">
-              <Col xs={12} lg={12} className="cd-scrolling-bg__content">
-                    <h2>My Groups</h2>
-                    { this.state.groups ? <div>{groupsjsx}</div> :
-                    <p>You are not in a group, Create one now!</p> }
-              </Col>
-          </Row>
-        <Row>
-            <Col xs={12} lg={12} className="cd-scrolling-bg__content">
-                <h2>Suggested Groups</h2>
-                  Join a group today
+                <p>Memeber Since: {cdate}</p>
+                {stripeButton}
             </Col>
         </Row>
-        </Row>
+</div>
 
+<section className="container">
 
-  </Row>
-            <div className='root'>
-               <GridList
+    <Row className="show-grid2">
+            <Col xs={12} lg={12} className="title" >
+            <h2>My Groups</h2>
+            <Col smOffset={3} sm={8}>
+              {/* <Button   className="btn-custom"  color="secondary-color-dark"
+                  onClick={this.props.CreateGroup}>Create Group</Button> */}
+                  {/* <Link to>
+                 */}
+            </Col>
+            </Col>
+    </Row>
 
-                 className='gridList'
-               >
+<div className='root'>
+        <GridList
+            className='gridList'>
+                    {randomImages.map((tile) => (
+                        <div key={tile}>
+                            <img className="tiles" src={tile} />
+                        </div>
+                        ))}
+        </GridList>
+    </div>
 
-               {randomImages.map((tile) => (
-                  <div
-                   key={tile}
-                    >
-                   <img className="tiles" src={tile} />*/
-                  </div>
+    <Row className="show-grid2">
+            <Col xs={12} lg={12} className="title">
+                <h2>My Groups</h2>
+            </Col>
+    </Row>
 
-                    <Row className="show-grid2">
-                          <Col xs={12} lg={12} className="title">
-                                <h2>My Groups</h2>
-                          </Col>
-                    </Row>
+    <div className='root'>
+            <GridList
+                cellHeight={180}
+                    className='gridList'>
+                        {randomImages.map((tile) => (
+                            <div key={tile}>
+                                <img className="tiles" src={tile} />
+                            </div>
+                        ))}
+            </GridList>
+    </div>
 
-                  <div className='root'>
-                          <GridList
-                               cellHeight={180}
-                                  className='gridList'>
-                                      {randomImages.map((tile) => (
-                                          <div key={tile}>
-                                                <img className="tiles" src={tile} />
-                                          </div>
-                                        ))}
-                          </GridList>
-                    </div>
+</section>
 
-                </section>
-
-                    <div>
-                        <FooterUser className="footer"/>
-                    </div>
-                </Grid>
-          </div>
+    <div>
+        <FooterUser className="footer"/>
+    </div>
+</Grid>
+</div>
     )
   }
 
@@ -266,12 +167,14 @@ renderProfilePage=()=>{
 render() {
   return(
       <div>
-          <Route path="/users/profile" render={this.renderProfilePage} />
+        <Route path="/groups/:groupID" component={GroupProfile}/>
+          <Route path="/users/profile" component={this.renderProfilePage} />
           <Route path="/groups" component={Groups} />
           <Route path="/" component={Landing} />
+          <Route path="/creategroup" component={CreateGroup} />
       </div>
     )
   }
 }
 
-export default (ProfilePage);
+export default ProfilePage;
