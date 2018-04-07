@@ -107,6 +107,8 @@ class GroupProfile extends Component {
   }
 
   checkGroupStatus = () => {
+    const { groupID } = this.state;
+
     fetch(`/groups/${groupID}/check`)
     .then(res => 
       res.json()
@@ -131,6 +133,15 @@ class GroupProfile extends Component {
     // console.log("checking status");
   }
 
+  checkIfMember = () => {
+    const { groupID } = this.state;
+
+    fetch(`/groups/${groupID}/member`)
+    .then(res => res.json())
+    .then(data => {
+      console.log("checkIfMember data ==> ", data);
+    });
+  }
 
 
   componentDidMount(){
@@ -140,6 +151,7 @@ class GroupProfile extends Component {
     this.setState({ groupID: groupID });
     this.getGroup();
     this.checkGroupStatus();
+    this.checkIfMember();
 
   }
 

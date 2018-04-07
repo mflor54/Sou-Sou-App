@@ -264,18 +264,20 @@ checkGroupStatus = (req, res, next) => {
   })
   .catch((err) => {
     console.log("check status", err)
-  })
+  });
 }
 
-isMember = (req, res, next) => {
-  let userID = 3;
+checkIfMember = (req, res, next) => {
+  let userID = req.user.id;
+  console.log("req.user.id from isMember", userID);
 
   db.any('select * from users_groups WHERE group_id=${groupID} AND user_id=${userID}', {
     groupID: req.params.groupID,
     userID: userID
   })
   .then((data) => {
-    if(data.length <= 0){
+    console.log("isMember query: ", data[0]);
+    if(data == undefined){
       res.status(200).json({
         status: 'success',
         result: false,
@@ -297,7 +299,7 @@ isMember = (req, res, next) => {
 }
 
 module.exports = {
-    isMember: isMember,
+    checkIfMember: checkIfMember,
     checkGroupStatus: checkGroupStatus,
     getAllGroups: getAllGroups,
     getUserInfo: getUserInfo,
