@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
+import 'grommet/grommet.min.css';
+import '../node_modules/grommet-css';
 import './App.css';
+import { Button} from 'mdbreact';
 
 
 import Landing from './Components/Landing/Landing'
-import ProfilePage from './Components/ProfilePage/ProfilePage'
+import GroupProfile from './Components/GroupProfile/GroupProfile'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Landing/>
-        <ProfilePage/>
+      <div>
+        <Landing />
       </div>
-    );
+
+    )
   }
 }
 

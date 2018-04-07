@@ -1,0 +1,389 @@
+/*Page layout*/
+
+.Landing{
+text-align: center;
+margin: 0;
+padding: 0;
+
+}
+
+h3{
+  padding: 10px 0;
+}
+
+.headers{
+  padding:0;
+}
+
+.crewPhotos{
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+object-fit: cover;
+
+}
+
+#icon_color{
+  background-color: #08CEC7;
+}
+
+
+/*
+
+    Button styling
+
+*/
+/* TO DO:Change colors to brand style colors */
+.btn-custom {
+    background-color: #a430a8;
+    color: #eaf3ff;
+    border-radius:50px;
+    width:10em;
+    height: 44px;
+    margin:0 0 20px 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .btn-custom.loginHeader {
+      background-color: #a430a8;
+      color: #eaf3ff;
+      border-radius:50px;
+      width: 10em;
+      height: 34px;
+      margin:0 0 20px 0;
+      font-family: 'Roboto', sans-serif;
+      font-size: 13px;
+    }
+
+    .btn-custom.register {
+        background-color: #a430a8;
+        color: #eaf3ff;
+        border-radius:50px;
+        width: 20em;
+        height: 45px;
+        margin: 30px 0;
+
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+      }
+
+.btn-custom:hover {
+    /* border: solid #620a65 .8px; */
+      color: #25283d !important;
+      background-color: transparent;
+
+
+  }
+  .btn-custom.loginHeader:hover {
+      /* border: solid #620a65 .8px; */
+        color: #eaf3ff !important;
+        background-color: transparent;
+
+
+    }
+
+.top{
+
+  padding: 0  0 50px 20px;
+}
+
+.header {
+  left:0;
+  text-align: left;
+    }
+
+.login_button {
+
+  right:3em;
+  text-align: right;
+  }
+
+
+  @media only screen and (max-width: 768px) {
+    .login_button {
+      text-align: center;
+      }
+  }
+
+/* Modal Styling */
+.loginModal{
+  padding: 20px 25px;
+  height: auto;
+  width: 55vw;
+  }
+
+  @media only screen
+    and (min-width: 320px)
+    and (max-width: 1400px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+      .react-router-modal__modal-open{
+
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        }
+  }
+
+
+    /* @media only screen
+      and (min-width: 320px)
+      and (max-width: 1400px)
+      and (-webkit-min-device-pixel-ratio: 2) {
+        .UserBg{
+          height:100%;
+        background-position: center;
+        background-size: cover;
+        }
+    } */
+/* Grid layout style */
+
+.show-grid #row1{
+  background-color: #eaf3ff;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 10px;
+
+}
+/* .show-grid #logo{
+  margin: auto;
+  align-content: center;
+} */
+.UserBg{
+  margin: 0;
+  padding: 0;
+  width:100vw;
+background-position: center;
+background-size: cover;
+}
+
+ #logosize{
+     width: 40vw;
+
+ }
+
+.show-grid2 #sec1{
+  background-color: #eaf3ff;
+  height: 20em;
+  margin: 0;
+  padding: 0;
+}
+
+
+.gridlayout:before {
+  margin: 0;
+  padding: 0;
+
+
+}
+
+/* Jumbotron header layout styling */
+ .show-grid #jumbotop{
+  background-color: #eaf3ff;
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+z-index: 4;
+}
+
+ .show-grid #mission {
+margin:auto;
+width: 83%;
+text-align: ;
+font-weight: 300;
+padding: 10px;
+
+ }
+.jumbotron {
+background-image: url(../images/BG/bg8.png);
+background-size: cover;
+background-repeat: no-repeat;
+padding: 2em;
+border: none;
+color: #eaf3ff;
+margin: 0;
+}
+#title {
+  padding: 30px 0;
+  font-size: 15px;
+  color: #eaf3ff;
+}
+/* .logo{
+position: relative;
+} */
+
+
+
+img.icons{
+  /* filter: invert(.5) sepia(1) saturate(2) hue-rotate(200deg) ; */
+  filter: invert(.5) sepia(1) saturate(2) brightness(50%) contrast(200%) hue-rotate(190deg);
+-webkit-filter:  invert(.5) sepia(1) saturate(2) brightness(50%) contrast(200%) hue-rotate(190deg);
+width: 40%;
+  padding-bottom: 1em;
+}
+
+*, *::after, *::before {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/*
+
+      Grid styling with background image
+
+*/
+
+
+.cd-fixed-bg {
+  position: relative;
+  min-height: 80vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 1;
+}
+
+.cd-fixed-bg__content, .cd-fixed-bg h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+  max-width: 1170px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 3rem;
+}
+
+
+.cd-fixed-bg h1, .cd-fixed-bg h2 {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+color: #29D9F4;
+}
+
+.cd-fixed-bg.cd-fixed-bg--1 {
+  background-image: url(../images/groupImages/celebration-coloured-crowd-889545.jpg);
+
+}
+.cd-fixed-bg.cd-fixed-bg--2 {
+  background-image: url(../images/groupImages/activity-adventure-blur-297642.jpg);
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 3.6rem;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 4.8rem;
+    font-weight: 300;
+  }
+  @supports (background-attachment: fixed) {
+    /* fix bug on IE11 and below */
+    .cd-fixed-bg {
+
+      background-attachment: fixed;
+    }
+  }
+}
+
+.cd-scrolling-bg {
+  position: relative;
+  min-height: 80%;
+  padding: 2em;
+
+  line-height: 1.6;
+  -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  z-index: 3;
+  text-align: center;
+}
+
+.cd-scrolling-bg.cd-scrolling-bg--color-3 {
+  background-color:#08cec7;
+  color: #eaf3ff;
+
+}
+#HowTo .cd-scrolling-bg.cd-scrolling-bg--color-3 {
+ overflow-y: scroll;
+ scroll-behavior: smooth;
+}
+
+
+.cd-scrolling-bg.cd-scrolling-bg--color-2 {
+  background-color:#a430a8;
+  color: #eaf3ff;
+
+}
+
+.cd-scrolling-bg.cd-scrolling-bg--color-1 {
+  background-color: #eaf3ff;
+  color: #25283D;
+
+
+}
+
+.cd-scrolling-bg__content {
+  width: 100vw;
+  max-width:100vw;
+  margin: 0 auto;
+
+}
+
+.cd-scrolling-bg__content.row_title {
+  width: 100vw;
+  max-width: 100vw;
+  margin: auto;
+}
+.cd-scrolling-bg__content.row_title h1{
+  margin: auto;
+  font-size: 60px;
+  padding-bottom: 1em;
+}
+.cd-scrolling-bg__content.row_title h2{
+font-size: 20px;
+padding-bottom: 15px;
+font-weight: 400;
+}
+
+.cd-scrolling-bg__content.row_title #content {
+font-size: 30px;
+padding: 0 2em 1em ;
+}
+.cd-scrolling-bg__content.row_title h3{
+font-size: 20px;
+padding: 20px;
+}
+
+.cd-scrolling-bg__content.row_title p{
+font-size: 17px;
+padding: 10px;
+}
+.cd-scrolling-bg__content h3{
+font-size: 40px;
+padding: 10px;
+
+}
+
+
+
+
+@media only screen and (min-width: 768px) {
+  .cd-scrolling-bg {
+    padding: 2em 0;
+    font-size: 2rem;
+    line-height: 2;
+    font-weight: 300;
+  }
+}

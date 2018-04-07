@@ -2,5 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: lightblue;
+  background: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+
 }

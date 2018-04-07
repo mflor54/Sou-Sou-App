@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Popover, Tooltip, Modal,OverlayTrigger } from 'react-bootstrap';
+import { Redirect } from "react-router";
+import {  Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
+import axios from "axios";
+import { Button } from 'mdbreact';
+import { ModalLink } from 'react-router-modal';
+
+import '../Landing/Landing.css';
+import 'react-router-modal/css/react-router-modal.css';
+
+
+
 
 
 class ModalRegister extends Component {
@@ -8,115 +18,199 @@ class ModalRegister extends Component {
     this.state ={
       usernameInput: "",
       passwordInput: "",
-      message: ""
+      firstNameInput: "",
+      lastNameInput: "",
+      comfirmPassword: "",
+      emailInput:"",
+      message: "",
+      registered:false,
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.renderModalRegistation = this.renderModalRegistation.bind(this)
+
   }
 
-  handleUsername = e => {
+handleChange (evt) {
+ this.setState({ [evt.target.name]: evt.target.value });
+}
+
+submitForm = e => {
+ e.preventDefault();
+ const { usernameInput, passwordInput, firstNameInput, lastNameInput, comfirmPassword,emailInput } = this.state;
+
+ if (usernameInput.length < 6) {
+   this.setState({
+     message: "Username length must be at least 6"
+   });
+   return;
+ }
+
+ if(passwordInput !== comfirmPassword){
+   this.setState({
+     message: "Password does not match"
+   });
+   return
+ }
+ axios.post("/users/register", {
+
+     firstName: firstNameInput,
+     lastName: lastNameInput,
+     username: usernameInput,
+     password: passwordInput,
+     email:emailInput
+   })
+   .then(res => {
      this.setState({
-       usernameInput: e.target.value
-     });
-   };
-
-   handlePassword = e => {
-     this.setState({
-       passwordInput: e.target.value
-     });
-   };
-
-   submitForm = e => {
-     e.preventDefault();
-     const { usernameInput, passwordInput } = this.state;
-
-     if (usernameInput.length < 3) {
-       this.setState({
-         message: "Username length must be at least 3"
+       registered: true,
+       firstNameInput: "",
+       lastNameInput: "",
+       usernameInput: "",
+       passwordInput: "",
+       comfirmPassword: "",
+       emailInput:"",
+       message: "Inserted User"
        });
-       return;
-     }
-     fetch
-       .post("/users/new", {
-         username: this.state.usernameInput,
-         password: this.state.passwordInput
-       })
-       .then(result => result.json())
-       .then(res => {
-         this.setState({ usernameInput: "", passwordInput: "", message: "Inserted User" });
-       })
-       .catch(err => {
-         this.setState({ usernameInput: "", passwordInput: "", message: "Error Inserting User" });
-       });
-   };
+   })
+   .catch(err => {
+     this.setState({ usernameInput: "", passwordInput: "", message: "Error Inserting User" });
+   });
+};
 
+renderModalRegistation({onHide}){
+  const { emailInput,usernameInput, passwordInput, message , firstNameInput, lastNameInput, comfirmPassword} = this.state;
 
+  return (
+    <div>
+    <Form horizontal className="loginModal">
+     <h2>Sign Up</h2>
+     <hr />
 
-  render(){
-    const popover = (
-    <Popover id="modal-popover" title="popover">
-      very popover. such engagement
-    </Popover>
+     <FormGroup controlId="formHorizontalFirstName" bsSize="large">
+       <Col componentClass={ControlLabel} sm={3}>
+         First Name
+       </Col>
+       <Col sm={9}>
+         <FormControl
+         className="input"
+         type="text"
+         placeholder="Jane"
+         name="firstNameInput"
+         value={firstNameInput}
+         onChange={this.handleChange}/>
+       </Col>
+     </FormGroup>
+
+     <FormGroup controlId="formHorizontalLastName" bsSize="large">
+       <Col componentClass={ControlLabel} sm={3}>
+        Last Name
+       </Col>
+       <Col sm={9}>
+         <FormControl
+         className="input"
+         type="text"
+         placeholder="Doe"
+         name="lastNameInput"
+         value={lastNameInput}
+         onChange={this.handleChange}/>
+       </Col>
+     </FormGroup>
+
+     <FormGroup controlId="formHorizontalEmail" bsSize="large">
+       <Col componentClass={ControlLabel} sm={3}>
+        Email
+       </Col>
+       <Col sm={9}>
+         <FormControl
+         className="input"
+         type="email"
+         placeholder="JaneDoe@example.com"
+         name="emailInput"
+         value={emailInput}
+         onChange={this.handleChange}/>
+       </Col>
+     </FormGroup>
+
+       <FormGroup controlId="formHorizontalUsername" bsSize="large">
+         <Col componentClass={ControlLabel} sm={3}>
+           Username
+         </Col>
+         <Col sm={9}>
+           <FormControl
+           className="input"
+           type="text"
+           placeholder="JaneDoe78"
+           name="usernameInput"
+           value={this.state.usernameInput}
+           onChange={this.handleChange} />
+         </Col>
+       </FormGroup>
+
+       <FormGroup controlId="formHorizontalPassword" bsSize="large">
+         <Col componentClass={ControlLabel} sm={3}>
+           Password
+         </Col>
+         <Col sm={9}>
+           <FormControl
+           className="input"
+           type="password"
+           placeholder="Password"
+            name="passwordInput"
+            value={this.state.passwordInput}
+            onChange={this.handleChange} />
+         </Col>
+       </FormGroup>
+
+       <FormGroup controlId="formHorizontalConfirmPassword" bsSize="large">
+         <Col componentClass={ControlLabel} sm={3}>
+           Confirm Passwod
+         </Col>
+         <Col sm={9}>
+           <FormControl
+           className="input"
+           type="password"
+            placeholder="Confirm Password"
+           name="comfirmPassword"
+           value={comfirmPassword}
+           onChange={this.handleChange}/>
+         </Col>
+       </FormGroup>
+
+       <FormGroup>
+         <Col smOffset={3} sm={8}>
+           <Button
+           className="btn-custom"
+           color="secondary-color-dark"
+           onClick={this.submitForm}>Sign Up</Button>
+         </Col>
+       </FormGroup>
+       <div>{message}</div>
+     </Form>
+
+     </div>
   );
-  const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
- const { usernameInput, passwordInput, message } = this.state;
-    return(
-      <Modal {...this.props}>
-      <Modal.Header closeButton>
-        <Modal.Title>Login</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+}
 
-      <label>
-        First Name:
-        <input
-          type="text"
-          name="username"
-          value={usernameInput}
-          onChange={this.handleFirstName}
-        />
-      </label>
-      <label>
-        Last Name:
-        <input
-          type="text"
-          name="username"
-          value={usernameInput}
-          onChange={this.handleLastName}
-        />
-      </label>
-          <label>
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={usernameInput}
-              onChange={this.handleUsername}
-            />
-          </label>
-          <label>
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={passwordInput}
-              onChange={this.handlePassword}
-            />
-          </label>
-          <label>
-            Confirm Password:
-            <input
-              type="password"
-              name="password"
-              value={passwordInput}
-              onChange={this.handleComfirmPassword}
-            />
-          </label>
 
-      </Modal.Body>
-      <Modal.Footer>
-      <Button onClick={this.submitForm}>Close</Button>
-        <Button onClick={this.props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
+render(){
+    const { emailInput,usernameInput, passwordInput, message , firstNameInput, lastNameInput, comfirmPassword, registered} = this.state;
+    if (registered) {
+      return <Redirect to={`/users/login`} render={this.renderLogin}/>;
+     }
+  return(
+
+        <div>
+          <ModalLink
+              path={`/users/register`}
+              component={this.renderModalRegistation}
+
+              parentPath="/">
+          <Button
+             className="btn-custom register"
+             color="secondary-color-dark" >
+            Start Saving Now
+            </Button>
+           </ModalLink>
+        </div>
     )
   }
 }

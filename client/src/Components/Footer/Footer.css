@@ -1,0 +1,27 @@
+
+
+
+
+
+.foot {
+height: auto;
+bottom: 0;
+padding: 12px 100px 0 100px;
+}
+
+
+.social {
+  right: 0;
+  padding-left: 30em;
+  margin: 0 auto;
+
+}
+
+img {
+width: 32px;
+}
+
+.help {
+  padding-right: 30em;
+    margin: 0 auto;
+}

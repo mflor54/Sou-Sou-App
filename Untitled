@@ -1,0 +1,134 @@
+
+<ListGroup bsClass="groups-list-group">
+{groups.map((group) =>
+<ListGroupItem header={group.description} href={`/groups/${group.id}`}>
+<Row>
+<Col md={4}>
+  <p>{group.frequency} pay-in of <strong>$ {group.total_amount}</strong></p>
+</Col>
+<Col md={4}>
+  <p>Savings Goal: <strong>$ {group.payout}</strong></p>
+</Col>
+<Col md={4}>
+  {this.showGroupMembers(group.total_members)}
+</Col>
+</Row>
+</ListGroupItem>
+)}
+</ListGroup>
+
+
+subtitle={this.showGroupMembers(group.total_members)}
+href={`/groups/${group.id}`}
+
+
+<div style={styles.root}>
+ <GridList
+   cols={2}
+   cellHeight={200}
+   padding={1}
+   style={styles.gridList} >
+      {groups.map((group) =>(
+
+        <GridTile
+            key={randomImages[Math.floor(Math.random()*randomImages.length)]}
+            title={group.description}
+            subtitle={<span>{group.frequency} pay-in of <b>$ {group.total_amount}</b></span>}
+            actionPosition="left"
+            titlePosition="top"
+            titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+            cols={group.featured ? 2 : 1}
+            rows={group.featured ? 2 : 1}
+          >
+      <img src={randomImages} />
+    </GridTile>
+    ))}
+</GridList>
+
+</div>
+
+
+
+
+
+
+
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: 500,
+    height: 450,
+    overflowY: 'auto',
+  },
+};
+
+
+
+const avatarStyle = {
+  height: '50px',
+  width: '50px',
+  marginRight: '5px'
+}
+
+
+
+class Groups extends Component {
+  constructor(){
+    super();
+    this.state = {
+      groups: []
+    }
+
+    this.renderGroupsList = this.renderGroupsList.bind(this)
+  }
+
+
+  getAllGroups = () => {
+    fetch("/groups")
+    .then(res => res.json())
+    .then(groups => {
+      console.log(groups.data[0]);
+      let data = groups.data
+      this.setState({
+        groups: data
+      });
+    });
+  }
+
+  componentDidMount(){
+      this.getAllGroups();
+    }
+
+
+    showGroupMembers(total_members){
+      let owlstr = [];
+      for(var i = 0; i < total_members; i++){
+        owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
+      }
+      //console.log(owlstr);
+      return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
+  }
+
+
+  renderGroupsList(){
+    const { groups } = this.state
+  return(
+    <div>
+      <Nav />
+      <PageHeader bsClass="groups-header">
+        Example page header <small>Subtext for header</small>
+      </PageHeader>
+
+
+      <div>
+          <Footer className="foot" />
+      </div>
+    </div>
+
+  )
+  }

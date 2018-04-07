@@ -3,13 +3,31 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+// var session = require('cookie-session');
 var bodyParser = require('body-parser');
+const session = require("express-session");
+const passport = require("passport");
+const cors = require('cors');
 
+const secret = require('./secret.js')
 var index = require('./routes/index');
 var users = require('./routes/users');
 let groups = require('./routes/groups');
+let stripeRoutes = require('./routes/stripe/stripe')
+let charges = require('./routes/stripe/charge');
 
 var app = express();
+let proxyValue = false;
+
+if(process.env.PROXY_VALUE == '1') {
+	//if there's a proxy, tell express to trust it.  used in production when serving node with nginx or similar
+	app.set('trust proxy', 1);
+	proxyValue = true;
+}
+
+app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,17 +39,32 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+  session({
+    name: 'server-session-cookie-id',
+    secret:
+      secret.secret,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+          secure: false,
+          maxAge: 2160000000,
+          httpOnly: false},
+    expires: false
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
+app.use('/users/stripe', stripeRoutes);
 app.use('/users', users);
 app.use('/groups', groups);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  res.status(404).send('404 Not Found' + req.url);
 });
 
 // error handler
@@ -44,5 +77,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

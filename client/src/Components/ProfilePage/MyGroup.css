@@ -1,0 +1,38 @@
+.my-grp-item {
+    background-color: #f9f9f9;
+    padding: 0px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+.my-grp-image {
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.my-grp-desc {
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 5px;
+}
+.my-grp-footer {
+    position: relative;
+}
+.my-grp-transfer{
+    display: inline;
+    background: #FFF;
+    position: absolute;
+    right: 10px;
+    top: -34px;
+    padding: 2px 10px;
+    font-weight: bold;
+}
+.my-grp-transfer .fa {
+    color: #ff9800;
+}
+.my-grp-date {
+    font-size: 0.7em;
+    color:#AAA;
+}
