@@ -133,15 +133,32 @@ class GroupProfile extends Component {
     // console.log("checking status");
   }
 
-  checkIfMember = () => {
-    const { groupID } = this.state;
-
-    fetch(`/groups/${groupID}/member`)
-    .then(res => res.json())
-    .then(data => {
-      console.log("checkIfMember data ==> ", data);
+  getGroupMembers = (id) => {
+    fetch(`/groups/${id}/members`)
+    .then(res => {
+      return res.json()
+      //console.log(res);
+    })
+    .then(info => {
+      console.log("groupMembers data ==> ", info);
     });
   }
+
+  /*
+   you need to return whatever is inside of this because the {} make it a block of code that is not implicityly retuning anyting
+   (a) => {
+
+   }
+
+   You do not need to return what is inside of this because the () around the {} tell it to implicity return the value of what is inside
+   (a) =>({
+
+   })
+
+   This implicitly returns what you are pointing to and you cannot write any additional code in this section.
+   () => json
+    
+  */
 
 
   componentDidMount(){
@@ -151,7 +168,7 @@ class GroupProfile extends Component {
     this.setState({ groupID: groupID });
     this.getGroup();
     this.checkGroupStatus();
-    this.checkIfMember();
+    this.getGroupMembers(groupID);
 
   }
 
