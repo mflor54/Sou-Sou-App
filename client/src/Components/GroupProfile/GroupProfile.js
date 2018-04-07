@@ -25,6 +25,8 @@ import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 
 import axios from 'axios';
+import {Button} from 'mdbreact';
+
 
 import Join from '../Join/Join';
 import './GroupProfile.css';
@@ -65,7 +67,8 @@ class GroupProfile extends Component {
       groupID:this.props.match.params.groupID,
       group:[],
       groupinfo: props.groupInfo, 
-      member: ''
+      member: '',
+      groupOpen: true
 
     }
   }
@@ -105,7 +108,28 @@ class GroupProfile extends Component {
   }
 
   checkGroupStatus = () => {
-    console.log("checking status");
+    fetch(`/groups/${groupID}/check`)
+    .then(res => 
+      res.json()
+    )
+    .then(group => {
+      console.log("++--> check status:", group.data);
+      let data = group.data[0];
+      //console.log(data.maxMembers);
+      if(group.data[0].currentMembers !== undefined){
+        let currentMembers = parseInt(data.currentMembers);
+        let maxMembers = data.maxMembers;
+        console.log(currentMembers, maxMembers);
+      
+        if(currentMembers >= maxMembers) {
+          this.setState({
+            groupOpen: false
+          });
+        }
+      }
+      
+    })
+    // console.log("checking status");
   }
 
   handleJoinSubmit = e => {
@@ -152,7 +176,7 @@ class GroupProfile extends Component {
 
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    const { group, member } = this.state;
+    const { group, member, groupOpen } = this.state;
 
     console.log("**member from state =>", member);
 
@@ -234,7 +258,9 @@ class GroupProfile extends Component {
 
                   </Section>
 
-                  <Join  submit={this.handleJoinSubmit} url={this.props.match.url}/>
+                  {groupOpen ? 
+                    <Join submit={this.handleJoinSubmit}/> : <Button className="btn-custom"> Group Full</Button>
+                  }
 
 
                     <Section pad='large'

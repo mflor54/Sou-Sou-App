@@ -19,6 +19,8 @@ router.get('/:groupID', db.getSingleGroup);
 //Join Group
 router.post('/:groupID/join', db.userJoinGroup);
 
+router.get('/:groupID/check', db.checkGroupStatus);
+
 router.post('/:id/charge', async (req, res, next) => {
     const charge = await stripe.charges.create({
         amount: req.amount,

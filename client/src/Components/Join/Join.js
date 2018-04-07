@@ -26,7 +26,8 @@ class ModalJoin extends Component {
     super(props,context)
     this.state ={
       agree: false, 
-      open: true
+      open: true, 
+      member: false
     }
 
     //this.renderModalJoin = this.renderModalJoin.bind(this)
@@ -64,6 +65,10 @@ class ModalJoin extends Component {
       //return <Redirect to={`/groups/${groupID}`} render={this.GroupProfile}/>
       
       //browserHistory.push(this.props.url);
+      this.setState({
+        member: true
+      })
+    
     })
   
 
@@ -82,7 +87,8 @@ class ModalJoin extends Component {
     return(
       
       <div>
-      <Button type="Submit" onClick={this.props.submit}>Join</Button>
+      <Button className="btn-custom" type="Submit" onClick={this.props.submit}>Join</Button>
+         
       </div>
     )
   }
