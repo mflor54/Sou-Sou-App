@@ -118,7 +118,7 @@ renderProfilePage=()=>{
             <Col smOffset={3} sm={8}>
               <Button   className="btn-custom"  color="secondary-color-dark"
                   onClick={this.props.CreateGroup}>Create Group</Button> */}
-                  {/* <Link to>
+            
                 
             </Col>
             </Col>
