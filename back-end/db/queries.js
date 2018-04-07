@@ -267,6 +267,16 @@ checkGroupStatus = (req, res, next) => {
   })
 }
 
+groupMember = (req, res, next) => {
+  let userID = req.user.id;
+  
+  db.any('select * from users_groups WHERE group_id=${groupID} AND user_id=${userID}', {
+    groupID: req.params.groupID,
+    userID: userID
+
+  })
+}
+
 module.exports = {
     checkGroupStatus: checkGroupStatus,
     getAllGroups: getAllGroups,
