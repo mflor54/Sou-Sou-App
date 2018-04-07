@@ -3,6 +3,7 @@ const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
 
 // Query to get all groups for public groups page, map in the front-end
+/*
 getAllGroups = (req, res, next) => {
 
     db.any('SELECT * FROM groups')
@@ -18,6 +19,7 @@ getAllGroups = (req, res, next) => {
         return next(err);
     })
 }
+*/
 
 //Get all information of all users
 getAllUsers = (req, res, next) => {
@@ -125,6 +127,7 @@ getSingleGroup = (req, res, next) => {
         console.log(err);
     })
 }
+
 // creates group when user submits form from group creation page
 createGroup = (req, res, next) => {
   let creator = 2;
@@ -177,10 +180,11 @@ getGroupByName = (req, res, next) => {
 }
 
 userJoinGroup = (req, res, next) => {
-
+  let userID = req.user.id;
+  console.log("userJoinGroup ==> req.user.id", userID);
    db.none('insert into users_groups (group_id, user_id) values (${groupID}, ${userID})', {
-      groupID: req.params.groupID,
-      userID: req.params.userID
+      groupID: req.body.groupID,
+      userID: userID
    })
     .then((data) => {
         res.status(200).json({
@@ -229,8 +233,74 @@ saveCustomerId = (data, id) => {
     })
 }
 
+getAllGroups = (req, res, next) => {
+
+  db.any('select * from groups inner join users on groups.creator = users.ID')
+  .then((data) => {
+    //console.log(data);
+      res.status(200).json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved all creators'
+      });
+  })
+  .catch((err) => {
+    console.log(err)
+      return next(err);
+  })
+}
+
+checkGroupStatus = (req, res, next) => {
+  db.any('select users_groups.group_id, count(*) as "currentMembers", groups.total_members as "maxMembers" from users_groups inner join groups on users_groups.group_id = groups.id where groups.id=${groupID} group by users_groups.group_id, groups.id', {
+    groupID: req.params.groupID
+  })
+  .then((data) => {
+    console.log(data[0].currentMembers);
+    res.status(200).json({
+      status: 'success',
+      data: data,
+      message: 'got member count info for group'
+    })
+  })
+  .catch((err) => {
+    console.log("check status", err)
+  });
+}
+
+checkIfMember = (req, res, next) => {
+  let userID = req.user.id;
+  console.log("req.user.id from isMember", userID);
+
+  db.any('select * from users_groups WHERE group_id=${groupID} AND user_id=${userID}', {
+    groupID: req.params.groupID,
+    userID: userID
+  })
+  .then((data) => {
+    console.log("isMember query: ", data[0]);
+    if(data == undefined){
+      res.status(200).json({
+        status: 'success',
+        result: false,
+        message: 'This user is not a group member'
+      })
+    } else {
+      res.status(200).json({
+        status: 'success',
+        result: true,
+        data: data, 
+        message: 'This user is a group member'
+      });
+      //console.log(data);
+    }
+  })
+  .catch((err) => {
+    console.log("isMember Error: ", err);
+  })
+}
 
 module.exports = {
+    checkIfMember: checkIfMember,
+    checkGroupStatus: checkGroupStatus,
     getAllGroups: getAllGroups,
     getUserInfo: getUserInfo,
     getSingleGroup: getSingleGroup,

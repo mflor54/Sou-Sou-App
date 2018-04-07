@@ -8,6 +8,7 @@ let router = express.Router();
 //localhost:3100/groups
 router.get('/', db.getAllGroups);
 
+
 //localhost:3100/groups/new
 router.post('/new', db.createGroup);
 
@@ -19,7 +20,11 @@ router.get('/byName/:groupName', db.getGroupByName);
 
 //localhost:3100/groups/:groupID/join/:userID
 //Join Group
-router.post('/:groupID/join/:userID', db.userJoinGroup);
+router.post('/:groupID/join', db.userJoinGroup);
+
+router.get('/:groupID/check', db.checkGroupStatus);
+
+router.get('/:groupID/member', db.checkIfMember);
 
 router.post('/:id/charge', async (req, res, next) => {
     const charge = await stripe.charges.create({

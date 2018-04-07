@@ -40,22 +40,12 @@ class Users extends React.Component {
   renderLogin = () => {
 
     return (
-      <Grid fluid="true">
-          <Row className="show-grid">
-              <Col xs={12} md={12} >
+      <div>
               <ModalLogin setUser={this.setUser} />
 
-              </Col>
-          </Row>
-          <Row className="show-grid">
-              <Col xs={12} md={12} >
               <img className="UserBg" src={randomImages[Math.floor(Math.random()*randomImages.length)]}/>
 
-              </Col>
-          </Row>
-    </Grid>
-
-
+</div>
     );
 
   };
@@ -63,15 +53,14 @@ class Users extends React.Component {
   renderRegistation = () => {
 
     return (
-      <Grid fluid="true">
-          <Row className="show-grid">
-              <Col xs={6} md={12}>
-              <img src={randomImages[Math.floor(Math.random()*randomImages.length)]}/>
-                    <ModalRegister />
-              </Col>
-          </Row>
-    </Grid>
 
+
+                    <div>
+                    <ModalRegister />
+
+                            <img className="UserBg" src={randomImages[Math.floor(Math.random()*randomImages.length)]}/>
+
+                </div>
 
     );
 
@@ -103,12 +92,14 @@ class Users extends React.Component {
     return (
 
       <div>
-<ModalContainer  backdropClassName='react-router-modal__backdrop' />
-      <ModalRoute path={`/users/login`} component={this.renderLogin} parentPath="/"/>
-      <ModalRoute path={`/users/register`} component={this.renderRegistation} />
+
       <Route path="/users/profile" render={this.renderProfilePage} />
       <Route path="/users/stripe/token" component={Token}/>
       <Route path="/users/stripe/done" component={Done}/>
+      <ModalRoute path={`/users/login`} component={this.renderLogin} parentPath="/"/>
+      <ModalRoute  path={`/users/register`}  component={this.renderRegistation} />
+
+      <ModalContainer  backdropClassName='react-router-modal__backdrop' />
 
       </div>
     );

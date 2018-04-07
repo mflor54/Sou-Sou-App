@@ -94,11 +94,11 @@ class ModalLogin extends Component {
             </Col>
             <Col sm={9}>
               <FormControl
-              className="input"
-              type="password"
-               name="password"
-               value={this.state.passwordInput}
-               onChange={this.handlePassword} />
+                  className="input"
+                  type="password"
+                   name="password"
+                   value={this.state.passwordInput}
+                   onChange={this.handlePassword} />
             </Col>
           </FormGroup>
 
@@ -131,7 +131,7 @@ class ModalLogin extends Component {
      }
     return(
 
-
+      <div>
           <ModalLink
              path={`/users/login`}
              component={this.renderModalLogin}
@@ -142,58 +142,11 @@ class ModalLogin extends Component {
              Login
           </Button>
         </ModalLink>
-    
 
+        </div>
     )
   }
 }
 
-//
-// <Button
-// className="btn-custom" color="unique" size="lg"
-// onClick={this.props.onHide}>Close</Button>
 
 export default ModalLogin;
-
-
-// <div className="loginModal">
-//   <div className="modalHeader">
-//    <h2>Login</h2>
-//   </div>
-//    <hr />
-//       <label>
-//         <div>
-//           Username:
-//          </div>
-//          <div className="input">
-//           <input
-//             type="text"
-//             name="username"
-//             value={this.state.usernameInput}
-//             onChange={this.handleUsername}
-//           />
-//          </div>
-//      </label>
-//
-//     <label>
-//       <div>
-//         Password:
-//      </div>
-//         <div className="input">
-//           <input
-//             type="password"
-//             name="password"
-//             value={this.state.passwordInput}
-//             onChange={this.handlePassword}
-//           />
-//         </div>
-//       </label>
-//    <div>
-//     <Button
-//     className="btn-custom" color="unique" size="lg"
-//     onClick={this.submitForm}>Login</Button>
-//    </div>
-//    <div>
-//     <h5>Click outside to cancel</h5>
-//    </div>
-// </div>
