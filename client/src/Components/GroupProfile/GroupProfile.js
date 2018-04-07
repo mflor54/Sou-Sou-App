@@ -24,6 +24,7 @@ import Nav from '../Nav/Nav';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 
+import axios from 'axios';
 
 import Join from '../Join/Join';
 import './GroupProfile.css';
@@ -64,6 +65,7 @@ class GroupProfile extends Component {
       groupID:this.props.match.params.groupID,
       group:[],
       groupinfo: props.groupInfo, 
+      member: ''
 
     }
   }
@@ -106,6 +108,24 @@ class GroupProfile extends Component {
     console.log("checking status");
   }
 
+  handleJoinSubmit = e => {
+    console.log("///clicking submit");
+    //get group id and send to back end via axios post request
+    let groupID = this.state.groupID;
+    console.log("this is this.state.groupID:", groupID);
+    //
+    //post request to userJoinGroup
+    axios.post(`/groups/${groupID}/join`, {
+      groupID: groupID
+    })
+    .then(res => {
+      console.log("***handleJoinSubmit response: ",res);
+      this.setState({
+        member: true
+      })
+    });
+  };
+
 
 
   componentDidMount(){
@@ -115,6 +135,7 @@ class GroupProfile extends Component {
     this.setState({ groupID: groupID });
     this.getGroup();
     this.checkGroupStatus();
+    console.log("props in groupProfile", this.props);
 
   }
 
@@ -131,9 +152,9 @@ class GroupProfile extends Component {
 
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    const { group } = this.state;
+    const { group, member } = this.state;
 
-    console.log("**group from state =>", groupID);
+    console.log("**member from state =>", member);
 
     return(
       <Article scrollStep={false}>
@@ -213,7 +234,7 @@ class GroupProfile extends Component {
 
                   </Section>
 
-                  <Join groupID={this.state.groupID}/>
+                  <Join  submit={this.handleJoinSubmit} url={this.props.match.url}/>
 
 
                     <Section pad='large'

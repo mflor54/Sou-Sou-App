@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { Col, Checkbox, Form, FormGroup, FormControl } from 'react-bootstrap';
 import { Button } from 'mdbreact';
-import { Redirect } from "react-router";
+import { Redirect, BrowserHistory, Router } from "react-router";
 
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, withRouter } from 'react-router-dom';
 
 import axios from 'axios';
 import { ModalLink, Modal } from 'react-router-modal';
+
+import GroupProfile from '../GroupProfile/GroupProfile';
 
 import '../Join/Join.css';
 
 import 'react-router-modal/css/react-router-modal.css';
 
+const refresh = ({ history }) => {
+  console.log("history: ", history);
+  // history.length > 1 && (
+  //   <Button  className="btn-custom"  color="secondary-color-dark"  onClick={history.goBack}>Cancel</Button>
+  // );
+}
 
 class ModalJoin extends Component {
   constructor(props,context){
@@ -30,6 +38,11 @@ class ModalJoin extends Component {
     });
   };
 
+  refresh = (groupID) => {
+    this.props.history.push(`/groups/${groupID}`);
+  }
+  
+  /*
   handleJoinSubmit = e => {
     console.log("///clicking submit");
     //get group id and send to back end via axios post request
@@ -42,11 +55,15 @@ class ModalJoin extends Component {
     })
     .then(res => {
       console.log("***handleJoinSubmit response: ",res);
+      //withRouter(refresh(groupID));
       //can this handle refresh of page
       //--you can force the page to refresh by changing state. 
       //this.setState({
         //groupmember: true
       //})
+      //return <Redirect to={`/groups/${groupID}`} render={this.GroupProfile}/>
+      
+      //browserHistory.push(this.props.url);
     })
   
 
@@ -55,47 +72,17 @@ class ModalJoin extends Component {
      //upon success, modal should close
      //user's avatar is then added to the payout section
   };
-  //check if group is full function
-  //get group total members - current members
-  //if result > 0 
-  //then group is not full
-  //total current group members can be rendered as 
-  //if result = 0
-  //group is full
-  //disable button
-  //** Where should this happen at? */
-  //-- In a .then upon success of getting the query back,
-  //-- send calculations/data back as data along with getSingleGroup query
-
-  //check if user is already a group member function
-  //get the group id that belongs to the req.user.id from the users_groups table and compare it to the group id from this.state
-  //true or false
-  //if (userID.groupID == groupID) {
-    //this.setState({
-        //groupMember: true
-    //});
-  //} else {
-    //this.setState({
-        //groupMember: false
-    //})
-  //}
-//}
-    
-    //user is in the group already
-    //render paybutton component
-    //render ChatBoard component
-   
-  //check if group is full
-//this can be used again to occur when a user joins a group - hopefully this will reset the page
-//should also call this function 
-
+  */
+  
 
 
 
   render(){
+    console.log("props in join", this.props);
     return(
+      
       <div>
-      <Button type="Submit" onClick={this.handleJoinSubmit}>Join</Button>
+      <Button type="Submit" onClick={this.props.submit}>Join</Button>
       </div>
     )
   }
