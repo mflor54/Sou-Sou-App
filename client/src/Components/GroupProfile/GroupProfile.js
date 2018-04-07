@@ -6,6 +6,7 @@ import { Jumbotron, Col, Grid, Row, Panel, Glyphicon } from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
 import { ModalContainer, ModalRoute } from 'react-router-modal';
 import { Button} from 'mdbreact';
+import axios from 'axios'
 
 import ModalJoin from '../Join/Join';
 import './GroupProfile.css';
@@ -56,6 +57,17 @@ class GroupProfile extends Component {
     return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
   }
 
+  paymentOnClick = () => {
+    let groupID = this.props.match.params.groupID
+    axios.post(`${groupID}/charge`)
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   render() {
     let joinClose = () => this.setState({ showjoin: false });
     const { group } = this.state;
@@ -77,7 +89,7 @@ class GroupProfile extends Component {
                 <p>{group.description_}</p>
                 <p>Group Creator: {group.creator} (i would prefer the group creator's avatar to be here</p>
                 <p>{group.frequency} payments of ${group.pay_in_amount}</p>
-
+                <p><button onClick={this.paymentOnClick}>PAY</button></p>
               </Col>
               <Col md={6}>
                 <p>Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018</p>

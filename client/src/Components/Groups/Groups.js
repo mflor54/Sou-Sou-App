@@ -173,6 +173,7 @@ class Groups extends Component {
 
 <Switch>
       <Route exact path="/groups" component={this.renderGroupsList} />
+      <Route path="/groups/:groupID/charge"/>
       <Route path="/groups/:groupID" component={GroupProfile}/>
       <Route path="/users/profile" component={ProfilePage}/>
       <Route path="/" component={Landing} />

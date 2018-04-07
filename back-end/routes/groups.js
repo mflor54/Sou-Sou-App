@@ -19,6 +19,6 @@ router.get('/:groupID', db.getSingleGroup);
 //Join Group
 router.post('/:groupID/join/:userID', db.userJoinGroup);
 
-router.post('/:id/charge', charge.newChargeAndTransfers);
+router.post('/:groupID/charge', charge.makeCharge);
 
 module.exports = router;
