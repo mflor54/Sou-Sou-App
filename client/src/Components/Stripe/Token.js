@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Done from './Done';
-import { stripeSecretKey, clientID, stripePublishableKey } from '../../secret'
+// import { stripeSecretKey, clientID, stripePublishableKey } from '../../secret'
 import { Switch, Link, Route, Redirect } from 'react-router-dom'
 
 class Token extends Component {

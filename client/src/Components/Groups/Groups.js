@@ -46,7 +46,8 @@ class Groups extends Component {
     fetch("/groups")
     .then(res => res.json())
     .then(groups => {
-      console.log(groups.data.username);
+      console.log('what is this:',groups)
+      console.log(groups.data[0]);
       let data = groups.data
       this.setState({
         groups: data,

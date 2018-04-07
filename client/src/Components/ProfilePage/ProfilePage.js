@@ -9,6 +9,7 @@ import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
 import FooterUser from '../Footer/Footer';
 import GroupProfile from '../GroupProfile/GroupProfile';
+import CreateGroup from '../CreateGroup/CreateGroup';
 import ProfilePic from './ProfilePic';
 import { Button} from 'mdbreact';
 import './ProfilePage.css'
@@ -32,6 +33,14 @@ class ProfilePage extends Component {
 
     }
   }
+
+
+  handleClick() {
+    this.setState(createGroup => ({
+     
+    }));
+  }
+  
 
   //
   // handleFile = (files) => {
@@ -58,9 +67,6 @@ class ProfilePage extends Component {
 
 
 
-
-
-
 renderProfilePage=()=>{
 
   console.log(this.state.userProfile);
@@ -80,74 +86,80 @@ renderProfilePage=()=>{
   )
 
   return(
-      <div xs={12} md={12}>
+<div xs={12} md={12}>
 
-                  <Grid fluid="gridlayout">
+    <Grid fluid="gridlayout">
 
-                      <Row className="show-grid">
-                          <Col xs={6} md={12} id="nav">
-                              <Nav />
-                          </Col>
-                      </Row>
+        <Row className="show-grid">
+            <Col xs={6} md={12} id="nav">
+                <Nav />
+            </Col>
+        </Row>
 
-                  <div>
-                      <Row className="userInfo">
-                          <Col xs={6} md={4}>
-                                <img alt=''  className="profilePic" />
-                          </Col>
-                          <Col xs={6} md={8} id="sec2">
-                                <p>Welcome {userProfile.username}</p>
-                                <p>Rating: Gold</p>
-                                <p>Memeber Since: {cdate}</p>
-                                {stripeButton}
-                          </Col>
-                      </Row>
-                </div>
+    <div>
+        <Row className="userInfo">
+            <Col xs={6} md={4}>
+                <img alt=''  className="profilePic" />
+            </Col>
+            <Col xs={6} md={8} id="sec2">
+                <p>Welcome {userProfile.username}</p>
+                <p>Rating: Gold</p>
+                <p>Memeber Since: {cdate}</p>
+                {stripeButton}
+            </Col>
+        </Row>
+</div>
 
-                <section className="container">
+<section className="container">
 
-                    <Row className="show-grid2">
-                          <Col xs={12} lg={12} className="title" >
-                            <h2>My Groups</h2>
-                          </Col>
-                    </Row>
+    <Row className="show-grid2">
+            <Col xs={12} lg={12} className="title" >
+            <h2>My Groups</h2>
+            <Col smOffset={3} sm={8}>
+              <Button   className="btn-custom"  color="secondary-color-dark"
+                  onClick={this.props.CreateGroup}>Create Group</Button> */}
+            
+                
+            </Col>
+            </Col>
+    </Row>
 
-                <div className='root'>
-                      <GridList
-                           className='gridList'>
-                                  {randomImages.map((tile) => (
-                                      <div key={tile}>
-                                          <img className="tiles" src={tile} />
-                                      </div>
-                                      ))}
-                       </GridList>
-                  </div>
+<div className='root'>
+        <GridList
+            className='gridList'>
+                    {randomImages.map((tile) => (
+                        <div key={tile}>
+                            <img className="tiles" src={tile} />
+                        </div>
+                        ))}
+        </GridList>
+    </div>
 
-                    <Row className="show-grid2">
-                          <Col xs={12} lg={12} className="title">
-                                <h2>My Groups</h2>
-                          </Col>
-                    </Row>
+    <Row className="show-grid2">
+            <Col xs={12} lg={12} className="title">
+                <h2>My Groups</h2>
+            </Col>
+    </Row>
 
-                  <div className='root'>
-                          <GridList
-                               cellHeight={180}
-                                  className='gridList'>
-                                      {randomImages.map((tile) => (
-                                          <div key={tile}>
-                                                <img className="tiles" src={tile} />
-                                          </div>
-                                        ))}
-                          </GridList>
-                    </div>
+    <div className='root'>
+            <GridList
+                cellHeight={180}
+                    className='gridList'>
+                        {randomImages.map((tile) => (
+                            <div key={tile}>
+                                <img className="tiles" src={tile} />
+                            </div>
+                        ))}
+            </GridList>
+    </div>
 
-                </section>
+</section>
 
-                    <div>
-                        <FooterUser className="footer"/>
-                    </div>
-                </Grid>
-          </div>
+    <div>
+        <FooterUser className="footer"/>
+    </div>
+</Grid>
+</div>
     )
   }
 
@@ -159,6 +171,7 @@ render() {
           <Route path="/users/profile" component={this.renderProfilePage} />
           <Route path="/groups" component={Groups} />
           <Route path="/" component={Landing} />
+          <Route path="/creategroup" component={CreateGroup} />
       </div>
     )
   }
