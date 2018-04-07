@@ -59,19 +59,6 @@ class CreateGroup extends Component {
    
     //calculates the payin amount based on the savings goal and payout frequency
   }
-  getNewGroup(){
-    console.log("getNewGroup started");
-    const { groupName } = this.state;
-
-    axios.get(`/groups/byName/${groupName}`)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-    
-  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -107,6 +94,8 @@ class CreateGroup extends Component {
     .then(
       this.getNewGroup()
     )
+    //add creator to group
+    //redirect to new group page
     .catch(err => {
       console.log(err);
       //reset form and tell user to there was an error and start over.
@@ -114,7 +103,19 @@ class CreateGroup extends Component {
     
   };
 
-  
+  getNewGroup = () => {
+    console.log("getNewGroup started");
+    const { groupName } = this.state;
+
+    fetch(`/groups/byName/${groupName}`)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+    
+  }
 
 
 
