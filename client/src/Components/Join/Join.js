@@ -18,7 +18,8 @@ class ModalJoin extends Component {
     super(props,context)
     this.state ={
       agree: false, 
-      open: true
+      open: true, 
+      member: false
     }
 
     //this.renderModalJoin = this.renderModalJoin.bind(this)
@@ -44,9 +45,10 @@ class ModalJoin extends Component {
       console.log("***handleJoinSubmit response: ",res);
       //can this handle refresh of page
       //--you can force the page to refresh by changing state. 
-      //this.setState({
-        //groupmember: true
-      //})
+      this.setState({
+        member: true
+      })
+    
     })
   
 
@@ -80,7 +82,7 @@ class ModalJoin extends Component {
     //})
   //}
 //}
-    
+
     //user is in the group already
     //render paybutton component
     //render ChatBoard component
@@ -95,7 +97,7 @@ class ModalJoin extends Component {
   render(){
     return(
       <div>
-      <Button type="Submit" onClick={this.handleJoinSubmit}>Join</Button>
+          <Button className="btn-custom" type="Submit" onClick={this.handleJoinSubmit}>Join</Button> 
       </div>
     )
   }

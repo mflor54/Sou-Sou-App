@@ -24,6 +24,8 @@ import Nav from '../Nav/Nav';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 
+import {Button} from 'mdbreact';
+
 
 import Join from '../Join/Join';
 import './GroupProfile.css';
@@ -64,7 +66,7 @@ class GroupProfile extends Component {
       groupID:this.props.match.params.groupID,
       group:[],
       groupinfo: props.groupInfo, 
-      groupOpen: ''
+      groupOpen: true
 
     }
   }
@@ -114,10 +116,10 @@ class GroupProfile extends Component {
       //console.log(data.maxMembers);
       let currentMembers = parseInt(data.currentMembers);
       let maxMembers = data.maxMembers;
-      console.log(typeof(currentMembers), maxMembers);
-      if(currentMembers > maxMembers){
+      console.log(currentMembers, maxMembers);
+      if(currentMembers >= maxMembers) {
         this.setState({
-          groupOpen: true
+          groupOpen: false
         })
       }
     })
@@ -149,7 +151,7 @@ class GroupProfile extends Component {
 
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    const { group } = this.state;
+    const { group, groupOpen } = this.state;
 
     console.log("**group from state =>", groupID);
 
@@ -230,8 +232,9 @@ class GroupProfile extends Component {
                   </Headline>
 
                   </Section>
-
-                  <Join groupID={this.state.groupID}/>
+                  {groupOpen ? 
+                  <Join groupID={this.state.groupID}/> : <Button className="btn-custom"> Group Full</Button>
+                  }
 
 
                     <Section pad='large'
