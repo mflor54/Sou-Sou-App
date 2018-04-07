@@ -24,7 +24,7 @@ import Nav from '../Nav/Nav';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 
-
+import axios from 'axios';
 import {Button} from 'mdbreact';
 
 
@@ -67,8 +67,8 @@ class GroupProfile extends Component {
       groupID:this.props.match.params.groupID,
       group:[],
       groupinfo: props.groupInfo, 
-      groupOpen: true, 
-      groupMember: ''
+      member: '',
+      groupOpen: true
 
     }
   }
@@ -134,39 +134,19 @@ class GroupProfile extends Component {
     // console.log("checking status");
   }
 
-  getGroupMembers = (id) => {
+  getGroupMembers = () => {
     fetch(`/groups/${id}/members`)
     .then(res => {
-      return res.json()
-      //console.log(res);
+      return res.json();
     })
-    .then(info => {
-      console.log("groupMembers data ==> ", info);
-
-    });
+    .then(info => console.log(info))
+    .cath(err => console.log("get members err", err))
   }
-
-  /*
-   you need to return whatever is inside of this because the {} make it a block of code that is not implicityly retuning anyting
-   (a) => {
-
-   }
-
-   You do not need to return what is inside of this because the () around the {} tell it to implicity return the value of what is inside
-   (a) =>({
-
-   })
-
-   This implicitly returns what you are pointing to and you cannot write any additional code in this section.
-   () => json
-    
-  */
-
   handleJoinSubmit = e => {
     console.log("///clicking submit");
     //get group id and send to back end via axios post request
-    let groupID = this.props.groupID;
-    console.log("this is this.props.groupID:", groupID);
+    let groupID = this.state.groupID;
+    console.log("this is this.state.groupID:", groupID);
     //
     //post request to userJoinGroup
     axios.post(`/groups/${groupID}/join`, {
@@ -174,14 +154,12 @@ class GroupProfile extends Component {
     })
     .then(res => {
       console.log("***handleJoinSubmit response: ",res);
-      //can this handle refresh of page
-      //--you can force the page to refresh by changing state. 
       this.setState({
         member: true
-      });
-    
-    })
+      })
+    });
   };
+
 
 
   componentDidMount(){
@@ -208,9 +186,9 @@ class GroupProfile extends Component {
 
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    const { group, groupOpen } = this.state;
+    const { group, member, groupOpen } = this.state;
 
-    console.log("**group from state =>", groupID);
+    console.log("**member from state =>", member);
 
     return(
       <Article scrollStep={false}>
@@ -289,6 +267,7 @@ class GroupProfile extends Component {
                   </Headline>
 
                   </Section>
+
                   {groupOpen ? 
                   <Join groupID={this.state.groupID}/> : <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button>
                   }
