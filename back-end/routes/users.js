@@ -26,7 +26,15 @@ router.post('/login', passport.authenticate("local"), (req, res) => {
   res.json(req.user);
 });
 
-router.get('/profile', loginRequired, db.getUserInfo)
+router.get('/user',loginRequired,(req, res) =>{
+  res.json(req.user)
+})
+// router.get('/profile',loginRequired,(req, res) =>{
+//   res.json(req.user)
+// })
+// router.get('/profile', db.getUserInfo)
+router.get('/profile/:userID', db.getUserInfo)
+
 // router.get("/logout", loginRequired, db.logoutuser);
 
 router.post('/signup', db.createUser);

@@ -37,6 +37,22 @@ getAllUsers = (req, res, next) => {
     });
 }
 
+getSingleUsers = (req, res, next) => {
+
+  db
+    .any("select * from users where first_name=Jason")
+    .then(function(data) {
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Crystal has Retrieved ALL users"
+      });
+
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+}
 
 
 
@@ -56,8 +72,12 @@ var sessData = req.session;
         if (err) {
           res.status(500).send("Login Error");
         }else {
+           console.log('USER====>:',user);
+          console.log('Res Login====>:',res);
           console.log(res.status);
           res.status(200).send(user);
+
+
           // res.redirect('/users/profile');
         }
       })
@@ -96,16 +116,36 @@ logoutUser = (req, res, next) => {
 }
 
 // get user info for their profile page when they log in or during session
+// getUserInfo = (req, res, next) => {
+//     db.any('select * from users where username = ${userName}')
+//     .then((data) => {
+//         res.status(200).json({
+//             status: success,
+//             data: data,
+//             message: 'Retrived User info'
+//         });
+//     })
+//     .catch((err) => {
+//         return next(err);
+//     });
+// }
+
 getUserInfo = (req, res, next) => {
-    db.any('select * from users where username = ${userName}')
+
+  console.log(req.body.userID);
+    db.any('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
+      userID:req.params.userID
+    })
     .then((data) => {
-        res.status(200).json({
-            status: success,
-            data: data,
-            message: 'Retrived User info'
-        });
+      console.log("DATA:=======================================> ", data);
+      res.status(200).json({
+          status: "success",
+          data: data,
+          message: 'Retrieved group info'
+      });
     })
     .catch((err) => {
+      console.log("ERROR:=====================================> ",err);
         return next(err);
     });
 }
@@ -240,6 +280,8 @@ module.exports = {
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
     userJoinGroup: userJoinGroup,
+    getSingleUsers:getSingleUsers
+    // getUserGroupInfo: getUserGroupInfo,
     // getAllCreatorsInfo: getAllCreatorsInfo
 
 };
