@@ -1,13 +1,9 @@
-.Nav {
-  padding: 1em 0;
-  text-align: center;
-  margin: auto 0;
-  height: 8em;
-}
+
 
 
 .logosize{
-  width: 7vw;
+  width: auto;
+  height: 3em;
 }
 
 .login_button {

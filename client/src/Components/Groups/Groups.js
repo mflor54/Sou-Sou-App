@@ -1,35 +1,35 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import { ListGroup, ListGroupItem, Row, Col, PageHeader } from 'react-bootstrap';
+// import { ListGroup, ListGroupItem, Row, Col, PageHeader } from 'react-bootstrap';
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 import Card from 'grommet/components/Card';
 import Article from 'grommet/components/Article';
 import Image from 'grommet/components/Image';
-
 import Headline from 'grommet/components/Headline';
 import Heading from 'grommet/components/Heading';
 import Pulse from 'grommet/components/icons/Pulse';
 import Header from 'grommet/components/Header';
 import Title from 'grommet/components/Title';
 import Search from 'grommet/components/Search';
-
 import Columns from 'grommet/components/Columns';
-
 import Section from 'grommet/components/Section';
 import Hero from 'grommet/components/Hero';
 import Box from 'grommet/components/Box';
+import Select from 'grommet/components/Select';
+import Paragraph from 'grommet/components/Paragraph';
+
 
 import GroupProfile from '../GroupProfile/GroupProfile';
 import ProfilePage from '../ProfilePage/ProfilePage';
-import Footer from '../Footer/Footer';
+import FooterUser from '../Footer/Footer';
+
 import Landing from '../Landing/Landing';
-import Nav from '../Nav/Nav';
+import Navagation from '../Nav/Nav';
 import './Groups.css'
 
 var pic = require('../images/groupImages/architecture-art-business-191429.jpg');
-
-var logo = require('../images/Logo/OwoLogoNWGroup3MD.png');
+var logo = require('../images/Logo/OwoLogoNWGroupGR.png');
 
 
 
@@ -37,11 +37,12 @@ class Groups extends Component {
   constructor(){
     super();
     this.state = {
-      groups: []
+      groups: [],
+      search:''
     }
 
     this.renderGroupsList = this.renderGroupsList.bind(this)
-    this.handleSearch = this.handleSearch.bind(this)
+
 
   }
 
@@ -52,12 +53,14 @@ class Groups extends Component {
     .then(groups => {
       console.log('what is this:',groups)
       console.log(groups.data[0]);
+      console.log(groups.data.username);
       let data = groups.data
       this.setState({
         groups: data
       });
     });
   }
+
 
 
   componentDidMount(){
@@ -72,90 +75,144 @@ class Groups extends Component {
 
     }
     //console.log(owlstr);
-    return owlstr.map((owl)=> <div><img src={owl} className="avatarStyle" alt="username"/></div>);
+    return owlstr.map((owl)=> <div id="inner"><img src={owl} className="avatarStyle" alt="username"/></div>);
   }
 
 
-  handleSearch(event) {
-    console.log("we sure are handling that search....")
+  handleSearch(e) {
+    const {search}=this.state
+    console.log('value');
+    this.setState({
+      search:e.target.value
+    })
   }
+
 
   renderGroupsList(){
     const { groups } = this.state;
     console.log("this is groups from state", groups);
+
+  let payList=  groups.map((group)=>{
+      console.log(group.pay_out_amount);
+
+    })
+
+
+    let filteredGroups = groups
   return(
+<Article
 
-    <Article scrollStep={true}>
+scrollStep={false}>
 
-    <Section pad='medium'
-      justify='center'
-      align='center'
-      className="groups-header"
-      colorIndex={'#25283D'}
-      >
-      <Nav />
-      <Image src={logo}  />
-      </Section>
-    <Section pad='medium'
-      justify='center'
-      align='center'>
-
-
-      <Box flex={true}
-        justify='end'
-        direction='row'
-        responsive={false}
-        size='large'>
-        <Search inline={true}
-        dropAlign={{"top": "bottom"}}
-
-        onDOMChange={this.handleSearch()}
-          fill={true}
-          size='large'
-          placeHolder='Search Groups'
-          dropAlign={{"right": "right"}} />
-      </Box>
-      </Section>
-
-    <Section pad='large'
-      justify='center'
-      align='center'
-  >
-      <Headline>Groups</Headline>
-
-
-        </Section>
-      
-
-      <Section pad='large'
+      <Section
         justify='center'
-        align='center'>
-        <Tiles fill={true}
-          selectable={true}
-          >
-            {groups.map((group)=>(
-              <Tile>
+        align='center'
+        className='background-header'
+        colorIndex={'#25283D'}
+        pad='medium'
+        >
 
 
-                 <Link to={`/groups/${group.id}`}><Card thumbnail={pic}
-                  heading={group.group_name}
-                  label={`Group Creator: ${group.creator}`}
-                  description={group.description_}
-
-                  />
-                  <div className="avatar">
-                  <div className="avatarList">
-                  {this.showGroupMembers(group.total_members)}
-                </div>
-              </div>
-            </Link>
-          </Tile>
-
-        ))}
+                <Headline>How Will You Save Today?</Headline>
 
 
-      </Tiles>
-  </Section>
+                <Section
+                pad='medium'
+                  justify='center'
+                  align='center'>
+
+                            <Box flex={true}
+                              justify='end'
+                              direction='row'
+                              responsive={false}
+                              size='large'>
+                                  <Search inline={true}
+                                        colorIndex='light-2'
+
+                                        value={this.state.search}
+                                        required autoFocus
+                                        onDOMChange={this.handleSearch.bind(this)}
+                                        fill={true}
+                                        size='large'
+                                        placeHolder='Search Groups'
+                                        dropAlign={{"right": "right"}} />
+                                  </Box>
+
+                  </Section>
+                  </Section>
+
+
+                <Section
+pad='small'
+                  justify='center'
+                  align='center'
+                  margin='none'>
+                  <Box flex={true}
+                    justify='end'
+                    direction='row'
+                    responsive={false}
+                    size='large'
+                    pad='medium'>
+
+                    <Select
+                            pad='small'
+                            fill={true}
+                            size='large'
+                            placeHolder='Sort by Pay Out'
+                            inline={false}
+                            multiple={false}
+                            colorIndex='light-2'
+                            options={['$50', '$100', '$200']}
+                            value={this.state.search}
+                            onChange={this.handleSearch.bind(this)} />
+
+                </Box>
+                      <Tiles fill={true}
+                        flush={true}
+                        selectable={true}
+                        justify='center'
+                        align='center'
+                        pad='small'
+                        >
+                        {filteredGroups.map((group)=>(
+                              <Tile>
+                                       <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}><Card id='thumbnail' thumbnail={pic}
+                                        heading={group.group_name.toUpperCase()}
+                                        label={`Group Creator: ${group.username}`}
+
+                                        />
+                                          <Heading
+                                          id='headingfont'
+                                                strong={false}
+                                                uppercase={false}
+                                                truncate={false}
+                                                align='start'
+                                                margin='none'>
+                                                <strong>Description:<br /></strong>
+                                              {`${group.description_}`}
+                                              </Heading>
+                                    <Paragraph
+                                        id='headingfont'
+                                        margin='small'
+                                        pad='small'>
+
+                                          {`Payout Amount: ${group.pay_out_amount}`}<br />
+                                          {`Payin Amount: ${group.pay_in_amount}`}<br/>
+                                          {`Frequency: ${group.frequency}`}
+
+
+                                        </Paragraph>
+                                            <div className="avatar">
+                                                    <div className="avatarList">
+                                                          {this.showGroupMembers(group.total_members)}
+                                                    </div>
+                                            </div>
+                                      </Link>
+                              </Tile>
+                          ))}
+                    </Tiles>
+
+            </Section>
 
   </Article>
 
@@ -166,19 +223,21 @@ class Groups extends Component {
 
   render(){
     let groupList = this.state.groups
-    console.log(groupList)
+    console.log('groupList: ', groupList)
     return(
 
 <div>
+<Navagation />
 
 <Switch>
       <Route exact path="/groups" component={this.renderGroupsList} />
       <Route path="/groups/:groupID/charge"/>
-      <Route path="/groups/:groupID" component={GroupProfile}/>
       <Route path="/users/profile" component={ProfilePage}/>
+      <Route path="/groups/:groupID" component={GroupProfile} groupinfo={groupList}/>
+      <Route path="/users/profile/:userID" component={ProfilePage} groupinfo={groupList}/>
       <Route path="/" component={Landing} />
 </Switch>
-
+  <FooterUser />
       </div>
     )
   }

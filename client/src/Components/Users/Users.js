@@ -23,12 +23,14 @@ var randomImages = [
 ];
 
 
+
 class Users extends React.Component {
   constructor() {
     super();
     this.state = {
       user: null,
-      id: null
+      id: null,
+      loading:true
 
     };
   }
@@ -67,15 +69,37 @@ class Users extends React.Component {
 
   };
 
+  componentDidMount=()=>{
+    fetch('/users/user')
+    .then((res) => {
+      if (res.ok){
+        return res.json()
+      } else {
+        this.setState({
+          loading:false
+        })
+      }
+    })
+    .then(data => {
+      console.log("=====>", data);
+          this.setState({
+            user:data,
+            loading:false
+
+          })
+    });
+
+  }
+
   renderProfilePage= props => {
 
     const { user, id } = this.state;
     console.log("users: ", user);
 
-    console.log("State.user is = " + user);
+    console.log("State.user is = ", user);
 
     if (!user) {
-      return null;
+      return <div>Loading....</div>
 
 
 }
@@ -88,21 +112,24 @@ class Users extends React.Component {
 
   render() {
 
-    const { user, id } = this.state;
+    const { user, id, loading } = this.state;
         console.log("users: ", user);
-    return (
 
+
+    return (
       <div>
       <Switch>
-      <Route path="/users/profile" render={this.renderProfilePage} />
+      <Route path="/users/profile/:userID" render={this.renderProfilePage} />
       <Route path="/users/stripe/token" component={Token}/>
       <Route path="/users/stripe/done" component={Done}/>
       <ModalRoute path={`/users/login`} component={this.renderLogin} parentPath="/"/>
       <ModalRoute  path={`/users/register`}  component={this.renderRegistation} />
       </Switch>
       <ModalContainer  backdropClassName='react-router-modal__backdrop' />
-      
       </div>
+
+
+    </div>
     );
   }
 }

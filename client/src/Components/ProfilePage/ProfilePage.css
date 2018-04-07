@@ -1,31 +1,41 @@
 
 .Profile{
-margin: 0;
-padding: 0;
-background-image: url(../images/BG/bg7.png);
+
+background-image: url(../images/BG/bg10.png);
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
-height: 100vh;
 width: 100vw;
-position: fixed;
+
 }
 
 .profilePic{
-height: 200px;
-width: 200px;
+height: 9em;
+width: 9em;
 
-border: solid #fff 3px;
-border-radius: 100px;
-position: absolute;
-top: 100px;
-left: 20px;
-background-image: url('../images/crew/rachel.jpg');
-background-size: cover;
-background-repeat: no-repeat;
+border: solid #a430a8 .3em;
+border-radius: 5em;
+
+top: 1em;
+left: .2em;
 
 }
 
+#left{
+    border-right: solid #a430a8 1px;
+padding: 0;
+margin: 0;
+}
+
+
+#right{
+margin: 2em;
+padding: 5em;
+}
+
+#outter{
+  border-radius: .5em;
+}
 /*
 .profilePic::after {
 content: '';
@@ -115,12 +125,12 @@ text-align: center;
 .btn-custom.pp {
     background-color: #a430a8;
     color: #eaf3ff;
-    border-radius:50px;
-    width:25em;
-    height: 3em;
-    margin:0 0 20px 0;
+    border-radius:1.2em;
+    width:20em;
+    height: 2.5em;
+    margin:.7em 0 .7em 0;
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: .7em;
     font-weight: 400;
   }
   .btn-custom:hover {

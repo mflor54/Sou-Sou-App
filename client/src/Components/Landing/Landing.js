@@ -13,6 +13,7 @@ import { ModalContainer, ModalRoute } from 'react-router-modal';
       import Headline from 'grommet/components/Headline';
       import Heading from 'grommet/components/Heading';
       import Pulse from 'grommet/components/icons/Pulse';
+      import Down from 'grommet/components/icons/base/Down';
 
       import Section from 'grommet/components/Section';
       import Hero from 'grommet/components/Hero';
@@ -132,8 +133,9 @@ handleChange = panel => (event, expanded) => {
 
                           <Row className="show-grid">
                             <Col xs={8} lg={12}>
-                           <a href="#HowTo">
-                                 <img src={arrow} className="arrow"/></a>
+                                 <a href="#HowTo">
+                                        <Pulse icon={<Down id='icon_color'/>} />
+                                  </a>
                             </Col>
                           </Row>
                        </Jumbotron>

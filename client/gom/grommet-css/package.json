@@ -1,0 +1,51 @@
+{
+  "_from": "grommet-css",
+  "_id": "grommet-css@1.6.0",
+  "_inBundle": false,
+  "_integrity": "sha512-ZUieW7uOOvlI9hNV7TNpRnGs3yXmljYyLGze8kWqOg6SoBcJh0UNHPxR06HX5tLkyUiGcD32mtSjnLL0QvC/iQ==",
+  "_location": "/grommet-css",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "grommet-css",
+    "name": "grommet-css",
+    "escapedName": "grommet-css",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/grommet-css/-/grommet-css-1.6.0.tgz",
+  "_shasum": "491e76b34a99a2b9ef3dd3bad4bb311df3823c5f",
+  "_spec": "grommet-css",
+  "_where": "/Users/crystalgrantfingshtt/Desktop/Desktop/NewVim/Capstone/Sou-Sou-App/client",
+  "author": {
+    "name": "Mel van Londen"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "grommet": "^1.6.0"
+  },
+  "deprecated": false,
+  "description": "Standalone css for grommet ui library.",
+  "devDependencies": {
+    "node-sass": "^4.5.1"
+  },
+  "keywords": [
+    "create-react-app",
+    "grommet"
+  ],
+  "license": "MIT",
+  "main": "build/index.min.css",
+  "name": "grommet-css",
+  "scripts": {
+    "build": "node-sass index.scss build/index.min.css --output-style compressed --include-path ./node_modules",
+    "build:buildabode": "node-sass themes/buildabode/index.scss build/buildabode/index.min.css --output-style compressed --include-path ./node_modules",
+    "start": "node-sass index.scss build/index.min.css -w --output-style compressed --include-path ./node_modules"
+  },
+  "version": "1.6.0"
+}

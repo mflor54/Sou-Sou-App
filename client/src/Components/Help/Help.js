@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import Accordion from 'grommet/components/Accordion';
+import AccordionPanel from 'grommet/components/AccordionPanel';
+import Headline from 'grommet/components/Headline';
+import Paragraph from 'grommet/components/Paragraph';
+import Value from 'grommet/components/Value';
+import Box from 'grommet/components/Box';
+
 import ExpansionPanel, {
   ExpansionPanelDetails,
   ExpansionPanelSummary,
@@ -62,53 +69,48 @@ onCloseModal = () => {
     return (
       <div className="example">
         <a onClick={this.onOpenModal}>
-            Help
+            Support
         </a>{' '}
 
         <Modal open={open} onClose={this.onCloseModal} little>
-          <h2>Simple centered modal</h2>
-          <div className={classes.root}>
-            <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography className={classes.heading}>General settings</Typography>
-                <Typography>I am an expansion panel</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Typography className={classes.secondaryHeading}>
-                  Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-                  maximus est, id dignissim quam.
-                </Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography className={classes.heading}>Users</Typography>
-                <Typography className={classes.secondaryHeading}>
-                  You are currently not an owner
-                </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Typography>
-                  Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-                  diam eros in elit. Pellentesque convallis laoreet laoreet.
-                </Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel expanded={expanded === 'panel3'} onChange={this.handleChange('panel3')}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography className={classes.heading}>Advanced settings</Typography>
-                <Typography className={classes.secondaryHeading}>
-                  Filtering has been entirely disabled for whole web server
-                </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Typography>
-                  Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
-                  eros, vitae egestas augue. Duis vel est augue.
-                </Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </div>
+        <Box direction='row'
+          justify='start'
+          align='start'
+          wrap={true}
+
+          margin='medium'
+          colorIndex='light-2'
+        >
+
+          <Box direction='row'
+            justify='start'
+            align='start'
+            wrap={true}
+
+            margin='small'
+            colorIndex='light-1'
+          >
+            <Accordion
+            active={0}>
+              <AccordionPanel heading='First Title'>
+                <Paragraph>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </Paragraph>
+              </AccordionPanel>
+              <AccordionPanel heading='Second Title'>
+                <Paragraph>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </Paragraph>
+              </AccordionPanel>
+              <AccordionPanel heading='Third Title'>
+                <Paragraph>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </Paragraph>
+              </AccordionPanel>
+            </Accordion>
+          </Box>
+        </Box>
+
         </Modal>
       </div>
 )
