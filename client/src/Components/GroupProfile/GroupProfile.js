@@ -66,7 +66,8 @@ class GroupProfile extends Component {
       groupID:this.props.match.params.groupID,
       group:[],
       groupinfo: props.groupInfo, 
-      groupOpen: true
+      groupOpen: true, 
+      groupMember: ''
 
     }
   }
