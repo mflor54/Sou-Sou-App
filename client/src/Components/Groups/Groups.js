@@ -47,7 +47,7 @@ class Groups extends Component {
     .then(res => res.json())
     .then(groups => {
       console.log(groups);
-      console.log(groups.data.username);
+      //console.log(groups.data.username);
       let data = groups.data
       this.setState({
         groups: data,
@@ -87,7 +87,7 @@ class Groups extends Component {
 
   renderGroupsList(){
     const { groups } = this.state;
-    console.log("this is groups from state", groups);
+    //console.log("this is groups from state", groups);
   return(
 
     <Article scrollStep={false}>
@@ -173,7 +173,7 @@ class Groups extends Component {
 
   render(){
     let groupList = this.state.groups
-    console.log(groupList)
+    //console.log(groupList)
     return(
 
 <div>

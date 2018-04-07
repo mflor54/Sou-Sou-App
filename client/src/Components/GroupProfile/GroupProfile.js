@@ -24,6 +24,7 @@ import Nav from '../Nav/Nav';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 
+
 import {Button} from 'mdbreact';
 
 
@@ -141,6 +142,7 @@ class GroupProfile extends Component {
     })
     .then(info => {
       console.log("groupMembers data ==> ", info);
+
     });
   }
 
@@ -159,6 +161,27 @@ class GroupProfile extends Component {
    () => json
     
   */
+
+  handleJoinSubmit = e => {
+    console.log("///clicking submit");
+    //get group id and send to back end via axios post request
+    let groupID = this.props.groupID;
+    console.log("this is this.props.groupID:", groupID);
+    //
+    //post request to userJoinGroup
+    axios.post(`/groups/${groupID}/join`, {
+      groupID: groupID
+    })
+    .then(res => {
+      console.log("***handleJoinSubmit response: ",res);
+      //can this handle refresh of page
+      //--you can force the page to refresh by changing state. 
+      this.setState({
+        member: true
+      });
+    
+    })
+  };
 
 
   componentDidMount(){
@@ -267,7 +290,7 @@ class GroupProfile extends Component {
 
                   </Section>
                   {groupOpen ? 
-                  <Join groupID={this.state.groupID}/> : <Button className="btn-custom"> Group Full</Button>
+                  <Join groupID={this.state.groupID}/> : <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button>
                   }
 
 

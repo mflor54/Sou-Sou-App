@@ -109,9 +109,9 @@ getUserInfo = (req, res, next) => {
 
 // select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
-    db.one('select * from groups where groups.ID=${groupId}',
+    db.one('select * from groups where groups.ID=${groupID}',
         {
-            groupId: req.params.groupID
+            groupID: req.params.groupID
         }
     )
     .then((data) => {
@@ -270,21 +270,26 @@ checkGroupStatus = (req, res, next) => {
 getMembers = (req, res, next) => {
   //let userID = req.user.id;
   //console.log("req.user.id from isMember", userID);
+  
   db.any('select users_groups.user_id AS "groupMembers" FROM users_groups where group_id=${groupID}', {
     groupID: req.params.groupID
   })
-  /*
-  db.any('select users_groups.user_id as "groupMembers", users_groups.group_id as "group" from users_groups where group_id=${groupID} group by group_id, users_groups.user_id', {
-    groupID: req.params.groupID
-    //userID: userID
-  })*/
   .then((data) => { 
     res.status(200).json({
       status: 'success',
       data: data,
       message: "got all users from this group"
     });
-    console.log("isMember query: ", data);
+    console.log("get members query: ", data);
+  })
+  .catch((err) => {
+    console.log("isMember Error: ", err);
+  })
+    /*
+  db.any('select users_groups.user_id as "groupMembers", users_groups.group_id as "group" from users_groups where group_id=${groupID} group by group_id, users_groups.user_id', {
+    groupID: req.params.groupID
+    //userID: userID
+  })*/
     /*
     if(data == undefined){
       res.status(200).json({
@@ -302,10 +307,6 @@ getMembers = (req, res, next) => {
       //console.log(data);
     }
     */
-  })
-  .catch((err) => {
-    console.log("isMember Error: ", err);
-  })
 }
 
 module.exports = {

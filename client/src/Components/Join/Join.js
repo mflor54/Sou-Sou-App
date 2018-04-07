@@ -31,6 +31,7 @@ class ModalJoin extends Component {
     });
   };
 
+  /*
   handleJoinSubmit = e => {
     console.log("///clicking submit");
     //get group id and send to back end via axios post request
@@ -50,13 +51,14 @@ class ModalJoin extends Component {
       })
     
     })
-  
+
 
      //sends the user's id(via the back end with req.user) and the group id to the database
      //the user's id gets added to that group as a group member
      //upon success, modal should close
      //user's avatar is then added to the payout section
   };
+  */
   //check if group is full function
   //get group total members - current members
   //if result > 0 
