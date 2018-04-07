@@ -51,6 +51,8 @@ class Groups extends Component {
     fetch("/groups")
     .then(res => res.json())
     .then(groups => {
+      console.log('what is this:',groups)
+      console.log(groups.data[0]);
       console.log(groups.data.username);
       let data = groups.data
       this.setState({
@@ -229,6 +231,8 @@ pad='small'
 
 <Switch>
       <Route exact path="/groups" component={this.renderGroupsList} />
+      <Route path="/groups/:groupID/charge"/>
+      <Route path="/users/profile" component={ProfilePage}/>
       <Route path="/groups/:groupID" component={GroupProfile} groupinfo={groupList}/>
       <Route path="/users/profile/:userID" component={ProfilePage} groupinfo={groupList}/>
       <Route path="/" component={Landing} />

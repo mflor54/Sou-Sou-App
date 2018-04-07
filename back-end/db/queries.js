@@ -83,7 +83,7 @@ var sessData = req.session;
       })
     }
   })
-  return authenticate(req, res, next)
+  return authenticate(req, res, next) //redirect - erty 
 }
 //Create user with resistration and login users
 createUser = (req, res, next) => {
@@ -99,7 +99,9 @@ createUser = (req, res, next) => {
   .then(() => {
     //Would like to authenticate and redirect to profile or login
     res.send(`created user: ${req.body.username}`);
-    loginUser()
+    if(next) { // this is super hacky, next will be undefined in seed.js
+        loginUser()
+    }
   })
     .catch(err => {
       console.log('Create User Error: ',err);
@@ -231,7 +233,7 @@ saveCustomerToken = (req, res, next) => {
 }
 
 paymentSent = (req, res, next) => {
-    db.none()
+    
 }
 
 saveCustomerId = (data, id) => {
@@ -246,6 +248,85 @@ saveCustomerId = (data, id) => {
         console.log('YOU SUCK');
         return;
     })
+}
+
+getMembersFromGroup = (group_id) => {
+    return (db.any('select * from users where group_id = ${group_id}', {
+        group_id: group_id
+    }))
+    // .then((data) => {
+    //     console.log('members data => ' + JSON.stringify(data));
+    //     return data;
+    // })
+    // .catch((err) => {
+    //     console.log('ERROR => ' + err);
+    //     return;
+    // })
+}
+
+getNumberOfPayments = (user, group) => {
+    console.log(typeof(group), typeof(user));
+    return (db.any('select * from paymentsin where group_id = ${group} and user_id = ${user}', {
+        user: user,
+        group: group,
+    }))
+    // .then((data) => {
+    //     res.status(200).json({
+    //         status: 'success',
+    //         data: data,
+    //         message: 'list of payments'
+    //     })
+    // })
+    // .catch((err) => {
+    //     console.log('number payments => ' + err);
+    //     return;
+    // })
+}
+
+paymentsIn = (user, amount, group, charge_id) => {
+    db.one('insert into paymentsin (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
+        charge_id: charge_id,
+        group: group,
+        user:user,
+        amount: amount
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'payment sent in'
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+        return;
+    })
+}
+
+paymentsOut = (user, amount, group, charge_id) => {
+    db.one('insert into paymentsout (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
+        charge_id: charge_id,
+        group: group,
+        user:user,
+        amount: amount
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'payment sent out'
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+        return;
+    })
+}
+
+getGroup = (groupID) => {
+    return (db.one('select * from groups where id = ${groupID}', {
+        groupID: groupID
+    }))
 }
 
 
@@ -280,8 +361,10 @@ module.exports = {
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
     userJoinGroup: userJoinGroup,
+    getMembersFromGroup: getMembersFromGroup,
+    getNumberOfPayments: getNumberOfPayments,
+    getGroup: getGroup,
     getSingleUsers:getSingleUsers
     // getUserGroupInfo: getUserGroupInfo,
     // getAllCreatorsInfo: getAllCreatorsInfo
-
 };

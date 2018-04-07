@@ -42,9 +42,9 @@ class ModalLogin extends Component {
      e.preventDefault();
      const { usernameInput, passwordInput, loggedIn, message, userID } = this.state;
 
-     if (usernameInput.length < 6) {
+     if (usernameInput.length < 4) {
        this.setState({
-         message: "Username length must be at least 6"
+         message: "Username length must be at least 4"
        });
        return;
      }
@@ -112,6 +112,7 @@ class ModalLogin extends Component {
 
           <FormGroup>
             <Col smOffset={3} sm={8}>
+            <p>{this.state.message}</p>
               <Button   className="btn-custom"  color="secondary-color-dark"
                   onClick={this.submitForm}>Sign in</Button>
             </Col>
@@ -145,7 +146,6 @@ class ModalLogin extends Component {
              Login
           </Button>
         </ModalLink>
-
         </div>
     )
   }

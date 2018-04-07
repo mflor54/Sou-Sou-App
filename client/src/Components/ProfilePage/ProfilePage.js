@@ -274,6 +274,7 @@ render() {
           <Route path="/groups" component={Groups} />
           <Route path="/" component={Landing} />
           </Switch>
+
           <FooterUser />
       </div>
     )

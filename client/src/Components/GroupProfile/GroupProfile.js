@@ -24,6 +24,11 @@ import Nav from '../Nav/Nav';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 
+import { Jumbotron, Col, Grid, Row, Panel, Glyphicon } from 'react-bootstrap';
+import { Link, Route, Switch } from 'react-router-dom';
+import { ModalContainer, ModalRoute } from 'react-router-modal';
+import { Button} from 'mdbreact';
+import axios from 'axios'
 
 import ModalJoin from '../Join/Join';
 import './GroupProfile.css';
@@ -123,6 +128,17 @@ let groupID = this.props.match.params.groupID;
     }
     //console.log(owlstr);
     return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
+  }
+
+  paymentOnClick = () => {
+    let groupID = this.props.match.params.groupID
+    axios.post(`${groupID}/charge`)
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   render() {
