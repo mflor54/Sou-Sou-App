@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import { Grid, Row, Col} from 'react-bootstrap';
 import { Link} from 'react-router-dom';
 import Box from 'grommet/components/Box';
+import Button from 'grommet/components/Button';
+import Image from 'grommet/components/Image';
+
 
 import Title from 'grommet/components/Title';
 import Menu from 'grommet/components/Menu';
@@ -15,6 +18,7 @@ import HelpList from'../Help/Help';
 import './Nav.css';
 
 var logo = require('../images/Logo/OwoLogoNWGroupTurq.png');
+var Mike= require("../images/crew/mike.jpg");
 
 
 const Navagation =()=>{
@@ -24,10 +28,18 @@ const Navagation =()=>{
           fixed={false}
           pad='medium'
           float={false}>
-                <Title>
-                      Sample Title
-
-                </Title>
+          <Button icon={<Image id='jayImage' src={Mike}
+                  full={false}
+                  size='thumb' />}
+                  responsive={true}
+                          label='JaySavesDoe'
+                          id="profileButton"
+                          primary={false}
+                          secondary={false}
+                          accent={false}
+                          critical={false}
+                          plain={false}
+                          path='/groups/Spending%20Money' />
           <Box flex={true}
                 justify='end'
                 direction='row'

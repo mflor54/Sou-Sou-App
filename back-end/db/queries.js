@@ -2,27 +2,26 @@ const db = require("./index");
 const stripe = require("../constants/stripe");
 const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
-const session = require("express-session");
 
 // Query to get all groups for public groups page, map in the front-end
-// getAllGroups = (req, res, next) => {
-//      db.any("select * from groups inner join users on groups.creator = users.ID")
-//     .then((data) => {
-//       console.log(data);
-//         res.status(200).json({
-//             status: 'success',
-//             data: data,
-//             message: 'Retrieved all groups'
-//         });
-//     })
-//     .catch((err) => {
-//         return next(err);
-//     })
-// }
+getGroups = (req, res, next) => {
+     db.any("select * from groups")
+    .then((data) => {
+      console.log(data);
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'Retrieved all groups'
+        });
+    })
+    .catch((err) => {
+        return next(err);
+    })
+}
+*/
 
 //Get all information of all users
 getAllUsers = (req, res, next) => {
-
   db
     .any("select * from users")
     .then(function(data) {
@@ -31,7 +30,6 @@ getAllUsers = (req, res, next) => {
         data: data,
         message: "Crystal has Retrieved ALL users"
       });
-
     })
     .catch(function(err) {
       return next(err);
@@ -60,7 +58,7 @@ getSingleUsers = (req, res, next) => {
 //Login users
 loginUser = (req, res, next) => {
   passport.authenticate("local", {});
-var sessData = req.session;
+
   const authenticate = passport.authenticate("local", (err, user, info) => {
     console.log('User: ', user);
     if(err) {
@@ -68,7 +66,6 @@ var sessData = req.session;
     } else if (!user) {
       res.status(401).send("Invalid Username or Password, Please try again");
     } else if (user) {
-
       req.logIn(user, (err) => {
         if (err) {
           res.status(500).send("Login Error");
@@ -119,25 +116,12 @@ logoutUser = (req, res, next) => {
   res.status(200).send("User logout")
 }
 
-// get user info for their profile page when they log in or during session
-// getUserInfo = (req, res, next) => {
-//     db.any('select * from users where username = ${userName}')
-//     .then((data) => {
-//         res.status(200).json({
-//             status: success,
-//             data: data,
-//             message: 'Retrived User info'
-//         });
-//     })
-//     .catch((err) => {
-//         return next(err);
-//     });
-// }
+
 
 getUserInfo = (req, res, next) => {
 
   console.log(req.body.userID);
-    db.any('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
+    db.one('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
       userID:req.params.userID
     })
     .then((data) => {
@@ -176,18 +160,26 @@ getSingleGroup = (req, res, next) => {
         console.log(err);
     })
 }
+
 // creates group when user submits form from group creation page
 createGroup = (req, res, next) => {
-    db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description_) values (${groupName}, ${totalMembers}, ${creator},${payinAmount}, ${payoutAmount}, ${frequency}, ${description})',{
+  let creator = 2;
+  //let date = now();
+  console.log("====================");
+  console.log("req.body of createGroup:", req.body)
+  console.log("====================");
+  //console.log("req.user", req.user);
+    db.none('insert into groups (group_name, total_members, creator, pay_in_amount, pay_out_amount, frequency, description_, date_created) values (${groupName}, ${totalMembers}, ${creator},${payinAmount}, ${payoutAmount}, ${frequency}, ${description}, clock_timestamp())',{
         groupName: req.body.groupName,
         totalMembers: req.body.totalMembers,
-        creator: req.body.creator,
+        creator: creator,
         payinAmount: req.body.payinAmount,
         payoutAmount: req.body.payoutAmount,
         frequency: req.body.frequency,
         description: req.body.description
     })
     .then((data) => {
+      console.log("this is data from my group from db.none", data);
         res.status(200).json({
             status: "success",
             data: data,
@@ -199,11 +191,34 @@ createGroup = (req, res, next) => {
     })
 }
 
-userJoinGroup = (req, res, next) => {
+getGroupByName = (req, res, next) => {
+  console.log("req.params of getGroupByName:",req.params);
+  db.one('select * from groups where group_name = ${groupName}',
+    {
+      groupName: req.params.groupName
+    }
+  )
+  .then((data) => {
+    console.log("=== group by name: ", data);
+      res.status(200).json({
+          status: "success",
+          data: data,
+          message: 'Retrieved Group by name'
+      });
+  })
+  .catch((err) => {
+      return next(err);
+      console.log(err);
+  })
+}
 
+
+userJoinGroup = (req, res, next) => {
+  //let userID = 4;
+  //console.log("userJoinGroup ==> req.user.id", userID);
    db.none('insert into users_groups (user_id, group_id) values (${userID}, ${groupID})', {
+      userID: req.params.userID,
       groupID: req.params.groupID,
-      userID: req.params.userID
    })
     .then((data) => {
         res.status(200).json({
@@ -346,34 +361,95 @@ getGroup = (groupID) => {
 
 getAllGroups = (req, res, next) => {
 
-    db.any('select * from groups inner join users on groups.creator = users.ID')
-    .then((data) => {
-      console.log(data);
-        res.status(200).json({
-            status: 'success',
-            data: data,
-            message: 'Retrieved all creators'
-        });
-    })
-    .catch((err) => {
-      console.log(err)
-        return next(err);
-    })
+  db.any('select * from groups inner join users on groups.creator = users.ID')
+  .then((data) => {
+    //console.log(data);
+      res.status(200).json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved all creators'
+      });
+  })
+  .catch((err) => {
+    console.log(err)
+      return next(err);
+  })
 }
 
+checkGroupStatus = (req, res, next) => {
+  db.any('select users_groups.group_id, count(*) as "currentMembers", groups.total_members as "maxMembers" from users_groups inner join groups on users_groups.group_id = groups.id where groups.id=${groupID} group by users_groups.group_id, groups.id', {
+    groupID: req.params.groupID
+  })
+  .then((data) => {
+    console.log(data[0].currentMembers);
+    res.status(200).json({
+      status: 'success',
+      data: data,
+      message: 'got member count info for group'
+    })
+  })
+  .catch((err) => {
+    console.log("check status", err)
+  });
+}
 
-
+getMembers = (req, res, next) => {
+  //let userID = req.user.id;
+  //console.log("req.user.id from isMember", userID);
+  
+  db.any('select users_groups.user_id AS "groupMembers" FROM users_groups where group_id=${groupID}', {
+    groupID: req.params.groupID
+  })
+  .then((data) => { 
+    res.status(200).json({
+      status: 'success',
+      data: data,
+      message: "got all users from this group"
+    });
+    console.log("get members query: ", data);
+  })
+  .catch((err) => {
+    console.log("isMember Error: ", err);
+  })
+    /*
+  db.any('select users_groups.user_id as "groupMembers", users_groups.group_id as "group" from users_groups where group_id=${groupID} group by group_id, users_groups.user_id', {
+    groupID: req.params.groupID
+    //userID: userID
+  })*/
+    /*
+    if(data == undefined){
+      res.status(200).json({
+        status: 'success',
+        result: false,
+        message: 'This user is not a group member'
+      })
+    } else {
+      res.status(200).json({
+        status: 'success',
+        result: true,
+        data: data, 
+        message: 'This user is a group member'
+      });
+      //console.log(data);
+    }
+    */
+}
 
 module.exports = {
+    getMembers: getMembers,
+    checkGroupStatus: checkGroupStatus,
     getAllGroups: getAllGroups,
     getUserInfo: getUserInfo,
     getSingleGroup: getSingleGroup,
+    getGroupByName: getGroupByName,
     createGroup: createGroup,
     createUser: createUser,
     loginUser: loginUser,
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
     userJoinGroup: userJoinGroup,
+    getSingleUsers:getSingleUsers,
+    getGroups:getGroups
     getMembersFromGroup: getMembersFromGroup,
     getNumberOfPayments: getNumberOfPayments,
     getGroup: getGroup,

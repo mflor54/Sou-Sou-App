@@ -30,6 +30,20 @@ import './Groups.css'
 
 var pic = require('../images/groupImages/architecture-art-business-191429.jpg');
 var logo = require('../images/Logo/OwoLogoNWGroupGR.png');
+var randomImages = [
+    require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
+    require('../images/groupImages/backlit-clouds-dusk-853168.jpg'),
+    require('../images/groupImages/bay-beach-beautiful-531602.jpg'),
+    require('../images/groupImages/beach-cave-cavo-greco-371588.jpg'),
+    require('../images/groupImages/celebration-coloured-crowd-889545.jpg'),
+    require('../images/groupImages/book-chair-chat-711009.jpg'),
+    require('../images/groupImages/activity-adventure-blur-297642.jpg'),
+    require('../images/groupImages/action-architecture-automobile-174752.jpg'),
+    require('../images/groupImages/architecture-art-beautiful-415708.jpg'),
+    require('../images/groupImages/architecture-art-business-191429.jpg'),
+    require('../images/groupImages/auto-automobile-automotive-358208.jpg'),
+    require('../images/groupImages/business-conference-learning-7095.jpg'),
+];
 
 
 
@@ -51,33 +65,56 @@ class Groups extends Component {
     fetch("/groups")
     .then(res => res.json())
     .then(groups => {
-      console.log('what is this:',groups)
-      console.log(groups.data[0]);
       console.log(groups.data.username);
       let data = groups.data
       this.setState({
-        groups: data
+        groups: data,
+        mockPics:[],
+        mockResults:[]
       });
     });
   }
 
+mockUser = ()=>{
+  fetch('https://randomuser.me/api/?results=20')
+  .then(res=> res.json())
+  .then(mocks => {
+    console.log(mocks.results)
+let mockResults =mocks.results
+    // console.log('holder :', holder );
+    let mockpic = mockResults.map(pic =>{this.setState({ mockPics:pic.picture.thumbnail})})
+    console.log(mockpic);
+    // let mockpic = mockResults.map(pic =>{console.log(pic.picture.thumbnail)})
+
+
+  })
+}
 
 
   componentDidMount(){
     this.getAllGroups();
+    this.mockUser();
   }
 
   showGroupMembers(total_members){
+  const {mockPics} = this.state
     let owlstr = [];
+    // console.log(owlstr);
     for(var i = 0; i < total_members; i++){
 
-      owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
+  owlstr.push('{mockPics}');
 
     }
-    //console.log(owlstr);
+    console.log(owlstr);
     return owlstr.map((owl)=> <div id="inner"><img src={owl} className="avatarStyle" alt="username"/></div>);
   }
 
+//   showGroupMembers(total_members){
+//   const {mockPics} = this.state
+// mockPics.forEach(el =>{
+//   console.log(el);
+// })
+// }
 
   handleSearch(e) {
     const {search}=this.state
@@ -89,7 +126,8 @@ class Groups extends Component {
 
 
   renderGroupsList(){
-    const { groups } = this.state;
+    const { groups, mockPics } = this.state;
+    console.log(mockPics);
     console.log("this is groups from state", groups);
 
   let payList=  groups.map((group)=>{
@@ -126,9 +164,9 @@ scrollStep={false}>
                               direction='row'
                               responsive={false}
                               size='large'>
+
                                   <Search inline={true}
                                         colorIndex='light-2'
-
                                         value={this.state.search}
                                         required autoFocus
                                         onDOMChange={this.handleSearch.bind(this)}
@@ -223,7 +261,6 @@ pad='small'
 
   render(){
     let groupList = this.state.groups
-    console.log('groupList: ', groupList)
     return(
 
 <div>
@@ -231,8 +268,6 @@ pad='small'
 
 <Switch>
       <Route exact path="/groups" component={this.renderGroupsList} />
-      <Route path="/groups/:groupID/charge"/>
-      <Route path="/users/profile" component={ProfilePage}/>
       <Route path="/groups/:groupID" component={GroupProfile} groupinfo={groupList}/>
       <Route path="/users/profile/:userID" component={ProfilePage} groupinfo={groupList}/>
       <Route path="/" component={Landing} />
