@@ -74,6 +74,7 @@ class GroupProfile extends Component {
       groupOpen: true, 
       currentMembers: 3,
       maxMembers: 5, 
+      chatMessage: '',
       showMessage: false
 
     }
