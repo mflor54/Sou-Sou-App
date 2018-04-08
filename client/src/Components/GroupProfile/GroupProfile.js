@@ -74,7 +74,7 @@ class GroupProfile extends Component {
       groupOpen: true, 
       currentMembers: 3,
       maxMembers: 5, 
-      chatMessage: '',
+      chatMessage: "Hey! Jason here! Excited to start saving with the group! OWO!",
       showMessage: false
 
     }
@@ -227,7 +227,8 @@ class GroupProfile extends Component {
 
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    const { group, member, groupOpen, showMessage } = this.state;
+    const { group, member, groupOpen, showMessage, chatMessage } = this.state;
+    console.log("chat message", chatMessage);
 
     console.log("**member from state =>", member);
     if(!member){
@@ -566,7 +567,7 @@ class GroupProfile extends Component {
                       <span className='secondary' id="verticalLine">
 
                       <span>
-                          Hey I'm new to OWO also! So excited to start saving money with my new w.o.e.s!!!  
+                          {this.state.chatMessage}  
                       </span>
                       </span>
                       <small className="pull-right" >
@@ -582,8 +583,14 @@ class GroupProfile extends Component {
               
 
                 <div className="input-group">
-                <FormField  type="text" className="form-control" label="type your message here....">
-                  <TextInput />
+                <FormField  
+                  type="text" className="form-control" 
+                  label="type your message here....">
+                  <TextInput 
+                    name="chatMessage"
+                    value={this.state.value}
+                    onChange={this.handleChatMessage}
+                  />
                 </FormField>
 
                   <span className="input-group-btn">
