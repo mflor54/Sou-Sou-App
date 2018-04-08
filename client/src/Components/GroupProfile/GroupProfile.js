@@ -559,7 +559,7 @@ class GroupProfile extends Component {
                       <span className='secondary' id="verticalLine">
 
                       <span>
-                          Hey I'm new to OWO also! So excited to start Saving money with my new w.o.e.s!!! LOL! 
+                          Hey I'm new to OWO also! So excited to start saving money with my new w.o.e.s!!!  
                       </span>
                       </span>
                       <small className="pull-right" >
