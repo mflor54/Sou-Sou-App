@@ -30,6 +30,20 @@ import './Groups.css'
 
 var pic = require('../images/groupImages/architecture-art-business-191429.jpg');
 var logo = require('../images/Logo/OwoLogoNWGroupGR.png');
+var randomImages = [
+    require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
+    require('../images/groupImages/backlit-clouds-dusk-853168.jpg'),
+    require('../images/groupImages/bay-beach-beautiful-531602.jpg'),
+    require('../images/groupImages/beach-cave-cavo-greco-371588.jpg'),
+    require('../images/groupImages/celebration-coloured-crowd-889545.jpg'),
+    require('../images/groupImages/book-chair-chat-711009.jpg'),
+    require('../images/groupImages/activity-adventure-blur-297642.jpg'),
+    require('../images/groupImages/action-architecture-automobile-174752.jpg'),
+    require('../images/groupImages/architecture-art-beautiful-415708.jpg'),
+    require('../images/groupImages/architecture-art-business-191429.jpg'),
+    require('../images/groupImages/auto-automobile-automotive-358208.jpg'),
+    require('../images/groupImages/business-conference-learning-7095.jpg'),
+];
 
 
 
@@ -56,7 +70,7 @@ class Groups extends Component {
       this.setState({
         groups: data,
         mockPics:[],
-        mockResults:''
+        mockResults:[]
       });
     });
   }
@@ -66,14 +80,10 @@ mockUser = ()=>{
   .then(res=> res.json())
   .then(mocks => {
     console.log(mocks.results)
-    this.setState({
-      mockResults:mocks.results
-    })
-
-
-
+let mockResults =mocks.results
     // console.log('holder :', holder );
-    // let mockpic = mockResults.map(pic =>{this.setState({ mockPics:pic.picture.thumbnail})})
+    let mockpic = mockResults.map(pic =>{this.setState({ mockPics:pic.picture.thumbnail})})
+    console.log(mockpic);
     // let mockpic = mockResults.map(pic =>{console.log(pic.picture.thumbnail)})
 
 
@@ -87,28 +97,24 @@ mockUser = ()=>{
   }
 
   showGroupMembers(total_members){
+  const {mockPics} = this.state
     let owlstr = [];
-    console.log(owlstr);
+    // console.log(owlstr);
     for(var i = 0; i < total_members; i++){
 
-      owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
+  owlstr.push('{mockPics}');
 
     }
-    //console.log(owlstr);
+    console.log(owlstr);
     return owlstr.map((owl)=> <div id="inner"><img src={owl} className="avatarStyle" alt="username"/></div>);
   }
 
-  // showGroupMembers(total_members){
-  // const {mockResults} = this.state
-  //   let mockstr = [];
-  //   for(var i = 0; i < total_members; i++){
-  //
-  //     mockstr.push();
-  //
-  //   }
-  //   //console.log(owlstr);
-  //   return mockPics.map((owl)=> <div id="inner"><img src={owl} className="avatarStyle" alt="username"/></div>);
-  // }
+//   showGroupMembers(total_members){
+//   const {mockPics} = this.state
+// mockPics.forEach(el =>{
+//   console.log(el);
+// })
+// }
 
   handleSearch(e) {
     const {search}=this.state
@@ -120,7 +126,8 @@ mockUser = ()=>{
 
 
   renderGroupsList(){
-    const { groups } = this.state;
+    const { groups, mockPics } = this.state;
+    console.log(mockPics);
     console.log("this is groups from state", groups);
 
   let payList=  groups.map((group)=>{
@@ -207,7 +214,10 @@ pad='small'
                         >
                         {filteredGroups.map((group)=>(
                               <Tile>
-                                       <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}><Card id='thumbnail' thumbnail={pic}
+                                       <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}><Card id='thumbnail'
+                                       full='true'
+                                       thumbnail={randomImages[Math.floor(Math.random()*randomImages.length)]}
+
                                         heading={group.group_name.toUpperCase()}
                                         label={`Group Creator: ${group.username}`}
 
@@ -254,7 +264,6 @@ pad='small'
 
   render(){
     let groupList = this.state.groups
-    console.log('groupList: ', groupList)
     return(
 
 <div>

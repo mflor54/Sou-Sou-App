@@ -20,13 +20,20 @@ import Image from 'grommet/components/Image';
 import Timestamp from 'grommet/components/Timestamp';
 import Headline from 'grommet/components/Headline';
 import Paragraph from 'grommet/components/Paragraph';
+import Tiles from 'grommet/components/Tiles';
+import Tile from 'grommet/components/Tile';
+import Card from 'grommet/components/Card';
+// import Button from 'grommet/components/Button';
 
+import AddCircleIcon from 'grommet/components/icons/base/AddCircle';
 
 
 import Navagation from '../Nav/Nav';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
 import FooterUser from '../Footer/Footer';
+import CreateGroup from '../CreateGroup/CreateGroup';
+
 import GroupProfile from '../GroupProfile/GroupProfile';
 import CreateGroup from '../CreateGroup/CreateGroup';
 import ProfilePic from './ProfilePic';
@@ -35,7 +42,7 @@ import axios from 'axios';
 import './ProfilePage.css'
 var logo = require('../images/Logo/OwoLogoNWGroup3Sm.png');
 var owl = require('../images/icons/owl.png');
-var Rachel= require("../images/crew/rachel.jpg");
+var Mike= require("../images/crew/mike.jpg");
 
 var randomImages = [
     require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
@@ -53,7 +60,8 @@ class ProfilePage extends Component {
     this.state = {
        showUpload: false,
        userProfile: props.userInfo,
-       userGroup:[]
+       userGroup:[],
+       getgroups:[]
 
     }
   }
@@ -81,31 +89,53 @@ class ProfilePage extends Component {
   //         })
   //     }
 
+    getUserInfo = () => {
+
+      const {userProfile} =this.state
+      let userID = this.state.userProfile.id
+      fetch(`/users/profile/${userID}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log("DATA stufff PP=====>", data.data);
+        const Store = [];
+          Store.push(data.data);
+          console.log('Store: ',Store);
+        this.setState({
+          userGroup:Store
+        })
+      });
+    }
+
+    getGroups= () => {
+      fetch(`/groups`)
+      .then(res => res.json())
+      .then(data => {
+        console.log("DATA stufff PP=====>", data.data);
+          this.setState({ getgroups: data.data})
+        })
+      }
 
 
-    //
-    // getUserInfo = () => {
-    //   fetch("/users/profile")
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log(data);
-    //
-    //     // this.setState({
-    //     //   groups: data
-    //     // });
-    //   });
-    // }
 
-
+    componentDidMount(){
+      this.getUserInfo();
+      this.getGroups()
+    }
 
 
 
 
 renderProfilePage=()=>{
+  console.log(this.state.userGroup);
+  let randomImage =<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+     />
 
   console.log(this.state.userProfile);
   console.log(this.props.userInfo.id);
-  const {userProfile} = this.state
+
+  const {userProfile, userGroup,getgroups} = this.state
+
+  console.log(userGroup);
   var cts = this.state.userProfile.member_date,
      cdate = (new Date(cts)).toString();
   const stripeUser = this.state.userProfile.stripe_id
@@ -117,7 +147,9 @@ renderProfilePage=()=>{
     </a>
   ):(
     <p>You have saved: {this.state.userProfile.amount} </p>
-  )
+  );
+
+
 
   return(
 
@@ -129,32 +161,38 @@ renderProfilePage=()=>{
           reverse={false}
           pad='medium'>
 
-
-
-      <Box
-      direction='row'
-        justify='center'
-        align='stretch'
-        id='outter'
-        pad='small'
-        colorIndex='light-2'
-    >
+          <Box direction='Row'
+            justify='center'
+            align='center'
+            wrap={true}
+            pad='small'
+            colorIndex='light-2'
+          
+        >
     <Split separator={false}
+    showOnResponsive='both'
       >
-      <Box direction='column'
-        justify='start'
-        align='center'
-        wrap={true}
-        pad='none'
-        colorIndex='light-2'
-        id='left'
-    >
-                <Headline>Hey {userProfile.username}</Headline>
+              <Box direction='Row'
+                justify='center'
+                align='center'
+                wrap={true}
+                pad='small'
+                colorIndex='light-2'
+                id='left'
+            >
+
                 <Box colorIndex='light-2'
                       justify='center'
                       fixed={true}
                       align='center'
-                      pad='none'>
+                      pad='small'>
+                      <Box colorIndex='light-2'
+                            justify='center'
+                            fixed={true}
+                            align='center'
+                            pad='small'>
+                        <Headline>Hey {userProfile.username}</Headline>
+                        </Box>
                         <Columns size='small'
                               masonry={true}
                               maxCount={1}>
@@ -162,7 +200,7 @@ renderProfilePage=()=>{
                                   pad='small'
 
                                   >
-                                    <Image alt='' className='profilePic' src={Rachel} />
+                                    <Image alt='' className='profilePic' src={Mike} />
                               </Box>
                               <Paragraph
                                   size='small'
@@ -190,33 +228,72 @@ renderProfilePage=()=>{
 
 
         </Box>
-      <Box direction='column'
-        justify='end'
-        align='center'
-        wrap={true}
-        pad='medium'
-        id='right'
-        colorIndex='light-2'
-    >
-    <Headline>Dashboard</Headline>
+
+    <Box direction='Row'
+          justify='center'
+          align='center'
+          wrap={true}
+          pad='small'
+          id='right'
+          colorIndex='light-2'
+      >
+
 
                   <Box colorIndex='light-2'
                         justify='center'
                         fixed={true}
                         align='center'
-                        pad='large'>
-                                <h2>My Groups</h2>
+                        pad='small'>
+                        <Box colorIndex='light-2'
+                              justify='center'
+                              fixed={true}
+                              align='center'
+                              pad='small'>
+                        <Headline>Dashboard</Headline>
+                              </Box>
+                              <Box colorIndex='light-2'
+                                    justify='end'
+                                    fixed={true}
+                                    align='end'
+                                    pad='small'
+                                    >
+                                          <Link id='addButton' to='/groups/new'>
+                                          <AddCircleIcon />
+                                          </Link>
+                                    </Box>
+
+                                    <h2>My Groups</h2>
                                 <Columns size='medium'
                                       masonry={true}
                                       maxCount={3}>
-                                            {randomImages.map((tile) => (
-                                                  <Box align='center'
-                                                      colorIndex='light-2'
-                                                        margin='small'
-                                                        >
-                                                        <img className="tiles" src={tile} />
-                                                  </Box>
-                                            ))}
+
+                                      {!userGroup ? (
+                                        <Paragraph>No Groups Yet... Join a Group to Start Saving!</Paragraph>
+                                        ):(
+
+                                          <Box align='center'
+
+                                                margin='small'
+                                                colorIndex='light-2'>
+
+                                                {userGroup.map((group) => (
+                                                  <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}>
+
+                                                    <Card id='thumbnail' thumbnail={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+                                                       />}
+                                                     heading={group.group_name.toUpperCase()}
+                                                     label={`Group Creator: ${group.username}`}
+
+                                                     />
+
+
+
+                                              </Link>
+
+                                             ))}
+                                          </Box>
+
+                                          )}
                                 </Columns>
                         </Box>
                       <Box
@@ -225,52 +302,54 @@ renderProfilePage=()=>{
                             pad='small'>
                                   <h2>Featured</h2>
                                   <Columns size='small'
-                                        masonry={true}
+                                        masonry={false}
                                         maxCount={3}>
-                                              {randomImages.map((tile) => (
-                                                    <Box align='center'
 
-                                                          margin='small'
-                                                          colorIndex='light-2'>
-                                                          <img className="tiles" src={tile} />
 
-                                                    </Box>
-                                              ))}
+
+
+                                                 <Box align='center'
+
+                                                       margin='small'
+                                                       colorIndex='light-2'>
+
+                                                       {getgroups.map((group) => (
+                                                         <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}>
+                                                         {randomImages.map((pics) => (
+                                                           <Card id='thumbnail' thumbnail={pics}
+                                                            heading={group.group_name.toUpperCase()}
+                                                            label={`Group Creator: ${group.username}`}
+
+                                                            />
+                                                         ))}
+
+
+                                                     </Link>
+
+                                                    ))}
+                                                 </Box>
+
                                   </Columns>
                         </Box>
                   </Box>
                   </Split>
-            </Box>
+              </Box>
     </Box>
 
 
     )
   }
-  getUserInfo = () => {
-
-    const {userProfile} =this.state
-    let userID = this.state.userProfile.id
-    console.log(userID);
-    fetch(`/users/profile/${userID}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log("DATA PP=====>", data);
-      this.setState({
-        userGroup:data
-      })
-    });
-  }
-  componentDidMount(){
-    this.getUserInfo();
-  }
-
 
 render() {
+    console.log(this.state.userGroup);
   return(
+
       <div>
       <Navagation />
       <Switch>
-        <Route path="/groups/:groupID" component={GroupProfile}/>
+
+        <Route path="/groups/new" component={CreateGroup} />
+          <Route path="/groups/:groupID" component={GroupProfile}/>
           <Route path="/users/profile/:userID" component={this.renderProfilePage} />
           <Route path="/groups" component={Groups} />
           <Route path="/" component={Landing} />
