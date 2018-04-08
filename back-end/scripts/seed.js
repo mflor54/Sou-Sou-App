@@ -2,6 +2,12 @@ var db = require('../db/index');
 var queries = require('../db/queries');
 
 
+let user1 = {
+  first_name: 'user1',
+  last_name: 'user_1',
+
+}
+
 //create an object that mimics req.body
 let group1 = {
   //this is the response you would get from the body
@@ -93,12 +99,19 @@ let group7 = {
 
 //create a mock response. nothing has to go inside
 let resMock = {
+  // send function
+  send: function() {
+    
+  },
   //res.status in a function
   status: function() {
     //returns a json object
     return {
       json: function() {
         //this is a mock response and nothing needs to go inside.
+      },
+      send: function() {
+
       }
     }
   }
@@ -108,6 +121,53 @@ let resMock = {
 let next = (err) => {
   console.log(err);
 }
+
+
+queries.createUser({
+  body: {
+    firstName: 'user1',
+    lastName: 'last1',
+    username: 'user1',
+    email: 'mflor54+user1@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'user2',
+    lastName: 'last2',
+    username: 'user2',
+    email: 'mflor54+user2@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'user3',
+    lastName: 'last3',
+    username: 'user3',
+    email: 'mflor54+user3@gmail.com',
+    password: 'password'
+  }
+}, resMock)
+queries.createUser({
+  body: {
+    firstName: 'user4',
+    lastName: 'last4',
+    username: 'user4',
+    email: 'mflor54+user4@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'user5',
+    lastName: 'last5',
+    username: 'user5',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);
 
 //pass all 3 into the query
 

@@ -35,6 +35,7 @@ import FooterUser from '../Footer/Footer';
 import CreateGroup from '../CreateGroup/CreateGroup';
 
 import GroupProfile from '../GroupProfile/GroupProfile';
+import CreateGroup from '../CreateGroup/CreateGroup';
 import ProfilePic from './ProfilePic';
 import { Button} from 'mdbreact';
 import axios from 'axios';
@@ -353,6 +354,7 @@ render() {
           <Route path="/groups" component={Groups} />
           <Route path="/" component={Landing} />
           </Switch>
+
           <FooterUser />
       </div>
     )

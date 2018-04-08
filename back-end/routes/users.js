@@ -26,6 +26,9 @@ router.post('/login', passport.authenticate("local"), (req, res) => {
   res.json(req.user);
 });
 
+router.get('/profile', loginRequired, db.getUserInfo)
+// router.patch('/profile', loginRequired, db.updateUserInfo)
+// router.post('/profile/picture/', loginRequired, db.updateProfilePicture)
 router.get('/user',loginRequired,(req, res) =>{
   res.json(req.user)
 })

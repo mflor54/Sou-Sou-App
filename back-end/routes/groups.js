@@ -2,6 +2,7 @@ let db = require('../db/queries');
 let stripe = require('../constants/stripe');
 let express = require('express');
 let axios = require('axios');
+let charge = require('./stripe/charge');
 const { loginRequired } = require("../auth/helpers");
 const passport = require("../auth/local");
 let router = express.Router();
@@ -21,15 +22,10 @@ router.get('/:groupID', db.getSingleGroup);
 //Join Group
 router.post('/:groupID/join/:userID', db.userJoinGroup);
 
-router.post('/:id/charge', async (req, res, next) => {
-    const charge = await stripe.charges.create({
-        amount: req.amount,
-        curreny: "usd",
-        source: null,
-        destination: {
-            account: ""
-        }
-    })
-})
+router.get('/:groupID/check', db.checkGroupStatus);
+
+router.get('/:groupID/members', db.getMembers);
+
+router.post('/:groupID/charge', charge.makeCharge);
 
 module.exports = router;

@@ -12,6 +12,7 @@ import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'mdbreact';
 
 import '../Landing/Landing.css';
+
 import './CreateGroup.css';
 
 
@@ -22,7 +23,6 @@ class CreateGroup extends Component {
       groupName: '',
       totalMembers: 0,
       creator: '',
-      payinAmount: '',
       payoutAmount: 0,
       frequency: '',
       description: '',
@@ -35,8 +35,13 @@ class CreateGroup extends Component {
   //needs to redirect to the newly created group-profile page
 
 
-  toggleTabs = () => {
-    //changes to the next tab
+  handleTabChange = (tabKey) => {
+    let key = this.state;
+    console.log("halllp")
+    this.setState({
+      key
+    });
+    //changes to the next tab 
     //make this a button
   }
 
@@ -45,13 +50,7 @@ class CreateGroup extends Component {
       [e.target.name]: e.target.value
     })
   }
-
-  handleChecked = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
+  
   calculatePayin = (amount, members) => {
     // const { payoutAmount, totalMembers } = this.state;
     // let amount = payoutAmount;
@@ -60,36 +59,50 @@ class CreateGroup extends Component {
     if(amount === 0 || members === 0){
       return result;
     } else {
-      result = Math.floor(amount/ ( members - 1 ));
+      result = Math.ceil(amount/( members - 1 ));
       return result;
     }
-    console.log("===>", amount, members);
-
+    console.log("===> amount, members", amount, members);
+   
     //calculates the payin amount based on the savings goal and payout frequency
   }
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log("clicking submit");
     const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
+    let payin = Math.ceil(payoutAmount/(totalMembers - 1));
+  
+    /*
+    fetch("/groups/new", {
+      method: "POST",
+      headers: {"Content-Type": "application/x-www-form-urlencoded"}, 
+      body: {
+        groupName: groupName,
+        totalMembers: totalMembers,
+        payinAmount: payinAmount,
+        payoutAmount: payoutAmount,
+        frequency: frequency,
+        description: description
+      }
+    });
+    */
     //axios call that sends all the info to the backend route
+    //console.log(this.state);    
     axios.post("/groups/new", {
       groupName: groupName,
       totalMembers: totalMembers,
-      creator: creator,
-      payinAmount: payinAmount,
+      payinAmount: payin,
       payoutAmount: payoutAmount,
       frequency: frequency,
       description: description
     })
     .then(res => {
       console.log(res);
-      //I want to show the success message and redirect to
-      // this.props.setUser(res.data);
-      //  this.setState({
-      //    loggedIn: true
-      //  });
+      //I want to show the success message and redirect to the newly created group
     })
     .catch(err => {
+      console.log(err);
       //reset form and tell user to there was an error and start over.
     });
   }
@@ -190,22 +203,25 @@ renderCreateGroup=()=>{
 
 
 
+
   render(){
     let members = [3, 5, 9];
     let payout = [100, 250, 1000];
     let payoutFreq = ["Weekly", "Bi-Weekly", "Monthly"];
 
 
-    const { groupName, totalMembers, creator, payinAmount, payoutAmount, frequency, description } = this.state;
+    const { groupName, totalMembers, creator, payoutAmount, frequency, description, key } = this.state;
+    /*
     console.log("===", groupName);
     console.log("===", description);
     console.log("===", totalMembers);
     console.log("===", frequency);
     console.log("===", payoutAmount);
+    */
+  
     return(
       <div>
       <Switch>
-
         <Route path="/groups/new" render={this.renderCreateGroup} />
         <Route path="/groups/:groupID" component={GroupProfile}/>
           <Route path="/users/profile/:userID" component={ProfilePage} />

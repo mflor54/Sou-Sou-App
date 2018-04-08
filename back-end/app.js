@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 let groups = require('./routes/groups');
 let stripeRoutes = require('./routes/stripe/stripe')
+let charges = require('./routes/stripe/charge');
 const db = require("./db/index");
 
 
@@ -40,18 +41,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-const pgSession = require("connect-pg-simple")(session);
-app.use(
-  session({
-    store: new pgSession({
-      pool: db.$pool
-    }),
-		secret:
-		      secret.secret,
-    resave: false,
-    saveUninitialized: true
-  })
-);
+// const pgSession = require("connect-pg-simple")(session);
+// app.use(
+//   session({
+//     store: new pgSession({
+//       pool: db.$pool
+//     }),
+// 		secret:
+// 		      secret.secret,
+//     resave: false,
+//     saveUninitialized: true
+//   })
+// );
 // app.use(session({
 //  store: new (require('connect-pg-simple')(session))(),
 //  secret:
@@ -61,20 +62,20 @@ app.use(
 //  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 // }));
 
-// app.use(
-//   session({
-//     name: 'server-session-cookie-id',
-//     secret:
-//       secret.secret,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//           secure: false,
-//           maxAge: 2160000000,
-//           httpOnly: false
-// 				}
-//   })
-// );
+app.use(
+  session({
+    name: 'server-session-cookie-id',
+    secret:
+      secret.secret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+          secure: false,
+          maxAge: 2160000000,
+          httpOnly: false
+				}
+  })
+);
 
 app.use(function printSession(req, res, next) {
   console.log('req.session', req.session);
