@@ -20,21 +20,31 @@ top: 1em;
 left: .2em;
 
 }
-
+#thumbnail{
+  width: 5em;
+}
 #left{
-    border-right: solid #a430a8 1px;
+border-right: solid #a430a8 1px;
 padding: 0;
 margin: 0;
+height: 100vh;
 }
 
 
 #right{
-margin: 2em;
-padding: 5em;
+margin: 0 2em;
+padding: 0 5em;
 }
 
 #outter{
   border-radius: .5em;
+}
+
+#addButton{
+  text-align: right;
+  align-content: flex-end;
+  right: 0;
+  float: right;
 }
 /*
 .profilePic::after {

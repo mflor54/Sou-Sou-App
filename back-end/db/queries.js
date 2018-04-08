@@ -4,20 +4,20 @@ const passport = require("../auth/local");
 const session = require("express-session");
 
 // Query to get all groups for public groups page, map in the front-end
-// getAllGroups = (req, res, next) => {
-//      db.any("select * from groups inner join users on groups.creator = users.ID")
-//     .then((data) => {
-//       console.log(data);
-//         res.status(200).json({
-//             status: 'success',
-//             data: data,
-//             message: 'Retrieved all groups'
-//         });
-//     })
-//     .catch((err) => {
-//         return next(err);
-//     })
-// }
+getGroups = (req, res, next) => {
+     db.any("select * from groups")
+    .then((data) => {
+      console.log(data);
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'Retrieved all groups'
+        });
+    })
+    .catch((err) => {
+        return next(err);
+    })
+}
 
 //Get all information of all users
 getAllUsers = (req, res, next) => {
@@ -115,25 +115,12 @@ logoutUser = (req, res, next) => {
   res.status(200).send("User logout")
 }
 
-// get user info for their profile page when they log in or during session
-// getUserInfo = (req, res, next) => {
-//     db.any('select * from users where username = ${userName}')
-//     .then((data) => {
-//         res.status(200).json({
-//             status: success,
-//             data: data,
-//             message: 'Retrived User info'
-//         });
-//     })
-//     .catch((err) => {
-//         return next(err);
-//     });
-// }
+
 
 getUserInfo = (req, res, next) => {
 
   console.log(req.body.userID);
-    db.any('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
+    db.one('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
       userID:req.params.userID
     })
     .then((data) => {
@@ -280,7 +267,8 @@ module.exports = {
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
     userJoinGroup: userJoinGroup,
-    getSingleUsers:getSingleUsers
+    getSingleUsers:getSingleUsers,
+    getGroups:getGroups
     // getUserGroupInfo: getUserGroupInfo,
     // getAllCreatorsInfo: getAllCreatorsInfo
 
