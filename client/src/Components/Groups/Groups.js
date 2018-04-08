@@ -51,24 +51,44 @@ class Groups extends Component {
     fetch("/groups")
     .then(res => res.json())
     .then(groups => {
-      console.log('what is this:',groups)
-      console.log(groups.data[0]);
       console.log(groups.data.username);
       let data = groups.data
       this.setState({
-        groups: data
+        groups: data,
+        mockPics:[],
+        mockResults:''
       });
     });
   }
 
+mockUser = ()=>{
+  fetch('https://randomuser.me/api/?results=20')
+  .then(res=> res.json())
+  .then(mocks => {
+    console.log(mocks.results)
+    this.setState({
+      mockResults:mocks.results
+    })
+
+
+
+    // console.log('holder :', holder );
+    // let mockpic = mockResults.map(pic =>{this.setState({ mockPics:pic.picture.thumbnail})})
+    // let mockpic = mockResults.map(pic =>{console.log(pic.picture.thumbnail)})
+
+
+  })
+}
 
 
   componentDidMount(){
     this.getAllGroups();
+    this.mockUser();
   }
 
   showGroupMembers(total_members){
     let owlstr = [];
+    console.log(owlstr);
     for(var i = 0; i < total_members; i++){
 
       owlstr.push("https://image.flaticon.com/icons/svg/12/12324.svg");
@@ -78,6 +98,17 @@ class Groups extends Component {
     return owlstr.map((owl)=> <div id="inner"><img src={owl} className="avatarStyle" alt="username"/></div>);
   }
 
+  // showGroupMembers(total_members){
+  // const {mockResults} = this.state
+  //   let mockstr = [];
+  //   for(var i = 0; i < total_members; i++){
+  //
+  //     mockstr.push();
+  //
+  //   }
+  //   //console.log(owlstr);
+  //   return mockPics.map((owl)=> <div id="inner"><img src={owl} className="avatarStyle" alt="username"/></div>);
+  // }
 
   handleSearch(e) {
     const {search}=this.state
@@ -126,9 +157,9 @@ scrollStep={false}>
                               direction='row'
                               responsive={false}
                               size='large'>
+
                                   <Search inline={true}
                                         colorIndex='light-2'
-
                                         value={this.state.search}
                                         required autoFocus
                                         onDOMChange={this.handleSearch.bind(this)}
@@ -231,8 +262,6 @@ pad='small'
 
 <Switch>
       <Route exact path="/groups" component={this.renderGroupsList} />
-      <Route path="/groups/:groupID/charge"/>
-      <Route path="/users/profile" component={ProfilePage}/>
       <Route path="/groups/:groupID" component={GroupProfile} groupinfo={groupList}/>
       <Route path="/users/profile/:userID" component={ProfilePage} groupinfo={groupList}/>
       <Route path="/" component={Landing} />

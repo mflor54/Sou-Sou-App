@@ -28,6 +28,7 @@ import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
 import FooterUser from '../Footer/Footer';
 import GroupProfile from '../GroupProfile/GroupProfile';
+import CreateGroup from '../CreateGroup/CreateGroup';
 import ProfilePic from './ProfilePic';
 import { Button} from 'mdbreact';
 import axios from 'axios';
