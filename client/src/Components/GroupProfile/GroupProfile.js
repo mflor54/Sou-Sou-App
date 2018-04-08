@@ -214,240 +214,341 @@ class GroupProfile extends Component {
     const { group, member, groupOpen } = this.state;
 
     console.log("**member from state =>", member);
+    if(!member){
+      return(
+        <div>
+          <Hero 
+            background={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+            fit='cover'
+            full={true} />}
+            backgroundColorIndex='dark'
+          >
+            <Box 
+              direction='row'
+              justify='center'
+              align='center'
+            >
+              <Box 
+                basis='1/2'
+                align='end'
+                pad='medium' 
+              />
+              <Box 
+                basis='1/2'
+                align='start'
+                pad='medium'
+              >
+                <Headline
+                  margin='none'
+                  size='large'>
+                  {group.group_name}
+                </Headline>
+              </Box>
+            </Box>
+          </Hero>
+          <Section 
+            pad='small'
+            justify='center'
+            align='center'
+            className="groups-header"
+          >
+
+          </Section>
+          <Section 
+            pad='large'
+            justify='center'
+          >
+            <Headline>Group Info</Headline>
+            <Headline
+              size='small'
+              strong={false}
+              id='headline'
+            >
+              {group.description_}
+            </Headline>
+            <Headline
+              size='small'
+              strong={false}
+            >
+              Group Creator: <img 
+                              className="img-circle" 
+                              src="https://image.flaticon.com/icons/svg/12/12324.svg" 
+                              alt="user-avatar" 
+                             />
+            </Headline>
+            <Headline
+              size='small'
+              strong={false}
+              id='headline'>
+                {group.frequency} payments of ${group.pay_in_amount}
+            </Headline>
+
+          </Section>
+          <Section 
+            pad='large'
+            justify='center'
+          >
+            <Headline>Group Updates:</Headline>
+            <Headline
+              size='small'
+              strong={false}
+              id='headline'
+            >
+              Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018
+            </Headline>
+            <Headline
+              size='small'
+              strong={false}
+            >
+              <div>
+                {this.showGroupMembers(group.total_members)}
+              </div>
+            </Headline>
+            <Section>
+              <Join groupID={this.state.groupID} submit={this.handleJoinSubmit}/>
+            </Section>
+          </Section>
     
-    return(
-      <Article scrollStep={false}>
+        </div>
+      )
+    } else {
+      return(
+        <Article scrollStep={false}>
+        <Hero 
+          background={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+          fit='cover'
+          full={true} />}
+          backgroundColorIndex='dark'
+        >
+          <Box 
+            direction='row'
+            justify='center'
+            align='center'
+          >
+            <Box 
+              basis='1/2'
+              align='end'
+              pad='medium' 
+            />
+            <Box basis='1/2'
+              align='start'
+              pad='medium'
+            >
+              <Headline
+                margin='none'
+                size='large'
+              >
+                {group.group_name}
+              </Headline>
 
+            </Box>
+          </Box>
+        </Hero>
+        <Section pad='small'
+          justify='center'
+          align='center'
+          className="groups-header"
+          >
 
-                <Hero background={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
-                    fit='cover'
-                    full={true} />}
-                    backgroundColorIndex='dark'>
-                        <Box direction='row'
-                          justify='center'
-                          align='center'>
-                              <Box basis='1/2'
-                                align='end'
-                                pad='medium' />
-                                  <Box basis='1/2'
-                                    align='start'
-                                    pad='medium'>
-                                        <Headline
-                                        margin='none'
-                                        size='large'>
-                                            {group.group_name}
-                                        </Headline>
+          </Section>
+          <Section 
+            pad='large'
+            justify='center'
+          >
+            <Headline>Group Info</Headline>
+            <Headline
+              size='small'
+              strong={false}
+              id='headline'>
+              {group.description_}
+            </Headline>
+            <Headline
+              size='small'
+              strong={false}
+            >
+              Group Creator: <img 
+                              className="img-circle" 
+                              src="https://image.flaticon.com/icons/svg/12/12324.svg" 
+                              alt="user-avatar"  
+                            />
+            </Headline>
+            <Headline
+              size='small'
+              strong={false}
+              id='headline'
+            >
+              {group.frequency} payments of ${group.pay_in_amount}
+            </Headline>
 
-                                  </Box>
-                            </Box>
-                  </Hero>
-                  <Section pad='small'
-                    justify='center'
-                    align='center'
-                    className="groups-header"
+          </Section>
+          <Section 
+            pad='large'
+            justify='center'
+          >
+            <Headline>Group Updates:</Headline>
+              <Headline
+                size='small'
+                strong={false}
+                id='headline'
+              >
+                Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018
+              </Headline>
+              <Headline
+                size='small'
+                strong={false}
+              >
+                <div>
+                    {this.showGroupMembers(group.total_members)}
+                </div>
+              </Headline>
+                <Section>
+                  <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button>
+                </Section>
+              </Section>
+             
+              <Section 
+                pad='large'
+                justify='center'
+              >
+                <Headline >ChatBoard</Headline>
+                <List>
+                  <ListItem
+                    justify='between'
+                    separator='horizontal'
+                  >
 
+                    <span >
+                    <img className="img-circle" src="http://placehold.it/50/29D9F4/fff&text=K" alt="user-avatar"  />
+                    </span>
+
+                    <span >
+
+                      <strong>Krystal</strong>
+                    </span>
+
+                    <span className='secondary' >
+
+                    <span id="text-align" className="pull-right" id="verticalLine">
+                          Heyyyy guys, Welcome to our awesome savings club... Lets save some money 🤑💪🏽
+                      </span>
+                    </span>
+                      <small className="pull-right" >
+                        <span className="glyphicon glyphicon-time"></span>
+                        <span>
+                        {" "}20min ago
+                        </span>
+                      </small>
+                  </ListItem>
+                  <ListItem 
+                    justify='between'
+                    separator='horizontal'
+                  >
+
+                    <span pad='small'>
+                    <img className="img-circle" src="http://placehold.it/50/08CEC7/fff&text=M" alt="user-avatar"  />
+                    </span>
+
+                    <span pad='small' id="space">
+                      <strong>Mike</strong>
+                    </span>
+
+                    <span className='secondary' id="verticalLine">
+
+                    <span>
+                          I am new to OWO... I am excited to be in my first savings pool, goodluck everyone 😁
+                      </span>
+                    </span>
+                      <small className="pull-right" >
+                        <span className="glyphicon glyphicon-time"></span>
+                        <span>
+                        {" "}17min ago
+                        </span>
+                      </small>
+                  </ListItem>
+                  <ListItem justify='between'
+                    separator='horizontal'
                     >
 
-                    </Section>
-              <Section pad='large'
-                justify='center'
+                    <span pad='small'>
+                    <img className="img-circle" src="http://placehold.it/50/A430A8/fff&text=C" alt="user-avatar"  />
+                    </span>
 
-                >
-              <Headline>Group Info</Headline>
-                <Headline
-                    size='small'
-                    strong={false}
-                    id='headline'>
-                          {group.description_}
-                </Headline>
-                <Headline
-                    size='small'
-                    strong={false}>
-                          Group Creator:     <img className="img-circle" src="https://image.flaticon.com/icons/svg/12/12324.svg" alt="user-avatar"  />
-                </Headline>
-                <Headline
-                    size='small'
-                    strong={false}
-                    id='headline'>
-                            {group.frequency} payments of ${group.pay_in_amount}
-                </Headline>
+                    <span pad='small' id="space">
 
-                </Section>
-                <Section pad='large'
-                  justify='center'
+                      <strong>Crystal</strong>
+                    </span>
 
+
+                    <span className='secondary' id="verticalLine">
+
+                    <span>
+                          OMG!! Nice to meet everyone... we are going to accompish so much together 🤴🏽👸🏽💅🏽
+                      </span>
+                    </span>
+                      <small className="pull-right" >
+                        <span className="glyphicon glyphicon-time"></span>
+                        <span>
+                        {" "}10min ago
+                        </span>
+                      </small>
+
+
+                  </ListItem>
+                  <ListItem 
+                    justify='between'
+                    separator='horizontal'
                   >
-                  <Headline>Group Updates:</Headline>
-                  <Headline
-                      size='small'
-                      strong={false}
-                      id='headline'>
-                            Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018
-                  </Headline>
-                  <Headline
-                      size='small'
-                      strong={false}>
-                      <div>
-                          {this.showGroupMembers(group.total_members)}
-                      </div>
-                  </Headline>
 
-                  </Section>
+                    <span pad='small'>
+                    <img className="img-circle" src="http://placehold.it/50/25283D/fff&text=R" alt="user-avatar"  />
+                    </span>
 
-                  {groupOpen ? 
-                  <Join groupID={this.state.groupID} submit={this.handleJoinSubmit}/> : <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button>
-                  }
+                    <span pad='small' id="space">
+
+                      <strong>Rachel</strong>
+                    </span>
 
 
-                    <Section pad='large'
-                      justify='center'
+                    <span className='secondary' id="verticalLine">
 
-                      >
-                        <Headline >ChatBoard</Headline>
-                                      <List>
-                                        <ListItem
-                                        justify='between'
-                                          separator='horizontal'
-
-                                          >
-
-                                          <span >
-                                          <img className="img-circle" src="http://placehold.it/50/29D9F4/fff&text=K" alt="user-avatar"  />
-                                          </span>
-
-                                          <span >
-
-                                            <strong>Krystal</strong>
-                                          </span>
+                    <span>
+                          This is awesome, I am meeting so many new people and saving so much. I 💜 OWO Yay!
+                      </span>
+                    </span>
+                      <small className="pull-right" >
+                        <span className="glyphicon glyphicon-time"></span>
+                        <span>
+                        {" "}5min ago
+                        </span>
+                      </small>
 
 
-                                          <span className='secondary' >
+                  </ListItem>
+                  <ListItem justify='between'>
+                    <span>
 
-                                          <span id="text-align" className="pull-right" id="verticalLine">
-                                                Heyyyy guys, Welcome to our awesome savings club... Lets save some money 🤑💪🏽
-                                            </span>
-                                          </span>
-                                            <small className="pull-right" >
-                                              <span className="glyphicon glyphicon-time"></span>
-                                              <span>
-                                              {" "}20min ago
-                                              </span>
-                                            </small>
-                                        </ListItem>
-                                        <ListItem justify='between'
-                                          separator='horizontal'
-                                          >
+                    </span>
+                  </ListItem>
+                </List>
 
-                                          <span pad='small'>
-                                          <img className="img-circle" src="http://placehold.it/50/08CEC7/fff&text=M" alt="user-avatar"  />
-                                          </span>
+                <div className="input-group">
+                <FormField  type="text" className="form-control" label="type your message here....">
+                  <TextInput />
+                </FormField>
 
-                                          <span pad='small' id="space">
-
-                                            <strong>Mike</strong>
-                                          </span>
-
-
-                                          <span className='secondary' id="verticalLine">
-
-                                          <span>
-                                                I am new to OWO... I am excited to be in my first savings pool, goodluck everyone 😁
-                                            </span>
-                                          </span>
-                                            <small className="pull-right" >
-                                              <span className="glyphicon glyphicon-time"></span>
-                                              <span>
-                                              {" "}17min ago
-                                              </span>
-                                            </small>
-
-
-                                        </ListItem>
-                                        <ListItem justify='between'
-                                          separator='horizontal'
-                                          >
-
-                                          <span pad='small'>
-                                          <img className="img-circle" src="http://placehold.it/50/A430A8/fff&text=C" alt="user-avatar"  />
-                                          </span>
-
-                                          <span pad='small' id="space">
-
-                                            <strong>Crystal</strong>
-                                          </span>
-
-
-                                          <span className='secondary' id="verticalLine">
-
-                                          <span>
-                                                OMG!! Nice to meet everyone... we are going to accompish so much together 🤴🏽👸🏽💅🏽
-                                            </span>
-                                          </span>
-                                            <small className="pull-right" >
-                                              <span className="glyphicon glyphicon-time"></span>
-                                              <span>
-                                              {" "}10min ago
-                                              </span>
-                                            </small>
-
-
-                                        </ListItem>
-                                        <ListItem justify='between'
-                                          separator='horizontal'
-                                          >
-
-                                          <span pad='small'>
-                                          <img className="img-circle" src="http://placehold.it/50/25283D/fff&text=R" alt="user-avatar"  />
-                                          </span>
-
-                                          <span pad='small' id="space">
-
-                                            <strong>Rachel</strong>
-                                          </span>
-
-
-                                          <span className='secondary' id="verticalLine">
-
-                                          <span>
-                                                This is awesome, I am meeting so many new people and saving so much. I 💜 OWO Yay!
-                                            </span>
-                                          </span>
-                                            <small className="pull-right" >
-                                              <span className="glyphicon glyphicon-time"></span>
-                                              <span>
-                                              {" "}5min ago
-                                              </span>
-                                            </small>
-
-
-                                        </ListItem>
-                                        <ListItem justify='between'>
-                                          <span>
-
-                                          </span>
-                                        </ListItem>
-                                      </List>
-
-                                      <div className="input-group">
-                                      <FormField  type="text" className="form-control" label="type your message here....">
-                                        <TextInput />
-                                      </FormField>
-
-                                        <span className="input-group-btn">
-                                          <button className="btn btn-secondary" type="button">Send</button>
-                                        </span>
-                                      </div>
-                              </Section>
-              <Section pad='large'
-                justify='center'
-                align='center'>
-        </Section>
-
-
-
-
-    </Article>
-    )
+                  <span className="input-group-btn">
+                    <button className="btn btn-secondary" type="button">Send</button>
+                  </span>
+                </div>
+            </Section>
+            <Section 
+              pad='large'
+              justify='center'
+              align='center'>
+            </Section>
+        
+      </Article>
+    )}
   }
 }
 
