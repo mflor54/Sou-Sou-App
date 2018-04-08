@@ -37,6 +37,25 @@ getAllUsers = (req, res, next) => {
     });
 }
 
+getSingleUsers = (req, res, next) => {
+
+  db
+    .any("select * from users where first_name=Jason")
+    .then(function(data) {
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Crystal has Retrieved ALL users"
+      });
+
+    })
+    .catch(function(err) {
+      return next(err);
+    });
+}
+
+
+
 //Login users
 loginUser = (req, res, next) => {
   passport.authenticate("local", {});
@@ -52,14 +71,18 @@ loginUser = (req, res, next) => {
         if (err) {
           res.status(500).send("Login Error");
         }else {
+           console.log('USER====>:',user);
+          console.log('Res Login====>:',res);
           console.log(res.status);
           res.status(200).send(user);
+
+
           // res.redirect('/users/profile');
         }
       })
     }
   })
-  return authenticate(req, res, next)
+  return authenticate(req, res, next) //redirect - erty 
 }
 //Create user with resistration and login users
 createUser = (req, res, next) => {
@@ -75,7 +98,9 @@ createUser = (req, res, next) => {
   .then(() => {
     //Would like to authenticate and redirect to profile or login
     res.send(`created user: ${req.body.username}`);
-    loginUser()
+    if(next) { // this is super hacky, next will be undefined in seed.js
+        loginUser()
+    }
   })
     .catch(err => {
       console.log('Create User Error: ',err);
@@ -92,16 +117,36 @@ logoutUser = (req, res, next) => {
 }
 
 // get user info for their profile page when they log in or during session
+// getUserInfo = (req, res, next) => {
+//     db.any('select * from users where username = ${userName}')
+//     .then((data) => {
+//         res.status(200).json({
+//             status: success,
+//             data: data,
+//             message: 'Retrived User info'
+//         });
+//     })
+//     .catch((err) => {
+//         return next(err);
+//     });
+// }
+
 getUserInfo = (req, res, next) => {
-    db.any('select * from users where username = ${userName}')
+
+  console.log(req.body.userID);
+    db.any('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
+      userID:req.params.userID
+    })
     .then((data) => {
-        res.status(200).json({
-            status: success,
-            data: data,
-            message: 'Retrived User info'
-        });
+      console.log("DATA:=======================================> ", data);
+      res.status(200).json({
+          status: "success",
+          data: data,
+          message: 'Retrieved group info'
+      });
     })
     .catch((err) => {
+      console.log("ERROR:=====================================> ",err);
         return next(err);
     });
 }
@@ -109,7 +154,7 @@ getUserInfo = (req, res, next) => {
 
 // select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
-    db.one('select * from groups where groups.ID=${groupID}',
+    db.one('select * from groups where group_name=${groupID}',
         {
             groupID: req.params.groupID
         }
@@ -180,11 +225,11 @@ getGroupByName = (req, res, next) => {
 }
 
 userJoinGroup = (req, res, next) => {
-  let userID = req.user.id;
-  console.log("userJoinGroup ==> req.user.id", userID);
-   db.none('insert into users_groups (group_id, user_id) values (${groupID}, ${userID})', {
-      groupID: req.body.groupID,
-      userID: userID
+  //let userID = 4;
+  //console.log("userJoinGroup ==> req.user.id", userID);
+   db.none('insert into users_groups (user_id, group_id) values (${userID}, ${groupID})', {
+      userID: req.params.userID,
+      groupID: req.params.groupID,
    })
     .then((data) => {
         res.status(200).json({
@@ -216,7 +261,7 @@ saveCustomerToken = (req, res, next) => {
 }
 
 paymentSent = (req, res, next) => {
-    db.none()
+    
 }
 
 saveCustomerId = (data, id) => {
@@ -232,6 +277,87 @@ saveCustomerId = (data, id) => {
         return;
     })
 }
+
+getMembersFromGroup = (group_id) => {
+    return (db.any('select * from users where group_id = ${group_id}', {
+        group_id: group_id
+    }))
+    // .then((data) => {
+    //     console.log('members data => ' + JSON.stringify(data));
+    //     return data;
+    // })
+    // .catch((err) => {
+    //     console.log('ERROR => ' + err);
+    //     return;
+    // })
+}
+
+getNumberOfPayments = (user, group) => {
+    console.log(typeof(group), typeof(user));
+    return (db.any('select * from paymentsin where group_id = ${group} and user_id = ${user}', {
+        user: user,
+        group: group,
+    }))
+    // .then((data) => {
+    //     res.status(200).json({
+    //         status: 'success',
+    //         data: data,
+    //         message: 'list of payments'
+    //     })
+    // })
+    // .catch((err) => {
+    //     console.log('number payments => ' + err);
+    //     return;
+    // })
+}
+
+paymentsIn = (user, amount, group, charge_id) => {
+    db.one('insert into paymentsin (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
+        charge_id: charge_id,
+        group: group,
+        user:user,
+        amount: amount
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'payment sent in'
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+        return;
+    })
+}
+
+paymentsOut = (user, amount, group, charge_id) => {
+    db.one('insert into paymentsout (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
+        charge_id: charge_id,
+        group: group,
+        user:user,
+        amount: amount
+    })
+    .then((data) => {
+        res.status(200).json({
+            status: 'success',
+            data: data,
+            message: 'payment sent out'
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+        return;
+    })
+}
+
+getGroup = (groupID) => {
+    return (db.one('select * from groups where id = ${groupID}', {
+        groupID: groupID
+    }))
+}
+
+
 
 getAllGroups = (req, res, next) => {
 
@@ -321,5 +447,11 @@ module.exports = {
     loginUser: loginUser,
     getAllUsers:getAllUsers,
     saveCustomerId: saveCustomerId,
-    userJoinGroup: userJoinGroup
+    userJoinGroup: userJoinGroup,
+    getMembersFromGroup: getMembersFromGroup,
+    getNumberOfPayments: getNumberOfPayments,
+    getGroup: getGroup,
+    getSingleUsers:getSingleUsers
+    // getUserGroupInfo: getUserGroupInfo,
+    // getAllCreatorsInfo: getAllCreatorsInfo
 };

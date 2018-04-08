@@ -87,7 +87,7 @@ class ModalJoin extends Component {
     return(
       
       <div>
-      <Button className="btn-custom" type="Submit" onClick={this.props.submit}>Join</Button>
+      <Button className="btn-custom" color="secondary-dark-color" type="Submit" onClick={this.props.submit}>Join</Button>
          
       </div>
     )

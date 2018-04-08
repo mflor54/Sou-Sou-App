@@ -1,31 +1,46 @@
 .groups-header {
-background-color: #25283D;
+background-color: #29D9F4;
+
+}
+.background-header{
+  background-color: #25283D;
 
 }
 
 /* Article{
 
 } */
-
+ #logoSize{
+   width: 6em;
+ }
 .foot{
 text-align: center;
-
 }
 .avatar{
   width: 100%;
-  margin: auto;
+}
 
+#thumbnail{
+  width: 18em;
+}
+
+#headingfont{
+  font-size: 1em;
 }
 .avatarList #inner{
     display: inline-block;
 }
 .avatarList {
-  display: inline-block;
-  width: 100%;
+left: 0;
+  width:20em;
+  padding-bottom: 1em;
+
+
 }
 
 .avatarStyle {
 display: inline-block;
+
   height: 2em;
   width: 2em;
 

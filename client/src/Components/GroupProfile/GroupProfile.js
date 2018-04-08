@@ -24,8 +24,11 @@ import Nav from '../Nav/Nav';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 
-import axios from 'axios';
-import {Button} from 'mdbreact';
+import { Jumbotron, Col, Grid, Row, Panel, Glyphicon } from 'react-bootstrap';
+import { Link, Route, Switch } from 'react-router-dom';
+import { ModalContainer, ModalRoute } from 'react-router-modal';
+import { Button} from 'mdbreact';
+import axios from 'axios'
 
 
 import Join from '../Join/Join';
@@ -67,8 +70,10 @@ class GroupProfile extends Component {
       groupID:this.props.match.params.groupID,
       group:[],
       groupinfo: props.groupInfo, 
-      member: '',
-      groupOpen: true
+      member: false,
+      groupOpen: true, 
+      currentMembers: 3,
+      maxMembers: 5
 
     }
   }
@@ -88,6 +93,46 @@ class GroupProfile extends Component {
   //   }, 1000);
   // },
 
+  getGroupMembers = (id) => {
+    fetch(`/groups/${id}/members`)
+    .then(res => {
+      return res.json();
+    })
+    .then(info => console.log(info))
+    .cath(err => console.log("get members err", err))
+  }
+
+  checkGroupStatus = () => {
+    const {group} = this.state;
+    let groupID = group.id;
+    //const { groupID } = this.state;
+
+    fetch(`/groups/${groupID}/check`)
+    .then(res => 
+      res.json()
+    )
+    .then(group => {
+      console.log("++--> check status:", group.data);
+      let data = group.data[0];
+      //console.log(data.maxMembers);
+      /*
+      if(group.data[0].currentMembers !== undefined){
+        let currentMembers = parseInt(data.currentMembers);
+        let maxMembers = data.maxMembers;
+        console.log(currentMembers, maxMembers);
+      
+        if(currentMembers >= maxMembers) {
+          this.setState({
+            groupOpen: false
+          });
+        }
+      }
+      */
+      
+    })
+    // console.log("checking status");
+  }
+
   //Gets one group from the database and udpates the state of group to that fetched group
   getGroup = () => {
     console.log(this.props.groupinfo);
@@ -104,52 +149,22 @@ class GroupProfile extends Component {
       this.setState({
         group: data
       });
-    });
-  }
-
-  checkGroupStatus = () => {
-    const { groupID } = this.state;
-
-    fetch(`/groups/${groupID}/check`)
-    .then(res => 
-      res.json()
-    )
-    .then(group => {
-      console.log("++--> check status:", group.data);
-      let data = group.data[0];
-      //console.log(data.maxMembers);
-      if(group.data[0].currentMembers !== undefined){
-        let currentMembers = parseInt(data.currentMembers);
-        let maxMembers = data.maxMembers;
-        console.log(currentMembers, maxMembers);
-      
-        if(currentMembers >= maxMembers) {
-          this.setState({
-            groupOpen: false
-          });
-        }
-      }
-      
     })
-    // console.log("checking status");
+    // .then(
+    //   this.getGroupMembers()
+    // )
   }
 
-  getGroupMembers = () => {
-    fetch(`/groups/${id}/members`)
-    .then(res => {
-      return res.json();
-    })
-    .then(info => console.log(info))
-    .cath(err => console.log("get members err", err))
-  }
   handleJoinSubmit = e => {
     console.log("///clicking submit");
     //get group id and send to back end via axios post request
-    let groupID = this.state.groupID;
+    let groupID = this.state.group.id;
+    let userID = 4;
     console.log("this is this.state.groupID:", groupID);
     //
     //post request to userJoinGroup
-    axios.post(`/groups/${groupID}/join`, {
+
+    axios.post(`/groups/${groupID}/join/${userID}`, {
       groupID: groupID
     })
     .then(res => {
@@ -164,12 +179,11 @@ class GroupProfile extends Component {
 
   componentDidMount(){
     let groupID = this.props.match.params.groupID;
-
     localStorage.setItem('groupID', JSON.stringify(groupID));
     this.setState({ groupID: groupID });
     this.getGroup();
     this.checkGroupStatus();
-    this.getGroupMembers(groupID);
+    //this.getGroupMembers();
 
   }
 
@@ -184,22 +198,26 @@ class GroupProfile extends Component {
     return owlstr.map((owl)=> <img src={owl} style={avatarStyle} alt="username"/>);
   }
 
+  paymentOnClick = () => {
+    let groupID = this.props.match.params.groupID
+    axios.post(`${groupID}/charge`)
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   render() {
     let joinClose = () => this.setState({ showjoin: false });
     const { group, member, groupOpen } = this.state;
 
     console.log("**member from state =>", member);
-
+    
     return(
       <Article scrollStep={false}>
-            <Section pad='small'
-              justify='center'
-              align='center'
-              className="groups-header"
 
-              >
-                      <Nav />
-              </Section>
 
                 <Hero background={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
                     fit='cover'
@@ -223,6 +241,14 @@ class GroupProfile extends Component {
                                   </Box>
                             </Box>
                   </Hero>
+                  <Section pad='small'
+                    justify='center'
+                    align='center'
+                    className="groups-header"
+
+                    >
+
+                    </Section>
               <Section pad='large'
                 justify='center'
 
@@ -269,7 +295,7 @@ class GroupProfile extends Component {
                   </Section>
 
                   {groupOpen ? 
-                  <Join groupID={this.state.groupID}/> : <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button>
+                  <Join groupID={this.state.groupID} submit={this.handleJoinSubmit}/> : <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button>
                   }
 
 

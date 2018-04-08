@@ -3,10 +3,9 @@
 
 
 
-.foot {
-height: auto;
-bottom: 0;
-padding: 12px 100px 0 100px;
+.footer {
+background-color: #25283D;
+
 }
 
 
@@ -18,7 +17,7 @@ padding: 12px 100px 0 100px;
 }
 
 img {
-width: 32px;
+width: 2.5em;
 }
 
 .help {

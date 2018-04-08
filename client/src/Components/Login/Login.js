@@ -21,7 +21,7 @@ class ModalLogin extends Component {
       passwordInput: "",
       message: "",
       loggedIn: false,
-      id:""
+      user:[]
     }
     this.renderModalLogin = this.renderModalLogin.bind(this)
   }
@@ -40,11 +40,11 @@ class ModalLogin extends Component {
 
    submitForm = e => {
      e.preventDefault();
-     const { usernameInput, passwordInput, loggedIn, message, userId } = this.state;
+     const { usernameInput, passwordInput, loggedIn, message, userID } = this.state;
 
-     if (usernameInput.length < 6) {
+     if (usernameInput.length < 4) {
        this.setState({
-         message: "Username length must be at least 6"
+         message: "Username length must be at least 4"
        });
        return;
      }
@@ -53,10 +53,12 @@ class ModalLogin extends Component {
          password: passwordInput
        })
        .then(res => {
-         console.log(res);
+         console.log('LOGIN ', res.data.id);
          this.props.setUser(res.data);
+
           this.setState({
-            loggedIn: true
+            loggedIn: true,
+            user: res.data
           });
        })
        .catch(err => {
@@ -110,6 +112,7 @@ class ModalLogin extends Component {
 
           <FormGroup>
             <Col smOffset={3} sm={8}>
+            <p>{this.state.message}</p>
               <Button   className="btn-custom"  color="secondary-color-dark"
                   onClick={this.submitForm}>Sign in</Button>
             </Col>
@@ -123,11 +126,12 @@ class ModalLogin extends Component {
 
   render(){
 
-    const { usernameInput, passwordInput, message, loggedIn } = this.state;
-
+    const { usernameInput, passwordInput, message, loggedIn, user } = this.state;
+      console.log(user);
+      let userID = user.id
     if (loggedIn) {
      console.log(loggedIn);
-      return <Redirect to={`/users/profile`} render={this.renderProfilePage}/>;
+      return <Redirect to={`/users/profile/${userID}`} render={this.renderProfilePage}/>;
      }
     return(
 
@@ -142,7 +146,6 @@ class ModalLogin extends Component {
              Login
           </Button>
         </ModalLink>
-
         </div>
     )
   }
