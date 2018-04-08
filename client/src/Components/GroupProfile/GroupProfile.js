@@ -73,7 +73,8 @@ class GroupProfile extends Component {
       member: false,
       groupOpen: true, 
       currentMembers: 3,
-      maxMembers: 5
+      maxMembers: 5, 
+      showMessage: false
 
     }
   }
@@ -209,9 +210,17 @@ class GroupProfile extends Component {
     })
   }
 
+  ShowMessage = () => {
+    console.log("clicking");
+    const { showMessage } = this.state;
+    this.setState({
+      showMessage: !showMessage
+    });
+  }
+
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    const { group, member, groupOpen } = this.state;
+    const { group, member, groupOpen, showMessage } = this.state;
 
     console.log("**member from state =>", member);
     if(!member){
@@ -524,12 +533,46 @@ class GroupProfile extends Component {
 
 
                   </ListItem>
-                  <ListItem justify='between'>
-                    <span>
+                
+                  {!showMessage ? 
+                    <ListItem 
+                      justify='between'
+                      separator='horizontal'
+                    >
+                      <span> </span> 
+                    </ListItem>
+                    :  
+                    <ListItem 
+                      justify='between'
+                      separator='horizontal'
+                    >
+                      <span pad='small'>
+                        <img className="img-circle" src="http://placehold.it/50/29D9F4/fff&text=J" alt="user-avatar"  />
+                      </span>
 
-                    </span>
-                  </ListItem>
+                      <span pad='small' id="space">
+
+                        <strong>Jason</strong>
+                      </span>
+
+
+                      <span className='secondary' id="verticalLine">
+
+                      <span>
+                          Hey I'm new to OWO also! So excited to start Saving money with my new w.o.e.s!!! LOL! 
+                      </span>
+                      </span>
+                      <small className="pull-right" >
+                        <span className="glyphicon glyphicon-time"></span>
+                        <span>
+                        {" "}0min ago
+                        </span>
+                      </small>
+                      </ListItem>
+                    }
+                  
                 </List>
+              
 
                 <div className="input-group">
                 <FormField  type="text" className="form-control" label="type your message here....">
@@ -537,7 +580,7 @@ class GroupProfile extends Component {
                 </FormField>
 
                   <span className="input-group-btn">
-                    <button className="btn btn-secondary" type="button">Send</button>
+                    <button className="btn btn-secondary" type="button" onClick={this.ShowMessage}>Send</button>
                   </span>
                 </div>
             </Section>
