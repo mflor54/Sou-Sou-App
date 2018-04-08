@@ -55,7 +55,7 @@ router.get('/token', userRequired, async (req, res) => {
         return;
     }
 
-    res.redirect('http://localhost:3000/users/login')
+    res.redirect('http://localhost:3000/groups')
 })
 
 

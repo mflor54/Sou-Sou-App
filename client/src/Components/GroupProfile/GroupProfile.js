@@ -109,15 +109,17 @@ class GroupProfile extends Component {
 
 
 
+
   componentDidMount(){
 
+  
+    let groupID = this.props.match.params.groupID;
 
-let groupID = this.props.match.params.groupID;
-
-        localStorage.setItem('groupID', JSON.stringify(groupID));
-        this.setState({ groupID: groupID });
-  this.getGroup();
+      localStorage.setItem('groupID', JSON.stringify(groupID));
+      this.setState({ groupID: groupID });
+      this.getGroup();
   }
+
 
   showGroupMembers(total_members){
     let owlstr = [];
@@ -132,9 +134,10 @@ let groupID = this.props.match.params.groupID;
 
   paymentOnClick = () => {
     let groupID = this.props.match.params.groupID
-    axios.post(`${groupID}/charge`)
+    console.log(groupID);
+    axios.post(`/groups/${this.state.groupID}/charge`)
     .then((data) => {
-      console.log(data)
+      console.log('onClick data ==> ' + JSON.stringify(data));
     })
     .catch((err) => {
       console.log(err)
@@ -197,6 +200,7 @@ let groupID = this.props.match.params.groupID;
                     strong={false}>
                           Group Creator:     <img className="img-circle" src="https://image.flaticon.com/icons/svg/12/12324.svg" alt="user-avatar"  />
                 </Headline>
+                <button onClick={this.paymentOnClick}>PAY HERE</button>
                 <Headline
                     size='small'
                     strong={false}

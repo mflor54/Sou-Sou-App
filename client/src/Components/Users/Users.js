@@ -127,9 +127,6 @@ class Users extends React.Component {
       </Switch>
       <ModalContainer  backdropClassName='react-router-modal__backdrop' />
       </div>
-
-
-    </div>
     );
   }
 }

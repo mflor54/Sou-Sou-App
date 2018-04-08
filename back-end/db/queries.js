@@ -1,4 +1,5 @@
 const db = require("./index");
+const stripe = require("../constants/stripe");
 const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
 const session = require("express-session");
@@ -89,6 +90,7 @@ var sessData = req.session;
 createUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
   console.log('createUser hash: ', hash);
+
   db.any('INSERT INTO users (first_name, last_name, username, password_digest, email) VALUES (${firstName}, ${lastName}, ${username}, ${password}, ${email})', {
     firstName: req.body.firstName,
     lastName:req.body.lastName,
@@ -139,7 +141,7 @@ getUserInfo = (req, res, next) => {
       userID:req.params.userID
     })
     .then((data) => {
-      console.log("DATA:=======================================> ", data);
+    //   console.log("DATA:=======================================> ", data);
       res.status(200).json({
           status: "success",
           data: data,
@@ -147,7 +149,7 @@ getUserInfo = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log("ERROR:=====================================> ",err);
+    //   console.log("ERROR:=====================================> ",err);
         return next(err);
     });
 }
@@ -155,8 +157,8 @@ getUserInfo = (req, res, next) => {
 
 // select one group from groups list page from front-end(list provided by getAllGroups)
 getSingleGroup = (req, res, next) => {
-  console.log("REQ Group ID: ",req);
-    db.one('select * from groups where group_name=${groupID}',
+  console.log("REQ Group ID: " + req.params.groupID);
+    db.one('select * from groups where id=${groupID}',
         {
             groupID: req.params.groupID
         }
@@ -199,7 +201,7 @@ createGroup = (req, res, next) => {
 
 userJoinGroup = (req, res, next) => {
 
-   db.none('insert into users_groups (group_id, user_id) values (${groupID}, ${userID})', {
+   db.none('insert into users_groups (user_id, group_id) values (${userID}, ${groupID})', {
       groupID: req.params.groupID,
       userID: req.params.userID
    })
@@ -251,7 +253,7 @@ saveCustomerId = (data, id) => {
 }
 
 getMembersFromGroup = (group_id) => {
-    return (db.any('select * from users where group_id = ${group_id}', {
+    return (db.any('select * from users_groups LEFT JOIN users on users_groups.user_id = users.id where group_id = ${group_id}', {
         group_id: group_id
     }))
     // .then((data) => {
@@ -265,10 +267,10 @@ getMembersFromGroup = (group_id) => {
 }
 
 getNumberOfPayments = (user, group) => {
-    console.log(typeof(group), typeof(user));
-    return (db.any('select * from paymentsin where group_id = ${group} and user_id = ${user}', {
+    console.log(user, group);
+    return (db.any('select * from payments_in where user_id = ${user} and group_id = ${group}', {
         user: user,
-        group: group,
+        group: group
     }))
     // .then((data) => {
     //     res.status(200).json({
@@ -281,46 +283,57 @@ getNumberOfPayments = (user, group) => {
     //     console.log('number payments => ' + err);
     //     return;
     // })
+    // db.any('select * from payments_in where user_id = ${user} and group_id = ${group}', {
+    //     user: user,
+    //     group: group
+    // })
+    // .then((data) => {
+    //     console.log(data);
+    //     return data;
+    // })
+    // .catch((err) => {
+    //     console.log('payments in error => ' + err);
+    // })
 }
 
 paymentsIn = (user, amount, group, charge_id) => {
-    db.one('insert into paymentsin (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
+    return (db.none('insert into payments_in (payment_id, amount, user_id, group_id) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
         charge_id: charge_id,
         group: group,
         user:user,
         amount: amount
-    })
-    .then((data) => {
-        res.status(200).json({
-            status: 'success',
-            data: data,
-            message: 'payment sent in'
-        })
-    })
-    .catch((err) => {
-        console.log(err);
-        return;
-    })
+    }));
+    // .then((data) => {
+    //     res.status(200).json({
+    //         status: 'success',
+    //         data: data,
+    //         message: 'payment sent in'
+    //     })
+    // })
+    // .catch((err) => {
+    //     console.log(err);
+    //     return;
+    // })
 }
 
 paymentsOut = (user, amount, group, charge_id) => {
-    db.one('insert into paymentsout (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
+    return (db.none('insert into payments_out (payment_id, amount, user_id, group_id) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
         charge_id: charge_id,
         group: group,
         user:user,
         amount: amount
-    })
-    .then((data) => {
-        res.status(200).json({
-            status: 'success',
-            data: data,
-            message: 'payment sent out'
-        })
-    })
-    .catch((err) => {
-        console.log(err);
-        return;
-    })
+    }));
+    // .then((data) => {
+    //     res.status(200).json({
+    //         status: 'success',
+    //         data: data,
+    //         message: 'payment sent out'
+    //     })
+    // })
+    // .catch((err) => {
+    //     console.log(err);
+    //     return;
+    // })
 }
 
 getGroup = (groupID) => {
@@ -364,7 +377,9 @@ module.exports = {
     getMembersFromGroup: getMembersFromGroup,
     getNumberOfPayments: getNumberOfPayments,
     getGroup: getGroup,
-    getSingleUsers:getSingleUsers
+    getSingleUsers:getSingleUsers,
+    paymentsIn: paymentsIn,
+    paymentsOut: paymentsOut,
     // getUserGroupInfo: getUserGroupInfo,
     // getAllCreatorsInfo: getAllCreatorsInfo
 };
