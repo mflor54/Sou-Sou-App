@@ -211,6 +211,12 @@ class GroupProfile extends Component {
     })
   }
 
+  handleChatMessage = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
   ShowMessage = () => {
     console.log("clicking");
     const { showMessage } = this.state;
