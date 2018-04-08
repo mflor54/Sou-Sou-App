@@ -214,10 +214,7 @@ pad='small'
                         >
                         {filteredGroups.map((group)=>(
                               <Tile>
-                                       <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}><Card id='thumbnail'
-                                       full='true'
-                                       thumbnail={randomImages[Math.floor(Math.random()*randomImages.length)]}
-
+                                       <Link to={`/groups/${group.id}`} groupinfo={group.creator}><Card id='thumbnail' thumbnail={pic}
                                         heading={group.group_name.toUpperCase()}
                                         label={`Group Creator: ${group.username}`}
 

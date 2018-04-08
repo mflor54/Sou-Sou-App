@@ -6,6 +6,8 @@ const secretStripeKey = 'sk_test_zqwRU3XilPXi20sK7XSC5B6z';
 
 const stripe = (configureStripe)(StripeTestKey);
 
+const stripeCharge = (configureStripe)(secretStripeKey);
+
 const clientID = 'ca_CVhEzMTBcVYxwt706tld9qDkYrPlxqSb';
 
 const authorizeUri = 'https://connect.stripe.com/express/oauth/authorize';
@@ -18,4 +20,5 @@ module.exports = {
     clientID: clientID,
     secretStripeKey, secretStripeKey,
     tokenUri: tokenUri,
+    stripeCharge: stripeCharge,
 }

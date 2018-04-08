@@ -127,7 +127,7 @@ class ModalLogin extends Component {
   render(){
 
     const { usernameInput, passwordInput, message, loggedIn, user } = this.state;
-      console.log(user);
+      // console.log(user);
       let userID = user.id
     if (loggedIn) {
      console.log(loggedIn);
