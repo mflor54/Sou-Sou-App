@@ -56,3 +56,17 @@ CREATE TABLE payments_out (
     group_id INTEGER REFERENCES groups(ID),
     user_id INTEGER REFERENCES users(ID)
 );
+
+CREATE TABLE threads (
+    ID SERIAL PRIMARY KEY,
+    groupID INTEGER REFERENCES groups(ID),
+    date_created TIMESTAMPTZ
+);
+
+CREATE TABLE messages (
+    ID SERIAL PRIMARY KEY,
+    authorID INTEGER REFERENCES users(ID),
+    threadID INTEGER REFERENCES threads(ID), 
+    user_message TEXT, 
+    date_created TIMESTAMPTZ
+);
