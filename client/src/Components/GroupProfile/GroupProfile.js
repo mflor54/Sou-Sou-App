@@ -165,7 +165,7 @@ class GroupProfile extends Component {
     //
     //post request to userJoinGroup
 
-    axios.post(`/groups/${groupID}/join/${userID}`, {
+    axios.post(`/groups/${groupID}/join`, {
       groupID: groupID
     })
     .then(res => {
