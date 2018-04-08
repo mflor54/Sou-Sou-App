@@ -18,7 +18,8 @@ getGroups = (req, res, next) => {
         return next(err);
     })
 }
-*/
+
+
 
 //Get all information of all users
 getAllUsers = (req, res, next) => {
@@ -449,7 +450,7 @@ module.exports = {
     saveCustomerId: saveCustomerId,
     userJoinGroup: userJoinGroup,
     getSingleUsers:getSingleUsers,
-    getGroups:getGroups
+    getGroups:getGroups,
     getMembersFromGroup: getMembersFromGroup,
     getNumberOfPayments: getNumberOfPayments,
     getGroup: getGroup,

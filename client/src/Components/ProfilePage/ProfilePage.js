@@ -32,7 +32,6 @@ import Navagation from '../Nav/Nav';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
 import FooterUser from '../Footer/Footer';
-import CreateGroup from '../CreateGroup/CreateGroup';
 
 import GroupProfile from '../GroupProfile/GroupProfile';
 import CreateGroup from '../CreateGroup/CreateGroup';

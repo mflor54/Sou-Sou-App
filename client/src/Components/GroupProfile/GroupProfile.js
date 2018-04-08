@@ -254,7 +254,7 @@ class GroupProfile extends Component {
                   size='large'>
                   {group.group_name}
                 </Headline>
-                <button onClick={this.paymentOnClick}>PAY HERE</button>
+                {/* <button onClick={this.paymentOnClick}>PAY HERE</button> */}
                 <Headline
                     size='small'
                     strong={false}
@@ -421,7 +421,12 @@ class GroupProfile extends Component {
                 </div>
               </Headline>
                 <Section>
-                  <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button>
+                  {/* <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button> */}
+                  <Section>
+              <Button onClick={this.paymentOnClick} className="btn-custom pp" color="secondary-color-dark">
+                Pay
+              </Button>
+            </Section>
                 </Section>
               </Section>
              
