@@ -21,12 +21,20 @@
   text-align: center;
   margin: 0 auto;
 }
+#closer{
+  left: 4em;
+}
 
 #profileButton{
   border-radius: 4em;
   border: solid .2em #08CEC7;
 
 }
+#block{
+  display: inline-block;
+
+}
+
 
 #jayImage{
   width: 2em;

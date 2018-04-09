@@ -13,6 +13,7 @@ const secret = require('./secret.js')
 var index = require('./routes/index');
 var users = require('./routes/users');
 let groups = require('./routes/groups');
+let profile = require('./routes/profile');
 let stripeRoutes = require('./routes/stripe/stripe')
 let charges = require('./routes/stripe/charge');
 const db = require("./db/index");
@@ -88,7 +89,7 @@ app.use('/', index);
 app.use('/users/stripe', stripeRoutes);
 app.use('/users', users);
 app.use('/groups', groups);
-
+app.use('/profile', profile);
 // Access the session as req.session
 app.get('/', function(req, res, next) {
   if (req.session.views) {

@@ -17,7 +17,7 @@ getGroups = (req, res, next) => {
         return next(err);
     })
 }
-*/
+
 
 //Get all information of all users
 getAllUsers = (req, res, next) => {
@@ -80,7 +80,7 @@ loginUser = (req, res, next) => {
       })
     }
   })
-  return authenticate(req, res, next) //redirect - erty 
+  return authenticate(req, res, next) //redirect - erty
 }
 //Create user with resistration and login users
 createUser = (req, res, next) => {
@@ -246,7 +246,7 @@ saveCustomerToken = (req, res, next) => {
 }
 
 paymentSent = (req, res, next) => {
-    
+
 }
 
 saveCustomerId = (data, id) => {
@@ -263,38 +263,38 @@ saveCustomerId = (data, id) => {
     })
 }
 
-getMembersFromGroup = (group_id) => {
-    return (db.any('select * from users where group_id = ${group_id}', {
-        group_id: group_id
-    }))
-    // .then((data) => {
-    //     console.log('members data => ' + JSON.stringify(data));
-    //     return data;
-    // })
-    // .catch((err) => {
-    //     console.log('ERROR => ' + err);
-    //     return;
-    // })
-}
+// getMembersFromGroup = (group_id) => {
+//     return (db.any('select * from users where group_id = ${group_id}', {
+//         group_id: group_id
+//     }))
+//     // .then((data) => {
+//     //     console.log('members data => ' + JSON.stringify(data));
+//     //     return data;
+//     // })
+//     // .catch((err) => {
+//     //     console.log('ERROR => ' + err);
+//     //     return;
+//     // })
+// }
 
-getNumberOfPayments = (user, group) => {
-    console.log(typeof(group), typeof(user));
-    return (db.any('select * from paymentsin where group_id = ${group} and user_id = ${user}', {
-        user: user,
-        group: group,
-    }))
-    // .then((data) => {
-    //     res.status(200).json({
-    //         status: 'success',
-    //         data: data,
-    //         message: 'list of payments'
-    //     })
-    // })
-    // .catch((err) => {
-    //     console.log('number payments => ' + err);
-    //     return;
-    // })
-}
+// getNumberOfPayments = (user, group) => {
+//     console.log(typeof(group), typeof(user));
+//     return (db.any('select * from paymentsin where group_id = ${group} and user_id = ${user}', {
+//         user: user,
+//         group: group,
+//     }))
+//     // .then((data) => {
+//     //     res.status(200).json({
+//     //         status: 'success',
+//     //         data: data,
+//     //         message: 'list of payments'
+//     //     })
+//     // })
+//     // .catch((err) => {
+//     //     console.log('number payments => ' + err);
+//     //     return;
+//     // })
+// }
 
 paymentsIn = (user, amount, group, charge_id) => {
     db.one('insert into paymentsin (payment_id, amount, user_id, group) VALUES (${charge_id}, ${amount}, ${user}, ${group})', {
@@ -378,14 +378,36 @@ checkGroupStatus = (req, res, next) => {
   });
 }
 
+
+getJason = (req, res, next) => {
+
+    console.log(req.body.userID);
+    let userID = 9
+      db.one('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
+        userID:req.params.userID
+      })
+      .then((data) => {
+        console.log("DATA:=======================================> ", data);
+        res.status(200).json({
+            status: "success",
+            data: data,
+            message: 'Retrieved group info'
+        });
+      })
+      .catch((err) => {
+        console.log("ERROR:=====================================> ",err);
+          return next(err);
+      });
+}
+
 getMembers = (req, res, next) => {
   //let userID = req.user.id;
   //console.log("req.user.id from isMember", userID);
-  
+
   db.any('select users_groups.user_id AS "groupMembers" FROM users_groups where group_id=${groupID}', {
     groupID: req.params.groupID
   })
-  .then((data) => { 
+  .then((data) => {
     res.status(200).json({
       status: 'success',
       data: data,
@@ -412,7 +434,7 @@ getMembers = (req, res, next) => {
       res.status(200).json({
         status: 'success',
         result: true,
-        data: data, 
+        data: data,
         message: 'This user is a group member'
       });
       //console.log(data);
@@ -434,10 +456,11 @@ module.exports = {
     saveCustomerId: saveCustomerId,
     userJoinGroup: userJoinGroup,
     getSingleUsers:getSingleUsers,
-    getGroups:getGroups
-    getMembersFromGroup: getMembersFromGroup,
-    getNumberOfPayments: getNumberOfPayments,
+    getGroups:getGroups,
+    // getMembersFromGroup: getMembersFromGroup,
+    // getNumberOfPayments: getNumberOfPayments,
     getGroup: getGroup,
     // getUserGroupInfo: getUserGroupInfo,
-    // getAllCreatorsInfo: getAllCreatorsInfo
+    // getAllCreatorsInfo: getAllCreatorsInfo,
+    getJason:getJason
 };

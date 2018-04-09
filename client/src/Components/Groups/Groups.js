@@ -23,7 +23,7 @@ import Paragraph from 'grommet/components/Paragraph';
 import GroupProfile from '../GroupProfile/GroupProfile';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import FooterUser from '../Footer/Footer';
-
+import JasonsProfilePage from '../ProfilePage/JasonsProfilePage'
 import Landing from '../Landing/Landing';
 import Navagation from '../Nav/Nav';
 import './Groups.css'
@@ -52,7 +52,11 @@ class Groups extends Component {
     super();
     this.state = {
       groups: [],
-      search:''
+      search:'',
+      mockPics:[],
+      thumbs:'',
+      mockResults:[]
+
     }
 
     this.renderGroupsList = this.renderGroupsList.bind(this)
@@ -69,22 +73,20 @@ class Groups extends Component {
       let data = groups.data
       this.setState({
         groups: data,
-        mockPics:[],
-        mockResults:[]
+
       });
     });
   }
 
 mockUser = ()=>{
-  fetch('https://randomuser.me/api/?results=20')
+  fetch('https://randomuser.me/api/?results=3')
   .then(res=> res.json())
   .then(mocks => {
-    console.log(mocks.results)
-let mockResults =mocks.results
-    // console.log('holder :', holder );
-    let mockpic = mockResults.map(pic =>{this.setState({ mockPics:pic.picture.thumbnail})})
-    console.log(mockpic);
-    // let mockpic = mockResults.map(pic =>{console.log(pic.picture.thumbnail)})
+
+this.setState({
+  mockResults:mocks.results
+})
+
 
 
   })
@@ -96,25 +98,20 @@ let mockResults =mocks.results
     this.mockUser();
   }
 
-  showGroupMembers(total_members){
-  const {mockPics} = this.state
-    let owlstr = [];
-    // console.log(owlstr);
-    for(var i = 0; i < total_members; i++){
-
-  owlstr.push('{mockPics}');
-
-    }
-    console.log(owlstr);
-    return owlstr.map((owl)=> <div id="inner"><img src={owl} className="avatarStyle" alt="username"/></div>);
-  }
 
 //   showGroupMembers(total_members){
-//   const {mockPics} = this.state
-// mockPics.forEach(el =>{
-//   console.log(el);
-// })
+//     const {mockResults} = this.state
+//         ava.push(mock.picture.thumbnail)
+//         ava.push("https://image.flaticon.com/icons/svg/12/12324.svg");
+//
+//
+//       }
+//       // console.log(ava);
+//       return ava.map((owl)=> <div id="inner"><img src={owl} className="avatarStyle" alt="username"/></div>);
+//
+//     })
 // }
+
 
   handleSearch(e) {
     const {search}=this.state
@@ -126,9 +123,14 @@ let mockResults =mocks.results
 
 
   renderGroupsList(){
-    const { groups, mockPics } = this.state;
-    console.log(mockPics);
-    console.log("this is groups from state", groups);
+    const { groups, mockPics, mockResults } = this.state;
+
+console.log(mockResults);
+
+
+// let picsAvatar =mockResults.map((mock)=>{
+//   console.log(mock)
+// })
 
   let payList=  groups.map((group)=>{
       console.log(group.pay_out_amount);
@@ -214,14 +216,17 @@ pad='small'
                         >
                         {filteredGroups.map((group)=>(
                               <Tile>
-                                       <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}><Card id='thumbnail'
-                                       full='true'
-                                       thumbnail={randomImages[Math.floor(Math.random()*randomImages.length)]}
+                                       <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}>{
+
+                                         <Card
+
+                                       thumbnail={<Image  src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+                                          />}
 
                                         heading={group.group_name.toUpperCase()}
                                         label={`Group Creator: ${group.username}`}
 
-                                        />
+                                        />}
                                           <Heading
                                           id='headingfont'
                                                 strong={false}
@@ -236,18 +241,14 @@ pad='small'
                                         id='headingfont'
                                         margin='small'
                                         pad='small'>
-
-                                          {`Payout Amount: ${group.pay_out_amount}`}<br />
-                                          {`Payin Amount: ${group.pay_in_amount}`}<br/>
+                                          {`Group Members: ${group.total_members}`}<br />
+                                          {`Pay Out Amount: ${group.pay_out_amount}`}<br />
+                                          {`Pay In Amount: ${group.pay_in_amount}`}<br/>
                                           {`Frequency: ${group.frequency}`}
 
 
                                         </Paragraph>
-                                            <div className="avatar">
-                                                    <div className="avatarList">
-                                                          {this.showGroupMembers(group.total_members)}
-                                                    </div>
-                                            </div>
+
                                       </Link>
                               </Tile>
                           ))}
@@ -270,6 +271,7 @@ pad='small'
 <Navagation />
 
 <Switch>
+      <Route exact path="/profile" component={this.renderGroupsList} />
       <Route exact path="/groups" component={this.renderGroupsList} />
       <Route path="/groups/:groupID" component={GroupProfile} groupinfo={groupList}/>
       <Route path="/users/profile/:userID" component={ProfilePage} groupinfo={groupList}/>

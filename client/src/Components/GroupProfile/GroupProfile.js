@@ -23,6 +23,8 @@ import Box from 'grommet/components/Box';
 import Nav from '../Nav/Nav';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
+import Form from 'grommet/components/Form';
+
 
 import { Jumbotron, Col, Grid, Row, Panel, Glyphicon } from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
@@ -35,7 +37,10 @@ import Join from '../Join/Join';
 import './GroupProfile.css';
 
 var logo = require('../images/Logo/OwoLogoNWGroupGR.png');
+var car =require('../images/groupImages/action-architecture-automobile-174752.jpg');
 let groupID = JSON.parse(localStorage.getItem('groupID')) || [];
+var Jason= require("../images/crew/jason.jpg");
+
 var randomImages = [
     require('../images/groupImages/activity-adventure-blur-297642.jpg'),
     require('../images/groupImages/action-architecture-automobile-174752.jpg'),
@@ -69,12 +74,16 @@ class GroupProfile extends Component {
       showJoin: false,
       groupID:this.props.match.params.groupID,
       group:[],
-      groupinfo: props.groupInfo, 
+      groupinfo: props.groupInfo,
       member: false,
-      groupOpen: true, 
+      groupOpen: true,
       currentMembers: 3,
-      maxMembers: 5, 
-      showMessage: false
+      maxMembers: 5,
+      showMessage: false,
+      resOne:[],
+      resTwo:[],
+      resThree:[],
+      resFour:[],
 
     }
   }
@@ -109,7 +118,7 @@ class GroupProfile extends Component {
     //const { groupID } = this.state;
 
     fetch(`/groups/${groupID}/check`)
-    .then(res => 
+    .then(res =>
       res.json()
     )
     .then(group => {
@@ -121,7 +130,7 @@ class GroupProfile extends Component {
         let currentMembers = parseInt(data.currentMembers);
         let maxMembers = data.maxMembers;
         console.log(currentMembers, maxMembers);
-      
+
         if(currentMembers >= maxMembers) {
           this.setState({
             groupOpen: false
@@ -129,9 +138,33 @@ class GroupProfile extends Component {
         }
       }
       */
-      
+
     })
     // console.log("checking status");
+  }
+
+
+  mockUser = ()=>{
+    fetch('https://randomuser.me/api/?results=4')
+    .then(res=> res.json())
+    .then(mocks => {
+let one = mocks.results[0]["picture"]["thumbnail"]
+let two = mocks.results[1]["picture"]["thumbnail"]
+let three = mocks.results[2]["picture"]["thumbnail"]
+let four = mocks.results[3]["picture"]["thumbnail"]
+
+  this.setState({
+    resOne:one,
+    resTwo:two,
+    resThree:three,
+    resFour:four,
+
+
+  })
+
+
+
+    })
   }
 
   //Gets one group from the database and udpates the state of group to that fetched group
@@ -184,6 +217,7 @@ class GroupProfile extends Component {
     this.setState({ groupID: groupID });
     this.getGroup();
     this.checkGroupStatus();
+    this.mockUser();
     //this.getGroupMembers();
 
   }
@@ -220,29 +254,37 @@ class GroupProfile extends Component {
 
   render() {
     let joinClose = () => this.setState({ showjoin: false });
-    const { group, member, groupOpen, showMessage } = this.state;
+    const { group, member, groupOpen, showMessage, resFour,resThree, resTwo, resOne } = this.state;
+
+//     let one = mockResults.map(pic => console.log(pic.picture))
+//     let onePic = mockResults["0"]
+//     let go = Object.entries(mockResults["0"])
+// console.log(go)
+//     console.log(onePic);
+
+// console.log("Mock images", one);
 
     console.log("**member from state =>", member);
     if(!member){
       return(
         <div>
-          <Hero 
-            background={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+          <Hero
+            background={<Image src={car}
             fit='cover'
             full={true} />}
             backgroundColorIndex='dark'
           >
-            <Box 
+            <Box
               direction='row'
               justify='center'
               align='center'
             >
-              <Box 
+              <Box
                 basis='1/2'
                 align='end'
-                pad='medium' 
+                pad='medium'
               />
-              <Box 
+              <Box
                 basis='1/2'
                 align='start'
                 pad='medium'
@@ -255,7 +297,7 @@ class GroupProfile extends Component {
               </Box>
             </Box>
           </Hero>
-          <Section 
+          <Section
             pad='small'
             justify='center'
             align='center'
@@ -263,7 +305,7 @@ class GroupProfile extends Component {
           >
 
           </Section>
-          <Section 
+          <Section
             pad='large'
             justify='center'
           >
@@ -279,11 +321,11 @@ class GroupProfile extends Component {
               size='small'
               strong={false}
             >
-              Group Creator: <img 
-                              className="img-circle" 
-                              src="https://image.flaticon.com/icons/svg/12/12324.svg" 
-                              alt="user-avatar" 
-                             />
+              <strong>Group Creator: </strong>{" "}<img
+                              className="img-circle"
+                              src={resFour}
+                              alt="user-avatar"
+                             /> CamOne
             </Headline>
             <Headline
               size='small'
@@ -293,7 +335,7 @@ class GroupProfile extends Component {
             </Headline>
 
           </Section>
-          <Section 
+          <Section
             pad='large'
             justify='center'
           >
@@ -303,41 +345,62 @@ class GroupProfile extends Component {
               strong={false}
               id='headline'
             >
-              Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018
+              Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for (Standby)
             </Headline>
             <Headline
               size='small'
               strong={false}
             >
               <div>
-                {this.showGroupMembers(group.total_members)}
+              <img
+                              className="img-circle"
+                              src={resFour}
+                              alt="user-avatar"
+                             />{" "}
+                             <img
+                                             className="img-circle"
+                                             src={resThree}
+                                             alt="user-avatar"
+                                            />{" "}<img
+                                                            className="img-circle"
+                                                            src={resTwo}
+                                                            alt="user-avatar"
+                                                           />{' '}<img
+                                                                           className="img-circle"
+                                                                           src={resOne}
+                                                                           alt="user-avatar"
+                                                                          />{' '}<img
+                                                                                          className="img-circle"
+                                                                                          src={"https://image.flaticon.com/icons/svg/12/12324.svg"}
+                                                                                          alt="user-avatar"
+                                                                                         />
               </div>
             </Headline>
             <Section>
               <Join groupID={this.state.groupID} submit={this.handleJoinSubmit}/>
             </Section>
           </Section>
-    
+
         </div>
       )
     } else {
       return(
         <Article scrollStep={false}>
-        <Hero 
-          background={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+        <Hero
+          background={<Image src={car}
           fit='cover'
           full={true} />}
           backgroundColorIndex='dark'
         >
-          <Box 
+          <Box
             direction='row'
             justify='center'
             align='center'
           >
-            <Box 
+            <Box
               basis='1/2'
               align='end'
-              pad='medium' 
+              pad='medium'
             />
             <Box basis='1/2'
               align='start'
@@ -360,7 +423,7 @@ class GroupProfile extends Component {
           >
 
           </Section>
-          <Section 
+          <Section
             pad='large'
             justify='center'
           >
@@ -375,10 +438,10 @@ class GroupProfile extends Component {
               size='small'
               strong={false}
             >
-              Group Creator: <img 
-                              className="img-circle" 
-                              src="https://image.flaticon.com/icons/svg/12/12324.svg" 
-                              alt="user-avatar"  
+              Group Creator: <img
+                              className="img-circle"
+                              src={resFour}
+                              alt="user-avatar"
                             />
             </Headline>
             <Headline
@@ -390,7 +453,7 @@ class GroupProfile extends Component {
             </Headline>
 
           </Section>
-          <Section 
+          <Section
             pad='large'
             justify='center'
           >
@@ -400,22 +463,42 @@ class GroupProfile extends Component {
                 strong={false}
                 id='headline'
               >
-                Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 1, 2018
+                Next Payout of <strong>${group.pay_out_amount}</strong> scheduled for April 20, 2018
               </Headline>
               <Headline
                 size='small'
                 strong={false}
               >
                 <div>
-                    {this.showGroupMembers(group.total_members)}
-                </div>
+                <img
+                                className="img-circle"
+                                src={resFour}
+                                alt="user-avatar"
+                               />{" "}
+                               <img
+                                               className="img-circle"
+                                               src={resThree}
+                                               alt="user-avatar"
+                                              />{" "}<img
+                                                              className="img-circle"
+                                                              src={resTwo}
+                                                              alt="user-avatar"
+                                                             />{' '}<img
+                                                                             className="img-circle"
+                                                                             src={resOne}
+                                                                             alt="user-avatar"
+                                                                            />{' '}<img
+                                                                                            className="img-circle"
+                                                                                            src={Jason}
+                                                                                            alt="user-avatar"
+                                                                                           />                </div>
               </Headline>
                 <Section>
-                  <Button className="btn-custom" color="secondary-color-dark"> Group Full</Button>
+                  <Button disabled className="btn-custom" color="secondary-color-dark"> Group Full</Button>
                 </Section>
               </Section>
-             
-              <Section 
+
+              <Section
                 pad='large'
                 justify='center'
               >
@@ -427,12 +510,12 @@ class GroupProfile extends Component {
                   >
 
                     <span >
-                    <img className="img-circle" src="http://placehold.it/50/29D9F4/fff&text=K" alt="user-avatar"  />
+                    <img className="img-circle" src={resOne} alt="user-avatar"  />
                     </span>
 
                     <span >
 
-                      <strong>Krystal</strong>
+                      <strong>CamOne</strong>
                     </span>
 
                     <span className='secondary' >
@@ -448,17 +531,17 @@ class GroupProfile extends Component {
                         </span>
                       </small>
                   </ListItem>
-                  <ListItem 
+                  <ListItem
                     justify='between'
                     separator='horizontal'
                   >
 
                     <span pad='small'>
-                    <img className="img-circle" src="http://placehold.it/50/08CEC7/fff&text=M" alt="user-avatar"  />
+                    <img className="img-circle" src={resTwo} alt="user-avatar"  />
                     </span>
 
                     <span pad='small' id="space">
-                      <strong>Mike</strong>
+                      <strong>Skylark46</strong>
                     </span>
 
                     <span className='secondary' id="verticalLine">
@@ -479,12 +562,12 @@ class GroupProfile extends Component {
                     >
 
                     <span pad='small'>
-                    <img className="img-circle" src="http://placehold.it/50/A430A8/fff&text=C" alt="user-avatar"  />
+                    <img className="img-circle" src={resThree} alt="user-avatar"  />
                     </span>
 
                     <span pad='small' id="space">
 
-                      <strong>Crystal</strong>
+                      <strong>AlexDex</strong>
                     </span>
 
 
@@ -503,18 +586,18 @@ class GroupProfile extends Component {
 
 
                   </ListItem>
-                  <ListItem 
+                  <ListItem
                     justify='between'
                     separator='horizontal'
                   >
 
                     <span pad='small'>
-                    <img className="img-circle" src="http://placehold.it/50/25283D/fff&text=R" alt="user-avatar"  />
+                    <img className="img-circle" src={resFour} alt="user-avatar"  />
                     </span>
 
                     <span pad='small' id="space">
 
-                      <strong>Rachel</strong>
+                      <strong>AngelOnEarth</strong>
                     </span>
 
 
@@ -533,21 +616,21 @@ class GroupProfile extends Component {
 
 
                   </ListItem>
-                
-                  {!showMessage ? 
-                    <ListItem 
+
+                  {!showMessage ?
+                    <ListItem
                       justify='between'
                       separator='horizontal'
                     >
-                      <span> </span> 
+                      <span> </span>
                     </ListItem>
-                    :  
-                    <ListItem 
+                    :
+                    <ListItem
                       justify='between'
                       separator='horizontal'
                     >
                       <span pad='small'>
-                        <img className="img-circle" src="http://placehold.it/50/29D9F4/fff&text=J" alt="user-avatar"  />
+                        <img className="img-circle" src={Jason} alt="user-avatar"  />
                       </span>
 
                       <span pad='small' id="space">
@@ -559,7 +642,7 @@ class GroupProfile extends Component {
                       <span className='secondary' id="verticalLine">
 
                       <span>
-                          Hey I'm new to OWO also! So excited to start saving money with my new w.o.e.s!!!  
+                          Hey I'm new to OWO also! So excited to start saving money with my new w.o.e.s!!!
                       </span>
                       </span>
                       <small className="pull-right" >
@@ -570,13 +653,14 @@ class GroupProfile extends Component {
                       </small>
                       </ListItem>
                     }
-                  
+
                 </List>
-              
+
 
                 <div className="input-group">
-                <FormField  type="text" className="form-control" label="type your message here....">
-                  <TextInput />
+
+                <FormField  pad='medium' size='large' type="text" className="form-control" label="type your message here....">
+                  <TextInput  />
                 </FormField>
 
                   <span className="input-group-btn">
@@ -584,12 +668,12 @@ class GroupProfile extends Component {
                   </span>
                 </div>
             </Section>
-            <Section 
+            <Section
               pad='large'
               justify='center'
               align='center'>
             </Section>
-        
+
       </Article>
     )}
   }
