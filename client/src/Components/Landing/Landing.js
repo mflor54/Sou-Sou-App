@@ -30,6 +30,7 @@ import FooterLanding from '../FooterLanding/FooterLanding';
 import Header from '../Header/Header';
 import HelpList from'../Help/Help';
 import Video from '../Video/Video';
+import JasonsProfilePage from '../ProfilePage/JasonsProfilePage';
 
 var logo = require('../images/Logo/OwoLogoNWGroup3LG.png');
 var bg = require('../images/BG/bg8.png');
@@ -270,6 +271,7 @@ handleChange = panel => (event, expanded) => {
       <Route exact path="/" component={this.renderLandingPage} />
       <Route path="/users" component={Users} />
       <Route path="/groups" component={Groups} />
+      <Route path="/profile/9" component={JasonsProfilePage}/>
     </Switch>
   </div>
     )

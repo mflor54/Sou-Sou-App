@@ -8,7 +8,13 @@ import Image from 'grommet/components/Image';
 
 import Title from 'grommet/components/Title';
 import Menu from 'grommet/components/Menu';
-import Actions from 'grommet/components/icons/base/Actions';
+import EmptyCircleIcon from 'grommet/components/icons/base/EmptyCircle';
+import ContactIcon from 'grommet/components/icons/base/Contact';
+import CircleQuestionIcon from 'grommet/components/icons/base/CircleQuestion';
+import LogoutIcon from 'grommet/components/icons/base/Logout';
+import GroupIcon from 'grommet/components/icons/base/Group';
+import CloseIcon from 'grommet/components/icons/base/Close';
+
 // import Anch from 'grommet/components/Anch';
 import Header from 'grommet/components/Header';
 import Anchor from 'grommet/components/Anchor';
@@ -18,7 +24,7 @@ import HelpList from'../Help/Help';
 import './Nav.css';
 
 var logo = require('../images/Logo/OwoLogoNWGroupTurq.png');
-var Mike= require("../images/crew/mike.jpg");
+var Jason= require("../images/crew/jason.jpg");
 
 
 const Navagation =()=>{
@@ -26,9 +32,9 @@ const Navagation =()=>{
     <Header splash={false}
           size='small'
           fixed={false}
-          pad='medium'
+          pad='small'
           float={false}>
-          <Button icon={<Image id='jayImage' src={Mike}
+          <Button icon={<Image id='jayImage' src={Jason}
                   full={false}
                   size='thumb' />}
                   responsive={true}
@@ -39,7 +45,7 @@ const Navagation =()=>{
                           accent={false}
                           critical={false}
                           plain={false}
-                          path='/groups/Spending%20Money' />
+                          path='/profile/9' />
           <Box flex={true}
                 justify='end'
                 direction='row'
@@ -50,21 +56,25 @@ const Navagation =()=>{
                 justify='end'
                 direction='row'
                 responsive={false}>
-                      <Menu icon={<Actions />}
-                            dropAlign={{"right": "right"}}>
+                      <Menu
+                      size="large"
+                      icon={<EmptyCircleIcon colorIndex={'brand'} size='medium' />}
+                            dropAlign={{"bottom": "right"}}>
+                          
                                 <Anchor href='/groups'
                                       className='active'>
-                                      Group Dashboard
+                                    <GroupIcon size='xsmall'  colorIndex={'brand'}/>  Group Dashboard
                                 </Anchor>
-                                <Anchor href='/'>
-                                      Logout
-                                </Anchor>
-                                <Anchor >
-                                      <HelpList  />
+
+                                <Anchor href='/help'>
+                                      <CircleQuestionIcon size='xsmall'  colorIndex={'brand'}/> Support
                                 </Anchor>
                                 <Anchor href='/Contact'>
-                                      Contact Us
+                                    <ContactIcon size='xsmall' colorIndex={'brand'} /> Contact Us
 
+                                </Anchor>
+                                <Anchor href='/'>
+                                      <LogoutIcon size='xsmall' colorIndex={'brand'} /> Logout
                                 </Anchor>
                       </Menu>
             </Box>
