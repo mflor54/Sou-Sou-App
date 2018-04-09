@@ -222,6 +222,7 @@ let four = mocks.results[3]["picture"]["thumbnail"]
 
   }
 
+
   showGroupMembers(total_members){
     let owlstr = [];
     for(var i = 0; i < total_members; i++){
@@ -235,9 +236,10 @@ let four = mocks.results[3]["picture"]["thumbnail"]
 
   paymentOnClick = () => {
     let groupID = this.props.match.params.groupID
-    axios.post(`${groupID}/charge`)
+    console.log(groupID);
+    axios.post(`/groups/${this.state.groupID}/charge`)
     .then((data) => {
-      console.log(data)
+      console.log('onClick data ==> ' + JSON.stringify(data));
     })
     .catch((err) => {
       console.log(err)
@@ -294,6 +296,14 @@ let four = mocks.results[3]["picture"]["thumbnail"]
                   size='large'>
                   {group.group_name}
                 </Headline>
+                {/* <button onClick={this.paymentOnClick}>PAY HERE</button> */}
+                <Headline
+                    size='small'
+                    strong={false}
+                    id='headline'>
+                            {group.frequency} payments of ${group.pay_in_amount}
+                </Headline>
+
               </Box>
             </Box>
           </Hero>
