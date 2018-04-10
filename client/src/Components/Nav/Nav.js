@@ -45,7 +45,7 @@ const Navagation =()=>{
                           accent={false}
                           critical={false}
                           plain={false}
-                          path='/profile/9' />
+                          path='/profile/12' />
           <Box flex={true}
                 justify='end'
                 direction='row'
@@ -60,7 +60,7 @@ const Navagation =()=>{
                       size="large"
                       icon={<EmptyCircleIcon colorIndex={'brand'} size='medium' />}
                             dropAlign={{"bottom": "right"}}>
-                          
+
                                 <Anchor href='/groups'
                                       className='active'>
                                     <GroupIcon size='xsmall'  colorIndex={'brand'}/>  Group Dashboard

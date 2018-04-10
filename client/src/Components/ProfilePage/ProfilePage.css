@@ -10,14 +10,27 @@ width: 100vw;
 }
 
 #profilePic{
-height: 11em;
-width: 9em;
+height: 10em;
+width: auto;
 border: solid #a430a8 .3em;
 border-radius: 50%;
 }
 
+#jasonPic{
+height: 11em;
+width: auto;
+border: solid #a430a8 .3em;
+border-radius: 50%;
+}
 
+#check{
 
+  width: 2.5em;
+}
+
+#line{
+  display: inline;
+}
 #card{
   width: 17em;
   padding: 2em;

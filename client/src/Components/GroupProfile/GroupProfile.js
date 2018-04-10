@@ -37,7 +37,7 @@ import Join from '../Join/Join';
 import './GroupProfile.css';
 
 var logo = require('../images/Logo/OwoLogoNWGroupGR.png');
-var car =require('../images/groupImages/action-architecture-automobile-174752.jpg');
+var car =require('../images/groupImages/auto-automobile-automotive-358208.jpg');
 let groupID = JSON.parse(localStorage.getItem('groupID')) || [];
 var Jason= require("../images/crew/jason.jpg");
 
