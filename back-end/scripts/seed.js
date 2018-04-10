@@ -9,18 +9,20 @@ let user1 = {
 }
 
 //create an object that mimics req.body
+
 let group1 = {
   //this is the response you would get from the body
   body: {
-    groupName: "Spending Money",
-    totalMembers: 5,
+    groupName: "Lets Get a Car",
+    totalMembers: 9,
     creator: 1,
-    payinAmount: 25,
-    payoutAmount: 125,
-    frequency: "Weekly",
-    description: "For shopping and food"
+    payinAmount: 625,
+    payoutAmount: 5000,
+    frequency: "Monthly",
+    description: "Down payment for a new car"
   }
 }
+
 let group2 = {
   //this is the response you would get from the body
   body: {
@@ -75,7 +77,7 @@ let group6 = {
   body: {
     groupName: "Electronic Envy",
     totalMembers: 9,
-    creator: 9,
+    creator: 4,
     payinAmount: 62.50,
     payoutAmount: 500,
     frequency: "weekly",
@@ -86,22 +88,78 @@ let group6 = {
 let group7 = {
   //this is the response you would get from the body
   body: {
-    groupName: "Lets Get a Car",
-    totalMembers: 9,
-    creator: 9,
-    payinAmount: 625,
-    payoutAmount: 5000,
-    frequency: "Monthly",
-    description: "Down payment for a new car"
+    groupName: "Spending Money",
+    totalMembers: 5,
+    creator: 6,
+    payinAmount: 25,
+    payoutAmount: 125,
+    frequency: "Weekly",
+    description: "For shopping and food"
   }
 }
-
+let group8 = {
+  //this is the response you would get from the body
+  body: {
+    groupName: "Student Loan... Ugh",
+    totalMembers: 5,
+    creator: 12,
+    payinAmount: 750,
+    payoutAmount: 3000,
+    frequency: "Monthly",
+    description: "Student loans? What part of the game is this?"
+  }
+}
+let group9 = {
+  //this is the response you would get from the body
+  body: {
+    groupName: "Budget Club",
+    totalMembers: 3,
+    creator: 7,
+    payinAmount: 50,
+    payoutAmount: 100,
+    frequency: "Weekly",
+    description: "Saving money with penny pinchers"
+  }
+}let group10 = {
+  //this is the response you would get from the body
+  body: {
+    groupName: "Vacay....",
+    totalMembers: 5,
+    creator: 8,
+    payinAmount: 500,
+    payoutAmount: 2000,
+    frequency: "Monthly",
+    description: "Tired of working"
+  }
+}let group11 = {
+  //this is the response you would get from the body
+  body: {
+    groupName: "Get Out of Debt",
+    totalMembers: 5,
+    creator: 10,
+    payinAmount: 300,
+    payoutAmount: 1200,
+    frequency: "Monthly",
+    description: "Student loans? What part of the game is this?"
+  }
+}let group12 = {
+  //this is the response you would get from the body
+  body: {
+    groupName: "Living Single",
+    totalMembers: 3,
+    creator: 9,
+    payinAmount: 200,
+    payoutAmount: 400,
+    frequency: "Monthly",
+    description: "Monthly Living"
+  }
+}
 
 //create a mock response. nothing has to go inside
 let resMock = {
   // send function
   send: function() {
-    
+
   },
   //res.status in a function
   status: function() {
@@ -168,7 +226,67 @@ queries.createUser({
     password: 'password'
   }
 }, resMock);
-
+queries.createUser({
+  body: {
+    firstName: 'user6',
+    lastName: 'last6',
+    username: 'user6',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'user7',
+    lastName: 'last7',
+    username: 'user7',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'user8',
+    lastName: 'last8',
+    username: 'user8',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'user9',
+    lastName: 'last9',
+    username: 'user9',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);queries.createUser({
+  body: {
+    firstName: 'user10',
+    lastName: 'last10',
+    username: 'user10',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);queries.createUser({
+  body: {
+    firstName: 'user11',
+    lastName: 'last11',
+    username: 'user11',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'Jason',
+    lastName: 'Doe',
+    username: 'JaySavesDoe',
+    email: 'mflor54+user5@gmail.com',
+    password: '000000'
+  }
+}, resMock);
 //pass all 3 into the query
 
 queries.createGroup(group1, resMock, next);
@@ -176,6 +294,13 @@ queries.createGroup(group2, resMock, next);
 queries.createGroup(group3, resMock, next);
 queries.createGroup(group4, resMock, next);
 queries.createGroup(group5, resMock, next);
+queries.createGroup(group6, resMock, next);
+queries.createGroup(group7, resMock, next);
+queries.createGroup(group8, resMock, next);
+queries.createGroup(group9, resMock, next);
+queries.createGroup(group10, resMock, next);
+queries.createGroup(group11, resMock, next);
+queries.createGroup(group12, resMock, next);
 
 //run the file in with node in the terminal. Test by reading the errors and correcting the queries.
 //Check the database --> did the data save correctly?

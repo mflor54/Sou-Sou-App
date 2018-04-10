@@ -21,6 +21,7 @@ import Paragraph from 'grommet/components/Paragraph';
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 import Card from 'grommet/components/Card';
+import Status from 'grommet/components/icons/Status';
 // import Button from 'grommet/components/Button';
 
 import AddCircleIcon from 'grommet/components/icons/base/AddCircle';
@@ -41,7 +42,9 @@ import './ProfilePage.css'
 var logo = require('../images/Logo/OwoLogoNWGroup3Sm.png');
 var owl = require('../images/icons/owl.png');
 var Jason= require("../images/crew/jason.jpg");
-
+var school=require('../images/groupImages/book-chair-chat-711009.jpg')
+var car =require('../images/groupImages/auto-automobile-automotive-358208.jpg');
+var stripe = require('../images/stripe.png')
 var randomImages = [
     require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
     require('../images/groupImages/backlit-clouds-dusk-853168.jpg'),
@@ -65,7 +68,7 @@ class JasonsProfilePage extends Component {
   }
 
     getJason = () => {
-      let userID = 9
+      let userID = 12
       fetch(`/profile/${userID}`)
       .then(res => res.json())
       .then(data => {
@@ -87,7 +90,10 @@ class JasonsProfilePage extends Component {
           this.setState({ getgroups: data.data})
         })
       }
+      paymentOnClick = () => {
+        this.setState({ payment: true })
 
+      }
 
 
     componentDidMount(){
@@ -99,7 +105,7 @@ class JasonsProfilePage extends Component {
 
 
 renderJasonsProfilePage=()=>{
-  console.log(this.state.userGroup);
+  console.log(this.state.userGroup["0"]);
   let randomImage =<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
      />
 
@@ -129,13 +135,12 @@ renderJasonsProfilePage=()=>{
             </Toast>
 
     <Split separator={false}
-    showOnResponsive='both'
-      >
+    showOnResponsive='both' >
               <Box direction='Row'
                 justify='center'
                 align='center'
                 wrap={true}
-                pad='small'
+                pad='none'
                 colorIndex='light-2'
                 id='left'
             >
@@ -150,23 +155,24 @@ renderJasonsProfilePage=()=>{
                             fixed={true}
                             align='center'
                             pad='none'>
-                        <Headline>Hey, {userGroup.username} </Headline>
+                        <Headline>Hey, JaySavesDoe </Headline>
                         </Box>
                         <Columns
                               align='start'
                               size='small'
+                              justify='center'
                               masonry={false}
                               >
                               <Box align='center'
-                                  pad='small'
+                                  pad='none'
 
                                   >
 
-                                    <Image fit='cover' alt='' id='profilePic' src={Jason} />
+                                    <Image fit='cover' alt='' id='jasonPic' src={Jason} />
 
                               </Box>
                               <Paragraph
-                                  size='medium'
+                                  size='small'
                                   strong={false}>
 
                                    <strong>  Rating: </strong> Gold<br /><br />
@@ -176,14 +182,17 @@ renderJasonsProfilePage=()=>{
                                       value={userGroup.member_date} /><br /><br />
 <hr />
                                      <strong>Next Pay Out: </strong><br/>
-                                     Get Car Fund:
-                                     $5,000 May 4, 2108<br /><br />
+                                     Student Loan... Ugh:<br />
+                                     $3,000 May 27, 2108<br />
+                                     Get Car Fund:<br />
+                                     $5,000 May 18, 2108<br />
 <hr />
                                      <strong>Due Dates:</strong><br />
                                     Student Loan... Ugh: <br />
-                                  $1,250 due by April 13, 2018<br />
-                                    <a href="http://localhost:3100/users/stripe/connect">Make a Payment</a><br />
-                                    <SocialStripeIcon />
+                                  $750 due by April 13, 2018<br />
+                                    <a onClick={this.paymentOnClick}> {!this.state.payment ? 'Make a Payment' : (<div id="line"><Image id='check' src={stripe}/> Payment Complete</div>) }</a><br />
+                                    Car Stash: <br />
+                                  $1,250 due by April 20, 2018<br />
                                     <br />
                                     <hr />
                                     <strong>Total Svaings:</strong> $2,834
@@ -236,7 +245,7 @@ renderJasonsProfilePage=()=>{
                                             {userGroup.map((group) => (
                                               <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}>
 
-                                                <Card id='thumbnail' thumbnail={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+                                                <Card id='thumbnail' thumbnail={<Image src={school}
                                                    />}
                                                  heading={group.group_name.toUpperCase()}
                                                  label={`Group Creator: ${group.username}`}
@@ -248,7 +257,20 @@ renderJasonsProfilePage=()=>{
                                           </Link>
 
                                          ))}
+                                         <Link to={`/groups/Car%20Stash`} groupinfo='CamOne'>
+
+                                           <Card id='thumbnail' thumbnail={<Image src={car}
+                                              />}
+                                            heading={'Car Stash'.toUpperCase()}
+                                            label={`Group Creator: CamOne`}
+
+                                            />
+
+
+
+                                     </Link>
                                       </Box>
+
 
                                       )}
                             </Box>
@@ -312,7 +334,7 @@ render() {
 <Navagation />
       <Switch>
 
-          <Route path="/profile/9" component={this.renderJasonsProfilePage}/>
+          <Route path="/profile/12" component={this.renderJasonsProfilePage}/>
           <Route path="/groups/new" component={CreateGroup} />
           <Route path="/groups/:groupID" component={GroupProfile}/>
           <Route path="/users/profile/:userID" component={ProfilePage} />

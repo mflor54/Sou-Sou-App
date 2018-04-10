@@ -267,19 +267,23 @@ saveCustomerId = (data, id) => {
     })
 }
 
-// getMembersFromGroup = (group_id) => {
-//     return (db.any('select * from users where group_id = ${group_id}', {
-//         group_id: group_id
-//     }))
-//     // .then((data) => {
-//     //     console.log('members data => ' + JSON.stringify(data));
-//     //     return data;
-//     // })
-//     // .catch((err) => {
-//     //     console.log('ERROR => ' + err);
-//     //     return;
-//     // })
-// }
+getMembersFromGroup = (group_id) => {
+    return (db.any('select * from users where group_id = ${group_id}', {
+        group_id: group_id
+    }))
+    // .then((data) => {
+    //     console.log('members data => ' + JSON.stringify(data));
+    //     return data;
+    // })
+    // .catch((err) => {
+    //     console.log('ERROR => ' + err);
+    //     return;
+    // })
+}
+
+getStripeAccounts = () => {
+  return (db.any('select stripe_id from users '));
+}
 
 // getNumberOfPayments = (user, group) => {
 //     console.log(typeof(group), typeof(user));
@@ -386,7 +390,7 @@ checkGroupStatus = (req, res, next) => {
 getJason = (req, res, next) => {
 
     console.log(req.body.userID);
-    let userID = 9
+    let userID = 12
       db.one('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
         userID:req.params.userID
       })
@@ -408,20 +412,20 @@ getMembers = (req, res, next) => {
   //let userID = req.user.id;
   //console.log("req.user.id from isMember", userID);
 
-  db.any('select users_groups.user_id AS "groupMembers" FROM users_groups where group_id=${groupID}', {
+  return (db.any('select users_groups.user_id AS "groupMembers" FROM users_groups where group_id=${groupID}', {
     groupID: req.params.groupID
-  })
-  .then((data) => {
-    res.status(200).json({
-      status: 'success',
-      data: data,
-      message: "got all users from this group"
-    });
-    console.log("get members query: ", data);
-  })
-  .catch((err) => {
-    console.log("isMember Error: ", err);
-  })
+  }));
+  // .then((data) => {
+  //   res.status(200).json({
+  //     status: 'success',
+  //     data: data,
+  //     message: "got all users from this group"
+  //   });
+  //   console.log("get members query: ", data);
+  // })
+  // .catch((err) => {
+  //   console.log("isMember Error: ", err);
+  // })
     /*
   db.any('select users_groups.user_id as "groupMembers", users_groups.group_id as "group" from users_groups where group_id=${groupID} group by group_id, users_groups.user_id', {
     groupID: req.params.groupID
@@ -461,7 +465,7 @@ module.exports = {
     userJoinGroup: userJoinGroup,
     getSingleUsers:getSingleUsers,
     getGroups:getGroups,
-    // getMembersFromGroup: getMembersFromGroup,
+    getMembersFromGroup: getMembersFromGroup,
     // getNumberOfPayments: getNumberOfPayments,
     getGroup: getGroup,
     getSingleUsers:getSingleUsers,
@@ -469,5 +473,6 @@ module.exports = {
     paymentsOut: paymentsOut,
     // getUserGroupInfo: getUserGroupInfo,
     // getAllCreatorsInfo: getAllCreatorsInfo,
-    getJason:getJason
+    getJason:getJason,
+    getStripeAccounts: getStripeAccounts,
 };

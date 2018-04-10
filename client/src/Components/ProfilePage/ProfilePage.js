@@ -59,7 +59,8 @@ class ProfilePage extends Component {
        showUpload: false,
        userProfile: props.userInfo,
        userGroup:[],
-       getgroups:[]
+       getgroups:[],
+       payment: false
 
     }
   }
@@ -113,6 +114,10 @@ class ProfilePage extends Component {
         })
       }
 
+      paymentOnClick = () => {
+        this.setState({ payment: true })
+
+      }
 
 
     componentDidMount(){
@@ -131,7 +136,7 @@ renderProfilePage=()=>{
   console.log(this.state.userProfile);
   console.log(this.props.userInfo.id);
 
-  const {userProfile, userGroup,getgroups} = this.state
+  const {userProfile, userGroup,getgroups, payment} = this.state
 
   console.log(userGroup);
 
@@ -143,7 +148,7 @@ renderProfilePage=()=>{
           </Button>
     </a>
   ):(
-    <p>You have saved: {this.state.userProfile.amount} </p>
+  null
   );
 
 
@@ -183,28 +188,31 @@ renderProfilePage=()=>{
                 id='left'
             >
 
-                <Box colorIndex='light-2'
-                      justify='center'
-                      fixed={true}
-                      align='center'
-                      pad='none'>
-                      <Box colorIndex='light-2'
-                            justify='center'
-                            fixed={true}
-                            align='center'
-                            pad='none'>
+            <Box colorIndex='light-2'
+                  justify='center'
+                  fixed={true}
+                  align='center'
+                  pad='none'>
+                  <Box colorIndex='light-2'
+                        justify='center'
+                        fixed={true}
+                        align='center'
+                        pad='none'>
                         <Headline>Hey, {userProfile.username}</Headline>
                         </Box>
                         <Columns
                               align='start'
                               size='small'
+                              justify='center'
                               masonry={false}
                               >
                               <Box align='center'
                                   pad='small'
 
                                   >
-                                    <Image alt='' className='profilePic' src={Jason} />
+
+                                    <Image fit='cover' alt='' id='profilePic' src={Jason} />
+
                               </Box>
                               <Paragraph
                                   size='medium'
@@ -218,15 +226,15 @@ renderProfilePage=()=>{
 <hr />
                                      <strong>Next Pay Out: </strong><br/>
                                      Get Car Fund:
-                                     $5,000 May 4, 2108<br /><br />
+                                     $3,000 May 4, 2018<br /><br />
 <hr />
                                      <strong>Due Dates:</strong><br />
                                     Student Loan... Ugh: <br />
-                                  $1,250 due by April 13, 2018<br />
-                                    <a href="http://localhost:3100/users/stripe/connect">Make a Payment</a><br />
-                                    <br />
+                                  $750 due by April 13, 2018<br />
+                                  <a onClick={this.paymentOnClick}> {!this.state.payment ? 'Make a Payment' : null }</a><br />
+                                                                     <br />
                                     <hr />
-                                    <strong>Total Svaings:</strong> $2,834
+                                    <strong>Total Savings:</strong> $2,834
                               </Paragraph>
                                 {stripeButton}
                         </Columns>
@@ -352,7 +360,7 @@ render() {
       <div>
       <Navagation />
       <Switch>
-        <Route path="/profile/9" component={JasonsProfilePage}/>
+        <Route path="/profile/12" component={JasonsProfilePage}/>
         <Route path="/groups/new" component={CreateGroup} />
           <Route path="/groups/:groupID" component={GroupProfile}/>
           <Route path="/users/profile/:userID" component={this.renderProfilePage} />
