@@ -65,7 +65,7 @@ class JasonsProfilePage extends Component {
   }
 
     getJason = () => {
-      let userID = 9
+      let userID = 12
       fetch(`/profile/${userID}`)
       .then(res => res.json())
       .then(data => {
@@ -129,13 +129,12 @@ renderJasonsProfilePage=()=>{
             </Toast>
 
     <Split separator={false}
-    showOnResponsive='both'
-      >
+    showOnResponsive='both' >
               <Box direction='Row'
                 justify='center'
                 align='center'
                 wrap={true}
-                pad='small'
+                pad='none'
                 colorIndex='light-2'
                 id='left'
             >
@@ -150,15 +149,16 @@ renderJasonsProfilePage=()=>{
                             fixed={true}
                             align='center'
                             pad='none'>
-                        <Headline>Hey, {userGroup.username} </Headline>
+                        <Headline>Hey, JaySavesDoe </Headline>
                         </Box>
                         <Columns
                               align='start'
                               size='small'
+                              justify='center'
                               masonry={false}
                               >
                               <Box align='center'
-                                  pad='small'
+                                  pad='none'
 
                                   >
 
@@ -166,7 +166,7 @@ renderJasonsProfilePage=()=>{
 
                               </Box>
                               <Paragraph
-                                  size='medium'
+                                  size='small'
                                   strong={false}>
 
                                    <strong>  Rating: </strong> Gold<br /><br />
@@ -176,14 +176,19 @@ renderJasonsProfilePage=()=>{
                                       value={userGroup.member_date} /><br /><br />
 <hr />
                                      <strong>Next Pay Out: </strong><br/>
-                                     Get Car Fund:
-                                     $5,000 May 4, 2108<br /><br />
+                                     Student Loan... Ugh:<br />
+                                     $3,000 May 27, 2108<br />
+                                     Get Car Fund:<br />
+                                     $5,000 May 18, 2108<br />
 <hr />
                                      <strong>Due Dates:</strong><br />
                                     Student Loan... Ugh: <br />
-                                  $1,250 due by April 13, 2018<br />
+                                  $750 due by April 13, 2018<br />
                                     <a href="http://localhost:3100/users/stripe/connect">Make a Payment</a><br />
-                                    <SocialStripeIcon />
+                                    Car Stash: <br />
+                                  $1,250 due by April 20, 2018<br />
+                                    <a href="http://localhost:3100/users/stripe/connect">Make a Payment</a><br />
+
                                     <br />
                                     <hr />
                                     <strong>Total Svaings:</strong> $2,834
@@ -312,7 +317,7 @@ render() {
 <Navagation />
       <Switch>
 
-          <Route path="/profile/9" component={this.renderJasonsProfilePage}/>
+          <Route path="/profile/12" component={this.renderJasonsProfilePage}/>
           <Route path="/groups/new" component={CreateGroup} />
           <Route path="/groups/:groupID" component={GroupProfile}/>
           <Route path="/users/profile/:userID" component={ProfilePage} />

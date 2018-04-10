@@ -184,28 +184,31 @@ renderProfilePage=()=>{
                 id='left'
             >
 
-                <Box colorIndex='light-2'
-                      justify='center'
-                      fixed={true}
-                      align='center'
-                      pad='none'>
-                      <Box colorIndex='light-2'
-                            justify='center'
-                            fixed={true}
-                            align='center'
-                            pad='none'>
+            <Box colorIndex='light-2'
+                  justify='center'
+                  fixed={true}
+                  align='center'
+                  pad='none'>
+                  <Box colorIndex='light-2'
+                        justify='center'
+                        fixed={true}
+                        align='center'
+                        pad='none'>
                         <Headline>Hey, {userProfile.username}</Headline>
                         </Box>
                         <Columns
                               align='start'
                               size='small'
+                              justify='center'
                               masonry={false}
                               >
                               <Box align='center'
                                   pad='small'
 
                                   >
-                                    <Image alt='' className='profilePic' src={Jason} />
+
+                                    <Image fit='cover' alt='' id='profilePic' src={Jason} />
+
                               </Box>
                               <Paragraph
                                   size='medium'
@@ -353,7 +356,7 @@ render() {
       <div>
       <Navagation />
       <Switch>
-        <Route path="/profile/9" component={JasonsProfilePage}/>
+        <Route path="/profile/12" component={JasonsProfilePage}/>
         <Route path="/groups/new" component={CreateGroup} />
           <Route path="/groups/:groupID" component={GroupProfile}/>
           <Route path="/users/profile/:userID" component={this.renderProfilePage} />

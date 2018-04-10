@@ -10,20 +10,13 @@ width: 100vw;
 }
 
 #profilePic{
-height: 10em;
-width: auto;
-
+height: 11em;
+width: 9em;
 border: solid #a430a8 .3em;
 border-radius: 50%;
-
-
-
 }
 
-.side-crop{
- max-width: 3em;
- overflow: hidden;
-}
+
 
 #card{
   width: 17em;
