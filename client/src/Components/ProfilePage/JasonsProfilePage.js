@@ -21,6 +21,7 @@ import Paragraph from 'grommet/components/Paragraph';
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 import Card from 'grommet/components/Card';
+import Status from 'grommet/components/icons/Status';
 // import Button from 'grommet/components/Button';
 
 import AddCircleIcon from 'grommet/components/icons/base/AddCircle';
@@ -41,7 +42,9 @@ import './ProfilePage.css'
 var logo = require('../images/Logo/OwoLogoNWGroup3Sm.png');
 var owl = require('../images/icons/owl.png');
 var Jason= require("../images/crew/jason.jpg");
-
+var school=require('../images/groupImages/book-chair-chat-711009.jpg')
+var car =require('../images/groupImages/auto-automobile-automotive-358208.jpg');
+var stripe = require('../images/stripe.png')
 var randomImages = [
     require('../images/groupImages/architecture-boat-buildings-208701.jpg'),
     require('../images/groupImages/backlit-clouds-dusk-853168.jpg'),
@@ -87,7 +90,10 @@ class JasonsProfilePage extends Component {
           this.setState({ getgroups: data.data})
         })
       }
+      paymentOnClick = () => {
+        this.setState({ payment: true })
 
+      }
 
 
     componentDidMount(){
@@ -99,7 +105,7 @@ class JasonsProfilePage extends Component {
 
 
 renderJasonsProfilePage=()=>{
-  console.log(this.state.userGroup);
+  console.log(this.state.userGroup["0"]);
   let randomImage =<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
      />
 
@@ -162,7 +168,7 @@ renderJasonsProfilePage=()=>{
 
                                   >
 
-                                    <Image fit='cover' alt='' id='profilePic' src={Jason} />
+                                    <Image fit='cover' alt='' id='jasonPic' src={Jason} />
 
                               </Box>
                               <Paragraph
@@ -184,11 +190,9 @@ renderJasonsProfilePage=()=>{
                                      <strong>Due Dates:</strong><br />
                                     Student Loan... Ugh: <br />
                                   $750 due by April 13, 2018<br />
-                                    <a href="http://localhost:3100/users/stripe/connect">Make a Payment</a><br />
+                                    <a onClick={this.paymentOnClick}> {!this.state.payment ? 'Make a Payment' : (<div id="line"><Image id='check' src={stripe}/> Payment Complete</div>) }</a><br />
                                     Car Stash: <br />
                                   $1,250 due by April 20, 2018<br />
-                                    <a href="http://localhost:3100/users/stripe/connect">Make a Payment</a><br />
-
                                     <br />
                                     <hr />
                                     <strong>Total Svaings:</strong> $2,834
@@ -241,7 +245,7 @@ renderJasonsProfilePage=()=>{
                                             {userGroup.map((group) => (
                                               <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}>
 
-                                                <Card id='thumbnail' thumbnail={<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
+                                                <Card id='thumbnail' thumbnail={<Image src={school}
                                                    />}
                                                  heading={group.group_name.toUpperCase()}
                                                  label={`Group Creator: ${group.username}`}
@@ -253,7 +257,20 @@ renderJasonsProfilePage=()=>{
                                           </Link>
 
                                          ))}
+                                         <Link to={`/groups/Car%20Stash`} groupinfo='CamOne'>
+
+                                           <Card id='thumbnail' thumbnail={<Image src={car}
+                                              />}
+                                            heading={'Car Stash'.toUpperCase()}
+                                            label={`Group Creator: CamOne`}
+
+                                            />
+
+
+
+                                     </Link>
                                       </Box>
+
 
                                       )}
                             </Box>

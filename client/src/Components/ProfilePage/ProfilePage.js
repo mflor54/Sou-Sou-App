@@ -60,7 +60,8 @@ class ProfilePage extends Component {
        showUpload: false,
        userProfile: props.userInfo,
        userGroup:[],
-       getgroups:[]
+       getgroups:[],
+       payment: false
 
     }
   }
@@ -113,19 +114,10 @@ class ProfilePage extends Component {
           this.setState({ getgroups: data.data})
         })
       }
-    
+
       paymentOnClick = () => {
-        // let userID = this.props.match.params.userID
-        let userID = this.props.userInfo.id;
-        console.log(this.props.userInfo.id);
-        console.log(userID);
-        axios.post(`http://localhost:3100/profile/${userID}/charge`)
-        .then((data) => {
-          console.log('onClick data ==> ' + JSON.stringify(data));
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+        this.setState({ payment: true })
+
       }
 
 
@@ -145,7 +137,7 @@ renderProfilePage=()=>{
   console.log(this.state.userProfile);
   console.log(this.props.userInfo.id);
 
-  const {userProfile, userGroup,getgroups} = this.state
+  const {userProfile, userGroup,getgroups, payment} = this.state
 
   console.log(userGroup);
 
@@ -157,7 +149,7 @@ renderProfilePage=()=>{
           </Button>
     </a>
   ):(
-    <p>You have saved: {this.state.userProfile.amount} </p>
+  null
   );
 
 
@@ -235,13 +227,13 @@ renderProfilePage=()=>{
 <hr />
                                      <strong>Next Pay Out: </strong><br/>
                                      Get Car Fund:
-                                     $5,000 May 4, 2018<br /><br />
+                                     $3,000 May 4, 2018<br /><br />
 <hr />
                                      <strong>Due Dates:</strong><br />
                                     Student Loan... Ugh: <br />
-                                  $1,250 due by April 13, 2018<br />
-                                    <button onClick={this.paymentOnClick}>Make a Payment</button><br />
-                                    <br />
+                                  $750 due by April 13, 2018<br />
+                                  <a onClick={this.paymentOnClick}> {!this.state.payment ? 'Make a Payment' : null }</a><br />
+                                                                     <br />
                                     <hr />
                                     <strong>Total Savings:</strong> $2,834
                               </Paragraph>

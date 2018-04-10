@@ -110,7 +110,7 @@ makeCharge = async (req, res) => {
         catch(err) {
             console.log('Error at making charge ' + err)
         }
-        
+
         // finally post the information to the database for paymentsIn and paymentsOut tables
         // might have to do it using try and catch to avoid async issues
         // console.log('This is charge => ' + JSON.stringify(charge));
