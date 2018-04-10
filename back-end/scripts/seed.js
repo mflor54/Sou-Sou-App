@@ -120,7 +120,8 @@ let group9 = {
     frequency: "Weekly",
     description: "Saving money with penny pinchers"
   }
-}let group10 = {
+}
+let group10 = {
   //this is the response you would get from the body
   body: {
     groupName: "Vacay....",
@@ -131,7 +132,8 @@ let group9 = {
     frequency: "Monthly",
     description: "Tired of working"
   }
-}let group11 = {
+}
+let group11 = {
   //this is the response you would get from the body
   body: {
     groupName: "Get Out of Debt",
@@ -142,7 +144,8 @@ let group9 = {
     frequency: "Monthly",
     description: "Student loans? What part of the game is this?"
   }
-}let group12 = {
+}
+let group12 = {
   //this is the response you would get from the body
   body: {
     groupName: "Living Single",
