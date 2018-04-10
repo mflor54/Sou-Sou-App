@@ -26,6 +26,6 @@ router.get('/:groupID/check', db.checkGroupStatus);
 
 router.get('/:groupID/members', db.getMembers);
 
-router.post('/:groupID/charge', charge.makeCharge);
+// router.post('/:groupID/charge', charge.makeCharge);
 
 module.exports = router;

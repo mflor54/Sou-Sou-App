@@ -7,7 +7,8 @@ let router = express.Router();
 // make post request first and run the contigencies before actually making the charge THIS IS THE POST REQUEST
 makeCharge = async (req, res) => {
     var successCharge;
-    const groupID = parseInt(req.params.groupID, 10);
+    console.log('USER ID SHIT ==>' + req.params.userID);
+    const groupID = parseInt(req.params.userID, 10);
     const user = req.user;
     console.log('groupID =>' + groupID);
 
@@ -42,7 +43,7 @@ makeCharge = async (req, res) => {
         console.log('group err ' + err);
     }
     try {
-        members = await db.getMembersFromGroup(groupID)
+        members = await db.getStripeAccounts()
     }
     catch (err) {
         console.log('members err ' + err);
@@ -52,17 +53,17 @@ makeCharge = async (req, res) => {
     console.log('members => ' + JSON.stringify(members));
 
     // create array with stripe accounts only
-    let membersWithStripe = members.map((el) => {
-        return el.stripe_id;
-    })
+    // let membersWithStripe = members.map((el) => {
+    //     return el.stripe_id;
+    // })
 
-    console.log('membersWithStripe => ' + membersWithStripe);
+    // console.log('membersWithStripe => ' + membersWithStripe);
 
     // check if user is part of the group with stripe accts
     //return res.status(403) for Forbidden
-    if(!membersWithStripe.includes(user.stripe_id)) {
-        res.status(403).send('Not a member');
-    }
+    // if(!membersWithStripe.includes(user.stripe_id)) {
+    //     res.status(403).send('Not a member');
+    // }
 
     // calculate number of payments per month using # of members
     // subtract by 1 to omit the one being paid
@@ -75,30 +76,30 @@ makeCharge = async (req, res) => {
         let paymentOut;
         // check to make sure count in loop isn't user
         console.log('current pick ===> ' + JSON.stringify(members[i]));
-        if(membersWithStripe[i] === user.stripe_id) {
-            continue;
-        }
+        // if(members[i] === user.stripe_id) {
+        //     continue;
+        // }
         let pick = members[i];
         let pickid = parseInt(pick.id, 10);
         console.log('current pick with id ==> ' + pick, pickid);
         //SELECT * FROM payments WHERE group_id = ${groupID} AND user_id = ${pick.id};
-        try {
-            currentCount = await db.getNumberOfPayments(pickid, groupID);
-        }
-        catch(err) {
-            console.log('Error at number of payments ' + err)
-        }
+        // try {
+        //     currentCount = await db.getNumberOfPayments(pickid, groupID);
+        // }
+        // catch(err) {
+        //     console.log('Error at number of payments ' + err)
+        // }
         // check to see if current count in loop already received max number of payments for month
         // i.e their turn in money pool already came up
-        console.log(currentCount.length);
-        if(currentCount >= paymentCount) {
-            continue;
-        }
+        // console.log(currentCount.length);
+        // if(currentCount >= paymentCount) {
+        //     continue;
+        // }
         // current pick should be the current payee in the money pool
         // so make charge against user, and destination to pick
         try {
             charge = await stripe.stripeCharge.charges.create({
-                amount: Math.round(group.pay_in_amount),
+                amount: 750,
                 currency: 'usd',
                 customer: 'cus_CajVXpjuOxmj3e',
                 destination: {

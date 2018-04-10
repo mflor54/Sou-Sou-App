@@ -113,7 +113,20 @@ class ProfilePage extends Component {
           this.setState({ getgroups: data.data})
         })
       }
-
+    
+      paymentOnClick = () => {
+        // let userID = this.props.match.params.userID
+        let userID = this.props.userInfo.id;
+        console.log(this.props.userInfo.id);
+        console.log(userID);
+        axios.post(`http://localhost:3100/profile/${userID}/charge`)
+        .then((data) => {
+          console.log('onClick data ==> ' + JSON.stringify(data));
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
 
 
     componentDidMount(){
@@ -219,15 +232,15 @@ renderProfilePage=()=>{
 <hr />
                                      <strong>Next Pay Out: </strong><br/>
                                      Get Car Fund:
-                                     $5,000 May 4, 2108<br /><br />
+                                     $5,000 May 4, 2018<br /><br />
 <hr />
                                      <strong>Due Dates:</strong><br />
                                     Student Loan... Ugh: <br />
                                   $1,250 due by April 13, 2018<br />
-                                    <a href="http://localhost:3100/users/stripe/connect">Make a Payment</a><br />
+                                    <button onClick={this.paymentOnClick}>Make a Payment</button><br />
                                     <br />
                                     <hr />
-                                    <strong>Total Svaings:</strong> $2,834
+                                    <strong>Total Savings:</strong> $2,834
                               </Paragraph>
                                 {stripeButton}
                         </Columns>
