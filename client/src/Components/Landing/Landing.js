@@ -23,6 +23,7 @@ import Tile from 'grommet/components/Tile';
 
 import Card from 'grommet/components/Card';
 
+import FooterUser from '../Footer/Footer';
 
 
 import Users from '../Users/Users';
@@ -253,7 +254,7 @@ handleChange = panel => (event, expanded) => {
 
 
             </Grid>
-              <FooterLanding />
+              <FooterUser />
        </div>
          )
 
@@ -271,7 +272,7 @@ handleChange = panel => (event, expanded) => {
       <Route exact path="/" component={this.renderLandingPage} />
       <Route path="/users" component={Users} />
       <Route path="/groups" component={Groups} />
-      <Route path="/profile/9" component={JasonsProfilePage}/>
+      <Route path="/profile/12" component={JasonsProfilePage}/>
     </Switch>
   </div>
     )

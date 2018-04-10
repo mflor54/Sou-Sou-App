@@ -75,7 +75,7 @@ let group6 = {
   body: {
     groupName: "Electronic Envy",
     totalMembers: 9,
-    creator: 9,
+    creator: 4,
     payinAmount: 62.50,
     payoutAmount: 500,
     frequency: "weekly",
@@ -88,7 +88,7 @@ let group7 = {
   body: {
     groupName: "Lets Get a Car",
     totalMembers: 9,
-    creator: 9,
+    creator: 6,
     payinAmount: 625,
     payoutAmount: 5000,
     frequency: "Monthly",
@@ -96,12 +96,24 @@ let group7 = {
   }
 }
 
+let group8 = {
+  //this is the response you would get from the body
+  body: {
+    groupName: "Student Loan... Ugh",
+    totalMembers: 5,
+    creator: 9,
+    payinAmount: 750,
+    payoutAmount: 300,
+    frequency: "Monthly",
+    description: "Student loans? What part of the game is this?"
+  }
+}
 
 //create a mock response. nothing has to go inside
 let resMock = {
   // send function
   send: function() {
-    
+
   },
   //res.status in a function
   status: function() {
@@ -168,7 +180,42 @@ queries.createUser({
     password: 'password'
   }
 }, resMock);
-
+queries.createUser({
+  body: {
+    firstName: 'user6',
+    lastName: 'last6',
+    username: 'user6',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'user7',
+    lastName: 'last7',
+    username: 'user7',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'user8',
+    lastName: 'last8',
+    username: 'user8',
+    email: 'mflor54+user5@gmail.com',
+    password: 'password'
+  }
+}, resMock);
+queries.createUser({
+  body: {
+    firstName: 'Jason',
+    lastName: 'Doe',
+    username: 'JaySavesDoe',
+    email: 'mflor54+user5@gmail.com',
+    password: '000000'
+  }
+}, resMock);
 //pass all 3 into the query
 
 queries.createGroup(group1, resMock, next);

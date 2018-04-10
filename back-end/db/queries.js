@@ -390,7 +390,7 @@ checkGroupStatus = (req, res, next) => {
 getJason = (req, res, next) => {
 
     console.log(req.body.userID);
-    let userID = 9
+    let userID = 12
       db.one('select * from users inner join groups on groups.creator = ${userID} and users.id = ${userID}',{
         userID:req.params.userID
       })
