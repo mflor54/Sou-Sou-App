@@ -9,16 +9,16 @@ import { Button} from 'mdbreact';
 import './Landing.css';
 import { Link, Route, Switch } from 'react-router-dom';
 import { ModalContainer, ModalRoute } from 'react-router-modal';
-      import Article from 'grommet/components/Article';
-      import Headline from 'grommet/components/Headline';
-      import Heading from 'grommet/components/Heading';
-      import Pulse from 'grommet/components/icons/Pulse';
-      import Down from 'grommet/components/icons/base/Down';
+import Article from 'grommet/components/Article';
+import Headline from 'grommet/components/Headline';
+import Heading from 'grommet/components/Heading';
+import Pulse from 'grommet/components/icons/Pulse';
+import Down from 'grommet/components/icons/base/Down';
 
-      import Section from 'grommet/components/Section';
-      import Hero from 'grommet/components/Hero';
-      import Box from 'grommet/components/Box';
-      import Tiles from 'grommet/components/Tiles';
+import Section from 'grommet/components/Section';
+import Hero from 'grommet/components/Hero';
+import Box from 'grommet/components/Box';
+import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 
 import Card from 'grommet/components/Card';
@@ -30,6 +30,7 @@ import FooterLanding from '../FooterLanding/FooterLanding';
 import Header from '../Header/Header';
 import HelpList from'../Help/Help';
 import Video from '../Video/Video';
+import JasonsProfilePage from '../ProfilePage/JasonsProfilePage';
 
 var logo = require('../images/Logo/OwoLogoNWGroup3LG.png');
 var bg = require('../images/BG/bg8.png');
@@ -190,7 +191,28 @@ handleChange = panel => (event, expanded) => {
             <Row>
                <Col xs={6} md={3} className="cd-scrolling-bg__content">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <strong>1. SIGN UP</strong>
+                    <p>
+                    Once you decide to join OWO you can start saving socially by joining or creating a group. 
+                    </p>
+                  </p>
+                  <p>
+                    <strong>2. JOIN A GROUP</strong>
+                    <p>
+                    Once you decide to join OWO you can start saving socially by joining or creating a group. 
+                    </p>
+                  </p>
+                  <p>
+                    <strong>3. CHAT AND MAKE PAYMENTS</strong>
+                    <p>
+                      Saving money is hard. Encourage your OWO group members to stick to their savings goals and get support in return.
+                    </p>
+                  </p>
+                  <p>
+                    <strong>4. Collect Your Money</strong> 
+                    <p>
+                      When you are scheduled to receive a payout, your money will be sent to your stripe account. Collect your money when you are ready. 
+                    </p>
                   </p>
 
                 </Col>
@@ -270,6 +292,7 @@ handleChange = panel => (event, expanded) => {
       <Route exact path="/" component={this.renderLandingPage} />
       <Route path="/users" component={Users} />
       <Route path="/groups" component={Groups} />
+      <Route path="/profile/9" component={JasonsProfilePage}/>
     </Switch>
   </div>
     )

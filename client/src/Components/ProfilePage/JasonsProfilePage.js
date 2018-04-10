@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactFileReader from 'react-file-reader';
-import { Grid, Row, Col} from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
 
 
@@ -26,14 +24,16 @@ import Card from 'grommet/components/Card';
 // import Button from 'grommet/components/Button';
 
 import AddCircleIcon from 'grommet/components/icons/base/AddCircle';
+import SocialStripeIcon from 'grommet/components/icons/base/SocialStripe';
 
-import CreateGroup from '../CreateGroup/CreateGroup';
+
 import Navagation from '../Nav/Nav';
 import Groups from '../Groups/Groups';
 import Landing from '../Landing/Landing';
 import FooterUser from '../Footer/Footer';
-import JasonsProfilePage from './JasonsProfilePage'
+import ProfilePage from './ProfilePage'
 import GroupProfile from '../GroupProfile/GroupProfile';
+import CreateGroup from '../CreateGroup/CreateGroup';
 import ProfilePic from './ProfilePic';
 import { Button} from 'mdbreact';
 import axios from 'axios';
@@ -52,7 +52,7 @@ var randomImages = [
 ];
 
 
-class ProfilePage extends Component {
+class JasonsProfilePage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -64,37 +64,12 @@ class ProfilePage extends Component {
     }
   }
 
-  //
-  // handleFile = (files) => {
-  //         console.log(files.base64)
-  //         this.setState({
-  //             showUpload: true,
-  //             user: {
-  //                 ...this.state.userProfile,
-  //                 profile_pic: files.base64
-  //             }
-  //         })
-  //     }
-  //     handleUploadFile = (files) => {
-  //         ProfileActions.uploadProfilePic({
-  //             image_: this.state.userProfile.profile_pic
-  //         }, ()=>{
-  //             this.setState({
-  //                 showUpload: false,
-  //             })
-  //         }, ()=>{
-  //             alert('upload failed')
-  //         })
-  //     }
-
-    getUserInfo = () => {
-
-      const {userProfile} =this.state
-      let userID = this.state.userProfile.id
-      fetch(`/users/profile/${userID}`)
+    getJason = () => {
+      let userID = 9
+      fetch(`/profile/${userID}`)
       .then(res => res.json())
       .then(data => {
-        console.log("DATA stufff PP=====>", data.data);
+        console.log("DATA stufff PP=====>", data);
         const Store = [];
           Store.push(data.data);
           console.log('Store: ',Store);
@@ -116,37 +91,19 @@ class ProfilePage extends Component {
 
 
     componentDidMount(){
-      this.getUserInfo();
+      this.getJason();
       this.getGroups()
     }
 
 
 
 
-renderProfilePage=()=>{
+renderJasonsProfilePage=()=>{
   console.log(this.state.userGroup);
   let randomImage =<Image src={randomImages[Math.floor(Math.random()*randomImages.length)]}
      />
 
-  console.log(this.state.userProfile);
-  console.log(this.props.userInfo.id);
-
-  const {userProfile, userGroup,getgroups} = this.state
-
-  console.log(userGroup);
-
-  const stripeUser = this.state.userProfile.stripe_id
-  const stripeButton = !stripeUser ? (
-    <a href="http://localhost:3100/users/stripe/connect">
-          <Button className="btn-custom pp" color="secondary-color-dark">
-                Complete your account STRIPE
-          </Button>
-    </a>
-  ):(
-    <p>You have saved: {this.state.userProfile.amount} </p>
-  );
-
-
+  const { userGroup,getgroups} = this.state
 
   return(
 
@@ -166,9 +123,9 @@ renderProfilePage=()=>{
             margin='small'
             id='outter'
           colorIndex='light-2'>
-            <Toast status='warning'
+            <Toast status='ok'
               >
-            OWO Reminder: Payment for, "Student Loan... Ugh" is due soon.
+            OWO Status: You are a new memeber of "Car Stash"... Welcome!!!
             </Toast>
 
     <Split separator={false}
@@ -193,7 +150,7 @@ renderProfilePage=()=>{
                             fixed={true}
                             align='center'
                             pad='none'>
-                        <Headline>Hey, {userProfile.username}</Headline>
+                        <Headline>Hey, {userGroup.username} </Headline>
                         </Box>
                         <Columns
                               align='start'
@@ -204,7 +161,9 @@ renderProfilePage=()=>{
                                   pad='small'
 
                                   >
-                                    <Image alt='' className='profilePic' src={Jason} />
+
+                                    <Image fit='cover' alt='' id='profilePic' src={Jason} />
+
                               </Box>
                               <Paragraph
                                   size='medium'
@@ -214,7 +173,7 @@ renderProfilePage=()=>{
                                    <hr />
 
                                  <strong>  Memeber Since: </strong> <Timestamp fields={['month', 'year']}
-                                      value={userProfile.member_date} /><br /><br />
+                                      value={userGroup.member_date} /><br /><br />
 <hr />
                                      <strong>Next Pay Out: </strong><br/>
                                      Get Car Fund:
@@ -224,11 +183,12 @@ renderProfilePage=()=>{
                                     Student Loan... Ugh: <br />
                                   $1,250 due by April 13, 2018<br />
                                     <a href="http://localhost:3100/users/stripe/connect">Make a Payment</a><br />
+                                    <SocialStripeIcon />
                                     <br />
                                     <hr />
                                     <strong>Total Svaings:</strong> $2,834
                               </Paragraph>
-                                {stripeButton}
+
                         </Columns>
               </Box>
 
@@ -346,24 +306,25 @@ renderProfilePage=()=>{
   }
 
 render() {
-    console.log(this.state.userGroup);
   return(
 
       <div>
-      <Navagation />
+<Navagation />
       <Switch>
-        <Route path="/profile/9" component={JasonsProfilePage}/>
-        <Route path="/groups/new" component={CreateGroup} />
+
+          <Route path="/profile/9" component={this.renderJasonsProfilePage}/>
+          <Route path="/groups/new" component={CreateGroup} />
           <Route path="/groups/:groupID" component={GroupProfile}/>
-          <Route path="/users/profile/:userID" component={this.renderProfilePage} />
+          <Route path="/users/profile/:userID" component={ProfilePage} />
           <Route path="/groups" component={Groups} />
           <Route path="/" component={Landing} />
+
           </Switch>
 
-          <FooterUser />
+  <FooterUser />
       </div>
     )
   }
 }
 
-export default ProfilePage;
+export default JasonsProfilePage;
