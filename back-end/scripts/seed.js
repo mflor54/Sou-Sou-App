@@ -13,7 +13,7 @@ let user1 = {
 let group1 = {
   //this is the response you would get from the body
   body: {
-    groupName: "Lets Get a Car",
+    groupName: "Car Stash",
     totalMembers: 9,
     creator: 1,
     payinAmount: 625,
