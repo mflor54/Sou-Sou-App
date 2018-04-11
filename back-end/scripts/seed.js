@@ -13,13 +13,13 @@ let user1 = {
 let group1 = {
   //this is the response you would get from the body
   body: {
-    groupName: "Car Stash",
-    totalMembers: 9,
-    creator: 1,
-    payinAmount: 625,
-    payoutAmount: 5000,
+    groupName: "Living Single",
+    totalMembers: 3,
+    creator: 9,
+    payinAmount: 200,
+    payoutAmount: 400,
     frequency: "Monthly",
-    description: "Down payment for a new car"
+    description: "Monthly Living"
   }
 }
 
@@ -147,14 +147,15 @@ let group11 = {
 }
 let group12 = {
   //this is the response you would get from the body
+
   body: {
-    groupName: "Living Single",
-    totalMembers: 3,
-    creator: 9,
-    payinAmount: 200,
-    payoutAmount: 400,
+    groupName: "Car Stash",
+    totalMembers: 9,
+    creator: 1,
+    payinAmount: 625,
+    payoutAmount: 5000,
     frequency: "Monthly",
-    description: "Monthly Living"
+    description: "Down payment for a new car"
   }
 }
 
