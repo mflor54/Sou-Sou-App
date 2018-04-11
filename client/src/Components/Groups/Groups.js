@@ -30,20 +30,16 @@ import './Groups.css'
 
 var pic = require('../images/groupImages/architecture-art-business-191429.jpg');
 var logo = require('../images/Logo/OwoLogoNWGroupGR.png');
+var car =require('../images/groupImages/auto-automobile-automotive-358208.jpg');
+
 var randomImages = [
     require('../images/groupImages/backlit-clouds-dusk-853168.jpg'),
-    require('../images/groupImages/auto-automobile-automotive-358208.jpg'),
+
   require('../images/groupImages/bay-beach-beautiful-531602.jpg'),
     require('../images/groupImages/beach-cave-cavo-greco-371588.jpg'),
-    require('../images/groupImages/auto-automobile-automotive-358208.jpg'),
-    require('../images/groupImages/action-architecture-automobile-174752.jpg'),
-
     require('../images/groupImages/celebration-coloured-crowd-889545.jpg'),
     require('../images/groupImages/activity-adventure-blur-297642.jpg'),
-    require('../images/groupImages/action-architecture-automobile-174752.jpg'),
-    require('../images/groupImages/auto-automobile-automotive-358208.jpg'),
 
-    require('../images/groupImages/auto-automobile-automotive-358208.jpg'),
 
 ];
 
@@ -216,6 +212,42 @@ pad='small'
                         align='center'
                         pad='small'
                         >
+                        <Tile>
+                                 <Link to={`/groups/Car%20Stash`} groupinfo={'CamOne'}>{
+
+                                   <Card
+
+                                 thumbnail={<Image  src={car}
+                                    />}
+
+                                  heading={'Car Stash'.toUpperCase()}
+                                  label={`Group Creator: CamOne`}
+                                  description={"Open"}
+                                  />}
+                                    <Heading
+                                    id='headingfont'
+                                          strong={false}
+                                          uppercase={false}
+                                          truncate={false}
+                                          align='start'
+                                          margin='none'>
+                                          <strong>Description:<br /></strong>
+                                        {`Saving For A Downpayment On A New Car`}
+                                        </Heading>
+                              <Paragraph
+                                  id='headingfont'
+                                  margin='small'
+                                  pad='small'>
+                                    {`Group Members: 5`}<br />
+                                    {`Pay Out Amount: $5,000`}<br />
+                                    {`Pay In Amount: $1,250`}<br/>
+                                    {`Frequency: Monthly`}
+
+
+                                  </Paragraph>
+
+                                </Link>
+                        </Tile>
                         {filteredGroups.map((group)=>(
                               <Tile>
                                        <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}>{
@@ -244,8 +276,8 @@ pad='small'
                                         margin='small'
                                         pad='small'>
                                           {`Group Members: ${group.total_members}`}<br />
-                                          {`Pay Out Amount: ${group.pay_out_amount}`}<br />
-                                          {`Pay In Amount: ${group.pay_in_amount}`}<br/>
+                                          {`Pay Out Amount: $${group.pay_out_amount}`}<br />
+                                          {`Pay In Amount: $${group.pay_in_amount}`}<br/>
                                           {`Frequency: ${group.frequency}`}
 
 
