@@ -129,7 +129,9 @@ renderJasonsProfilePage=()=>{
             margin='small'
             id='outter'
           colorIndex='light-2'>
-            <Toast status='ok'
+            <Toast
+            size='large'
+            status='ok'
               >
             OWO Status: You are a new memeber of "Car Stash"... Welcome!!!
             </Toast>
@@ -190,7 +192,10 @@ renderJasonsProfilePage=()=>{
                                      <strong>Due Dates:</strong><br />
                                     Student Loan... Ugh: <br />
                                   $750 due by April 13, 2018<br />
-                                    <a onClick={this.paymentOnClick}> {!this.state.payment ? 'Make a Payment' : (<div id="line"><Image id='check' src={stripe}/> Payment Complete</div>) }</a><br />
+                                    <a onClick={this.paymentOnClick}> {!this.state.payment ? 'Make a Payment' : (<div id="line"> <Toast status='ok' size='large'
+>
+OWO: Thank You for Your Payment
+</Toast><Image id='check' src={stripe}/> Payment Complete</div>) }</a><br />
                                     Car Stash: <br />
                                   $1,250 due by April 20, 2018<br />
                                     <br />
