@@ -249,7 +249,7 @@ pad='small'
                                 </Link>
                         </Tile>
                         {filteredGroups.map((group)=>(
-                              <Tile>
+                              <Tile className="widthFix">
                                        <Link to={`/groups/${group.group_name}`} groupinfo={group.creator}>{
 
                                          <Card
