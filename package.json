@@ -2,7 +2,7 @@
   "name": "sou-sou-app",
   "version": "1.0.0",
   "description": "OWO is a social savings platform that brings the money pool community to you.  ## Description ![screen shot 2018-04-19 at 8 07 19 pm](https://user-images.githubusercontent.com/17325777/39024476-2c014b2c-440f-11e8-9abb-039f4df2ff83.png)",
-  "main": "app.js",
+  "main": "./back-end/app.js",
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1",
