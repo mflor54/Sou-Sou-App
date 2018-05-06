@@ -1,0 +1,50 @@
+.groups-header {
+background-color: #29D9F4;
+
+}
+.background-header{
+  background-color: #25283D;
+
+}
+
+.widthFix{
+  width:33%;
+ padding: 2em;
+}
+/* Article{
+
+} */
+ #logoSize{
+   width: 6em;
+ }
+.foot{
+text-align: center;
+}
+.avatar{
+  width: 100%;
+}
+
+
+
+#headingfont{
+  font-size: 1em;
+}
+.avatarList #inner{
+    display: inline-block;
+}
+.avatarList {
+left: 0;
+  width:20em;
+  padding-bottom: 1em;
+
+
+}
+
+.avatarStyle {
+display: inline-block;
+
+  height: 2em;
+  width: 2em;
+
+
+}

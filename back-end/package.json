@@ -3,15 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
+    "connect-pg-simple": "^4.2.1",
     "cookie-parser": "~1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.0.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
+    "nodemon": "^1.17.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "password-hash-and-salt": "^0.1.4",
     "pg-promise": "^8.2.2",
     "serve-favicon": "~2.4.5",
     "stripe": "^5.5.0"

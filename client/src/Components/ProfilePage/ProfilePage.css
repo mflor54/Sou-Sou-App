@@ -1,0 +1,185 @@
+
+.Profile{
+
+background-image: url(../images/BG/bg10.png);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+width: 100vw;
+
+}
+
+#profilePic{
+height: 10em;
+width: auto;
+border: solid #a430a8 .4em;
+border-radius: 50%;
+}
+
+#jasonPic{
+height: 11em;
+width: auto;
+border: solid #a430a8 .3em;
+border-radius: 50%;
+}
+
+#check{
+
+  width: 2.5em;
+}
+
+#line{
+  display: inline;
+}
+#card{
+  width: 17em;
+  padding: 2em;
+}
+#thumbnails{
+width: 47em;
+
+}
+#left{
+  border-right: solid #a430a8 1px;
+width: 30em;
+height: 100%;
+padding: 0;
+}
+
+#image{
+  width: 14em;
+}
+
+#right{
+
+width: 40em;
+padding: 1em 0 0 0;
+margin: 0;
+}
+
+#outter{
+  border-radius: .5em;
+}
+
+#addButton{
+  text-align: right;
+  align-content: flex-end;
+  right: 0;
+  float: right;
+}
+
+#suggested{
+  border-top: solid 1px #ddd;
+}
+/*
+.profilePic::after {
+content: '';
+position: absolute;
+border-radius: 100px;
+top: 0; left: 0; bottom: 0; right: 0;
+background: radial-gradient(circle, transparent 50%, black 150%);
+padding: 4em;
+} */
+
+
+
+.show-grid #nav{
+  height: 4em;
+  margin: 0;
+  padding: 0;
+  color: #a430a8;
+
+}
+
+.show-grid #sec2{
+
+  height: 20em;
+  margin: 0;
+  padding: 5em;
+  right: 0;
+
+}
+
+#sec2 p{
+
+line-height: 1.5;
+font-size: 20px;
+font-weight: 300;
+
+}
+
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+},
+.gridList {
+  width: 40em;
+  height: 20em;
+border-spacing: 8px 20px;
+  overflow-y: auto;
+
+},
+
+.userInfo{
+  position: relative;
+   width: 100%;
+   height: 150px;
+   border: 2px solid #000;
+   text-align: right;
+   background-size: cover;
+   background-repeat: no-repeat;
+background-image: url(../images/BG/bg7.png);
+}
+
+
+.footer{
+text-align: center;
+
+}
+
+.tiles{
+  width: 15vw;
+  height: auto;
+
+}
+
+.container{
+  position: relative;
+  width: 100%;
+  border: 2px solid #000;
+  height: 500px;
+  text-align: right;
+
+}
+
+
+
+.btn-custom.pp {
+    background-color: #a430a8;
+    color: #eaf3ff;
+    border-radius:1.2em;
+    width:20em;
+    height: 2.5em;
+    margin:.7em 0 .7em 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: .7em;
+    font-weight: 400;
+  }
+  .btn-custom:hover {
+      /* border: solid #620a65 .8px; */
+        color: #25283d !important;
+        background-color: transparent;
+
+
+    }
+
+.user_groups{
+height:20vh;
+}
+
+.featured_groups{
+height: 20vh;
+}

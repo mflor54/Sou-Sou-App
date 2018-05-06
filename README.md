@@ -1,13 +1,22 @@
 # OWO 
 OWO is a social savings platform that brings the money pool community to you. 
 ## Description
-We envision a world where everyone has the opportunity to save OWO (money) with their family, friends and neighbors. Through our platform OWO members can support and motivate each other to reach their savings goal. By providing resources we want to improve the financial knowledge of our OWO members that will benefit in future progression/succession of our community and economy. 
+![screen shot 2018-04-19 at 8 07 19 pm](https://user-images.githubusercontent.com/17325777/39024476-2c014b2c-440f-11e8-9abb-039f4df2ff83.png)
 
 ## Features
-title, description, screenshot
 1. Profile Creation
-2. Banking security and payment handling with Stripe
-3. Join and Create savings groups
+
+![profile page screenshot](https://user-images.githubusercontent.com/17325777/39024745-e062412e-4410-11e8-8f3f-3a1f77e048a2.png)
+
+2. Find a public group via the dashboard.
+
+![menu screenshot](https://user-images.githubusercontent.com/17325777/39024761-fea7071e-4410-11e8-969b-13f5f7679eec.png)
+
+3. Find a group that fits your needs and join!
+
+![Group Profile Page Screenshot](https://user-images.githubusercontent.com/17325777/39024781-0ebe6ba6-4411-11e8-809e-7e04a17041ac.png)
+
+4. Banking security and payment handling with Stripe
 
 ## Built With
 - React.js
@@ -22,6 +31,3 @@ title, description, screenshot
 - [ ] Google and Facebook OAuth.
 - [ ] Early payout options.
 - [ ] Member credit checks and reporting.
-
-
-

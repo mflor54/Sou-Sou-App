@@ -1,0 +1,43 @@
+
+
+
+.logosize{
+  width: auto;
+  height: 3em;
+}
+
+.login_button {
+  position: absolute;
+}
+
+.logoPos{
+  padding-left: 5em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.logoPos p {
+  padding-left: 5em;
+  text-align: center;
+  margin: 0 auto;
+}
+#closer{
+  left: 4em;
+}
+
+#profileButton{
+  border-radius: 4em;
+  border: solid .2em #08CEC7;
+
+}
+#block{
+  display: inline-block;
+
+}
+
+
+#jayImage{
+  width: 2em;
+  height: 2em;
+    border-radius: 4em;
+}
