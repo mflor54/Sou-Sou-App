@@ -31,5 +31,3 @@ OWO is a social savings platform that brings the money pool community to you.
 - [ ] Google and Facebook OAuth.
 - [ ] Early payout options.
 - [ ] Member credit checks and reporting.
-
-
