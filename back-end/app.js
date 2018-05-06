@@ -30,7 +30,7 @@ if(process.env.PROXY_VALUE == '1') {
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -90,6 +90,11 @@ app.use('/users/stripe', stripeRoutes);
 app.use('/users', users);
 app.use('/groups', groups);
 app.use('/profile', profile);
+//Heroku cilent build
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
 // Access the session as req.session
 app.get('/', function(req, res, next) {
   if (req.session.views) {
