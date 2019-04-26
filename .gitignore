@@ -1,11 +1,12 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
-
+.gitignore
 # dependencies
 node_modules
 client/node_modules
 client/src/secret.js
 back-end/node_modules
 back-end/secret.js
+back-end/constants/stripe.js
 
 # testing
 /coverage
